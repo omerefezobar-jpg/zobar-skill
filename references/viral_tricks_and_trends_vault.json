@@ -1,9 +1,9 @@
 {
   "version": "2.0.0",
-  "last_updated_utc": "2026-10-28T23:24:56Z",
+  "last_updated_utc": "2026-10-28T23:41:41Z",
   "metadata": {
     "description": "Zobar Trend & Trick Vault: Verified Curated Benchmarks & Live Network Feed Ingestions",
-    "total_tricks": 19
+    "total_tricks": 20
   },
   "tricks": [
     {
@@ -516,6 +516,33 @@
       "verification_methodology": "COMMUNITY_CONSENSUS_VERIFIED",
       "source_url": "https://ghostty.org/docs/install/release-notes/1-4-0",
       "measurement_date_utc": "2026-10-28T23:22:54Z"
+    },
+    {
+      "id": "LIVE-HN-50261319",
+      "data_origin": "LIVE_NETWORK_SCRAPED",
+      "http_status": 200,
+      "platform": "Global Tech News / Hacker News",
+      "creator": "acossta",
+      "title": "Genie 4",
+      "category": "Global Engineering Wire",
+      "tags": [
+        "hacker-news",
+        "frontpage",
+        "verified-live"
+      ],
+      "problem_solved": "Breakthrough engineering discussion regarding Genie 4",
+      "trick_snippet": "// Live HN Story: https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/\n// Upvotes: 1018 | Comments: 576\nconst ENGINEERING_BREAKTHROUGH = true;",
+      "raw_metrics": {
+        "raw_points": 1018,
+        "raw_comments": 576,
+        "hn_object_id": "50261319"
+      },
+      "viral_score": 91,
+      "scoring_methodology": "LOG10_HN_POINTS_AND_COMMENTS: 30 + 18*log10(1018 + 2.5*576 + 1) = 91",
+      "verified_impact": "1018 community upvotes and 576 peer comments on Hacker News.",
+      "verification_methodology": "COMMUNITY_CONSENSUS_VERIFIED",
+      "source_url": "https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/",
+      "measurement_date_utc": "2026-10-28T23:31:46Z"
     }
   ]
 }

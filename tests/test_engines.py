@@ -299,5 +299,38 @@ class TestAutomatedArchitectureAndTRIZInventions(unittest.TestCase):
         self.assertEqual(len(inv1["failure_modes"]), 3)
         self.assertIn("flowchart TD", inventions_data["system_architecture_mermaid"])
 
+    def test_claim_evidence_quality_and_freshness_scoring(self):
+        from scripts.evidence_provenance_engine import (
+            build_default_evidence_graph,
+            ClaimEvidenceQualityScorer
+        )
+        g = build_default_evidence_graph()
+        
+        # Test 1: Grounded Statutory Claim should score high (>= 80)
+        statutory_claim = "Directive 2009/24/EC Article 6 provides statutory interoperability safe harbor for reverse engineering."
+        res1 = g.evaluate_claim_quality(statutory_claim, "EVID-EU-DIR-2009-24")
+        self.assertGreaterEqual(res1["total_score"], 80.0)
+        self.assertEqual(res1["quality_grade"], "GROUNDED_HIGH_FIDELITY")
+        self.assertTrue(res1["is_statutory"])
+
+        # Test 2: Unregistered evidence ID gives zero score
+        res_missing = g.evaluate_claim_quality("Arbitrary claim", "NON-EXISTENT-EVID")
+        self.assertEqual(res_missing["total_score"], 0.0)
+        self.assertEqual(res_missing["quality_grade"], "UNGROUNDED_HALLUCINATION")
+
+        # Test 3: Hypothetical ungrounded claim should receive low score
+        mock_hypothesis = {
+            "evidence_id": "MOCK-HYPO",
+            "source_type": "LLM Inference",
+            "citation": "Generic guess",
+            "claim_supported": "General thought",
+            "confidence_tier": "MODEL_HYPOTHESIS",
+            "published_year": 2020
+        }
+        res_hypo = ClaimEvidenceQualityScorer.score_claim_support("Quantum teleportation compiler", mock_hypothesis)
+        self.assertLess(res_hypo["total_score"], 50.0)
+        self.assertIn(res_hypo["quality_grade"], ["WEAK_EVIDENCE_UNVERIFIED", "UNGROUNDED_HALLUCINATION"])
+
+
 if __name__ == "__main__":
     unittest.main()

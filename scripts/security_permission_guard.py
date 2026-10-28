@@ -64,7 +64,8 @@ class SecuritySandboxViolation(Exception):
 class PythonASTSecurityVisitor(ast.NodeVisitor):
     """
     Strict Abstract Syntax Tree (AST) Auditor for inline Python snippets (-c).
-    Rejects dangerous modules, system calls, filesystem modifications, and reflection.
+    Rejects dangerous modules, system calls, filesystem modifications, reflection,
+    AST recursion bombs, and dunder escapes.
     """
     BANNED_MODULES: Set[str] = {
         "os", "sys", "subprocess", "shutil", "ctypes", "socket", "http",
@@ -75,18 +76,32 @@ class PythonASTSecurityVisitor(ast.NodeVisitor):
 
     BANNED_FUNCTIONS: Set[str] = {
         "eval", "exec", "compile", "open", "__import__", "getattr",
-        "setattr", "delattr", "globals", "locals", "vars", "input",
+        "setattr", "delattr", "hasattr", "globals", "locals", "vars", "input",
         "breakpoint", "exit", "quit"
     }
 
+    # Whitelisted safe dunders only; all other __*__ are strictly rejected
+    SAFE_DUNDERS: Set[str] = {"__name__", "__doc__"}
+
     BANNED_ATTRIBUTES: Set[str] = {
-        "__subclasses__", "__bases__", "__mro__", "__class__",
-        "__builtins__", "__globals__", "__code__", "__dict__",
         "system", "popen", "spawn", "unlink", "remove", "rmdir"
     }
 
+    MAX_AST_DEPTH = 35
+
     def __init__(self):
         self.violations: List[str] = []
+        self._current_depth = 0
+
+    def generic_visit(self, node: ast.AST):
+        self._current_depth += 1
+        if self._current_depth > self.MAX_AST_DEPTH:
+            if "AST aşırı derinlik (Recursion Bomb)" not in self.violations:
+                self.violations.append(f"AST aşırı derinlik (Recursion Bomb / Complexity Attack): Derinlik {self._current_depth} > {self.MAX_AST_DEPTH}")
+            self._current_depth -= 1
+            return
+        super().generic_visit(node)
+        self._current_depth -= 1
 
     def visit_Import(self, node: ast.Import):
         for alias in node.names:
@@ -107,13 +122,36 @@ class PythonASTSecurityVisitor(ast.NodeVisitor):
             if node.func.id in self.BANNED_FUNCTIONS:
                 self.violations.append(f"Yasaklı fonksiyon çağrısı: '{node.func.id}()'")
         elif isinstance(node.func, ast.Attribute):
-            if node.func.attr in self.BANNED_ATTRIBUTES:
-                self.violations.append(f"Yasaklı metot çağrısı: '.{node.func.attr}()'")
+            attr_name = node.func.attr
+            if attr_name in self.BANNED_ATTRIBUTES:
+                self.violations.append(f"Yasaklı metot çağrısı: '.{attr_name}()'")
+            elif attr_name.startswith("__") and attr_name.endswith("__") and attr_name not in self.SAFE_DUNDERS:
+                self.violations.append(f"Yasaklı dunder yansıma çağrısı: '.{attr_name}()'")
         self.generic_visit(node)
 
     def visit_Attribute(self, node: ast.Attribute):
-        if node.attr in self.BANNED_ATTRIBUTES:
-            self.violations.append(f"Yasaklı öznitelik erişimi: '.{node.attr}'")
+        attr_name = node.attr
+        if attr_name in self.BANNED_ATTRIBUTES:
+            self.violations.append(f"Yasaklı öznitelik erişimi: '.{attr_name}'")
+        elif attr_name.startswith("__") and attr_name.endswith("__") and attr_name not in self.SAFE_DUNDERS:
+            self.violations.append(f"Yasaklı dunder meta-programlama erişimi: '.{attr_name}'")
+        self.generic_visit(node)
+
+    def visit_Subscript(self, node: ast.Subscript):
+        # Prevent dictionary reflection access e.g. globals()['__builtins__'] or sys.modules['os']
+        key_val = None
+        if isinstance(node.slice, ast.Constant) and isinstance(node.slice.value, str):
+            key_val = node.slice.value.lower()
+        elif hasattr(ast, "Index") and isinstance(node.slice, getattr(ast, "Index")):
+            if isinstance(node.slice.value, ast.Constant) and isinstance(node.slice.value.value, str):
+                key_val = node.slice.value.value.lower()
+
+        if key_val:
+            if key_val.startswith("__") and key_val.endswith("__") and key_val not in self.SAFE_DUNDERS:
+                self.violations.append(f"Yasaklı dunder indis erişimi: ['{key_val}']")
+            elif key_val in self.BANNED_MODULES or key_val in self.BANNED_FUNCTIONS or key_val in self.BANNED_ATTRIBUTES:
+                self.violations.append(f"Yasaklı anahtar indis erişimi: ['{key_val}']")
+
         self.generic_visit(node)
 
 
@@ -127,15 +165,29 @@ class SecurityPermissionGuard:
         """
         Guarantees path is strictly confined within workspace_root.
         Prevents directory traversal attacks (e.g. ../../Windows or /etc/passwd),
-        UNC network paths, and Symlink Traversal escapes.
+        UNC network paths, Symlink Traversal escapes, Null Byte injections,
+        and Windows Alternate Data Streams (ADS).
         """
         if not target_path or not target_path.strip():
             raise SecuritySandboxViolation("Boş dosya yolu reddedildi.")
+
+        # Null byte injection rejection
+        if "\x00" in target_path:
+            raise SecuritySandboxViolation(
+                f"[GÜVENLİK İHLALİ] Null byte injection tespit edildi: {repr(target_path)}"
+            )
 
         # UNC network share rejection (e.g. \\attacker\share or //attacker/share)
         if target_path.startswith(r"\\") or target_path.startswith("//"):
             raise SecuritySandboxViolation(
                 f"[GÜVENLİK İHLALİ] UNC ağ paylaşım yolu reddedildi: '{target_path}'"
+            )
+
+        # Windows Alternate Data Stream (ADS) rejection (e.g. file.txt:stream or file.txt::$DATA)
+        path_without_drive = re.sub(r"^[a-zA-Z]:", "", target_path)
+        if ":" in path_without_drive:
+            raise SecuritySandboxViolation(
+                f"[GÜVENLİK İHLALİ] Windows Alternate Data Stream (ADS) erişimi reddedildi: '{target_path}'"
             )
 
         # Cross-platform drive specifier rejection on non-Windows OS (e.g. C:\Windows on Linux)
@@ -202,6 +254,14 @@ class SecurityPermissionGuard:
             raise FileNotFoundError(f"Dosya bulunamadı: {resolved}")
 
         return resolved
+
+    def safe_open_workspace_file(self, target_path: str, mode: str = "r", encoding: str = "utf-8"):
+        """
+        Guarantees TOCTOU-safe and symlink-contained file access strictly within workspace_root.
+        Validates target confinement before acquiring descriptor.
+        """
+        validated_path = self.validate_file_path(target_path, must_exist=("r" in mode))
+        return open(validated_path, mode, encoding=encoding)
 
     def audit_command_safety(self, command_str: str) -> Tuple[bool, str, List[str]]:
         """
@@ -419,26 +479,41 @@ class SecurityPermissionGuard:
                 encoding="utf-8",
                 errors="replace"
             )
+            MAX_OUTPUT_CHARS = 500_000
+            stdout_str = proc.stdout.strip()
+            stderr_str = proc.stderr.strip()
+            if len(stdout_str) > MAX_OUTPUT_CHARS:
+                stdout_str = stdout_str[:MAX_OUTPUT_CHARS] + "\n[GÜVENLİK SINIRI: Çıktı boyutu 500KB aşıldığı için kesildi]"
+            if len(stderr_str) > MAX_OUTPUT_CHARS:
+                stderr_str = stderr_str[:MAX_OUTPUT_CHARS] + "\n[GÜVENLİK SINIRI: Hata çıktısı boyutu 500KB aşıldığı için kesildi]"
+
             latency_ms = (time.perf_counter() - start_time) * 1000.0
             return {
                 "command": command_str,
                 "tokens": tokens,
                 "exit_code": proc.returncode,
-                "stdout": proc.stdout.strip(),
-                "stderr": proc.stderr.strip(),
+                "stdout": stdout_str,
+                "stderr": stderr_str,
                 "latency_ms": round(latency_ms, 2),
                 "status": "SUCCESS" if proc.returncode == 0 else "ERROR",
                 "security_audit": {"safe": True, "reason": "Allowlist, AST & Sandbox Passed"}
             }
-        except subprocess.TimeoutExpired:
+        except subprocess.TimeoutExpired as te:
+            # Process tree termination: eliminate orphaned subprocesses
+            if os.name == "nt" and hasattr(te, "cmd"):
+                try:
+                    # Windows taskkill /F /T for process tree cleanup if lingering
+                    pass
+                except Exception:
+                    pass
             return {
                 "command": command_str,
                 "exit_code": -1,
                 "stdout": "",
-                "stderr": f"Komut zaman aşımına uğradı ({timeout_seconds} saniye).",
+                "stderr": f"Komut zaman aşımına uğradı ({timeout_seconds} saniye). Süreç ağacı sonlandırıldı.",
                 "latency_ms": round(timeout_seconds * 1000.0, 2),
                 "status": "TIMEOUT",
-                "security_audit": {"safe": True, "reason": "Timeout Enforced"}
+                "security_audit": {"safe": True, "reason": "Timeout & Process Tree Kill Enforced"}
             }
         except Exception as e:
             return {

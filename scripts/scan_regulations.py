@@ -48,8 +48,12 @@ def evaluate_compliance(domain_keywords: str):
             "statutory_disclaimer": "Sistem AB pazarında mutlak olarak yasaklanan kategoridedir; derhal durdurulmalıdır."
         }
 
-    # 1b. Social Scoring (Article 5(1)(c))
-    if any(k in lowered for k in ["social scoring", "social score", "vatandaş puanlama"]):
+    # 1b. Social Scoring & Behavioral Profiling (Article 5(1)(c))
+    if any(k in lowered for k in [
+        "social scoring", "social score", "vatandaş puanlama",
+        "behavioral scoring", "citizen scoring", "ranking citizens",
+        "social credit", "davranış puanlama"
+    ]):
         return {
             "domain": domain_keywords,
             "eu_ai_act": {
@@ -140,7 +144,11 @@ def evaluate_compliance(domain_keywords: str):
         }
 
     # 1g. Real-Time Remote Biometric Identification in Public Spaces (Article 5(1)(h))
-    if any(k in lowered for k in ["realtime remote biometric identification", "remote biometric in public", "public facial tracking"]):
+    if any(k in lowered for k in [
+        "realtime remote biometric identification", "remote biometric in public",
+        "public facial tracking", "biometric identification in public",
+        "mass surveillance camera", "pedestrian faces", "police databases"
+    ]):
         return {
             "domain": domain_keywords,
             "eu_ai_act": {
@@ -157,10 +165,32 @@ def evaluate_compliance(domain_keywords: str):
             "statutory_disclaimer": "Kamusal alanda gerçek zamanlı uzaktan biyometrik takip genel kural olarak yasaktır."
         }
 
+    # 1h. Circumvention of Technological Protection Measures & DRM Piracy (DMCA 1201(a)(1) & Directive 2001/29/EC)
+    if any(k in lowered for k in [
+        "drm bypass", "anti-tamper", "denuvo", "software crack",
+        "game piracy", "license crack", "telif koruma bypass", "drm cracker"
+    ]):
+        return {
+            "domain": domain_keywords,
+            "eu_ai_act": {
+                "tier": "Yasaklı / Yasa Dışı İhlal (Prohibited Copyright Infringement & DRM Circumvention)",
+                "statutory_basis": "DMCA 17 U.S.C. § 1201(a)(1) & EU InfoSoc Direktifi (2001/29/EC) Madde 6",
+                "official_precedent": "Directive 2001/29/EC Article 6 & 17 U.S.C. § 1201(a)(1)",
+                "confidence": "Kritik / Yasa Dışı",
+                "requires_expert_counsel": True,
+                "obligations": [
+                    "Yazılım ve oyunların teknolojik koruma önlemlerini kırmak ve telifli kodları izinsiz bypass etmek yasa dışıdır.",
+                    "Fikri mülkiyet ihlali nedeniyle cezai ve hukuki tazminat sorumluluğu doğar."
+                ]
+            },
+            "data_privacy": ["Telif Hakları Mevzuatı: Fikri mülkiyet ihlali ve korsanlık yasağı."],
+            "statutory_disclaimer": "Korsanlık veya DRM korumalarını aşma amaçlı araçlar hukuken yasaklanmıştır."
+        }
+
     # =========================================================================
     # 2. HEALTHCARE & MEDICAL SYSTEMS (MDR 2017/745 & AI ACT ARTICLE 6(1))
     # =========================================================================
-    if any(k in lowered for k in ["medical", "health", "patient", "clinical", "hospital", "radiology"]):
+    if any(k in lowered for k in ["medical", "health", "patient", "clinical", "hospital", "radiology", "mammography", "cancer", "ecg", "cardiology"]):
         # Exclusion 1: Insurance Underwriting (Evaluated under Annex III Point 5(a))
         if any(k in lowered for k in ["insurance", "underwriting", "policy eligibility"]):
             pass
@@ -247,7 +277,12 @@ def evaluate_compliance(domain_keywords: str):
         }
 
     # 3c. Critical Infrastructure Safety Components (Annex III Point 2)
-    if any(k in lowered for k in ["critical infrastructure", "power grid", "water management scada", "energy grid safety", "water infrastructure", "dam management", "flood control", "scada", "autonomous drone", "drone dispatch"]):
+    if any(k in lowered for k in [
+        "critical infrastructure", "power grid", "water management scada",
+        "energy grid safety", "water infrastructure", "dam management",
+        "flood control", "scada", "autonomous drone", "drone dispatch",
+        "avionics", "flight navigation", "autopilot", "aerospace"
+    ]):
         return {
             "domain": domain_keywords,
             "eu_ai_act": {
@@ -480,6 +515,28 @@ def evaluate_compliance(domain_keywords: str):
             },
             "data_privacy": ["Telif Hakları Direktifi (2019/790) Madde 4: Kod analizinde lisans uyumluluğu."],
             "statutory_disclaimer": "Geliştirici araçları ve statik analizörler AI Act yüksek risk veya şeffaflık kapsamı dışındadır."
+        }
+
+    # 5b. Reverse Engineering for Interoperability Safe Harbor (Directive 2009/24/EC Article 6 & DMCA 1201(f))
+    if any(k in lowered for k in [
+        "reverse engineering", "interoperability", "clean room", "can bus",
+        "decompiler", "disassembler", "birlikte çalışabilirlik", "tersine mühendislik"
+    ]):
+        return {
+            "domain": domain_keywords,
+            "eu_ai_act": {
+                "tier": "Yasal Muafiyet / Birlikte Çalışabilirlik Güvencesi (Legal Exemption / Interoperability Safe Harbor)",
+                "statutory_basis": "Directive 2009/24/EC Madde 6 & DMCA 17 U.S.C. § 1201(f)",
+                "official_precedent": "EU Directive 2009/24/EC Article 6 & DMCA 1201(f) (Decompilation for Interoperability)",
+                "confidence": "Yüksek (Yasal Birlikte Çalışabilirlik Güvencesi)",
+                "requires_expert_counsel": False,
+                "obligations": [
+                    "Birlikte çalışabilirlik için zorunlu olan kısımlarla sınırlı kalınmalıdır.",
+                    "Bağımsız geliştirme ve temiz oda (Clean-Room Specification) şartlarına riayet edilmelidir."
+                ]
+            },
+            "data_privacy": ["Telif Direktifi (2009/24/EC): Fikri mülkiyet birlikte çalışabilirlik güvencesi."],
+            "statutory_disclaimer": "Temiz oda şartlarında birlikte çalışabilirlik amaçlı tersine mühendislik yasal güvence altındadır."
         }
 
     # =========================================================================

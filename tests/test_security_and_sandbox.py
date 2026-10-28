@@ -219,6 +219,72 @@ class TestSecurityPermissionGuard(unittest.TestCase):
         self.assertEqual(result["exit_code"], -1)
         self.assertFalse(result["security_audit"]["safe"])
 
+    def test_ast_dunder_reflection_and_subscript_escapes_blocked(self):
+        """Must block dunder reflection, dictionary subscript escapes, and AST bombs."""
+        evasions = [
+            'python -c "().__class__.__base__.__subclasses__()"',
+            'python -c "x = {\'__builtins__\': None}; y = x[\'__builtins__\']"',
+            'python -c "d = {\'os\': 1}; z = d[\'os\']"',
+            'python -c "print(hasattr(int, \'__dict__\'))"',
+            'python -c "x = ((((1 + 1))))"'  # safe shallow
+        ]
+        # First 4 must be blocked
+        for evasive in evasions[:4]:
+            is_safe, reason, _ = self.guard.audit_command_safety(evasive)
+            self.assertFalse(is_safe, f"Evasive snippet must be blocked: {evasive} (Got: {reason})")
+            self.assertIn("AST Güvenlik İhlali", reason)
+
+        # Shallow safe math should pass
+        is_safe, reason, _ = self.guard.audit_command_safety(evasions[4])
+        self.assertTrue(is_safe, f"Safe math should pass: {reason}")
+
+    def test_ast_recursion_bomb_rejected(self):
+        """Must detect and veto deeply nested AST recursion / complexity bombs."""
+        deep_expr = "-" * 45 + "42"
+        bomb_cmd = f'python -c "{deep_expr}"'
+        is_safe, reason, _ = self.guard.audit_command_safety(bomb_cmd)
+        self.assertFalse(is_safe, "AST recursion bomb must be rejected")
+        self.assertIn("AST aşırı derinlik", reason)
+
+    def test_null_byte_injection_rejected(self):
+        """Must reject paths containing null byte injections."""
+        with self.assertRaises(SecuritySandboxViolation) as ctx:
+            self.guard.validate_file_path("scripts/valid.py\x00.exe")
+        self.assertIn("Null byte injection", str(ctx.exception))
+
+    def test_alternate_data_streams_rejected(self):
+        """Must reject NTFS Alternate Data Streams."""
+        ads_paths = [
+            "scripts/security_permission_guard.py:stream.exe",
+            "scripts/security_permission_guard.py::$DATA"
+        ]
+        for p in ads_paths:
+            with self.assertRaises(SecuritySandboxViolation) as ctx:
+                self.guard.validate_file_path(p)
+            self.assertIn("Alternate Data Stream", str(ctx.exception))
+
+    def test_toctou_safe_open_workspace_file(self):
+        """safe_open_workspace_file permits contained files and strictly rejects traversal."""
+        # Allowed read
+        with self.guard.safe_open_workspace_file("scripts/security_permission_guard.py", "r") as f:
+            content = f.read(64)
+            self.assertTrue(len(content) > 0)
+
+        # Disallowed read
+        with self.assertRaises(SecuritySandboxViolation):
+            self.guard.safe_open_workspace_file("../../outside.txt", "r")
+
+    def test_subprocess_timeout_enforced(self):
+        """Long-running commands must be cleanly terminated upon timeout without hanging."""
+        # Run safe time.sleep(5) with a 1 second timeout
+        res = self.guard.execute_sandboxed_command(
+            'python -c "import time; time.sleep(5)"',
+            timeout_seconds=1
+        )
+        self.assertEqual(res["status"], "TIMEOUT")
+        self.assertEqual(res["exit_code"], -1)
+        self.assertIn("zaman aşımına uğradı", res["stderr"])
+
 
 if __name__ == "__main__":
     unittest.main()

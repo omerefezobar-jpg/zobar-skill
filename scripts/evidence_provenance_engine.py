@@ -17,9 +17,11 @@ FEATURES:
 import sys
 import os
 import json
+import math
+import re
 import datetime
 import argparse
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any, Optional, Set, Tuple
 
 # Ensure UTF-8 stdout
 if hasattr(sys.stdout, "reconfigure"):
@@ -127,12 +129,131 @@ class EvidenceProvenanceGraph:
             "lineage_links_count": len(self.causal_links)
         }
 
+    def evaluate_claim_quality(self, claim_text: str, evidence_id: str) -> Dict[str, Any]:
+        """
+        Rigorously scores the factual grounding, freshness, and entailment of an evidence item
+        supporting a specific claim, replacing naive source presence counts.
+        """
+        evidence_node = self.evidence_nodes.get(evidence_id)
+        if not evidence_node:
+            return {
+                "claim_text": claim_text,
+                "evidence_id": evidence_id,
+                "total_score": 0.0,
+                "quality_grade": "UNGROUNDED_HALLUCINATION",
+                "error": "Belirtilen kanıt kimliği (evidence_id) sistemde kayıtlı değil."
+            }
+        return ClaimEvidenceQualityScorer.score_claim_support(claim_text, evidence_node)
+
     def export_provenance_dossier(self) -> Dict[str, Any]:
         """Exports the complete machine-readable and human-verifiable provenance dossier."""
         return {
             "audit_summary": self.audit_evidence_integrity(),
             "evidence_nodes": list(self.evidence_nodes.values()),
             "causal_lineage": self.causal_links
+        }
+
+
+class ClaimEvidenceQualityScorer:
+    """
+    Mathematical Claim-Evidence Quality, Freshness & Entailment Scorer.
+    Replaces naive 'count > 0' with factual verification, exponential freshness decay,
+    and semantic claim support scoring.
+    """
+    AUTHORITY_WEIGHTS = {
+        "STATUTORY_GROUND_TRUTH": 40.0,
+        "PEER_REVIEWED_EMPIRICAL": 35.0,
+        "INDUSTRY_TELEMETRY": 28.0,
+        "ARCHITECTURAL_HEURISTIC": 25.0,
+        "MODEL_HYPOTHESIS": 10.0,
+    }
+
+    DECAY_LAMBDA = {
+        "STATUTORY_GROUND_TRUTH": 0.0,     # Laws remain binding until repealed
+        "PEER_REVIEWED_EMPIRICAL": 0.03,  # Academic ground truths decay slowly
+        "ARCHITECTURAL_HEURISTIC": 0.02,  # Mathematical theorems don't expire
+        "INDUSTRY_TELEMETRY": 0.20,       # Fast decay for telemetry/prices
+        "MODEL_HYPOTHESIS": 0.40          # High decay for unverified hypotheses
+    }
+
+    STOP_WORDS = {
+        "the", "a", "an", "and", "or", "of", "to", "in", "is", "for", "with", "on", "at", "by", "from",
+        "ve", "ile", "için", "bir", "bu", "şu", "da", "de", "olarak", "tarafından"
+    }
+
+    @classmethod
+    def tokenize_clean(cls, text: str) -> Set[str]:
+        words = re.findall(r"[a-zA-Z0-9çğıöşüÇĞİÖŞÜ_]+", text.lower())
+        return {w for w in words if w not in cls.STOP_WORDS and len(w) > 2}
+
+    @classmethod
+    def score_claim_support(cls, claim_text: str, evidence: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Evaluates a claim against an evidence record:
+        1. Authority Score (0-40)
+        2. Freshness Score via exponential decay (0-30)
+        3. Entailment / Semantic Support Score (0-30)
+        Total Score: 0 - 100
+        """
+        tier = evidence.get("confidence_tier", "MODEL_HYPOTHESIS")
+        auth_score = cls.AUTHORITY_WEIGHTS.get(tier, 10.0)
+
+        # 2. Freshness Score: 30 * exp(-lambda * delta_years)
+        published_year = evidence.get("published_year", 2024)
+        current_year = datetime.datetime.now(datetime.timezone.utc).year
+        delta_years = max(0, current_year - published_year)
+        lam = cls.DECAY_LAMBDA.get(tier, 0.20)
+        freshness_decay = math.exp(-lam * delta_years)
+        freshness_score = round(30.0 * freshness_decay, 2)
+
+        # 3. Entailment / Semantic Support Score (0-30)
+        claim_tokens = cls.tokenize_clean(claim_text)
+        evidence_content = (
+            evidence.get("claim_supported", "") + " " +
+            evidence.get("citation", "") + " " +
+            evidence.get("source_type", "")
+        )
+        evidence_tokens = cls.tokenize_clean(evidence_content)
+
+        if not claim_tokens or not evidence_tokens:
+            support_score = 5.0
+            overlap_ratio = 0.0
+        else:
+            intersection = claim_tokens.intersection(evidence_tokens)
+            overlap_ratio = len(intersection) / len(claim_tokens)
+            # Baseline overlap contribution (up to 20 pts)
+            support_score = min(20.0, overlap_ratio * 30.0)
+
+            # Statutory / Metric Grounding Bonus (up to 10 pts)
+            numbers_in_claim = re.findall(r"\b\d+(?:[\.,]\d+)?%?|\b[a-z]{1,4}-\d+\b", claim_text.lower())
+            if numbers_in_claim:
+                matched_numbers = [num for num in numbers_in_claim if num in evidence_content.lower()]
+                if matched_numbers:
+                    support_score += min(10.0, 5.0 * len(matched_numbers))
+
+        support_score = min(30.0, round(support_score, 2))
+        total_score = round(auth_score + freshness_score + support_score, 2)
+
+        if total_score >= 80.0:
+            quality_grade = "GROUNDED_HIGH_FIDELITY"
+        elif total_score >= 60.0:
+            quality_grade = "ADEQUATELY_SUPPORTED"
+        elif total_score >= 40.0:
+            quality_grade = "WEAK_EVIDENCE_UNVERIFIED"
+        else:
+            quality_grade = "UNGROUNDED_HALLUCINATION"
+
+        return {
+            "claim_text": claim_text,
+            "evidence_id": evidence.get("evidence_id", "UNKNOWN"),
+            "confidence_tier": tier,
+            "authority_score": auth_score,
+            "freshness_score": freshness_score,
+            "support_score": support_score,
+            "total_score": total_score,
+            "quality_grade": quality_grade,
+            "overlap_ratio_pct": round(overlap_ratio * 100.0, 1),
+            "is_statutory": tier == "STATUTORY_GROUND_TRUTH"
         }
 
 def build_default_evidence_graph() -> EvidenceProvenanceGraph:

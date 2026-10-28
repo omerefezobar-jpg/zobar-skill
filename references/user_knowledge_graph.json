@@ -80,6 +80,14 @@
       "confidence": 0.91,
       "created_at": 1793229774.7879317,
       "last_reinforced": 1793229774.7879317
+    },
+    {
+      "subject": "live_trend_harvester",
+      "predicate": "assimilated_trick",
+      "object": "Genie 4",
+      "confidence": 0.91,
+      "created_at": 1793230306.8983452,
+      "last_reinforced": 1793230306.8983452
     }
   ],
   "user_profile": {
@@ -90,6 +98,6 @@
     "disliked_patterns": [],
     "last_updated": 1793225150.468043
   },
-  "total_triples_count": 10,
-  "last_saved": 1793229774.788754
+  "total_triples_count": 11,
+  "last_saved": 1793230306.8993475
 }
