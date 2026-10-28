@@ -1,0 +1,47 @@
+{
+  "timestamp": "2026-10-28T19:17:32.755022+00:00",
+  "final_percentage": 100.0,
+  "total_score": 300,
+  "max_score": 300,
+  "cases": [
+    {
+      "id": "CASE-01",
+      "name": "Kritik Tıbbi Teşhis ve Otonom Karar Sistemi (Medical Diagnostics)",
+      "score": 100,
+      "max": 100,
+      "notes": [
+        "✅ EU AI Act risk sınıflandırması tam isabet.",
+        "✅ Kanun maddesi referansı doğru (Madde 6 & Ek III).",
+        "✅ Hukuki uzman incelemesi bayrağı doğru.",
+        "✅ Çekirdek dil seçimi amaca tam uygun (Rust).",
+        "✅ Tüm icatlar TRL kanıt türü ve 3 hata modu ile zırhlı."
+      ]
+    },
+    {
+      "id": "CASE-02",
+      "name": "Yüksek Başarımlı AST Derleyici & Kod Analiz Motoru (Code Analysis)",
+      "score": 100,
+      "max": 100,
+      "notes": [
+        "✅ EU AI Act risk sınıflandırması tam isabet.",
+        "✅ Kanun maddesi referansı doğru (Madde 69).",
+        "✅ Hukuki uzman incelemesi bayrağı doğru.",
+        "✅ Çekirdek dil seçimi amaca tam uygun (Rust).",
+        "✅ Tüm icatlar TRL kanıt türü ve 3 hata modu ile zırhlı."
+      ]
+    },
+    {
+      "id": "CASE-03",
+      "name": "Üretken Kod Asistanı & Otonom LLM Ajanı (Generative Coding Agent)",
+      "score": 100,
+      "max": 100,
+      "notes": [
+        "✅ EU AI Act risk sınıflandırması tam isabet.",
+        "✅ Kanun maddesi referansı doğru (Madde 50).",
+        "✅ Hukuki uzman incelemesi bayrağı doğru.",
+        "✅ Çekirdek dil seçimi amaca tam uygun (TypeScript / Rust (Hibrit Mimari)).",
+        "✅ Tüm icatlar TRL kanıt türü ve 3 hata modu ile zırhlı."
+      ]
+    }
+  ]
+}

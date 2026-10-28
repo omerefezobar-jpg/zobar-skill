@@ -25,6 +25,10 @@ jobs:
       run: |
         python -m unittest discover tests
 
+    - name: Run Ground-Truth Accuracy & Evaluation Benchmark Suite
+      run: |
+        python benchmarks/run_benchmarks.py
+
     - name: Run Dossier & HTML Export Smoke Test
       run: |
         python scripts/export_html_report.py examples/sample-innovator-report.md --output ci_report.html

@@ -28,7 +28,7 @@ if hasattr(sys.stdout, "reconfigure"):
 
 BANNER = r"""
 ========================================================================
-   ⚡ FRONTIER INNOVATOR — FULL 6-PHASE AUTONOMOUS DEEP-TECH ENGINE ⚡
+   ⚡ ZOBAR SKILL — FULL 6-PHASE AUTONOMOUS DEEP-TECH ENGINE ⚡
 ========================================================================
 """
 
@@ -37,7 +37,7 @@ def generate_dossier(topic: str, output_path: str = None, html_path: str = None)
     now_utc = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     print(f"[*] Hedef Konu / Problem: {topic}")
     print(f"[*] Başlangıç Zamanı     : {now_utc}")
-    print("[*] 6 Fazlı tam otonom araştırma ve sentez akışı başlatılıyor...\n")
+    print("[*] 6 Fazlı tam otonom Zobar Skill araştırma akışı başlatılıyor...\n")
 
     # 1. Akademik Ön Baskılar (arXiv HTTPS)
     print("[1/6] 🏛️ FAZ 1: arXiv üzerinden akademik literatür ve ön baskılar taranıyor...")
@@ -82,8 +82,8 @@ def generate_dossier(topic: str, output_path: str = None, html_path: str = None)
 
     # Tam Raporu İnşa Et
     dossier_lines = [
-        f"# FRONTIER INNOVATOR UÇTAN-UCA RAPORU: {topic.upper()}",
-        f"**Rapor Tarihi (UTC):** {now_utc} | **Motor:** Frontier Innovator v3.0-Autonomous 6-Phase Engine\n",
+        f"# ZOBAR SKILL RAPORU: {topic.upper()}",
+        f"**Rapor Tarihi (UTC):** {now_utc} | **Motor:** Zobar Skill v3.5-Autonomous Engine\n",
         "---",
         "## 🏛️ FAZ 1: Akademik Zemin & Ön Baskı Literatürü (arXiv)",
         "> ⚠️ **Akademik Kanıt Notu:** Aşağıdaki çalışmalar arXiv açık erişim ön baskı (pre-print) deposundan derlenmiştir. Bu çalışmalar en güncel teorik sınırları sunmakla birlikte henüz hakemli dergi onayından geçmemiş olabilir. Bulgular `[Literatür Ön Baskısı]` olarak etiketlenmiştir.\n",
@@ -200,7 +200,7 @@ def generate_dossier(topic: str, output_path: str = None, html_path: str = None)
         print(f"[+] 6 Fazlı Tam Araştırma Dosyası (Markdown) kaydedildi: {output_path}")
 
     if html_path:
-        rendered_html = export_to_html(full_dossier, title=f"Frontier Dossier: {topic}")
+        rendered_html = export_to_html(full_dossier, title=f"Zobar Skill: {topic}")
         with open(html_path, "w", encoding="utf-8") as f:
             f.write(rendered_html)
         print(f"[+] Güvenlik zırhlı görsel Dashboard (HTML/Mermaid) kaydedildi: {html_path}")

@@ -1,11 +1,11 @@
 ---
-name: frontier-innovator
+name: zobar-skill
 description: >-
   Use this skill whenever conceptualizing, researching, benchmarking, or architecting a product, software system, or revolutionary feature from the ground up.
   Executes an uncompromising 6-phase master protocol: academic ground truth (top university syllabi, seminal textbooks, professor mental models), raw user sentiment & pain point extraction, competitor teardown & 10x moat creation, legal/regulatory risk mapping, optimal tech stack & UI component engineering, and radical boundary-pushing inventions validated by feasibility, commercial viability, and visual architecture diagrams.
 ---
 
-# Frontier Innovator: Deep-Tech, Market & Radical Invention Engine
+# Zobar Skill: Deep-Tech, Market & Radical Invention Engine
 
 > **Aforizma:** *"Sıradanlık en büyük risktir. Bir sistem inşa edilecekse; bilimin en uç teorisiyle temellenmeli, sokaktaki kullanıcının en derin acısını çözmeli, hukuki olarak zırhlı olmalı, uygulanabilirliği ve ticari talebi kanıtlanmış radikal icatları bünyesinde barındırmalıdır."*
 
