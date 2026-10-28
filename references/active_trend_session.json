@@ -2,7 +2,7 @@
   "session_id": "SESSION-LIVE-TREND-001",
   "status": "ACTIVE_MONITORING",
   "created_at_utc": "2026-10-29T00:00:00Z",
-  "last_heartbeat_utc": "2026-10-28T22:08:23Z",
+  "last_heartbeat_utc": "2026-10-28T22:20:02Z",
   "monitoring_channels": [
     "YouTube Shorts (@Fireship, @Theo, @ByteByteGo, @KevinPowell)",
     "Instagram Tech Reels (@hyperplexed, @codewithharry, @florinpop17)",
@@ -10,19 +10,31 @@
     "Global Tech News (Hacker News Algolia API, arXiv cs.AI/cs.SE)"
   ],
   "poll_interval_seconds": 3600,
-  "total_harvested_count": 11,
+  "total_harvested_count": 18,
   "unread_tricks_queue": [],
   "seen_identifiers": [
-    "TRICK-IG-02",
-    "TRICK-YT-04",
-    "TRICK-NEWS-05",
-    "TRICK-IG-06",
-    "TRICK-NEWS-09",
-    "TRICK-YT-01",
-    "TRICK-GH-10",
+    "LIVE-HN-50276792",
+    "LIVE-YT-aVRjFZM23ak",
     "TRICK-GH-03",
-    "TRICK-NEWS-50271640",
     "TRICK-GH-07",
-    "TRICK-YT-08"
-  ]
+    "LIVE-GH-1024554267",
+    "LIVE-GH-1073224795",
+    "TRICK-IG-06",
+    "TRICK-YT-04",
+    "LIVE-YT-nEaJMdM1djM",
+    "LIVE-YT-G_em1hHPnXY",
+    "TRICK-NEWS-05",
+    "TRICK-NEWS-50271640",
+    "LIVE-HN-50271640",
+    "TRICK-YT-01",
+    "TRICK-YT-08",
+    "TRICK-GH-10",
+    "LIVE-YT-Dddv7P_k60o",
+    "TRICK-IG-02",
+    "TRICK-NEWS-09"
+  ],
+  "heartbeat_ticks_total": 19,
+  "is_daemon_running": false,
+  "daemon_pid": 19552,
+  "uptime_seconds": 2.91
 }

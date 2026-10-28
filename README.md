@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![CI & Quality Gate](https://github.com/omerefezobar-jpg/zobar-skill/actions/workflows/ci.yml/badge.svg)](https://github.com/omerefezobar-jpg/zobar-skill/actions)
 [![Regression Suite](https://img.shields.io/badge/Regression%20Suite-30%2F30%20Passing%20(Zero%20Tolerance)-blue.svg)](./benchmarks/BENCHMARK_REPORT.md)
-[![Unit Tests](https://img.shields.io/badge/Unit%20Tests-133%2F133%20Passing-brightgreen.svg)](https://github.com/omerefezobar-jpg/zobar-skill/actions)
+[![Unit Tests](https://img.shields.io/badge/Unit%20Tests-136%2F136%20Passing-brightgreen.svg)](https://github.com/omerefezobar-jpg/zobar-skill/actions)
 [![Real--World Tasks](https://img.shields.io/badge/Real--World%20Tasks-100.0%25%20Composite%20Score-success.svg)](./benchmarks/real_world_task_benchmarks.py)
 [![Live MCP Engine](https://img.shields.io/badge/Live%20MCP%20Server-24%20Tools%20(Sub--1ms)-blue.svg)](./benchmarks/MCP_BENCHMARK_REPORT.md)
 [![Trend & Trick Harvester](https://img.shields.io/badge/Active%20Trend%20Session-Reels%20%7C%20Shorts%20%7C%20GitHub-ff69b4.svg)](./scripts/trend_trick_harvester_engine.py)
@@ -156,6 +156,7 @@ zobar-skill/
 ├── references/                       # Zihinsel modeller, First Principles, TRIZ matrisi
 │   ├── viral_tricks_and_trends_vault.json # Canlı Reels, Shorts ve GitHub trickleri ve kod şablonları
 │   ├── active_trend_session.json     # Sürekli aktif izleme oturumu ve yeni trick kuyruğu
+│   ├── session_telemetry_audit.log   # Append-only sürekli daemon heartbeat & tarama telemetrisi
 │   ├── free_modern_components_vault.json # Hazır modern React/Tailwind bileşen kodları (Shimmer, Bento, CTA)
 │   ├── empirical_feedback_registry.json # Bayesyen kazanma oranları ve ampirik deneme telemetrileri
 │   ├── evolutionary_design_memory.json # Tekrarsız tasarım oturum hafızası ve kromozom bankası
@@ -164,7 +165,7 @@ zobar-skill/
 │   ├── s_tier_design_vault.json      # 202 adet doğrulanmış S-Tier site ve bileşen tasarım veri tabanı
 │   ├── heavy_apps_engineering_blueprints.json # Steam, Excel, Premiere vb. 10x mühendislik analizleri
 │   └── supabase_production_schema.sql# Multi-tenant RLS, pgvector HNSW ve Realtime PostgreSQL şeması
-├── tests/                            # 133/133 Çevrimdışı mock'lu deterministik birim test paketi
+├── tests/                            # 136/136 Çevrimdışı mock'lu deterministik birim test paketi
 └── examples/                         # Örnek rapor (Markdown + HTML formatında)
 ```
 

@@ -8,6 +8,70 @@
       "confidence": 0.99,
       "created_at": 1793225150.8948164,
       "last_reinforced": 1793225150.8948164
+    },
+    {
+      "subject": "live_trend_harvester",
+      "predicate": "assimilated_trick",
+      "object": "Did the AI bubble just pop?",
+      "confidence": 0.95,
+      "created_at": 1793225806.049965,
+      "last_reinforced": 1793225806.049965
+    },
+    {
+      "subject": "live_trend_harvester",
+      "predicate": "assimilated_trick",
+      "object": "China just dropped a new frontier model... and nob",
+      "confidence": 0.95,
+      "created_at": 1793225806.0509636,
+      "last_reinforced": 1793225806.0509636
+    },
+    {
+      "subject": "live_trend_harvester",
+      "predicate": "assimilated_trick",
+      "object": "Top 5 AI Building Blocks Every Engineer Should Kno",
+      "confidence": 0.95,
+      "created_at": 1793225806.0509636,
+      "last_reinforced": 1793225806.0509636
+    },
+    {
+      "subject": "live_trend_harvester",
+      "predicate": "assimilated_trick",
+      "object": "How to Test Your Code (Even When AI Writes It)",
+      "confidence": 0.95,
+      "created_at": 1793225806.0509636,
+      "last_reinforced": 1793225806.0509636
+    },
+    {
+      "subject": "live_trend_harvester",
+      "predicate": "assimilated_trick",
+      "object": "obra/superpowers: An agentic skills framework & so",
+      "confidence": 1.0,
+      "created_at": 1793225806.0509636,
+      "last_reinforced": 1793225806.0509636
+    },
+    {
+      "subject": "live_trend_harvester",
+      "predicate": "assimilated_trick",
+      "object": "NousResearch/hermes-agent: The agent that grows wi",
+      "confidence": 1.0,
+      "created_at": 1793225806.0509636,
+      "last_reinforced": 1793225806.0509636
+    },
+    {
+      "subject": "live_trend_harvester",
+      "predicate": "assimilated_trick",
+      "object": "Apple's git still trusts the compromised eMudhra c",
+      "confidence": 0.89,
+      "created_at": 1793225806.0519717,
+      "last_reinforced": 1793225806.0519717
+    },
+    {
+      "subject": "live_trend_harvester",
+      "predicate": "assimilated_trick",
+      "object": "Gemini 4 Carbon",
+      "confidence": 0.9,
+      "created_at": 1793225806.0519717,
+      "last_reinforced": 1793225806.0519717
     }
   ],
   "user_profile": {
@@ -18,6 +82,6 @@
     "disliked_patterns": [],
     "last_updated": 1793225150.468043
   },
-  "total_triples_count": 1,
-  "last_saved": 1793225150.8957977
+  "total_triples_count": 9,
+  "last_saved": 1793225806.0519717
 }

@@ -55,10 +55,10 @@ class TestTrendTrickHarvesterEngine(unittest.TestCase):
         self.assertTrue(any("css" in t["title"].lower() or "css" in t.get("tags", []) for t in css_tricks))
 
         # By platform
-        ig_tricks = self.engine.search_tricks(platform="Instagram Reels")
+        ig_tricks = self.engine.search_tricks(platform="Instagram")
         self.assertGreaterEqual(len(ig_tricks), 1)
         for t in ig_tricks:
-            self.assertEqual(t["platform"], "Instagram Reels")
+            self.assertIn("Instagram", t["platform"])
 
     def test_sync_active_session_assimilates_memory(self):
         """Syncing active session must update heartbeat, update queue, and push to continual memory."""
@@ -70,8 +70,47 @@ class TestTrendTrickHarvesterEngine(unittest.TestCase):
 
         # Verify memory engine received knowledge triples
         memory_triples = self.engine.memory_engine.triples
-        has_trick_subject = any(t.get("subject") == "trick_vault" for t in memory_triples)
+        has_trick_subject = any(t.get("subject") in ["live_trend_harvester", "trick_vault"] for t in memory_triples)
         self.assertTrue(has_trick_subject)
+
+    def test_origin_separation_live_vs_curated(self):
+        """Must strictly separate LIVE_NETWORK_SCRAPED from CURATED_OFFLINE_BENCHMARK."""
+        curated_matches = self.engine.search_tricks(origin_filter="CURATED_ONLY")
+        self.assertGreaterEqual(len(curated_matches), 5)
+        for t in curated_matches:
+            self.assertEqual(t.get("data_origin"), "CURATED_OFFLINE_BENCHMARK")
+
+        live_matches = self.engine.search_tricks(origin_filter="LIVE_ONLY")
+        for t in live_matches:
+            self.assertEqual(t.get("data_origin"), "LIVE_NETWORK_SCRAPED")
+
+    def test_mathematical_viral_score_formulas(self):
+        """Deterministic logarithmic engagement verification."""
+        # Test GitHub formula
+        score_gh, formula_gh = self.engine.calculate_github_viral_score(stars=10000, forks=2000)
+        self.assertGreaterEqual(score_gh, 85)
+        self.assertIn("log10", formula_gh)
+
+        # Test Hacker News formula
+        score_hn, formula_hn = self.engine.calculate_news_viral_score(points=500, comments=150)
+        self.assertGreaterEqual(score_hn, 80)
+        self.assertIn("log10", formula_hn)
+
+    def test_continuous_daemon_loop_and_telemetry_audit(self):
+        """Daemon must execute real ticks and write append-only telemetry records."""
+        audit_file = self.engine.audit_log_path
+        initial_lines = 0
+        if os.path.exists(audit_file):
+            with open(audit_file, "r", encoding="utf-8") as f:
+                initial_lines = len(f.readlines())
+
+        # Run 2 ticks directly
+        self.engine.run_continuous_monitoring_daemon(interval_seconds=1, max_ticks=2)
+        self.assertFalse(self.engine.session_data.get("is_daemon_running"))
+
+        with open(audit_file, "r", encoding="utf-8") as f:
+            lines = f.readlines()
+        self.assertGreaterEqual(len(lines), initial_lines + 2)
 
     def test_daily_brief_generation(self):
         """Must generate structured executive markdown daily trick brief."""
