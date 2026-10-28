@@ -3,6 +3,7 @@
 Multi-Source User Sentiment & Friction Miner for Frontier Innovator.
 Extracts real developer complaints, pain points, and friction points across
 Hacker News (Algolia API) and Reddit (Public JSON API) with zero dependencies.
+Includes source health tracking and weighted sentiment scoring.
 """
 
 import sys
@@ -17,10 +18,15 @@ import argparse
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
-FRICTION_KEYWORDS = [
-    "slow", "hate", "issue", "problem", "broken", "pain", "expensive", 
-    "crash", "annoying", "terrible", "worst", "bug", "confusing", "fail",
-    "frustrat", "unusable", "horrible", "waste", "garbage", "overkill"
+# Weighted friction vocabulary
+HIGH_FRICTION_KEYWORDS = [
+    "hate", "broken", "terrible", "worst", "unusable", "horrible",
+    "garbage", "disaster", "painful", "nightmare", "crash", "corrupt"
+]
+
+MODERATE_FRICTION_KEYWORDS = [
+    "slow", "issue", "problem", "bug", "confusing", "fail", "expensive",
+    "annoying", "frustrat", "waste", "overkill", "bloat", "clunky", "hard to"
 ]
 
 def clean_html(raw_html: str) -> str:
@@ -29,20 +35,26 @@ def clean_html(raw_html: str) -> str:
     text = re.sub(cleanr, ' ', raw_html)
     return html.unescape(text).strip()
 
+def calculate_friction_score(text: str) -> int:
+    """Calculates weighted friction score based on severity and keyword density."""
+    lowered = text.lower()
+    high_count = sum(2 for kw in HIGH_FRICTION_KEYWORDS if kw in lowered)
+    mod_count = sum(1 for kw in MODERATE_FRICTION_KEYWORDS if kw in lowered)
+    return high_count + mod_count
+
 def search_hn_sentiment(query: str, max_comments: int = 4):
     """Mines user sentiment and complaints from Hacker News via Algolia API."""
     encoded_query = urllib.parse.quote(query)
-    url = f"https://hn.algolia.com/api/v1/search?query={encoded_query}&tags=comment&hitsPerPage={max_comments * 2}"
+    url = f"https://hn.algolia.com/api/v1/search?query={encoded_query}&tags=comment&hitsPerPage={max_comments * 3}"
 
-    headers = {"User-Agent": "FrontierInnovatorBot/1.0 (Developer Sentiment Research)"}
+    headers = {"User-Agent": "FrontierInnovatorBot/2.0 (Developer Sentiment Research)"}
     req = urllib.request.Request(url, headers=headers)
 
     try:
-        with urllib.request.urlopen(req, timeout=12) as response:
+        with urllib.request.urlopen(req, timeout=10) as response:
             data = json.loads(response.read().decode('utf-8'))
     except Exception as e:
-        print(f"[-] HN Arama Hatası: {e}", file=sys.stderr)
-        return []
+        return {"status": "error", "error": str(e), "comments": []}
 
     hits = data.get("hits", [])
     results = []
@@ -61,7 +73,7 @@ def search_hn_sentiment(query: str, max_comments: int = 4):
         author = hit.get("author", "anon")
         url = f"https://news.ycombinator.com/item?id={hit.get('objectID')}"
 
-        score = sum(1 for kw in FRICTION_KEYWORDS if kw in cleaned.lower())
+        score = calculate_friction_score(cleaned)
 
         results.append({
             "source": "Hacker News",
@@ -74,22 +86,21 @@ def search_hn_sentiment(query: str, max_comments: int = 4):
         })
 
     results.sort(key=lambda x: x["friction_score"], reverse=True)
-    return results[:max_comments]
+    return {"status": "success", "comments": results[:max_comments]}
 
 def search_reddit_sentiment(query: str, max_comments: int = 4):
     """Mines user complaints and feedback from Reddit public search JSON."""
-    encoded_query = urllib.parse.quote(f"{query} (slow OR hate OR bug OR problem OR terrible)")
-    url = f"https://www.reddit.com/search.json?q={encoded_query}&type=comment&limit={max_comments * 2}&sort=relevance"
+    encoded_query = urllib.parse.quote(f"{query} (slow OR hate OR bug OR problem OR terrible OR broken)")
+    url = f"https://www.reddit.com/search.json?q={encoded_query}&type=comment&limit={max_comments * 3}&sort=relevance"
 
-    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) FrontierInnovator/1.0"}
+    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) FrontierInnovator/2.0"}
     req = urllib.request.Request(url, headers=headers)
 
     try:
         with urllib.request.urlopen(req, timeout=10) as response:
             data = json.loads(response.read().decode('utf-8'))
-    except Exception:
-        # Reddit may rate-limit anonymous requests; fail silently and rely on HN
-        return []
+    except Exception as e:
+        return {"status": "rate-limited/error", "error": str(e), "comments": []}
 
     items = data.get("data", {}).get("children", [])
     results = []
@@ -106,29 +117,52 @@ def search_reddit_sentiment(query: str, max_comments: int = 4):
         url = f"https://reddit.com{permalink}" if permalink else "https://reddit.com"
         subreddit = c_data.get("subreddit_name_prefixed", "r/reddit")
 
-        score = sum(1 for kw in FRICTION_KEYWORDS if kw in cleaned.lower())
+        score = calculate_friction_score(cleaned)
 
         results.append({
             "source": f"Reddit ({subreddit})",
             "author": author,
-            "date": "Güncel",
-            "title": f"{subreddit} Gönderisi",
+            "date": "Güncel Gönderi",
+            "title": f"{subreddit} Tartışması",
             "url": url,
-            "friction_score": score + 1,  # Reddit search specifically targeted complaints
+            "friction_score": score,
             "text": cleaned[:380] + "..." if len(cleaned) > 380 else cleaned
         })
 
     results.sort(key=lambda x: x["friction_score"], reverse=True)
-    return results[:max_comments]
+    return {"status": "success", "comments": results[:max_comments]}
 
 def search_sentiment(query: str, max_comments: int = 5):
-    """Aggregates and ranks user complaints from multiple community channels."""
-    hn_results = search_hn_sentiment(query, max_comments=max_comments)
-    reddit_results = search_reddit_sentiment(query, max_comments=max_comments)
+    """
+    Aggregates and ranks user complaints from multiple community channels.
+    Returns structured dict with both comments list and sources summary metadata.
+    """
+    hn_res = search_hn_sentiment(query, max_comments=max_comments)
+    reddit_res = search_reddit_sentiment(query, max_comments=max_comments)
 
-    combined = hn_results + reddit_results
+    combined = hn_res.get("comments", []) + reddit_res.get("comments", [])
     combined.sort(key=lambda x: x["friction_score"], reverse=True)
-    return combined[:max_comments]
+    selected = combined[:max_comments]
+
+    active_sources = []
+    if hn_res.get("status") == "success":
+        active_sources.append(f"Hacker News ({len(hn_res.get('comments', []))} veri)")
+    else:
+        active_sources.append(f"Hacker News (Hata: {hn_res.get('error', 'bağlantı')})")
+
+    if reddit_res.get("status") == "success":
+        active_sources.append(f"Reddit ({len(reddit_res.get('comments', []))} veri)")
+    else:
+        active_sources.append("Reddit (Açık API kısıtı/bağlantı)")
+
+    summary = f"Taranan Kanallar: {', '.join(active_sources)}"
+
+    return {
+        "comments": selected,
+        "summary": summary,
+        "hn_status": hn_res.get("status"),
+        "reddit_status": reddit_res.get("status")
+    }
 
 def main():
     parser = argparse.ArgumentParser(description="Multi-source user friction and sentiment miner.")
@@ -140,16 +174,20 @@ def main():
     print(f" 💬 ÇOK KAYNAKLI KULLANICI ŞİKAYET MADENCİLİĞİ: '{args.query}'")
     print(f"=======================================================\n")
 
-    comments = search_sentiment(args.query, args.max)
+    result = search_sentiment(args.query, args.max)
+    comments = result["comments"]
+    print(f"[*] Durum: {result['summary']}\n")
+
     if not comments:
         print("[-] Uygun kullanıcı yorumu veya eleştiri bulunamadı.")
         return
 
     for idx, c in enumerate(comments, 1):
-        friction_tag = "⚠️ YÜKSEK SÜRTÜNME/ŞİKAYET" if c["friction_score"] >= 2 else "📌 KULLANICI GERİ BİLDİRİMİ"
+        friction_tag = "⚠️ YÜKSEK SÜRTÜNME (AĞIR ŞİKAYET)" if c["friction_score"] >= 3 else "📌 KULLANICI SÜRTÜNME/GERİ BİLDİRİMİ"
         print(f"[{idx}] {friction_tag} [{c['source']}] (Yazar: @{c['author']} | Tarih: {c['date']})")
         print(f"    📖 Başlık   : {c['title']}")
         print(f"    🔗 Kaynak   : {c['url']}")
+        print(f"    📊 Skor     : {c['friction_score']}")
         print(f"    🗣️ Yorum    : {c['text']}")
         print("-" * 55)
 

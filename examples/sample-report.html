@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://cdn.tailwindcss.com https://cdn.jsdelivr.net 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; font-src https: data:; img-src https: data:; connect-src 'none';">
     <title>Frontier Innovator Report</title>
     <!-- Tailwind CSS (via CDN) -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -157,16 +157,16 @@ flowchart LR
     end
 
     subgraph Çıktı["Doğrulanmış Aksiyon"]
-        PR["Kendi Kendini Doğrulamış PR<br/>(%100 Yeşil Test + Sıfır Regresyon)"]
+        PR["Kendi Kendini Doğrulamış PR(%100 Yeşil Test + Sıfır Regresyon)"]
     end
 
-    Code --> Tree
-    Tree --> Formal
-    Formal -- "Kritik Açık / Bug Kanıtı" --> LLM
-    LLM --> Sandbox
-    Sandbox --> Tests
-    Tests -- "Test Başarısız" --> LLM
-    Tests -- "Test Başarılı & Kanıtlandı" --> PR
+    Code --&gt; Tree
+    Tree --&gt; Formal
+    Formal -- "Kritik Açık / Bug Kanıtı" --&gt; LLM
+    LLM --&gt; Sandbox
+    Sandbox --&gt; Tests
+    Tests -- "Test Başarısız" --&gt; LLM
+    Tests -- "Test Başarılı & Kanıtlandı" --&gt; PR
 </div>
     </main>
 

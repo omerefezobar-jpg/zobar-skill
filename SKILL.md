@@ -87,13 +87,13 @@ flowchart TD
   - Kullanıcı ergonomisi: Bilişsel yükü sıfıra indiren arayüz felsefesi.
 
 ### FAZ 6: Radikal İcat & Doğrulama Kapısı (Breakthrough & Feasibility Gate)
-* **İcat Kılavuzu:** İcat üretirken [triz-invention-engine.md](./references/triz-invention-engine.md) prensiplerini (özellikle Tersine Çevirme, Önceden Eylem ve Kendi Kendine İyileşme) temel al.
+* **İcat Kılavuzu:** İcat üretirken [triz-invention-engine.md](./references/triz-invention-engine.md) prensiplerini (özellikle Tersine Çevirme, Önceden Eylem ve Kendi Kendine İyileşme) temel al. Vizyon asla sıradanlaşmamalı, ancak havada asılı bilim-kurgu vaatler yerine ayakları yere basan bir ispat disiplinine dayanmalıdır.
 * **Zorunlu Doğrulama Kapısı (Validation Gate):**
   Her üretilen icat için aşağıdaki 4 kriterin doldurulması **ZORUNLUDUR**:
-  1. **TRL Olgunluk Seviyesi (1-9):** Teknoloji laboratuvar aşamasında mı (TRL 2-3), çalışan prototip mi (TRL 5-6), üretime hazır mı (TRL 8-9)?
+  1. **TRL Olgunluk Seviyesi (1-9):** Model Tahmini mi yoksa Literatür/Prototip Kanıtı mı? (Örn: TRL 3: Matematiksel/Algoritmik ispat var, TRL 5: Sandbox ortamında test edildi).
   2. **ICE Skoru:** `Etki (1-10) x Güven (1-10) x Kolaylık (1-10) / 10`.
-  3. **Ticari Talep & WTP (Willingness to Pay):** Müşteri bu özelliğe neden para öder? Alternatif maliyeti nedir?
-  4. **Kritik Hata Modları (Failure Modes):** Bu icat hangi 3 senaryoda başarısız olabilir ve nasıl engellenir?
+  3. **Ticari Talep & WTP (Ödeme İstekliliği):** Müşteri bu özelliğe neden para öder? Alternatif maliyeti nedir? (Doğrulanmış pazar kanıtı mı, model hipotezi mi?).
+  4. **Kritik Hata Modları (Failure Modes):** Bu icat hangi 3 ekstrem koşulda çöker veya kullanılamaz hale gelir; bunu engelleyen mimari önlem nedir?
 * **Görselleştirme:** Sistemin veya icadın çalışma dinamiğini gösteren detaylı bir **Mermaid mimari/akış diyagramı** üret.
 
 ---

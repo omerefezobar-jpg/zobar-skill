@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """
-Hardened HTML Dashboard Exporter for Frontier Innovator.
+Fully Hardened HTML Dashboard Exporter for Frontier Innovator.
 Converts markdown research dossiers or innovation reports into a self-contained,
-dark-mode HTML visual report with XSS protection and embedded Mermaid.js rendering.
+dark-mode HTML visual report with comprehensive XSS protection, safe Mermaid.js
+sanitization, and Content Security Policy (CSP).
 """
 
 import sys
@@ -20,7 +21,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://cdn.tailwindcss.com https://cdn.jsdelivr.net 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; font-src https: data:; img-src https: data:; connect-src 'none';">
     <title>{{title}}</title>
     <!-- Tailwind CSS (via CDN) -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -91,15 +92,33 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 """
 
 def is_safe_url(target_url: str) -> bool:
-    """Validates that a URL uses safe protocols (http, https, or relative anchor)."""
-    if not target_url:
+    """Validates that a URL strictly uses safe protocols (http, https, or relative anchor)."""
+    if not target_url or not isinstance(target_url, str):
         return False
-    parsed = urlparse(target_url)
+    clean_url = target_url.strip()
+    # Reject dangerous URI schemes
+    lowered = clean_url.lower()
+    if lowered.startswith(('javascript:', 'data:', 'vbscript:', 'file:')):
+        return False
+    parsed = urlparse(clean_url)
     if parsed.scheme in ('http', 'https'):
         return True
-    if target_url.startswith('#') or target_url.startswith('./') or target_url.startswith('/'):
+    if clean_url.startswith(('#', './', '/')):
         return True
     return False
+
+def sanitize_mermaid_diagram(raw_diagram: str) -> str:
+    """
+    Sanitizes Mermaid syntax to prevent DOM breakout or HTML injection.
+    Mermaid v10 parses text inside .mermaid. To prevent injection:
+    - Strips all HTML/XML tags (<...>) from node labels and labels.
+    - Neutralizes closing </div> or </script> tags.
+    """
+    # Remove any HTML tags completely inside the diagram definition
+    stripped = re.sub(r'</?[a-zA-Z][^>]*>', '', raw_diagram)
+    # Neutralize any residual angle brackets
+    neutralized = stripped.replace('<', '&lt;').replace('>', '&gt;')
+    return neutralized.strip()
 
 def format_inline_markdown(text: str) -> str:
     """Escapes HTML and applies safe inline formatting (bold, italic, links, code)."""
@@ -127,20 +146,21 @@ def format_inline_markdown(text: str) -> str:
     return escaped
 
 def parse_markdown_to_html(md_text: str) -> str:
-    """Hardened, secure Markdown-to-HTML parser with XSS protection and Mermaid support."""
-    # 1. Isolate and safely preserve Mermaid blocks
+    """Hardened, secure Markdown-to-HTML parser with strict XSS protection and Mermaid sanitization."""
+    if not md_text:
+        return ""
+
+    # 1. Isolate and strictly sanitize Mermaid blocks
     mermaid_blocks = []
     def stash_mermaid(match):
-        clean_diagram = match.group(1).strip()
-        # Ensure no raw script injection inside Mermaid text
-        clean_diagram = re.sub(r'<script.*?>.*?</script>', '', clean_diagram, flags=re.IGNORECASE)
+        clean_diagram = sanitize_mermaid_diagram(match.group(1))
         idx = len(mermaid_blocks)
         mermaid_blocks.append(clean_diagram)
         return f"__MERMAID_BLOCK_{idx}__"
 
     processed = re.sub(r'```mermaid\s*([\s\S]*?)\s*```', stash_mermaid, md_text)
 
-    # 2. Isolate code blocks
+    # 2. Isolate generic code blocks
     code_blocks = []
     def stash_code(match):
         lang = match.group(1) or ""
@@ -161,7 +181,7 @@ def parse_markdown_to_html(md_text: str) -> str:
     for line in lines:
         line_stripped = line.strip()
 
-        # Handle stashed blocks
+        # Handle stashed Mermaid blocks
         if line_stripped.startswith('__MERMAID_BLOCK_') and line_stripped.endswith('__'):
             m_idx = int(line_stripped.replace('__MERMAID_BLOCK_', '').replace('__', ''))
             if in_list:
@@ -173,6 +193,7 @@ def parse_markdown_to_html(md_text: str) -> str:
             html_lines.append(f'<div class="mermaid">\n{mermaid_blocks[m_idx]}\n</div>')
             continue
 
+        # Handle stashed Code blocks
         if line_stripped.startswith('__CODE_BLOCK_') and line_stripped.endswith('__'):
             c_idx = int(line_stripped.replace('__CODE_BLOCK_', '').replace('__', ''))
             if in_list:
@@ -236,9 +257,12 @@ def parse_markdown_to_html(md_text: str) -> str:
     return '\n'.join(html_lines)
 
 def export_to_html(markdown_content: str, title: str = "Frontier Innovator Report") -> str:
-    """Exports markdown content to a fully-formed, sanitized HTML string."""
+    """
+    Primary canonical entry point for generating HTML.
+    Safely escapes the title and parses markdown content through hardened pipeline.
+    """
+    safe_title = html.escape(str(title).strip(), quote=True)
     parsed_content = parse_markdown_to_html(markdown_content)
-    safe_title = html.escape(title)
     return HTML_TEMPLATE.replace("{{title}}", safe_title).replace("{{content}}", parsed_content)
 
 def main():
