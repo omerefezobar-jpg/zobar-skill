@@ -12,8 +12,12 @@ import argparse
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
-from scripts.recommend_ui_patterns import match_s_tier_patterns
-from scripts.analyze_heavy_app_architecture import match_heavy_app_blueprint
+try:
+    from scripts.recommend_ui_patterns import match_s_tier_patterns
+    from scripts.analyze_heavy_app_architecture import match_heavy_app_blueprint
+except ImportError:
+    from recommend_ui_patterns import match_s_tier_patterns
+    from analyze_heavy_app_architecture import match_heavy_app_blueprint
 
 def synthesize_tech_stack(domain: str):
     """

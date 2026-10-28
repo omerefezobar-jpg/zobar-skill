@@ -15,6 +15,10 @@ import time
 import argparse
 from typing import Dict, List, Any, Optional
 
+from scripts.security_permission_guard import SecurityPermissionGuard, SecuritySandboxViolation
+
+_SECURITY_GUARD = SecurityPermissionGuard()
+
 # Ensure UTF-8 stdout
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
@@ -92,8 +96,9 @@ python scripts/{safe_name.replace('-', '_')}_runner.py --help
 """
     saved_path = None
     if target_dir:
-        os.makedirs(target_dir, exist_ok=True)
-        saved_path = os.path.join(target_dir, "SKILL.md")
+        safe_target_dir = _SECURITY_GUARD.validate_file_path(target_dir)
+        os.makedirs(safe_target_dir, exist_ok=True)
+        saved_path = os.path.join(safe_target_dir, "SKILL.md")
         with open(saved_path, "w", encoding="utf-8") as f:
             f.write(content)
 
@@ -105,49 +110,17 @@ python scripts/{safe_name.replace('-', '_')}_runner.py --help
         "status": "READY_FOR_INSTALLATION"
     }
 
-def execute_terminal_mcp_command(command: str, timeout_seconds: int = 5) -> Dict[str, Any]:
+def execute_terminal_mcp_command(command: str, timeout_seconds: int = 5, user_confirmed: bool = False) -> Dict[str, Any]:
     """
-    Executes a terminal command safely resembling an MCP Terminal Tool runner.
-    Captures stdout, stderr, execution latency, and return codes.
+    Executes a terminal command safely through SecurityPermissionGuard.
+    Replaces raw shell=True with allowlist verification, parameter validation,
+    and timeout isolation.
     """
-    start_time = time.perf_counter()
-    try:
-        proc = subprocess.run(
-            command,
-            shell=True,
-            capture_output=True,
-            text=True,
-            timeout=timeout_seconds,
-            encoding="utf-8",
-            errors="replace"
-        )
-        latency_ms = (time.perf_counter() - start_time) * 1000.0
-        return {
-            "command": command,
-            "exit_code": proc.returncode,
-            "stdout": proc.stdout.strip(),
-            "stderr": proc.stderr.strip(),
-            "latency_ms": round(latency_ms, 2),
-            "status": "SUCCESS" if proc.returncode == 0 else "ERROR"
-        }
-    except subprocess.TimeoutExpired:
-        return {
-            "command": command,
-            "exit_code": -1,
-            "stdout": "",
-            "stderr": f"Command timed out after {timeout_seconds} seconds.",
-            "latency_ms": round(timeout_seconds * 1000.0, 2),
-            "status": "TIMEOUT"
-        }
-    except Exception as e:
-        return {
-            "command": command,
-            "exit_code": -1,
-            "stdout": "",
-            "stderr": str(e),
-            "latency_ms": 0.0,
-            "status": "EXCEPTION"
-        }
+    return _SECURITY_GUARD.execute_sandboxed_command(
+        command_str=command,
+        timeout_seconds=timeout_seconds,
+        user_confirmed=user_confirmed
+    )
 
 def main():
     parser = argparse.ArgumentParser(description="Zobar Skill Discovery & MCP Terminal Engineer.")

@@ -247,7 +247,7 @@ def evaluate_compliance(domain_keywords: str):
         }
 
     # 3c. Critical Infrastructure Safety Components (Annex III Point 2)
-    if any(k in lowered for k in ["critical infrastructure", "power grid", "water management scada", "energy grid safety", "water infrastructure", "dam management", "flood control"]):
+    if any(k in lowered for k in ["critical infrastructure", "power grid", "water management scada", "energy grid safety", "water infrastructure", "dam management", "flood control", "scada", "autonomous drone", "drone dispatch"]):
         return {
             "domain": domain_keywords,
             "eu_ai_act": {

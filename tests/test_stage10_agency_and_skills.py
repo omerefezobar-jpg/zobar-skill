@@ -93,12 +93,16 @@ class TestMCPStage10ToolsIntegration(unittest.TestCase):
 
     def test_mcp_manifest_contains_19_tools(self):
         tools = self.server.get_tools_manifest()
-        self.assertEqual(len(tools), 19)
+        self.assertGreaterEqual(len(tools), 19)
         names = [t["name"] for t in tools]
         self.assertIn("analyze_human_delight", names)
         self.assertIn("generate_client_agency_pitch", names)
         self.assertIn("manage_skills_and_mcp", names)
         self.assertIn("get_free_component_snippet", names)
+        self.assertIn("run_unified_orchestration", names)
+        self.assertIn("audit_security_sandbox", names)
+        self.assertIn("query_evidence_provenance", names)
+        self.assertIn("query_learning_registry", names)
 
     def test_mcp_execute_human_delight(self):
         res = self.server.execute_tool("analyze_human_delight", {

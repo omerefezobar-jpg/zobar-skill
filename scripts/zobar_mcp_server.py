@@ -54,6 +54,10 @@ from scripts.human_delight_psychology_engine import analyze_user_psychology_and_
 from scripts.freelance_agency_growth_engine import generate_cold_audit_proposal, calculate_agency_retainer_growth
 from scripts.skill_registry_and_installer_engine import search_ecosystem_skills, synthesize_new_skill_scaffold, execute_terminal_mcp_command
 from scripts.modern_component_snippets import ModernComponentsEngine
+from scripts.security_permission_guard import SecurityPermissionGuard
+from scripts.evidence_provenance_engine import EvidenceProvenanceGraph
+from scripts.feedback_outcome_learning_engine import FeedbackOutcomeEngine
+from scripts.unified_system_orchestrator import UnifiedSystemOrchestrator
 
 
 class ZobarMCPServer:
@@ -66,6 +70,10 @@ class ZobarMCPServer:
         self.asset_vault = AssetVaultQueryEngine()
         self.design_styles = ModernDesignStylesEngine()
         self.components_engine = ModernComponentsEngine()
+        self.security_guard = SecurityPermissionGuard()
+        self.provenance_graph = EvidenceProvenanceGraph()
+        self.learning_engine = FeedbackOutcomeEngine()
+        self.unified_orchestrator = UnifiedSystemOrchestrator()
 
     def get_tools_manifest(self) -> List[Dict[str, Any]]:
         return [
@@ -312,6 +320,55 @@ class ZobarMCPServer:
                         "component_id": {"type": "string", "description": "Optional direct component ID (e.g. COMP-01, COMP-03)"}
                     }
                 }
+            },
+            {
+                "name": "run_unified_orchestration",
+                "description": "Executes the autonomous 9-phase end-to-end product engineering pipeline: Research -> Sentiment -> Competitors -> Legal Compliance -> Architecture -> Code Prototype -> Sandbox & AST Validation -> Provenance -> Senate Ratification.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "vision": {"type": "string", "description": "Product idea, system vision, or architecture proposal"},
+                        "sector": {"type": "string", "description": "Industry sector (default: High-Performance Systems)"}
+                    },
+                    "required": ["vision"]
+                }
+            },
+            {
+                "name": "audit_security_sandbox",
+                "description": "Strict security audit: verifies workspace path containment (path traversal block), validates shell metacharacters and blocked binaries, and executes safe sandboxed commands with shell=False.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "action": {"type": "string", "enum": ["audit_command", "validate_path", "execute_command"], "description": "Security action to perform"},
+                        "target": {"type": "string", "description": "Command string to audit/execute or file path to validate"},
+                        "timeout_seconds": {"type": "integer", "description": "Execution timeout limit (default: 5)"},
+                        "user_confirmed": {"type": "boolean", "description": "User confirmation gate for execution (default: false)"}
+                    },
+                    "required": ["action", "target"]
+                }
+            },
+            {
+                "name": "query_evidence_provenance",
+                "description": "Tracks evidence provenance, confidence tiers (Statutory, Peer-Reviewed, Telemetry, Heuristic, Hypothesis), causal decision links, and flags stale data.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "action": {"type": "string", "enum": ["integrity_audit", "get_node"], "description": "Action to run on provenance graph"},
+                        "evidence_id": {"type": "string", "description": "Optional evidence ID to inspect"}
+                    },
+                    "required": ["action"]
+                }
+            },
+            {
+                "name": "query_learning_registry",
+                "description": "Queries empirical Bayesian Beta-Binomial learning registry to retrieve calibrated pattern win-rates and empirical trial history.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "pattern_name": {"type": "string", "description": "Architecture pattern key to query (e.g. lock_free_ringbuffer, rust_tauri_core)"}
+                    },
+                    "required": ["pattern_name"]
+                }
             }
         ]
 
@@ -508,6 +565,44 @@ class ZobarMCPServer:
             else:
                 matches = self.components_engine.search_components(query)
                 payload = {"query": query, "count": len(matches), "components": matches}
+
+        elif name == "run_unified_orchestration":
+            vision = args.get("vision", "")
+            sector = args.get("sector", "High-Performance Systems")
+            payload = self.unified_orchestrator.orchestrate_product_lifecycle(vision, target_sector=sector)
+
+        elif name == "audit_security_sandbox":
+            action = args.get("action", "audit_command")
+            target = args.get("target", "")
+            timeout = args.get("timeout_seconds", 5)
+            user_confirmed = args.get("user_confirmed", False)
+            if action == "audit_command":
+                safe, reason, tokens = self.security_guard.audit_command_safety(target)
+                payload = {"is_safe": safe, "reason": reason, "tokenized_args": tokens}
+            elif action == "validate_path":
+                try:
+                    resolved = self.security_guard.validate_file_path(target)
+                    payload = {"is_valid": True, "resolved_path": resolved}
+                except Exception as e:
+                    payload = {"is_valid": False, "error": str(e)}
+            elif action == "execute_command":
+                payload = self.security_guard.execute_sandboxed_command(target, timeout_seconds=timeout, user_confirmed=user_confirmed)
+            else:
+                raise ValueError(f"Unknown security action: {action}")
+
+        elif name == "query_evidence_provenance":
+            action = args.get("action", "integrity_audit")
+            if action == "integrity_audit":
+                payload = self.provenance_graph.audit_evidence_integrity()
+            elif action == "get_node":
+                ev_id = args.get("evidence_id", "")
+                payload = self.provenance_graph.evidence_nodes.get(ev_id, {"error": "Node not found"})
+            else:
+                raise ValueError(f"Unknown provenance action: {action}")
+
+        elif name == "query_learning_registry":
+            pattern_name = args.get("pattern_name", "")
+            payload = self.learning_engine.get_pattern_reputation(pattern_name)
 
         else:
             raise ValueError(f"Unknown tool name: {name}")

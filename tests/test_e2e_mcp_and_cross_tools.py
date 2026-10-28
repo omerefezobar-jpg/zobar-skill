@@ -80,7 +80,7 @@ class TestE2EMCPAndCrossTools(unittest.TestCase):
         self.assertGreaterEqual(len(tools), 8)
 
         tool_names = [t["name"] for t in tools]
-        self.assertGreaterEqual(len(tools), 10)
+        self.assertGreaterEqual(len(tools), 20)
         self.assertIn("semantic_cache_query", tool_names)
         self.assertIn("smart_route", tool_names)
         self.assertIn("audit_supabase_sql", tool_names)
@@ -91,6 +91,10 @@ class TestE2EMCPAndCrossTools(unittest.TestCase):
         self.assertIn("step_ecs_simulation", tool_names)
         self.assertIn("search_asset_vault", tool_names)
         self.assertIn("calculate_systems_math", tool_names)
+        self.assertIn("run_unified_orchestration", tool_names)
+        self.assertIn("audit_security_sandbox", tool_names)
+        self.assertIn("query_evidence_provenance", tool_names)
+        self.assertIn("query_learning_registry", tool_names)
 
     def test_03_tool_call_smart_route_execution(self):
         req = {
@@ -227,6 +231,78 @@ class TestE2EMCPAndCrossTools(unittest.TestCase):
         self.assertEqual(content["tool_status"], "SUCCESS")
         self.assertEqual(content["result"]["system_status"], "STABLE")
         self.assertLess(content["result"]["average_latency_ms"], 10.0)
+
+    def test_09_audit_security_sandbox_e2e(self):
+        # 1. Audit malicious command chaining
+        bad_req = {
+            "jsonrpc": "2.0",
+            "id": 91,
+            "method": "tools/call",
+            "params": {
+                "name": "audit_security_sandbox",
+                "arguments": {
+                    "action": "audit_command",
+                    "target": "git status ; rm -rf /"
+                }
+            }
+        }
+        bad_resp = self.send_rpc(bad_req)
+        bad_content = json.loads(bad_resp["result"]["content"][0]["text"])
+        self.assertFalse(bad_content["result"]["is_safe"])
+        self.assertIn("Tehlikeli kabuk karakteri", bad_content["result"]["reason"])
+
+        # 2. Audit path traversal validation
+        path_req = {
+            "jsonrpc": "2.0",
+            "id": 92,
+            "method": "tools/call",
+            "params": {
+                "name": "audit_security_sandbox",
+                "arguments": {
+                    "action": "validate_path",
+                    "target": "../../Windows/System32"
+                }
+            }
+        }
+        path_resp = self.send_rpc(path_req)
+        path_content = json.loads(path_resp["result"]["content"][0]["text"])
+        self.assertFalse(path_content["result"]["is_valid"])
+        self.assertIn("Yol izolasyonu aşıldı", path_content["result"]["error"])
+
+    def test_10_query_learning_registry_e2e(self):
+        req = {
+            "jsonrpc": "2.0",
+            "id": 101,
+            "method": "tools/call",
+            "params": {
+                "name": "query_learning_registry",
+                "arguments": {
+                    "pattern_name": "lock_free_ringbuffer"
+                }
+            }
+        }
+        resp = self.send_rpc(req)
+        content = json.loads(resp["result"]["content"][0]["text"])
+        self.assertEqual(content["tool_status"], "SUCCESS")
+        self.assertIn("win_rate", content["result"])
+        self.assertGreater(content["result"]["win_rate"], 0.6)
+
+    def test_11_query_evidence_provenance_e2e(self):
+        req = {
+            "jsonrpc": "2.0",
+            "id": 111,
+            "method": "tools/call",
+            "params": {
+                "name": "query_evidence_provenance",
+                "arguments": {
+                    "action": "integrity_audit"
+                }
+            }
+        }
+        resp = self.send_rpc(req)
+        content = json.loads(resp["result"]["content"][0]["text"])
+        self.assertEqual(content["tool_status"], "SUCCESS")
+        self.assertIn("total_evidence", content["result"])
 
 
 if __name__ == "__main__":
