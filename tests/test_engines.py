@@ -224,6 +224,15 @@ class TestAutomatedArchitectureAndTRIZInventions(unittest.TestCase):
         self.assertEqual(metrics_dev["trl_number"], 4)
         self.assertEqual(metrics_dev["ice"]["ease"], 7)
 
+    def test_s_tier_design_vault_matching(self):
+        from scripts.recommend_ui_patterns import match_s_tier_patterns
+        res_stream = match_s_tier_patterns("video streaming cinema", max_results=2)
+        self.assertGreaterEqual(res_stream["total_vault_size"], 100)
+        self.assertTrue(any("Netflix" in s["name"] or "Spotify" in s["name"] for s in res_stream["matched_sites"]))
+
+        res_fintech = match_s_tier_patterns("fintech payments banking", max_results=2)
+        self.assertTrue(any("Stripe" in s["name"] or "Ramp" in s["name"] for s in res_fintech["matched_sites"]))
+
     def test_phase_6_triz_invention_generation(self):
         inventions_data = generate_validated_inventions("Code Analysis")
         self.assertEqual(len(inventions_data["inventions"]), 2)

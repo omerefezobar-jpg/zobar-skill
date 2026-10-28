@@ -213,6 +213,17 @@ def generate_dossier(topic: str, output_path: str = None, html_path: str = None)
     dossier_lines.append(f"- **Tasarım Sistemi:** {arch['ui_architecture']['design_system']}")
     dossier_lines.append(f"- **Bilişsel Ergonomi Kuralı:** {arch['ui_architecture']['ergonomic_rule']}\n")
 
+    if arch.get("s_tier_benchmarks"):
+        dossier_lines.append("### 💎 Eşleşen S-Tier Tasarım & Bileşen Referansları (100+ Design Vault):")
+        for s in arch["s_tier_benchmarks"]:
+            dossier_lines.append(f"#### [{s['name']}]({s['url']}) — *{s['category']}*")
+            dossier_lines.append(f"- **Tasarım Paradigması:** {s['design_paradigm']}")
+            dossier_lines.append(f"- **Hero / Başlık Deseni:** {s['hero_pattern']}")
+            dossier_lines.append(f"- **Bileşen Mimarisi:** {s['component_features']}")
+            dossier_lines.append(f"- **Mikro-Etkileşimler:** {s['key_interactions']}")
+            dossier_lines.append(f"- **Renk & Stil Tokenları:** Arka Plan: `{s['color_tokens']['background']}` | Vurgu: `{s['color_tokens']['accent']}`")
+            dossier_lines.append(f"- **Önerilen UI Kütüphaneleri:** `{', '.join(s['recommended_libraries'])}`\n")
+
     dossier_lines.append("---")
     dossier_lines.append("## 🚀 FAZ 6: TRIZ Radikal İcatları & Dinamik Doğrulama Kapısı")
     dossier_lines.append("> 📌 **Kanıt Ayrımı:** Dokümandaki TRL ve WTP değerleri alan kısıtlarına ve mevzuat zorluklarına göre dinamik olarak hesaplanmış olup deneysel geçerleme kapıları belirtilmiştir.\n")

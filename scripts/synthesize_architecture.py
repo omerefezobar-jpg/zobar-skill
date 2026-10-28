@@ -12,9 +12,12 @@ import argparse
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
+from scripts.recommend_ui_patterns import match_s_tier_patterns
+
 def synthesize_tech_stack(domain: str):
     """
-    Selects optimal languages, frameworks, and UI components based on domain constraints.
+    Selects optimal languages, frameworks, UI components, and matched S-Tier
+    design patterns based on domain constraints.
     """
     lowered = domain.lower()
     
@@ -52,6 +55,9 @@ def synthesize_tech_stack(domain: str):
         "ergonomic_rule": "Bilişsel Kalkan (Zero-Noise UX): Kullanıcıya sadece onay gerektiren yüksek değerli aksiyonları göster; arka plan loglarını katlanabilir tut."
     }
 
+    # 4. S-Tier Benchmark Matching from 100+ Design Vault
+    s_tier_data = match_s_tier_patterns(domain, max_results=3)
+
     return {
         "domain": domain,
         "core_language": core_lang,
@@ -59,7 +65,8 @@ def synthesize_tech_stack(domain: str):
         "recommended_libraries": core_libs,
         "data_layer": data_layer,
         "data_justification": data_reason,
-        "ui_architecture": ui_stack
+        "ui_architecture": ui_stack,
+        "s_tier_benchmarks": s_tier_data.get("matched_sites", [])
     }
 
 def main():

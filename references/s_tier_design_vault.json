@@ -1,0 +1,895 @@
+{
+  "vault_metadata": {
+    "total_sites": 104,
+    "last_updated": "2026-Q4",
+    "description": "Curated collection of 100+ S-Tier digital products and websites for automated UI/UX component synthesis, design system inspiration, and design token mapping."
+  },
+  "categories": [
+    {
+      "category_name": "Streaming & Immersive Entertainment",
+      "design_paradigm": "Cinematic Dark Canvas, Video Scrollers & Fluid Carousels",
+      "recommended_libraries": ["Swiper/Embla Carousel", "Framer Motion", "Video.js", "Tailwind CSS v4"],
+      "sites": [
+        {
+          "name": "Netflix",
+          "url": "https://www.netflix.com",
+          "hero_pattern": "Cinematic Full-bleed Video Billboard with dynamic metadata and mute/play toggle",
+          "component_features": "Lazy-loaded horizontal carousel rails, micro-hover video previews with modal expansion, profile selector avatar grid",
+          "color_tokens": {"background": "#141414", "accent": "#E50914", "text": "#FFFFFF"},
+          "key_interactions": "Smooth row sliding, expandable details card overlay without layout shift"
+        },
+        {
+          "name": "Spotify",
+          "url": "https://open.spotify.com",
+          "hero_pattern": "Dynamic ambient gradient extracted from currently active playlist/album cover",
+          "component_features": "Persistent bottom playbar with track scrubber, virtualized playlist data table, resizable sidebar library",
+          "color_tokens": {"background": "#121212", "accent": "#1DB954", "text": "#FFFFFF"},
+          "key_interactions": "Zero-latency audio scrubbing, dynamic hover play button transition"
+        },
+        {
+          "name": "Apple TV+",
+          "url": "https://tv.apple.com",
+          "hero_pattern": "Ultra-wide parallax hero banner with San Francisco Pro typography",
+          "component_features": "Glassmorphic navigation bar with backdrop-filter blur, episode carousel with progress indicators",
+          "color_tokens": {"background": "#000000", "accent": "#FFFFFF", "text": "#F5F5F7"},
+          "key_interactions": "Fluid iOS-style swipe gestures, HDR video playback integration"
+        },
+        {
+          "name": "Disney+",
+          "url": "https://www.disneyplus.com",
+          "hero_pattern": "3D tilt brand hubs (Disney, Pixar, Marvel, Star Wars, NatGeo)",
+          "component_features": "Brand card hover video loops, responsive thumbnail grids, multi-profile switcher",
+          "color_tokens": {"background": "#1A1D29", "accent": "#0063E5", "text": "#F9F9F9"},
+          "key_interactions": "Subtle 3D scale and shine on brand tile hover"
+        },
+        {
+          "name": "Twitch",
+          "url": "https://www.twitch.tv",
+          "hero_pattern": "Low-latency live stream player with collapsible multi-stream carousel",
+          "component_features": "Real-time virtualized chat dock, channel point rewards popovers, streamer status pills",
+          "color_tokens": {"background": "#0E0E10", "accent": "#9146FF", "text": "#EFEFF1"},
+          "key_interactions": "Animated chat emote badges, theatre mode expander"
+        },
+        {
+          "name": "YouTube Music",
+          "url": "https://music.youtube.com",
+          "hero_pattern": "Adaptive ambient lighting backdrop with contextual explore shelves",
+          "component_features": "Bottom sheet lyrics drawer, responsive track tables with hover menus, queue drawer",
+          "color_tokens": {"background": "#030303", "accent": "#FF0000", "text": "#FFFFFF"},
+          "key_interactions": "Drag-and-drop queue reordering, instant tab switching"
+        },
+        {
+          "name": "Max (HBO Max)",
+          "url": "https://www.max.com",
+          "hero_pattern": "High-contrast editorial typography with deep cobalt blue accents",
+          "component_features": "Editorial curated collection carousels, parental pin modals, continue watching rail",
+          "color_tokens": {"background": "#000000", "accent": "#002BE7", "text": "#FFFFFF"},
+          "key_interactions": "Seamless video preview overlay on title click"
+        },
+        {
+          "name": "MUBI",
+          "url": "https://mubi.com",
+          "hero_pattern": "Film-grain editorial aesthetic with custom serif typography",
+          "component_features": "Film of the Day fullscreen poster, director retrospectives, minimalist reviews grid",
+          "color_tokens": {"background": "#0B0B0B", "accent": "#002F6C", "text": "#E8E8E8"},
+          "key_interactions": "Film trailer modal with cinematic letterbox reveal"
+        },
+        {
+          "name": "Crunchyroll",
+          "url": "https://www.crunchyroll.com",
+          "hero_pattern": "High-energy orange hero banner with seasonal anime showcase",
+          "component_features": "Episode progression timeline, multi-tiered mega menu, watch-list drawer",
+          "color_tokens": {"background": "#000000", "accent": "#F47521", "text": "#FFFFFF"},
+          "key_interactions": "Instant episode playback resume on thumbnail click"
+        },
+        {
+          "name": "MasterClass",
+          "url": "https://www.masterclass.com",
+          "hero_pattern": "Cinematic documentary video scroller with instructor quotes",
+          "component_features": "Lesson chapter accordion, downloadable workbook previewer, instructor spotlight cards",
+          "color_tokens": {"background": "#111111", "accent": "#C49A45", "text": "#FFFFFF"},
+          "key_interactions": "Video hover scrubber allowing scrubbing lesson preview before clicking"
+        }
+      ]
+    },
+    {
+      "category_name": "Developer Tools & Cloud Infrastructure",
+      "design_paradigm": "Keyboard-First Ergonomics, Glowing Borders & High-Density Dashboards",
+      "recommended_libraries": ["Radix UI", "cmdk", "Lucide React", "Monaco Editor", "Tailwind CSS v4"],
+      "sites": [
+        {
+          "name": "Linear",
+          "url": "https://linear.app",
+          "hero_pattern": "Sleek dark gradient hero with subtle illuminated border effects and 120fps UI demo",
+          "component_features": "Universal Command-K palette (cmdk), Kanban/List view toggle, keyboard shortcut toast, issue triage drawers",
+          "color_tokens": {"background": "#08090A", "accent": "#5E6AD2", "text": "#F7F8F8"},
+          "key_interactions": "Complete zero-mouse navigation, instantaneous optimistic state updates"
+        },
+        {
+          "name": "Vercel",
+          "url": "https://vercel.com",
+          "hero_pattern": "Geist Design System hero with monochrome typography and live CLI animation",
+          "component_features": "Deployment telemetry timeline, tabbed branch previews, edge latency maps, project dashboard cards",
+          "color_tokens": {"background": "#000000", "accent": "#0070F3", "text": "#EDEDED"},
+          "key_interactions": "Copy-to-clipboard feedback tooltips, dynamic domain DNS status indicators"
+        },
+        {
+          "name": "GitHub",
+          "url": "https://github.com",
+          "hero_pattern": "Interactive globe visualizer with real-time PR/commit activity",
+          "component_features": "Primer Design System, accessible code diff viewer, expandable file tree, issue timeline anchors",
+          "color_tokens": {"background": "#0D1117", "accent": "#238636", "text": "#C9D1D9"},
+          "key_interactions": "Keyboard search shortcuts (`/` and `t`), expandable line-by-line diff commentary"
+        },
+        {
+          "name": "Supabase",
+          "url": "https://supabase.com",
+          "hero_pattern": "Emerald green particle hero with interactive code block selector (Postgres, Auth, Storage)",
+          "component_features": "Tabular SQL table studio with inline editing, schema relational viewer, database performance gauges",
+          "color_tokens": {"background": "#1C1C1C", "accent": "#3ECF8E", "text": "#EDEDED"},
+          "key_interactions": "One-click SQL query generation, live replica sync status pills"
+        },
+        {
+          "name": "Raycast",
+          "url": "https://www.raycast.com",
+          "hero_pattern": "Deep black metallic canvas with glowing hotkey badges and app store tiles",
+          "component_features": "Keyboard shortcut simulator, extension developer cards, command list previewer",
+          "color_tokens": {"background": "#0A0A0A", "accent": "#FF6363", "text": "#FFFFFF"},
+          "key_interactions": "Interactive KBD hotkey visualizer that triggers live UI transitions"
+        },
+        {
+          "name": "Warp Terminal",
+          "url": "https://www.warp.dev",
+          "hero_pattern": "Interactive terminal block simulator with AI auto-complete demo",
+          "component_features": "Block-based command outputs, collaborative session sharing links, customized prompt chips",
+          "color_tokens": {"background": "#111116", "accent": "#00DF89", "text": "#F3F4F6"},
+          "key_interactions": "Right-click block bookmarking, instant command copy"
+        },
+        {
+          "name": "Cursor",
+          "url": "https://www.cursor.com",
+          "hero_pattern": "Ambient code editor canvas demonstrating inline AI diff replacements",
+          "component_features": "Side-by-side terminal & AI reasoning pane, prompt chips, model switcher dropdown",
+          "color_tokens": {"background": "#18181B", "accent": "#6366F1", "text": "#FAFAFA"},
+          "key_interactions": "Smooth code stream rendering with syntax highlight tokens"
+        },
+        {
+          "name": "Cloudflare",
+          "url": "https://www.cloudflare.com",
+          "hero_pattern": "Global edge network interactive WebGL globe with DDoS attack telemetry",
+          "component_features": "DNS record manager tables with instant validation, SSL status badges, WAF analytics graph",
+          "color_tokens": {"background": "#1A1A1A", "accent": "#F38020", "text": "#EEEEEE"},
+          "key_interactions": "Time-range drag selector for latency graphs"
+        },
+        {
+          "name": "Datadog",
+          "url": "https://www.datadoghq.com",
+          "hero_pattern": "High-density multi-dashboard metrics wall with anomaly detection banners",
+          "component_features": "Timeseries scrubber with synchronized cross-metric cursor, log explorer with facet filters",
+          "color_tokens": {"background": "#1E1335", "accent": "#632CA6", "text": "#F0EEF5"},
+          "key_interactions": "Drag-to-zoom on timeseries chart updating all dependent query widgets"
+        },
+        {
+          "name": "Railway",
+          "url": "https://railway.com",
+          "hero_pattern": "Canvas node-based architecture canvas with live service health pings",
+          "component_features": "Drag-and-drop service topology, live build log streaming terminal, variable secret drawer",
+          "color_tokens": {"background": "#0C0D0E", "accent": "#B62D9A", "text": "#E1E2E4"},
+          "key_interactions": "Connecting two service nodes to automatically link environment variables"
+        },
+        {
+          "name": "PlanetScale",
+          "url": "https://planetscale.com",
+          "hero_pattern": "Clean database branching diagram with Git-like deploy requests",
+          "component_features": "Zero-downtime schema migration viewer, query latency scatter plot, branch diff cards",
+          "color_tokens": {"background": "#000000", "accent": "#FF4500", "text": "#FFFFFF"},
+          "key_interactions": "Visual merge queue for database schema changes"
+        },
+        {
+          "name": "HashiCorp",
+          "url": "https://www.hashicorp.com",
+          "hero_pattern": "Isometric geometric illustrations with multi-product brand grid",
+          "component_features": "Unified product switcher, enterprise security compliance badges, interactive architecture diagrams",
+          "color_tokens": {"background": "#000000", "accent": "#000000", "text": "#FFFFFF"},
+          "key_interactions": "Interactive HCL code configuration snippet builder"
+        }
+      ]
+    },
+    {
+      "category_name": "High-End FinTech & Banking",
+      "design_paradigm": "Interactive Gradient Meshes, Bento Grids & Precision Typography",
+      "recommended_libraries": ["Three.js", "Shadcn/ui Data Table", "Recharts", "Radix UI Dialog"],
+      "sites": [
+        {
+          "name": "Stripe",
+          "url": "https://stripe.com",
+          "hero_pattern": "Interactive WebGL animated gradient mesh flowing across viewports",
+          "component_features": "Tabbed multi-language API code viewer synchronized with live payment form simulator, currency dropdown",
+          "color_tokens": {"background": "#0A2540", "accent": "#635BFF", "text": "#FFFFFF"},
+          "key_interactions": "Hover glow on card elements, real-time credit card formatting and brand icon auto-detection"
+        },
+        {
+          "name": "Ramp",
+          "url": "https://ramp.com",
+          "hero_pattern": "Bento grid layout highlighting autonomous savings and spend automation",
+          "component_features": "Virtual card visualizer with copy number overlay, real-time receipt matching status pills",
+          "color_tokens": {"background": "#F6F7F9", "accent": "#15803D", "text": "#111827"},
+          "key_interactions": "Interactive ROI savings calculator with slider adjustments"
+        },
+        {
+          "name": "Wise",
+          "url": "https://wise.com",
+          "hero_pattern": "Fast currency converter hero with live exchange rate charts and fee transparency breakdown",
+          "component_features": "Multi-currency balance wallet selector, transaction receipt modal, recipient bank validator",
+          "color_tokens": {"background": "#FFFFFF", "accent": "#9FE870", "text": "#163300"},
+          "key_interactions": "Live updating fee comparison against traditional banks"
+        },
+        {
+          "name": "Revolut",
+          "url": "https://www.revolut.com",
+          "hero_pattern": "Mobile-first 3D metal card customizer with holographic reflection",
+          "component_features": "Dynamic crypto/fiat balance switcher, round-up vault progression bars, lifestyle perk cards",
+          "color_tokens": {"background": "#191C1F", "accent": "#0075FF", "text": "#FFFFFF"},
+          "key_interactions": "Card tilt physics based on cursor movement"
+        },
+        {
+          "name": "Robinhood",
+          "url": "https://robinhood.com",
+          "hero_pattern": "Neon green/red stock candlestick scrubber with instant buying power card",
+          "component_features": "Interactive 1D/1W/1M/1Y performance graphs, order execution sheet, fractional share slider",
+          "color_tokens": {"background": "#000000", "accent": "#00C805", "text": "#FFFFFF"},
+          "key_interactions": "Finger/cursor drag along chart updating header price and portfolio return"
+        },
+        {
+          "name": "Coinbase",
+          "url": "https://www.coinbase.com",
+          "hero_pattern": "Modern high-contrast crypto market overview with real-time ticker tape",
+          "component_features": "Order book depth chart visualizer, recurring buy scheduler modal, asset search popover",
+          "color_tokens": {"background": "#FFFFFF", "accent": "#0052FF", "text": "#0A0B0D"},
+          "key_interactions": "One-click asset swap with slippage preview"
+        },
+        {
+          "name": "Klarna",
+          "url": "https://www.klarna.com",
+          "hero_pattern": "Soft pink and black editorial shopping showcase with Pay in 4 widget",
+          "component_features": "Installment breakdown stepper, price drop notification toggle, merchant loyalty card carousel",
+          "color_tokens": {"background": "#FFF0F5", "accent": "#FFA0C5", "text": "#171717"},
+          "key_interactions": "Smooth installment timeline expanding on hover"
+        },
+        {
+          "name": "Monzo",
+          "url": "https://monzo.com",
+          "hero_pattern": "Hot coral neon card hero with real-time notification simulation",
+          "component_features": "Monthly spending category donut chart, bill-splitting slider, shared tab drawers",
+          "color_tokens": {"background": "#14233C", "accent": "#FF365D", "text": "#FFFFFF"},
+          "key_interactions": "Interactive salary sorter demo allocating funds to pots"
+        },
+        {
+          "name": "Brex",
+          "url": "https://www.brex.com",
+          "hero_pattern": "Enterprise financial operating system dashboard showcase",
+          "component_features": "Treasury yield visualizer, employee expense approval chain, global wire preview",
+          "color_tokens": {"background": "#000000", "accent": "#F46A35", "text": "#FFFFFF"},
+          "key_interactions": "Hierarchical budget tree navigation"
+        },
+        {
+          "name": "Mercury",
+          "url": "https://mercury.com",
+          "hero_pattern": "Refined editorial typography paired with modern financial graphs for tech founders",
+          "component_features": "Clean cash flow waterfall graph, multi-entity account switcher, API key management modal",
+          "color_tokens": {"background": "#0E1015", "accent": "#5356FB", "text": "#F3F4F6"},
+          "key_interactions": "Instant transaction filtering with natural language query bar"
+        }
+      ]
+    },
+    {
+      "category_name": "Modern AI & Generative Intelligence",
+      "design_paradigm": "Minimalist Research Canvas, Split-Pane Artifacts & Streaming Code",
+      "recommended_libraries": ["Shadcn/ui", "Lucide React", "Canvas-Confetti", "PrismJS / Shiki"],
+      "sites": [
+        {
+          "name": "OpenAI",
+          "url": "https://openai.com",
+          "hero_pattern": "Ultra-clean research paper typography with minimal floating prompt card",
+          "component_features": "ChatGPT style conversational thread, inline code sandbox, system prompt status chips",
+          "color_tokens": {"background": "#000000", "accent": "#10A37F", "text": "#FFFFFF"},
+          "key_interactions": "Streamed token text rendering with subtle cursor blink"
+        },
+        {
+          "name": "Perplexity AI",
+          "url": "https://www.perplexity.ai",
+          "hero_pattern": "Central omni-search prompt bar with Focus selector (Academic, Writing, YouTube, Reddit)",
+          "component_features": "Interactive citation pill badges with tooltip source previews, related queries accordion, image grid",
+          "color_tokens": {"background": "#191A1A", "accent": "#20B8CD", "text": "#F3F3EE"},
+          "key_interactions": "Clicking citation smoothly scrolls and highlights referenced source in right-hand drawer"
+        },
+        {
+          "name": "Midjourney",
+          "url": "https://www.midjourney.com",
+          "hero_pattern": "Dense ASCII art & typographic landing expanding into an infinite virtualized image gallery",
+          "component_features": "Prompt copy tooltip on hover, upscale/variant action pill bar, generation parameter sliders",
+          "color_tokens": {"background": "#050505", "accent": "#FFFFFF", "text": "#D1D5DB"},
+          "key_interactions": "Full-bleed lightbox with pan/zoom and seed details"
+        },
+        {
+          "name": "Runway",
+          "url": "https://runwayml.com",
+          "hero_pattern": "Video generation studio with multi-track timeline and brush inpainting demo",
+          "component_features": "Motion brush canvas controller, camera pan/tilt 3D joystick, asset generator queue",
+          "color_tokens": {"background": "#000000", "accent": "#00FF66", "text": "#FFFFFF"},
+          "key_interactions": "Real-time keyframe scrubbing with instant canvas preview"
+        },
+        {
+          "name": "ElevenLabs",
+          "url": "https://elevenlabs.io",
+          "hero_pattern": "Interactive text-to-speech audio player with multi-voice character picker",
+          "component_features": "Dynamic voice stability/similarity sliders, real-time waveform visualizer, multilingual flag switcher",
+          "color_tokens": {"background": "#FFFFFF", "accent": "#000000", "text": "#111827"},
+          "key_interactions": "Audio spectrum bars animating dynamically during voice synthesis playback"
+        },
+        {
+          "name": "Claude by Anthropic",
+          "url": "https://claude.ai",
+          "hero_pattern": "Warm terracotta/editorial canvas with natural conversation container",
+          "component_features": "Split-pane Artifact viewer (React/SVG/HTML/Code previewer), context window capacity indicator",
+          "color_tokens": {"background": "#FBF8F3", "accent": "#D97757", "text": "#1F1E1D"},
+          "key_interactions": "Side-by-side artifact editing while continuing conversation"
+        },
+        {
+          "name": "Poe by Quora",
+          "url": "https://poe.com",
+          "hero_pattern": "Multi-bot switcher sidebar with immediate prompt input",
+          "component_features": "Custom bot creator drawer, bot monetization badge, KaTeX math equation rendering",
+          "color_tokens": {"background": "#1F2023", "accent": "#8A57FF", "text": "#E4E4E7"},
+          "key_interactions": "Instant bot-to-bot handover within the same chat thread"
+        },
+        {
+          "name": "Phind",
+          "url": "https://www.phind.com",
+          "hero_pattern": "Developer-centric search with instant code block synthesis",
+          "component_features": "Side-by-side technical source cards, syntax-highlighted code with line numbers, copy-diff button",
+          "color_tokens": {"background": "#0E1117", "accent": "#5E6AD2", "text": "#FFFFFF"},
+          "key_interactions": "Pair programming mode with interactive terminal replay"
+        },
+        {
+          "name": "v0 by Vercel",
+          "url": "https://v0.dev",
+          "hero_pattern": "Generative UI studio with prompt box and immediate React component render",
+          "component_features": "Code vs Preview tab toggle, responsive viewport resizing frame, one-click copy npx command",
+          "color_tokens": {"background": "#000000", "accent": "#0070F3", "text": "#EDEDED"},
+          "key_interactions": "Clicking individual UI element in preview to prompt-edit only that subcomponent"
+        },
+        {
+          "name": "Hugging Face",
+          "url": "https://huggingface.co",
+          "hero_pattern": "Curated model card repository with live inference API widget",
+          "component_features": "Dataset table viewer with column statistics, space demo embeds, community discussion boards",
+          "color_tokens": {"background": "#0B0F19", "accent": "#FFD21E", "text": "#FFFFFF"},
+          "key_interactions": "In-browser model inference widget generating live outputs"
+        }
+      ]
+    },
+    {
+      "category_name": "Design, Creative & Collaborative Canvas",
+      "design_paradigm": "Infinite Vector Canvas, Multiplayer Cursors & Precision Toolbars",
+      "recommended_libraries": ["Konva/Fabric.js", "Radix UI Toolbar", "Framer Motion", "Perfect-Freehand"],
+      "sites": [
+        {
+          "name": "Figma",
+          "url": "https://www.figma.com",
+          "hero_pattern": "Collaborative infinite design canvas with colored multiplayer cursors and live vector editing",
+          "component_features": "Layer hierarchy tree sidebar, inspect CSS property drawer, interactive prototype connector lines",
+          "color_tokens": {"background": "#2C2C2C", "accent": "#0D99FF", "text": "#FFFFFF"},
+          "key_interactions": "Fluid pinch-to-zoom (1% to 25600%) with GPU accelerated vector rendering"
+        },
+        {
+          "name": "Framer",
+          "url": "https://www.framer.com",
+          "hero_pattern": "Visual website builder canvas showing real-time breakpoint resizing (Desktop/Tablet/Mobile)",
+          "component_features": "Spring physics animation timeline, component variant matrix, CMS collection table",
+          "color_tokens": {"background": "#000000", "accent": "#0055FF", "text": "#FFFFFF"},
+          "key_interactions": "Direct canvas manipulation generating production-grade React code"
+        },
+        {
+          "name": "Pitch",
+          "url": "https://pitch.com",
+          "hero_pattern": "Modern presentation deck canvas with team video bubble overlays",
+          "component_features": "Smart slide templates, live reaction emoji burst, chart data editor sheet",
+          "color_tokens": {"background": "#0C0E12", "accent": "#FFE54C", "text": "#F3F4F6"},
+          "key_interactions": "Multiplayer slide navigation with presenter follow mode"
+        },
+        {
+          "name": "Canva",
+          "url": "https://www.canva.com",
+          "hero_pattern": "Template search engine with instant drag-and-drop graphic canvas",
+          "component_features": "Element asset sidebar with instant filtering, font pairing selector, one-click background remover",
+          "color_tokens": {"background": "#FFFFFF", "accent": "#00C4CC", "text": "#0E1318"},
+          "key_interactions": "Snapping alignment guides with distance measurements"
+        },
+        {
+          "name": "Dribbble",
+          "url": "https://dribbble.com",
+          "hero_pattern": "Grid of animated creative shots with designer badges and like counters",
+          "component_features": "Color palette extraction pills on shot hover, hire designer modal, video shot previews",
+          "color_tokens": {"background": "#F8F8F8", "accent": "#EA4C89", "text": "#0D0C22"},
+          "key_interactions": "Hover video preview with save-to-bucket quick action"
+        },
+        {
+          "name": "Behance",
+          "url": "https://www.behance.com",
+          "hero_pattern": "Full-bleed creative case studies with editorial typography and high-res imagery",
+          "component_features": "Tools used badge list, creative field filter tags, appreciation button animation",
+          "color_tokens": {"background": "#191919", "accent": "#0057FF", "text": "#FFFFFF"},
+          "key_interactions": "Sticky project author header that shrinks on scroll"
+        },
+        {
+          "name": "Mobbin",
+          "url": "https://mobbin.com",
+          "hero_pattern": "Comprehensive mobile & web UI flow repository with device frames",
+          "component_features": "Multi-screen user flow connector, search by UI component type, copy screen link",
+          "color_tokens": {"background": "#000000", "accent": "#2563EB", "text": "#FFFFFF"},
+          "key_interactions": "Side-by-side screen comparison with zoom lens"
+        },
+        {
+          "name": "Godly Website Showcase",
+          "url": "https://godly.website",
+          "hero_pattern": "Curated web design gallery with autoplay video hover tiles",
+          "component_features": "Interaction tag filters (WebGL, 3D, Typography, Minimal, Brutalist), site visit pill button",
+          "color_tokens": {"background": "#0D0D0D", "accent": "#FFFFFF", "text": "#E5E5E5"},
+          "key_interactions": "Cursor magnetic snapping to visit buttons"
+        },
+        {
+          "name": "Awwwards",
+          "url": "https://www.awwwards.com",
+          "hero_pattern": "Site of the Day fullscreen showcase with circular jury score breakdown",
+          "component_features": "Score wheels (Design, Usability, Creativity, Content), jury comment drawer, awards badge ribbon",
+          "color_tokens": {"background": "#222222", "accent": "#49c5b6", "text": "#FFFFFF"},
+          "key_interactions": "Interactive circular score meter animating on load"
+        },
+        {
+          "name": "LottieFiles",
+          "url": "https://lottiefiles.com",
+          "hero_pattern": "Interactive vector animation player canvas with timeline controls",
+          "component_features": "Frame-by-frame scrubber, color palette replacer, format export modal (JSON, dotLottie, GIF)",
+          "color_tokens": {"background": "#FFFFFF", "accent": "#00DDB3", "text": "#212B36"},
+          "key_interactions": "Directly clicking color tokens in animation to live-swap hues"
+        }
+      ]
+    },
+    {
+      "category_name": "Productivity, Notes & Workspace",
+      "design_paradigm": "Modular Block Architecture, Unified Search & Ergonomic Time Blocking",
+      "recommended_libraries": ["Tiptap", "ProseMirror", "cmdk", "FullCalendar / DayPilot"],
+      "sites": [
+        {
+          "name": "Notion",
+          "url": "https://www.notion.so",
+          "hero_pattern": "Modular workspace canvas showcasing blocks, databases, and AI autocomplete",
+          "component_features": "Slash command `/` block inserter, multi-view databases (Kanban, Table, Timeline, Gallery, List), breadcrumb bar",
+          "color_tokens": {"background": "#FFFFFF", "accent": "#2EAADC", "text": "#37352F"},
+          "key_interactions": "Drag-to-reorder blocks and convert to multiple columns"
+        },
+        {
+          "name": "Arc Browser (The Browser Company)",
+          "url": "https://arc.net",
+          "hero_pattern": "Reimagined web browser with vertical sidebar spaces and translucent glassmorphism",
+          "component_features": "Pinned tab icons, command bar (Cmd+T), split view container, easel canvas",
+          "color_tokens": {"background": "#1C1C24", "accent": "#FF5E5B", "text": "#F3F4F6"},
+          "key_interactions": "Peek preview cards when hovering external links"
+        },
+        {
+          "name": "Slack",
+          "url": "https://slack.com",
+          "hero_pattern": "Collaborative messaging channels with emoji reactions and workflow automations",
+          "component_features": "Thread flyout drawer, custom emoji reaction picker, huddle audio status pill, canvas drawer",
+          "color_tokens": {"background": "#1A1D21", "accent": "#ECB22E", "text": "#D1D2D3"},
+          "key_interactions": "One-click emoji reaction bounce animation"
+        },
+        {
+          "name": "Discord",
+          "url": "https://discord.com",
+          "hero_pattern": "Community server channel hierarchy with real-time voice channel waves",
+          "component_features": "Server icon navigation rail, active voice member avatar rings, role tag pills, rich embeds",
+          "color_tokens": {"background": "#313338", "accent": "#5865F2", "text": "#DBDEE1"},
+          "key_interactions": "Speaking avatar green glow ring reacting to audio input"
+        },
+        {
+          "name": "Reflect Notes",
+          "url": "https://reflect.app",
+          "hero_pattern": "Networked bi-directional note taking with an interactive backlink graph",
+          "component_features": "Force-directed graph visualizer of notes, instant daily note canvas, end-to-end encryption badge",
+          "color_tokens": {"background": "#111215", "accent": "#8A5CF5", "text": "#E2E4E9"},
+          "key_interactions": "Clicking nodes in graph smoothly navigates to linked notes"
+        },
+        {
+          "name": "Amie",
+          "url": "https://amie.so",
+          "hero_pattern": "Playful color-coded calendar & task manager with smooth drag-and-drop",
+          "component_features": "Integrated to-do list sidebar, color-coded calendar blocks, meeting booking link creator",
+          "color_tokens": {"background": "#FAF7F5", "accent": "#FF4458", "text": "#202020"},
+          "key_interactions": "Drag task from sidebar directly onto calendar grid to block time"
+        },
+        {
+          "name": "Notion Calendar (Cron)",
+          "url": "https://calendar.notion.so",
+          "hero_pattern": "Keyboard-first ultra-fast calendar scheduling with multi-timezone columns",
+          "component_features": "Share availability slot selector, menu bar quick view, linked Notion doc preview",
+          "color_tokens": {"background": "#191919", "accent": "#0066FF", "text": "#FFFFFF"},
+          "key_interactions": "Press 'S' and drag on calendar to generate formatted availability text"
+        },
+        {
+          "name": "Campsite",
+          "url": "https://www.campsite.com",
+          "hero_pattern": "Async team communication feed combining posts, design feedback, and calls",
+          "component_features": "Post feedback comments anchored to specific image coordinates, video scrubbers, clean inbox",
+          "color_tokens": {"background": "#0F0F11", "accent": "#F5A623", "text": "#F3F4F6"},
+          "key_interactions": "Clicking any image region to drop a numbered pin comment"
+        },
+        {
+          "name": "Craft Docs",
+          "url": "https://www.craft.do",
+          "hero_pattern": "Native iOS/macOS inspired document design with rich card nesting",
+          "component_features": "Page-inside-page card previews, customizable header covers, typography presets",
+          "color_tokens": {"background": "#FFFFFF", "accent": "#4E75FF", "text": "#1A1A1A"},
+          "key_interactions": "Folding and unfolding card blocks with spring animations"
+        },
+        {
+          "name": "Heptabase",
+          "url": "https://heptabase.com",
+          "hero_pattern": "Spatial whiteboard for complex research, reading PDFs, and connecting thoughts",
+          "component_features": "Whiteboard card clusters, split-screen PDF highlighter, mindmap connector lines",
+          "color_tokens": {"background": "#1C1C1E", "accent": "#FF9F0A", "text": "#F2F2F7"},
+          "key_interactions": "Dragging highlighted PDF quotes directly onto whiteboard as editable cards"
+        }
+      ]
+    },
+    {
+      "category_name": "E-Commerce & High-End Brand Showcase",
+      "design_paradigm": "Scroll-Driven Scrollytelling, 3D Product Reveals & Floating Cart Drawers",
+      "recommended_libraries": ["GSAP ScrollTrigger", "Lenis Smooth Scroll", "Three.js", "Tailwind CSS v4"],
+      "sites": [
+        {
+          "name": "Apple",
+          "url": "https://www.apple.com",
+          "hero_pattern": "Scroll-driven 3D product explosion and assembly with razor-sharp San Francisco typography",
+          "component_features": "Side-by-side device comparison sliders, sticky buy navigation bar, tech specs accordion drawer",
+          "color_tokens": {"background": "#000000", "accent": "#0071E3", "text": "#F5F5F7"},
+          "key_interactions": "Scrollytelling video/canvas scrubbing synced precisely to page scroll position"
+        },
+        {
+          "name": "Nike",
+          "url": "https://www.nike.com",
+          "hero_pattern": "High-impact athletic video banner with bold Futura condensed typography",
+          "component_features": "Interactive 3D sneaker customizer, size grid selector with inventory alerts, member perk drawer",
+          "color_tokens": {"background": "#FFFFFF", "accent": "#111111", "text": "#111111"},
+          "key_interactions": "Colorway thumbnail swap updating all product gallery angles instantaneously"
+        },
+        {
+          "name": "Airbnb",
+          "url": "https://www.airbnb.com",
+          "hero_pattern": "Floating search bar pill expanding into destination, calendar, and guest picker",
+          "component_features": "Category icon carousel with active underlines, split-screen interactive map, photo grid lightbox",
+          "color_tokens": {"background": "#FFFFFF", "accent": "#FF385C", "text": "#222222"},
+          "key_interactions": "Hovering listing card highlights corresponding price pin on interactive map"
+        },
+        {
+          "name": "Tesla",
+          "url": "https://www.tesla.com",
+          "hero_pattern": "Fullscreen vehicle hero with transparent navigation and clean performance badges",
+          "component_features": "Interactive car configurator (paint, wheels, interior, autopilot), estimated payment calculator",
+          "color_tokens": {"background": "#FFFFFF", "accent": "#E82127", "text": "#171A20"},
+          "key_interactions": "Live 3D vehicle exterior color change on button click"
+        },
+        {
+          "name": "Dyson",
+          "url": "https://www.dyson.com",
+          "hero_pattern": "Engineering exploded-view diagrams revealing internal cyclone airflow mechanics",
+          "component_features": "Hair type selector tool, machine attachment comparison matrix, live chat specialist widget",
+          "color_tokens": {"background": "#000000", "accent": "#FF007F", "text": "#FFFFFF"},
+          "key_interactions": "Interactive airflow simulator demonstrating particle filtration"
+        },
+        {
+          "name": "Allbirds",
+          "url": "https://www.allbirds.com",
+          "hero_pattern": "Sustainability-focused footwear showcase with natural wool textures",
+          "component_features": "Carbon footprint meter badge, material zoom inset on hover, eco-metric transparency breakdown",
+          "color_tokens": {"background": "#F5F5F5", "accent": "#212A2F", "text": "#212A2F"},
+          "key_interactions": "Smooth drawer cart slide-out with free shipping progress bar"
+        },
+        {
+          "name": "Glossier",
+          "url": "https://www.glossier.com",
+          "hero_pattern": "Playful minimalist beauty editorial with soft millennial pink accents",
+          "component_features": "Shade finder swatch slider, user-generated review photo gallery, bundle builder stepper",
+          "color_tokens": {"background": "#FFF9FA", "accent": "#FF5280", "text": "#262626"},
+          "key_interactions": "Live swatch overlay previewing lipstick tone on different skin tones"
+        },
+        {
+          "name": "Teenage Engineering",
+          "url": "https://teenage.engineering",
+          "hero_pattern": "Retro-futuristic brutalist electronics showcase with monospace layout and industrial schematics",
+          "component_features": "Interactive synthesizer audio sample buttons, technical spec sheet, raw mechanical diagrams",
+          "color_tokens": {"background": "#FFFFFF", "accent": "#FF4400", "text": "#000000"},
+          "key_interactions": "Clicking keys on virtual OP-1 synthesizer plays real sound frequencies"
+        },
+        {
+          "name": "Aesop",
+          "url": "https://www.aesop.com",
+          "hero_pattern": "Literary and poetic skincare catalog with calming earth tones and understated serif fonts",
+          "component_features": "Store locator architectural photo showcase, ingredient suitability guide, clean checkout modal",
+          "color_tokens": {"background": "#FFFEF2", "accent": "#333333", "text": "#252525"},
+          "key_interactions": "Subtle image fade and quote reveal on section scroll"
+        },
+        {
+          "name": "Gymshark",
+          "url": "https://www.gymshark.com",
+          "hero_pattern": "High-octane athlete workout video banner with bold sports typography",
+          "component_features": "Quick-add size drawer, wishlist heart animation, model size and height guide indicator",
+          "color_tokens": {"background": "#FFFFFF", "accent": "#000000", "text": "#000000"},
+          "key_interactions": "One-tap quick add popover without leaving catalog feed"
+        }
+      ]
+    },
+    {
+      "category_name": "Design Systems & Component Libraries",
+      "design_paradigm": "Standardized Tokens, Accessibility (WAI-ARIA) & Composable Primitives",
+      "recommended_libraries": ["Radix Primitives", "Tailwind CSS v4", "Storybook", "Class-Variance-Authority"],
+      "sites": [
+        {
+          "name": "Shadcn/ui",
+          "url": "https://ui.shadcn.com",
+          "hero_pattern": "Copy-paste component architecture with interactive theme color generator",
+          "component_features": "Accessible Radix primitives styled with Tailwind, CLI code copier, customizable dark mode tokens",
+          "color_tokens": {"background": "#09090B", "accent": "#FAFAFA", "text": "#FAFAFA"},
+          "key_interactions": "Live theme preset switcher (Zinc, Slate, Rose, Orange, Green) updating all demo cards"
+        },
+        {
+          "name": "Tailwind CSS",
+          "url": "https://tailwindcss.com",
+          "hero_pattern": "Interactive utility class playground demonstrating instant CSS changes",
+          "component_features": "Searchable class reference docs, dark mode preview toggle, component showcase snippets",
+          "color_tokens": {"background": "#0F172A", "accent": "#38BDF8", "text": "#F8FAFC"},
+          "key_interactions": "Editing utility classes in in-browser editor immediately repaints preview element"
+        },
+        {
+          "name": "Radix UI",
+          "url": "https://www.radix-ui.com",
+          "hero_pattern": "Unstyled, accessible UI component primitives with keyboard navigation highlights",
+          "component_features": "WAI-ARIA compliance checklists, focus trap demos, composable primitives (Dialog, Dropdown, Accordion, Slider)",
+          "color_tokens": {"background": "#110F23", "accent": "#6E56CF", "text": "#EDEDED"},
+          "key_interactions": "Interactive keyboard navigation test displaying active TAB/Arrow focus indicators"
+        },
+        {
+          "name": "Apple Developer Human Interface Guidelines",
+          "url": "https://developer.apple.com/design",
+          "hero_pattern": "Fluid iOS/macOS/visionOS gesture guides and spatial computing design principles",
+          "component_features": "SF Symbols icon viewer, dynamic island interaction guidelines, liquid glass token specs",
+          "color_tokens": {"background": "#000000", "accent": "#0071E3", "text": "#F5F5F7"},
+          "key_interactions": "Interactive gesture simulator (swipe, pinch, double tap, spatial gaze)"
+        },
+        {
+          "name": "Material Design 3 (Google)",
+          "url": "https://m3.material.io",
+          "hero_pattern": "Material You dynamic theming extracting algorithmic color palettes from user wallpapers",
+          "component_features": "Tonal palette generator, elevation token shadow specs, motion transition timings",
+          "color_tokens": {"background": "#FEF7FF", "accent": "#6750A4", "text": "#1D1B20"},
+          "key_interactions": "Uploading an image to generate 5 complete light and dark theme tonal palettes"
+        },
+        {
+          "name": "IBM Carbon Design System",
+          "url": "https://carbondesignsystem.com",
+          "hero_pattern": "Industrial grade high-density enterprise grid with strict WCAG AAA contrast options",
+          "component_features": "Data table with batch actions and multi-column sorting, code snippet component, status icons",
+          "color_tokens": {"background": "#161616", "accent": "#0F62FE", "text": "#F4F4F4"},
+          "key_interactions": "Switching between 4 IBM themes (White, Gray 10, Gray 90, Gray 100)"
+        },
+        {
+          "name": "Shopify Polaris",
+          "url": "https://polaris.shopify.com",
+          "hero_pattern": "Merchant commerce design system with action-oriented administrative cards",
+          "component_features": "Resource list tables, page action banner bars, order fulfillment stepper",
+          "color_tokens": {"background": "#F1F2F4", "accent": "#008060", "text": "#202223"},
+          "key_interactions": "Interactive Polaris sandbox allowing rapid assembly of merchant admin pages"
+        },
+        {
+          "name": "Uber Base Web",
+          "url": "https://baseweb.design",
+          "hero_pattern": "High-reliability fleet, driver and rider UI components designed for harsh outdoor lighting",
+          "component_features": "Accessible high-contrast form inputs, phone number international country selector, map pins",
+          "color_tokens": {"background": "#000000", "accent": "#276EF1", "text": "#FFFFFF"},
+          "key_interactions": "Component token overrides via Styletron runtime"
+        },
+        {
+          "name": "Atlassian Design System",
+          "url": "https://atlassian.design",
+          "hero_pattern": "Enterprise collaboration design system powering Jira and Confluence",
+          "component_features": "Lozenge status tags, avatar stack with overflow counter, Jira issue detail modal",
+          "color_tokens": {"background": "#091E42", "accent": "#0052CC", "text": "#172B4D"},
+          "key_interactions": "Drag-and-drop Kanban card transitions"
+        },
+        {
+          "name": "GitHub Primer",
+          "url": "https://primer.style",
+          "hero_pattern": "Developer-first design system with Octicon integration and strict dark mode tokens",
+          "component_features": "Diff review components, Markdown styling containers, branch selector popover",
+          "color_tokens": {"background": "#0D1117", "accent": "#1F6FEB", "text": "#C9D1D9"},
+          "key_interactions": "Theme switcher toggling between light, dark default, and dark dimmed"
+        }
+      ]
+    },
+    {
+      "category_name": "Web3, Decentralized & Crypto Ecosystems",
+      "design_paradigm": "Holographic Gradients, Real-Time Market Tickers & Non-Custodial Modals",
+      "recommended_libraries": ["Wagmi/Viem", "RainbowKit", "Recharts", "Framer Motion"],
+      "sites": [
+        {
+          "name": "Uniswap",
+          "url": "https://uniswap.org",
+          "hero_pattern": "Clean floating token swap card with automatic routing optimization diagram",
+          "component_features": "Token search modal with verified trust badges, slippage tolerance settings, liquidity position cards",
+          "color_tokens": {"background": "#131313", "accent": "#FC72FF", "text": "#FFFFFF"},
+          "key_interactions": "Swap button flip animation and real-time gas estimate updates"
+        },
+        {
+          "name": "OpenSea",
+          "url": "https://opensea.io",
+          "hero_pattern": "Virtualized NFT marketplace grid with real-time floor price indicators",
+          "component_features": "Trait rarity filter drawer, buy-now checkout sidebar, sales volume timeseries chart",
+          "color_tokens": {"background": "#121212", "accent": "#2081E2", "text": "#FFFFFF"},
+          "key_interactions": "Batch sweep slider selecting multiple NFT cards with single-click checkout"
+        },
+        {
+          "name": "Magic Eden",
+          "url": "https://magiceden.io",
+          "hero_pattern": "High-speed multi-chain launchpad with live countdown timers and whitelist minting",
+          "component_features": "Real-time activity ticker, wallet connection modal (Phantom/MetaMask), trait bid drawer",
+          "color_tokens": {"background": "#10141E", "accent": "#E42575", "text": "#E2E8F0"},
+          "key_interactions": "Live mint progress bar filling in real-time via WebSocket"
+        },
+        {
+          "name": "Base by Coinbase",
+          "url": "https://base.org",
+          "hero_pattern": "Deep cobalt blue geometric identity showcasing L2 scalability and low fees",
+          "component_features": "Bridge asset widget, builder grant showcase tiles, live gas savings counter",
+          "color_tokens": {"background": "#0052FF", "accent": "#FFFFFF", "text": "#FFFFFF"},
+          "key_interactions": "Interactive network transaction cost comparison"
+        },
+        {
+          "name": "Solana",
+          "url": "https://solana.com",
+          "hero_pattern": "High-tech cyberpunk holographic gradient hero with live TPS (Transactions Per Second) counter",
+          "component_features": "Validator map visualizer, ecosystem project search filter, block time telemetry",
+          "color_tokens": {"background": "#000000", "accent": "#14F195", "text": "#FFFFFF"},
+          "key_interactions": "Real-time ticker pulsating with every verified Solana block"
+        },
+        {
+          "name": "Ethereum.org",
+          "url": "https://ethereum.org",
+          "hero_pattern": "Decentralized community portal with comprehensive staking and developer guides",
+          "component_features": "Gas tracker live status pill, wallet recommendation quiz stepper, network upgrade timeline",
+          "color_tokens": {"background": "#1A1A1A", "accent": "#627EEA", "text": "#F7F7F7"},
+          "key_interactions": "Language selector with translation bounty indicators"
+        },
+        {
+          "name": "Polymarket",
+          "url": "https://polymarket.com",
+          "hero_pattern": "Real-time prediction market probability odds graph with live volume tracking",
+          "component_features": "Yes/No outcome trading cards, order book depth slider, market resolution timeline",
+          "color_tokens": {"background": "#0C0D0E", "accent": "#0066FF", "text": "#FFFFFF"},
+          "key_interactions": "Instant price outcome slider updating return percentage live"
+        },
+        {
+          "name": "Phantom Wallet",
+          "url": "https://phantom.com",
+          "hero_pattern": "Playful ghost mascot with smooth 3D wallet card interactions",
+          "component_features": "Multi-chain asset balances, collectibles gallery view, token swap slide drawer",
+          "color_tokens": {"background": "#222222", "accent": "#AB9FF2", "text": "#FFFFFF"},
+          "key_interactions": "Confetti burst on successful transaction execution"
+        },
+        {
+          "name": "Foundation",
+          "url": "https://foundation.app",
+          "hero_pattern": "Curated digital art gallery with full-screen artwork viewports",
+          "component_features": "Live auction countdown banner, bid history drawer, artist provenance timeline",
+          "color_tokens": {"background": "#000000", "accent": "#000000", "text": "#FFFFFF"},
+          "key_interactions": "Smooth zoom into high-res digital artwork"
+        },
+        {
+          "name": "Cosmos Network",
+          "url": "https://cosmos.network",
+          "hero_pattern": "Interchain galaxy 3D visualizer showing connected IBC blockchains",
+          "component_features": "IBC transfer volume counters, connected zone hubs, token economy simulator",
+          "color_tokens": {"background": "#15171E", "accent": "#5064FB", "text": "#FFFFFF"},
+          "key_interactions": "3D orbital rotation of interconnected blockchain nodes"
+        }
+      ]
+    },
+    {
+      "category_name": "Editorial, Media & Publishing",
+      "design_paradigm": "Classic Mastheads, Dynamic Data Journalism & Reader Focus",
+      "recommended_libraries": ["Tailwind Typography (@tailwindcss/typography)", "D3.js", "Medium-Zoom"],
+      "sites": [
+        {
+          "name": "The New York Times",
+          "url": "https://www.nytimes.com",
+          "hero_pattern": "Classic Cheltenham serif masthead with multi-column editorial hierarchy and breaking news ribbons",
+          "component_features": "Interactive data journalism graphics, paywall slide drawer, audio article player pill",
+          "color_tokens": {"background": "#FFFFFF", "accent": "#121212", "text": "#121212"},
+          "key_interactions": "Smooth scroll-triggered data visualizer animations"
+        },
+        {
+          "name": "The Verge",
+          "url": "https://www.theverge.com",
+          "hero_pattern": "Cyberpunk high-contrast grid with vivid magenta/cyan accents and fast-updating news stream",
+          "component_features": "Verge Scorecard with pros/cons matrix, live blog timeline with auto-refresh pills, author card",
+          "color_tokens": {"background": "#121212", "accent": "#E51253", "text": "#FFFFFF"},
+          "key_interactions": "Quick stream filter toggling between features and quick news bites"
+        },
+        {
+          "name": "Bloomberg",
+          "url": "https://www.bloomberg.com",
+          "hero_pattern": "High-contrast financial black and yellow header with live market ticker tape",
+          "component_features": "Real-time stock indices ribbon, market opinion callouts, video interview popover",
+          "color_tokens": {"background": "#000000", "accent": "#FBFF00", "text": "#FFFFFF"},
+          "key_interactions": "Hovering stock ticker reveals mini intraday sparkline"
+        },
+        {
+          "name": "Wired",
+          "url": "https://www.wired.com",
+          "hero_pattern": "Bold neo-brutalist black & white typography with modular magazine grids",
+          "component_features": "Long-form reading progress bar, related story sidebar, pull quote containers",
+          "color_tokens": {"background": "#FFFFFF", "accent": "#000000", "text": "#000000"},
+          "key_interactions": "Top reading progress line filling with page scroll"
+        },
+        {
+          "name": "Medium",
+          "url": "https://medium.com",
+          "hero_pattern": "Distraction-free reading canvas with optimal line-height and serif font pairing",
+          "component_features": "Highlight and comment tooltip on text selection, clap appreciation counter, bookmark button",
+          "color_tokens": {"background": "#FFFFFF", "accent": "#1A8917", "text": "#242424"},
+          "key_interactions": "Selecting text reveals contextual floating action toolbar (Highlight, Tweet, Comment)"
+        },
+        {
+          "name": "Substack",
+          "url": "https://substack.com",
+          "hero_pattern": "Clean author-first newsletter layout with floating subscription pill",
+          "component_features": "Author Notes micro-feed, podcast episode player, comment threading with author badge",
+          "color_tokens": {"background": "#FFFFFF", "accent": "#FF6719", "text": "#1C1C1C"},
+          "key_interactions": "Floating subscribe bar appearing as reader finishes first half of article"
+        },
+        {
+          "name": "ReadCV",
+          "url": "https://read.cv",
+          "hero_pattern": "Elegant designer and engineer curriculum vitae layout with clean typography",
+          "component_features": "Work experience timeline with expandable project media, peer recommendations, contact popover",
+          "color_tokens": {"background": "#FFFFFF", "accent": "#111111", "text": "#111111"},
+          "key_interactions": "Clicking project thumbnail opens distraction-free lightbox"
+        },
+        {
+          "name": "Bento.me",
+          "url": "https://bento.me",
+          "hero_pattern": "Modular Bento grid personal profile canvas with customizable media tiles",
+          "component_features": "Drag-and-drop tile rearrangement, social link badges, embedded Spotify/YouTube widgets",
+          "color_tokens": {"background": "#0F0F0F", "accent": "#FFFFFF", "text": "#F5F5F7"},
+          "key_interactions": "Smooth spring physics when resizing and moving bento tiles"
+        },
+        {
+          "name": "Cosmos.so",
+          "url": "https://www.cosmos.so",
+          "hero_pattern": "Visual digital moodboard and discovery engine for creative curators",
+          "component_features": "Masonry image grid with instant connection links, minimalist search, dark aesthetic",
+          "color_tokens": {"background": "#000000", "accent": "#FFFFFF", "text": "#E5E5E5"},
+          "key_interactions": "One-click save to cluster with floating confirmation pill"
+        },
+        {
+          "name": "Typewolf",
+          "url": "https://www.typewolf.com",
+          "hero_pattern": "Typography encyclopedia showcasing fonts in real-world professional use",
+          "component_features": "Font pairing recommendations, site of the day typography breakdown, font identifier",
+          "color_tokens": {"background": "#FFFFFF", "accent": "#000000", "text": "#222222"},
+          "key_interactions": "Clicking font name jumps to sample pairings and commercial license sources"
+        }
+      ]
+    }
+  ]
+}

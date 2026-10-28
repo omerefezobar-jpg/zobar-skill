@@ -3,7 +3,7 @@
 University Curriculum, Research Lab & Peer-Reviewed Academic Engine for Zobar Skill (Phase 1).
 Integrates live academic citations (OpenAlex Scholarly Graph & Semantic Scholar)
 with structured syllabus, textbook, and research lab ground truth from top global
-universities (MIT, Stanford, ETH Zürich, Oxford, CMU, UC Berkeley).
+universities (MIT, Stanford, ETH Zürich, Oxford, CMU, UC Berkeley, Harvard).
 
 DISCLAIMER:
 Academic papers and syllabi represent the cutting edge of theory and foundational principles.
@@ -11,6 +11,7 @@ Citations and peer-reviewed status are tracked to establish empirical credibilit
 """
 
 import sys
+import re
 import json
 import urllib.request
 import urllib.parse
@@ -20,7 +21,7 @@ import argparse
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
-# Structured syllabus, textbook, and lab knowledge base across top world institutions
+# Comprehensive University Curriculum & Elite Research Lab Index across 15+ disciplines
 UNIVERSITY_CURRICULUM_INDEX = [
     {
         "keywords": ["compiler", "ast", "parser", "linter", "static analysis", "program analysis", "interpreter", "refactor"],
@@ -151,7 +152,7 @@ UNIVERSITY_CURRICULUM_INDEX = [
         ]
     },
     {
-        "keywords": ["medical", "health", "clinical", "diagnostic", "patient", "biomedical", "radiology"],
+        "keywords": ["medical", "health", "clinical", "diagnostic", "patient", "biomedical", "radiology", "oncology"],
         "curriculum": [
             {
                 "institution": "Stanford University",
@@ -228,16 +229,157 @@ UNIVERSITY_CURRICULUM_INDEX = [
                 "url": "https://crypto.stanford.edu/"
             }
         ]
+    },
+    {
+        "keywords": ["robotics", "autonomous", "vehicle", "drone", "lidar", "slam", "kinematics", "motion planning"],
+        "curriculum": [
+            {
+                "institution": "Stanford University",
+                "course_code": "CS223A",
+                "course_title": "Introduction to Robotics & Manipulation",
+                "professors": ["Oussama Khatib"],
+                "syllabus_url": "https://cs223a.stanford.edu/",
+                "seminal_textbook": "Probabilistic Robotics - Sebastian Thrun, Wolfram Burgard, Dieter Fox",
+                "core_mental_models": [
+                    "İleri ve ters kinematik (Forward & Inverse Kinematics), Jacobian matrisleri.",
+                    "Genişletilmiş Kalman Filtresi (EKF) ve Parçacık Filtreleri ile lokalizasyon.",
+                    "SLAM (Simultaneous Localization and Mapping) algoritmaları."
+                ]
+            },
+            {
+                "institution": "ETH Zürich",
+                "course_code": "151-0851-00L",
+                "course_title": "Robot Dynamics & Autonomous Navigation",
+                "professors": ["Marco Hutter", "Roland Siegwart"],
+                "syllabus_url": "https://rsl.ethz.ch/education-lectures/lectures/robotdynamics.html",
+                "seminal_textbook": "Introduction to Autonomous Mobile Robots - Siegwart, Nourbakhsh, Scaramuzza",
+                "core_mental_models": [
+                    "Dinamik hareket planlama (RRT*, A* graf arama).",
+                    "Gerçek zamanlı çarpışma önleme ve sensör füzyonu (IMU + LiDAR + Kamera)."
+                ]
+            }
+        ],
+        "research_labs": [
+            {
+                "name": "Stanford Robotics Lab",
+                "focus": "Autonomous manipulation, human-robot interaction, tactile sensing.",
+                "url": "https://robotics.stanford.edu/"
+            },
+            {
+                "name": "ETH Zürich Robotic Systems Lab (RSL)",
+                "focus": "Legged robots, dynamic locomotion, harsh-environment navigation.",
+                "url": "https://rsl.ethz.ch/"
+            }
+        ]
+    },
+    {
+        "keywords": ["fintech", "finance", "trading", "quant", "algorithmic", "market", "pricing", "credit", "risk"],
+        "curriculum": [
+            {
+                "institution": "MIT Sloan School of Management",
+                "course_code": "15.433 / 18.S096",
+                "course_title": "Financial Markets & Quantitative Methods",
+                "professors": ["Andrew W. Lo"],
+                "syllabus_url": "https://ocw.mit.edu/courses/15-433-financial-markets-fall-2011/",
+                "seminal_textbook": "Options, Futures, and Other Derivatives - John C. Hull",
+                "core_mental_models": [
+                    "Black-Scholes-Merton opsiyon fiyatlama ve Greeks risk duyarlılıkları.",
+                    "Uyarlanabilir Piyasalar Hipotezi (Adaptive Markets Hypothesis).",
+                    "Mikroyapı piyasaları, emir defteri dinamikleri ve slippage minimizasyonu."
+                ]
+            },
+            {
+                "institution": "University of Oxford",
+                "course_code": "MF-01",
+                "course_title": "Mathematical & Algorithmic Finance",
+                "professors": ["Rama Cont", "Xunyu Zhou"],
+                "syllabus_url": "https://www.maths.ox.ac.uk/study-here/postgraduate-study/msc-mathematical-finance",
+                "seminal_textbook": "Stochastic Calculus for Finance - Steven Shreve",
+                "core_mental_models": [
+                    "Stokastik diferansiyel denklemler (Itô Kalkülüsü) ve volatilite modellemesi.",
+                    "Sistemik risk, kredi temerrüt olasılığı ve likidite darboğazları."
+                ]
+            }
+        ],
+        "research_labs": [
+            {
+                "name": "MIT Laboratory for Financial Engineering (LFE)",
+                "focus": "Systemic risk, algorithmic trading safety, healthcare financing.",
+                "url": "https://lfe.mit.edu/"
+            },
+            {
+                "name": "Oxford-Man Institute of Quantitative Finance",
+                "focus": "Machine learning in financial markets, high-frequency limit order dynamics.",
+                "url": "https://www.oxford-man.ox.ac.uk/"
+            }
+        ]
+    },
+    {
+        "keywords": ["database", "storage", "sql", "nosql", "btree", "lsm", "olap", "oltp", "query engine"],
+        "curriculum": [
+            {
+                "institution": "Carnegie Mellon University (CMU)",
+                "course_code": "15-445 / 645",
+                "course_title": "Database Systems & Storage Engine Architecture",
+                "professors": ["Andy Pavlo"],
+                "syllabus_url": "https://15445.courses.cs.cmu.edu/",
+                "seminal_textbook": "Database System Concepts - Silberschatz, Korth, Sudarshan",
+                "core_mental_models": [
+                    "Buffer Pool yöneticisi, B+ Tree vs LSM-Tree indeksleme mekanizmaları.",
+                    "İki Aşamalı Kilitleme (2PL) ve Çok Sürümlü Eşzamanlılık Denetimi (MVCC).",
+                    "Vektörize sorgu yürütme (Vectorized execution / SIMD processing)."
+                ]
+            }
+        ],
+        "research_labs": [
+            {
+                "name": "CMU Database Group (BusTub)",
+                "focus": "Autonomous self-driving database management systems, in-memory execution.",
+                "url": "https://db.cs.cmu.edu/"
+            }
+        ]
+    },
+    {
+        "keywords": ["ui", "ux", "human", "hci", "interaction", "ergonomics", "interface", "design"],
+        "curriculum": [
+            {
+                "institution": "Stanford University",
+                "course_code": "CS147",
+                "course_title": "Introduction to Human-Computer Interaction Design",
+                "professors": ["James Landay", "Ge Wang"],
+                "syllabus_url": "https://cs147.stanford.edu/",
+                "seminal_textbook": "The Design of Everyday Things - Don Norman",
+                "core_mental_models": [
+                    "Affordance, Signifier ve Geri Bildirim (Feedback loops) ilkeleri.",
+                    "Fitts Kanunu ve Hick-Hyman Kanunu ile bilişsel karar süresi hesaplaması.",
+                    "Kullanıcı zihinsel modeli ile sistem kavramsal modeli arasındaki boşluğun kapatılması."
+                ]
+            }
+        ],
+        "research_labs": [
+            {
+                "name": "Stanford HCI Group",
+                "focus": "Generative user interfaces, cognitive computing, and collaborative design.",
+                "url": "https://hci.stanford.edu/"
+            }
+        ]
     }
 ]
+
+def clean_search_query(raw_query: str) -> str:
+    """Extracts high-value semantic tokens from a query string."""
+    cleaned = re.sub(r'[^a-zA-Z0-9\s-]', ' ', raw_query)
+    tokens = [w for w in cleaned.split() if len(w) > 2]
+    return " ".join(tokens[:5]) if tokens else raw_query
 
 def fetch_openalex_papers(query: str, max_results: int = 4):
     """
     Queries the OpenAlex Scholarly Graph (covering 250M+ peer-reviewed works)
-    without authentication barriers or rate-limit throttles.
+    with adaptive token fallback to ensure deep literature returns for any domain.
     """
-    clean_query = urllib.parse.quote(query)
-    url = f"https://api.openalex.org/works?search={clean_query}&per-page={max_results}"
+    clean_query = clean_search_query(query)
+    encoded_query = urllib.parse.quote(clean_query)
+    url = f"https://api.openalex.org/works?search={encoded_query}&per-page={max_results}"
 
     headers = {
         "User-Agent": "ZobarSkillBot/3.0 (mailto:zobarskill@academic-research.org)"
@@ -256,31 +398,41 @@ def fetch_openalex_papers(query: str, max_results: int = 4):
         }
 
     raw_results = data.get("results", [])
-    papers = []
+    
+    # Adaptive Fallback: if 0 results, retry with first 2 words
+    if not raw_results and len(clean_query.split()) > 2:
+        fallback_query = urllib.parse.quote(" ".join(clean_query.split()[:2]))
+        fallback_url = f"https://api.openalex.org/works?search={fallback_query}&per-page={max_results}"
+        try:
+            req_fallback = urllib.request.Request(fallback_url, headers=headers)
+            with urllib.request.urlopen(req_fallback, timeout=10) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+                raw_results = data.get("results", [])
+        except Exception:
+            pass
 
+    papers = []
     for item in raw_results:
         title = item.get("title") or "Başlıksız Hakemli Çalışma"
         pub_year = item.get("publication_year") or "Tarih Yok"
         cited_by = item.get("cited_by_count", 0)
-        
-        # Authors
+
         authors = []
         for auth_obj in item.get("authorships", []):
             author_data = auth_obj.get("author", {})
             name = author_data.get("display_name")
             if name:
                 authors.append(name)
-        
-        # Primary location / venue
+
         primary_loc = item.get("primary_location") or {}
         source = primary_loc.get("source") or {}
         venue = source.get("display_name") or "Uluslararası Hakemli Dergi / Konferans"
-        
+
         doi = item.get("doi")
         openalex_id = item.get("id")
         paper_url = doi if doi else openalex_id
 
-        # Inverted index abstract reconstruction if present
+        # Inverted index abstract reconstruction
         abstract = ""
         inv_index = item.get("abstract_inverted_index")
         if inv_index and isinstance(inv_index, dict):
@@ -322,9 +474,9 @@ def find_university_curriculum(domain_query: str):
             matched_curriculum.extend(entry["curriculum"])
             matched_labs.extend(entry["research_labs"])
 
-    # Fallback to compilers/program analysis or distributed systems if no specific match
+    # Intelligent fallback to foundational computer science and systems architecture
     if not matched_curriculum:
-        fallback = UNIVERSITY_CURRICULUM_INDEX[0]
+        fallback = UNIVERSITY_CURRICULUM_INDEX[1] # Distributed Systems & Cloud
         matched_curriculum = fallback["curriculum"][:1]
         matched_labs = fallback["research_labs"][:1]
 
@@ -361,7 +513,7 @@ def main():
 
     ground_truth = fetch_comprehensive_academic_ground_truth(args.topic, args.max)
 
-    print("📚 İLGİLİ SEÇKİN ÜNİVERSİTE MÜFREDATLARI (MIT, Stanford, ETH, Oxford):")
+    print("📚 İLGİLİ SEÇKİN ÜNİVERSİTE MÜFREDATLARI (MIT, Stanford, ETH, Oxford, CMU):")
     for c in ground_truth["curriculum"]:
         print(f"- {c['institution']} [{c['course_code']}]: {c['course_title']}")
         print(f"  👨‍🏫 Öğretim Üyeleri : {', '.join(c['professors'])}")

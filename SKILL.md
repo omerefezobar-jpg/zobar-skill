@@ -88,15 +88,21 @@ flowchart TD
   - Kullanım amacına göre EU AI Act seviyesi (Yasaklı, Yüksek Risk, Şeffaflık, Ar-Ge Muafiyeti, Minimal Risk).
   - MDR (AB) 2017/745 Kural 11 klinik ayrımı ve GDPR Madde 6/9/22 yükümlülükleri.
 
-### FAZ 5: Teknik Yığın & UI/UX Bileşen Mimarisi (Tech Blueprint)
-* **Kaynak Havuzu & Yardımcı Araç:**
-  ```bash
-  python ./scripts/synthesize_architecture.py "<konu>"
-  ```
+### FAZ 5: Teknik Yığın, UI/UX Bileşen Mimarisi & 100+ S-Tier Tasarım Havuzu (Tech Blueprint)
+* **Kaynak Havuzu & Yardımcı Araçlar:**
+  - Teknik mimari ve bileşen sentezi için:
+    ```bash
+    python ./scripts/synthesize_architecture.py "<konu>"
+    ```
+  - 100+ S-Tier siteden (Netflix, Stripe, Linear, Apple vb.) tasarım deseni ve bileşen çekmek için:
+    ```bash
+    python ./scripts/recommend_ui_patterns.py "<konu>" --max 4
+    ```
 * **Görev:**
   - Gecikme ve bellek güvenliğine göre çekirdek dil (Rust, Go, TypeScript).
   - Sıfır konfigürasyonlu yerel veri katmanı (LanceDB, SQLite).
-  - Modern erişilebilir masaüstü/web arayüzü (Tauri v2, React 19, Radix, Tailwind).
+  - 100+ S-Tier siteden eşleşen canlı URL'ler, hero desenleri, renk tokenları ve mikro-etkileşimler.
+  - Modern erişilebilir arayüz yığını (Tauri v2, React 19, Radix UI, Tailwind CSS v4).
 
 ### FAZ 6: Radikal İcat & Dinamik Doğrulama Kapısı (Feasibility Gate)
 * **Kaynak Havuzu & Yardımcı Araç:**
