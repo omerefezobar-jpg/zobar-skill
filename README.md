@@ -3,8 +3,12 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![CI & Quality Gate](https://github.com/omerefezobar-jpg/zobar-skill/actions/workflows/ci.yml/badge.svg)](https://github.com/omerefezobar-jpg/zobar-skill/actions)
 [![Regression Suite](https://img.shields.io/badge/Regression%20Suite-30%2F30%20Passing%20(Zero%20Tolerance)-blue.svg)](./benchmarks/BENCHMARK_REPORT.md)
-[![Unit Tests](https://img.shields.io/badge/Unit%20Tests-100%2F100%20Passing-brightgreen.svg)](https://github.com/omerefezobar-jpg/zobar-skill/actions)
-[![Live MCP Engine](https://img.shields.io/badge/Live%20MCP%20Server-15%20Tools%20(Sub--1ms)-blue.svg)](./benchmarks/MCP_BENCHMARK_REPORT.md)
+[![Unit Tests](https://img.shields.io/badge/Unit%20Tests-113%2F113%20Passing-brightgreen.svg)](https://github.com/omerefezobar-jpg/zobar-skill/actions)
+[![Live MCP Engine](https://img.shields.io/badge/Live%20MCP%20Server-19%20Tools%20(Sub--1ms)-blue.svg)](./benchmarks/MCP_BENCHMARK_REPORT.md)
+[![Human Delight](https://img.shields.io/badge/Human%20Delight-Viral%20K--Factor%20%7C%20Optimistic%20UI-ff69b4.svg)](./scripts/human_delight_psychology_engine.py)
+[![Freelance & Agency Growth](https://img.shields.io/badge/Agency%20%26%20Freelance-Cold%20Audits%20%7C%20MRR%20Retainers-success.svg)](./scripts/freelance_agency_growth_engine.py)
+[![Skill Researcher](https://img.shields.io/badge/Skill%20Researcher-MCP%20Terminal%20%7C%20Auto--Scaffold-blueviolet.svg)](./scripts/skill_registry_and_installer_engine.py)
+[![Free Modern UI Vault](https://img.shields.io/badge/Free%20UI%20Vault-Shimmer%20%7C%20Bento%20%7C%20WhatsApp%20CTA-orange.svg)](./references/free_modern_components_vault.json)
 [![REA Clean-Room Reversing](https://img.shields.io/badge/Reverse%20Engineering-REA%20%7C%20Clean--Room%20%7C%20EU%202009%2F24%2FEC-red.svg)](./scripts/reverse_engineering_analyst.py)
 [![Game Modding & Minecraft](https://img.shields.io/badge/Game%20Modding-Minecraft%20%7C%20Fabric%20%7C%20Harmony%20%7C%20Voxel-blue.svg)](./scripts/game_modding_engine.py)
 [![Chief Engineer Senate](https://img.shields.io/badge/Chief%20Engineer%20Senate-Academic%20%7C%20Public%20%7C%20Engineers%20%7C%20Oversight%20Seal-success.svg)](./scripts/multi_agent_deliberation_council.py)
@@ -124,9 +128,13 @@ zobar-skill/
 │   ├── unit_economics_investor_simulator.py # LTV/CAC > 3 ve sıfır sermayeli asimetrik girişim simülatörü
 │   ├── reverse_engineering_analyst.py # REA & Çin Seddi / Temiz Oda yasal tersine mühendislik motoru
 │   ├── game_modding_engine.py        # Minecraft/Unity/Unreal modlama & Greedy Meshing voxel köprüsü
-│   ├── multi_agent_deliberation_council.py # Akademisyenler, Halk Meclisi & Çalışanlar Senato toplantısı
+│   ├── multi_agent_deliberation_council.py # Akademisyenler, Halk Meclisi, Çalışanlar & Başmühendislik Senatosu
 │   ├── creative_evolutionary_designer.py # Kendini tekrar etmeyen evrimsel tasarım motoru (D_novelty >= 0.75)
-│   ├── zobar_mcp_server.py           # 15 Araçlı resmi Model Context Protocol (MCP) JSON-RPC 2.0 sunucusu
+│   ├── human_delight_psychology_engine.py # Kullanıcı hazzı, viral K-faktörü ve optimist UI optimizasyonu
+│   ├── freelance_agency_growth_engine.py # Freelance/Ajans müşteri kazanma, soğuk denetim & MRR modelleri
+│   ├── skill_registry_and_installer_engine.py # Skill araştırmacısı, SKILL.md üretici ve MCP terminal koşucusu
+│   ├── modern_component_snippets.py  # Ücretsiz hazır modern React/Tailwind v4 bileşen kütüphanesi
+│   ├── zobar_mcp_server.py           # 19 Araçlı resmi Model Context Protocol (MCP) JSON-RPC 2.0 sunucusu
 │   ├── validate_inventions.py        # Faz 6: TRIZ radikal icat, dinamik TRL/ICE/WTP ve Mermaid mimarı
 │   └── export_html_report.py         # XSS korumalı, CSP uyumlu ('unsafe-eval' içermez) HTML çevirici
 ├── benchmarks/                       # 30 vakalık sıfır toleranslı regresyon denetim sistemi
@@ -134,13 +142,14 @@ zobar-skill/
 │   ├── BENCHMARK_REPORT.md           # Üretilen denetim ve başarı skorkartı
 │   └── benchmark_results.json        # Makine tarafından okunabilir benchmark çıktısı
 ├── references/                       # Zihinsel modeller, First Principles, TRIZ matrisi
+│   ├── free_modern_components_vault.json # Hazır modern React/Tailwind bileşen kodları (Shimmer, Bento, CTA)
 │   ├── evolutionary_design_memory.json # Tekrarsız tasarım oturum hafızası ve kromozom bankası
 │   ├── modern_design_styles_vault.json # Glassmorphism, Aurora, Cyberpunk HUD, Neo-Brutalist token havuzu
 │   ├── free_assets_and_3d_vault.json # 3D, GLTF, PBR texture, ses ve arayüz asset havuzu
 │   ├── s_tier_design_vault.json      # 202 adet doğrulanmış S-Tier site ve bileşen tasarım veri tabanı
 │   ├── heavy_apps_engineering_blueprints.json # Steam, Excel, Premiere vb. 10x mühendislik analizleri
 │   └── supabase_production_schema.sql# Multi-tenant RLS, pgvector HNSW ve Realtime PostgreSQL şeması
-├── tests/                            # 100/100 Çevrimdışı mock'lu deterministik birim test paketi
+├── tests/                            # 113/113 Çevrimdışı mock'lu deterministik birim test paketi
 └── examples/                         # Örnek rapor (Markdown + HTML formatında)
 ```
 

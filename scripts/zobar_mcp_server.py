@@ -2,7 +2,7 @@
 Zobar Real-Time MCP (Model Context Protocol) Server
 Production-Grade JSON-RPC 2.0 Live Server over stdio
 
-Provides 15 live, fully-functional tools connected directly to Zobar Skill core engines:
+Provides 19 live, fully-functional tools connected directly to Zobar Skill core engines:
 1. semantic_cache_query         -> scripts.semantic_cache.SemanticCache (<0.05ms inverted index)
 2. smart_route                  -> scripts.smart_model_router.SmartModelRouter
 3. audit_supabase_sql           -> scripts.supabase_db_optimizer.SupabaseDBOptimizer
@@ -16,8 +16,12 @@ Provides 15 live, fully-functional tools connected directly to Zobar Skill core 
 11. get_design_style            -> scripts.design_system_generator.ModernDesignStylesEngine (Glassmorphism, Aurora, Bento)
 12. analyze_reverse_engineering -> scripts.reverse_engineering_analyst (REA & Clean-Room Safe Harbors)
 13. generate_game_mod_architecture -> scripts.game_modding_engine (Fabric/Harmony & Voxel/Minecraft Greedy Meshing)
-14. deliberate_council          -> scripts.multi_agent_deliberation_council (Academic, Public & Workforce Senate)
+14. deliberate_council          -> scripts.multi_agent_deliberation_council (Academic, Public, Workforce & Chief Engineer)
 15. generate_evolutionary_design-> scripts.creative_evolutionary_designer (Novelty Divergence >= 0.75 & Genetic UI)
+16. analyze_human_delight       -> scripts.human_delight_psychology_engine (Dopamine loops, viral K-factor, optimistic UI)
+17. generate_client_agency_pitch-> scripts.freelance_agency_growth_engine (Cold audits, client ROI pitches, MRR retainer models)
+18. manage_skills_and_mcp       -> scripts.skill_registry_and_installer_engine (Skill researcher & MCP terminal command runner)
+19. get_free_component_snippet  -> scripts.modern_component_snippets (Ready-to-copy free modern UI snippets)
 """
 
 import sys
@@ -46,6 +50,10 @@ from scripts.reverse_engineering_analyst import analyze_target_system
 from scripts.game_modding_engine import synthesize_minecraft_in_game_bridge, calculate_greedy_meshing_metrics, generate_mod_code_template
 from scripts.multi_agent_deliberation_council import conduct_executive_board_deliberation
 from scripts.creative_evolutionary_designer import generate_evolutionary_design
+from scripts.human_delight_psychology_engine import analyze_user_psychology_and_delight, calculate_viral_k_factor
+from scripts.freelance_agency_growth_engine import generate_cold_audit_proposal, calculate_agency_retainer_growth
+from scripts.skill_registry_and_installer_engine import search_ecosystem_skills, synthesize_new_skill_scaffold, execute_terminal_mcp_command
+from scripts.modern_component_snippets import ModernComponentsEngine
 
 
 class ZobarMCPServer:
@@ -57,6 +65,7 @@ class ZobarMCPServer:
         self.image_synthesizer = ImagePromptSynthesizer()
         self.asset_vault = AssetVaultQueryEngine()
         self.design_styles = ModernDesignStylesEngine()
+        self.components_engine = ModernComponentsEngine()
 
     def get_tools_manifest(self) -> List[Dict[str, Any]]:
         return [
@@ -254,6 +263,55 @@ class ZobarMCPServer:
                     },
                     "required": ["domain_context"]
                 }
+            },
+            {
+                "name": "analyze_human_delight",
+                "description": "Evaluates user psychology, cognitive friction, dopamine micro-interactions (optimistic UI, shimmer skeletons, spring physics), and calculates viral loop K-factor (K = i * c).",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "feature_or_page": {"type": "string", "description": "Feature, funnel, or UI component to evaluate"},
+                        "invites_per_user": {"type": "number", "description": "Average invites per user (default 2.5)"},
+                        "invitee_conversion_rate": {"type": "number", "description": "Conversion rate of invited users (default 0.35)"}
+                    },
+                    "required": ["feature_or_page"]
+                }
+            },
+            {
+                "name": "generate_client_agency_pitch",
+                "description": "Freelance, agency & indie-developer growth engine. Generates high-margin niche business ideas, cold audit outreach proposals that quantify lost revenue/ROI, and monthly recurring maintenance retainers (MRR).",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "target_business": {"type": "string", "description": "Target client business name (e.g. Apex Dental)"},
+                        "niche": {"type": "string", "description": "Niche category (clinic, contractor, hotel, restaurant)"},
+                        "client_website": {"type": "string", "description": "Existing client website domain (optional)"}
+                    },
+                    "required": ["target_business"]
+                }
+            },
+            {
+                "name": "manage_skills_and_mcp",
+                "description": "Skill Researcher & MCP Terminal Engineer role. Discovers ecosystem skills, scaffolds compliant SKILL.md packages, and executes terminal MCP subshell commands with latency and exit code capture.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "action": {"type": "string", "enum": ["search", "scaffold", "execute_command"], "description": "Action to perform"},
+                        "query": {"type": "string", "description": "Skill search keyword, new skill name, or terminal command string"}
+                    },
+                    "required": ["action", "query"]
+                }
+            },
+            {
+                "name": "get_free_component_snippet",
+                "description": "Retrieves ready-to-copy, zero-cost, modern S-Tier React and Tailwind CSS v4 component snippets (e.g. Shimmer Skeleton Card, Bento Metric Card, Mobile Sticky WhatsApp Conversion Bar, Interactive Client ROI Slider).",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "query": {"type": "string", "description": "Component search term or keyword (e.g. skeleton, bento, whatsapp, roi)"},
+                        "component_id": {"type": "string", "description": "Optional direct component ID (e.g. COMP-01, COMP-03)"}
+                    }
+                }
             }
         ]
 
@@ -405,6 +463,51 @@ class ZobarMCPServer:
         elif name == "generate_evolutionary_design":
             domain_context = args.get("domain_context", "Modern Enterprise Application")
             payload = generate_evolutionary_design(domain_context=domain_context)
+
+        elif name == "analyze_human_delight":
+            feat = args.get("feature_or_page", "Main Landing Page Funnel")
+            invites = float(args.get("invites_per_user", 2.5))
+            conv = float(args.get("invitee_conversion_rate", 0.35))
+            psych = analyze_user_psychology_and_delight(feat)
+            viral = calculate_viral_k_factor(invites, conv)
+            payload = {
+                "psychology_analysis": psych,
+                "viral_k_factor": viral
+            }
+
+        elif name == "generate_client_agency_pitch":
+            biz = args.get("target_business", "Prospective Client")
+            niche = args.get("niche", "clinic")
+            web = args.get("client_website", "example.com")
+            proposal = generate_cold_audit_proposal(biz, niche_key=niche, client_website=web)
+            monthly_fee = float(proposal["niche_data"]["monthly_retainer_usd"])
+            growth = calculate_agency_retainer_growth(client_count=10, avg_monthly_fee=monthly_fee)
+            payload = {
+                "client_proposal": proposal,
+                "agency_10_client_growth_model": growth
+            }
+
+        elif name == "manage_skills_and_mcp":
+            action = args.get("action", "search")
+            query = args.get("query", "browser")
+            if action == "search":
+                payload = {"matched_skills": search_ecosystem_skills(query)}
+            elif action == "scaffold":
+                payload = synthesize_new_skill_scaffold(skill_name=query, skill_description=f"Automated skill for {query}")
+            elif action == "execute_command":
+                payload = execute_terminal_mcp_command(command=query)
+            else:
+                raise ValueError(f"Unknown action: {action}")
+
+        elif name == "get_free_component_snippet":
+            comp_id = args.get("component_id")
+            query = args.get("query", "")
+            if comp_id:
+                comp = self.components_engine.get_component_by_id(comp_id)
+                payload = {"component": comp} if comp else {"error": f"Component ID '{comp_id}' not found."}
+            else:
+                matches = self.components_engine.search_components(query)
+                payload = {"query": query, "count": len(matches), "components": matches}
 
         else:
             raise ValueError(f"Unknown tool name: {name}")

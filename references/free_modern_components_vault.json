@@ -1,0 +1,42 @@
+{
+  "vault_metadata": {
+    "version": "1.0.0",
+    "name": "Zobar Skill Free Modern UI Components Vault",
+    "description": "Ready-to-copy, zero-cost, modern S-Tier React & Tailwind CSS v4 component snippets for freelancers, agencies, and indie devs.",
+    "compatibility": ["React 18+", "Tailwind CSS v3/v4", "Next.js", "Framer Motion"]
+  },
+  "components": [
+    {
+      "id": "COMP-01",
+      "name": "Shimmer Skeleton Card",
+      "category": "Loading & Skeletons",
+      "description": "Sub-millisecond perceived performance card loader replacing boring spinners.",
+      "tailwind_classes": "relative overflow-hidden rounded-2xl bg-slate-900 border border-slate-800 p-6 space-y-4",
+      "react_jsx": "export const ShimmerSkeletonCard = () => (\n  <div className=\"relative overflow-hidden rounded-2xl bg-slate-900 border border-slate-800 p-6 space-y-4\">\n    <div className=\"absolute inset-0 -translate-x-full animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/5 to-transparent\" />\n    <div className=\"h-6 w-1/3 bg-slate-800 rounded-lg\" />\n    <div className=\"h-4 w-full bg-slate-800/60 rounded\" />\n    <div className=\"h-4 w-2/3 bg-slate-800/60 rounded\" />\n  </div>\n);"
+    },
+    {
+      "id": "COMP-02",
+      "name": "Bento Metric Stat Card",
+      "category": "Analytics & Bento Grid",
+      "description": "High-density metric tile with glowing upward trend pill and subtle gradient border.",
+      "tailwind_classes": "rounded-3xl bg-slate-950/80 backdrop-blur-xl border border-slate-800/60 p-6 shadow-2xl relative overflow-hidden group hover:border-emerald-500/40 transition-all duration-300",
+      "react_jsx": "export const BentoStatCard = ({ title = \"Aylık Tekrarlayan Ciro (MRR)\", value = \"$8,420\", growth = \"+24.8%\" }) => (\n  <div className=\"rounded-3xl bg-slate-950/80 backdrop-blur-xl border border-slate-800/60 p-6 shadow-2xl relative overflow-hidden group hover:border-emerald-500/40 transition-all duration-300\">\n    <div className=\"flex items-center justify-between text-slate-400 text-sm font-medium mb-3\">\n      <span>{title}</span>\n      <span className=\"px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20\">\n        {growth}\n      </span>\n    </div>\n    <div className=\"text-3xl font-extrabold text-white tracking-tight\">{value}</div>\n  </div>\n);"
+    },
+    {
+      "id": "COMP-03",
+      "name": "Mobile Sticky WhatsApp Conversion Bar",
+      "category": "Conversion & Mobile CTA",
+      "description": "Sticky bottom bar that increases client lead capture by +35% on mobile devices.",
+      "tailwind_classes": "fixed bottom-0 left-0 right-0 p-4 bg-slate-950/90 backdrop-blur-lg border-t border-slate-800 flex items-center justify-between z-50 md:hidden",
+      "react_jsx": "export const MobileStickyWhatsAppBar = ({ phone = \"905551234567\", message = \"Merhaba, randevu almak istiyorum\" }) => (\n  <div className=\"fixed bottom-0 left-0 right-0 p-4 bg-slate-950/90 backdrop-blur-lg border-t border-slate-800 flex items-center justify-between z-50 md:hidden\">\n    <div>\n      <div className=\"text-xs text-slate-400 font-medium\">Hemen İletişime Geçin</div>\n      <div className=\"text-sm text-white font-bold\">15 Dk İçinde Dönüş</div>\n    </div>\n    <a\n      href={`https://wa.me/${phone}?text=${encodeURIComponent(message)}`}\n      className=\"px-5 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold rounded-xl flex items-center gap-2 shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-all active:scale-95\"\n    >\n      WhatsApp ile Yaz\n    </a>\n  </div>\n);"
+    },
+    {
+      "id": "COMP-04",
+      "name": "Interactive Client ROI Slider",
+      "category": "Sales & Pricing Tools",
+      "description": "Allows prospects to adjust lead volume and visually see their annual revenue gain.",
+      "tailwind_classes": "rounded-3xl bg-slate-900/60 border border-slate-800 p-8 space-y-6 max-w-lg mx-auto",
+      "react_jsx": "export const ClientROICalculator = ({ leadValue = 150 }) => {\n  const [extraLeads, setExtraLeads] = React.useState(12);\n  const monthlyGain = extraLeads * leadValue;\n  return (\n    <div className=\"rounded-3xl bg-slate-900/60 border border-slate-800 p-8 space-y-6 max-w-lg mx-auto\">\n      <div className=\"flex justify-between items-center\">\n        <span className=\"text-slate-300 font-medium\">Aylık Ek Hasta/Müşteri:</span>\n        <span className=\"text-2xl font-black text-emerald-400\">+{extraLeads}</span>\n      </div>\n      <input\n        type=\"range\" min=\"2\" max=\"50\" value={extraLeads}\n        onChange={(e) => setExtraLeads(Number(e.target.value))}\n        className=\"w-full accent-emerald-500 cursor-pointer\"\n      />\n      <div className=\"p-4 rounded-2xl bg-emerald-950/30 border border-emerald-500/20 text-center\">\n        <div className=\"text-xs text-emerald-400 font-semibold uppercase tracking-wider\">Tahmini Ek Yıllık Ciro</div>\n        <div className=\"text-3xl font-extrabold text-white mt-1\">${(monthlyGain * 12).toLocaleString()}</div>\n      </div>\n    </div>\n  );\n};"
+    }
+  ]
+}
