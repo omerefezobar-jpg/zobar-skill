@@ -46,12 +46,34 @@ Geleneksel statik kod analizi (SonarQube, Snyk vb.) araçları reaktiftir: Hatay
 
 ---
 
-## 🛠️ 5. Teknik Mimari & UI/UX Bileşenleri
-- **Çekirdek Dil (Core Engine):** **Rust** (Tree-sitter ile AST parsing, bellek güvenliği).
-- **Ajan Orkestrasyonu:** **Go** (Yüksek concurrency, goroutine tabanlı mikro-servis yönetimi).
-- **UI / UX Arayüzü:** 
-  - **Tauri + React + Tailwind + Radix UI**: Hafif, native masaüstü performansı.
-  - **Monaco Editor / Canvas**: Kod diff'lerini 60 FPS gösteren arayüz.
+## 🛠️ 5. Teknik Mimari, Matematiksel Sistem Modellemesi & UI/UX
+
+### 5.1. Donanım Tavanı Analizi (Berkeley Roofline Model)
+- **İş Yükü:** AST Ayrıştırma & CFG (Control Flow Graph) Oluşturma.
+- **Parametreler:** 100 Milyon AST düğümü, $5 \times 10^9$ FLOP, $8 \times 10^8$ Byte RAM transferi.
+- **Aritmetik Yoğunluk:** $I = \frac{5 \times 10^9}{8 \times 10^8} = 6.25 \text{ FLOP/Byte}$.
+- **Darboğaz Sınıflandırması:** `MEMORY_BANDWIDTH_BOUND` (Apple M3 Max ve RTX 4090 bellek bant genişliği sınırında).
+- **Mühendislik Kararı:** Bellek kopyalamayı (memory copy) sıfırlamak için Rust `bumpalo` arena bellek ayırıcısı ve bitişik bellek dizileri (ECS SoA) kullanılmıştır.
+
+### 5.2. Kuyruk Teorisi ve Yanıt Süresi SLA'sı (Little's Law & M/M/1)
+- **Varış Hızı ($\lambda$):** 800 istek/saniye (Eşzamanlı CI/CD Git webhook akışı).
+- **Servis Kapasitesi ($\mu$):** 1.000 istek/saniye (Rust çoklu iş parçacıklı işçi havuzu).
+- **Sistem Doluluğu ($\rho$):** $\rho = \frac{\lambda}{\mu} = \frac{800}{1000} = 0.80$ (%80).
+- **Ortalama Yanıt Gecikmesi ($W$):** $W = \frac{1}{\mu - \lambda} = \frac{1}{200} = 0.005\text{s} = \mathbf{5.00\text{ ms}}$.
+- **Ortalama Kuyruk Derinliği ($L$):** $L = \lambda W = 800 \times 0.005 = \mathbf{4.00\text{ istek}}$.
+- **P95 / P99 Kuyruk Gecikmesi:** $P95 = 14.98\text{ ms}$, $P99 = 23.03\text{ ms}$ (Tüm kuyruklar $<25\text{ms}$ kurumsal SLA içindedir).
+
+### 5.3. Paralellik Ölçeklenmesi (Amdahl's Law)
+- **Paralellenebilir Kısım ($p$):** %94 (AST parsing ve tip kontrolü); %6 seri (Disk I/O ve PR commit yazımı).
+- **32-Çekirdekli AMD EPYC Hızlanması:** $S(32) = \frac{1}{(1 - 0.94) + \frac{0.94}{32}} = \mathbf{11.2\times}$ kat hızlanma.
+- **Teorik Asimptotik Tavan:** $S(\infty) = \frac{1}{1 - 0.94} = 16.67\times$.
+
+### 5.4. S-Tier Arayüz, Bento Grid & Apple Yay Fiziği (Spring Physics)
+- **Yerleşim:** 12-kolonlu responsive Bento Grid (`grid-cols-12 gap-4 auto-rows-[160px]`).
+- **Mikro Etkileşimler:** Apple HIG standartlarında kritik sönümlü (Critically Damped) 2. Derece Diferansiyel Denklem:
+  $$m \frac{d^2x}{dt^2} + c \frac{dx}{dt} + k x = 0$$
+  - $m = 1.0$, $k = 180.0$, $c = 26.83$ $\rightarrow$ Sönüm Oranı $\zeta = \frac{c}{2\sqrt{mk}} = \mathbf{1.00}$ (Sıfır salınımlı, 18 karede sarsıntısız oturan modal açılış fiziği).
+- **Canlı Bileşen Referansları:** [Aceternity UI Bento Grid](https://ui.aceternity.com), [Shadcn Dialog](https://ui.shadcn.com), [Lucide Git Icons](https://lucide.dev).
 
 ---
 

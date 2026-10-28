@@ -44,6 +44,8 @@ class SemanticCache:
             self.cache_file = os.path.join(base_dir, "semantic_cache_store.json")
             
         self.entries: List[Dict[str, Any]] = []
+        self.exact_map: Dict[str, Dict[str, Any]] = {}
+        self.inverted_index: Dict[str, List[int]] = {}
         self.stats = {
             "total_queries": 0,
             "cache_hits": 0,
@@ -52,6 +54,19 @@ class SemanticCache:
             "total_time_saved_ms": 0.0,
         }
         self.load()
+
+    def _reindex(self) -> None:
+        self.exact_map.clear()
+        self.inverted_index.clear()
+        for idx, entry in enumerate(self.entries):
+            q_clean = entry.get("query", "").strip().lower()
+            if q_clean:
+                self.exact_map[q_clean] = entry
+            vec = entry.get("vector", {})
+            for term in vec.keys():
+                if term not in self.inverted_index:
+                    self.inverted_index[term] = []
+                self.inverted_index[term].append(idx)
 
     def _tokenize(self, text: str) -> List[Tuple[str, float]]:
         cleaned = re.sub(r"[^\w\s]", " ", text.lower(), flags=re.UNICODE)
@@ -104,6 +119,7 @@ class SemanticCache:
                     self.stats = data.get("stats", self.stats)
             except Exception:
                 self.entries = []
+        self._reindex()
 
     def save(self) -> None:
         try:
@@ -121,20 +137,51 @@ class SemanticCache:
                 )
         except Exception:
             pass
+        self._reindex()
 
     def get(self, query: str) -> Optional[Dict[str, Any]]:
         start_time = time.perf_counter()
         self.stats["total_queries"] += 1
-        
+        q_clean = query.strip().lower()
+
+        # Fast-Path 1: Exact Hash Map Match (O(1) < 0.005ms)
+        if q_clean in self.exact_map:
+            best_entry = self.exact_map[q_clean]
+            latency_ms = (time.perf_counter() - start_time) * 1000.0
+            self.stats["cache_hits"] += 1
+            saved_usd = best_entry.get("cost_saved_usd", self.default_cost_per_query_usd)
+            time_saved_ms = max(best_entry.get("remote_latency_ms", 1200.0) - latency_ms, 0.0)
+            self.stats["total_saved_usd"] += saved_usd
+            self.stats["total_time_saved_ms"] += time_saved_ms
+            best_entry["hit_count"] = best_entry.get("hit_count", 0) + 1
+            best_entry["last_hit_at"] = time.time()
+            return {
+                "matched": True,
+                "similarity": 1.0,
+                "response": best_entry["response"],
+                "source_query": best_entry["query"],
+                "cache_latency_ms": round(latency_ms, 3),
+                "saved_usd": round(saved_usd, 4),
+                "metadata": best_entry.get("metadata", {}),
+            }
+
+        # Fast-Path 2: Inverted Index Filtered Cosine Vector Similarity
         query_vec = self._compute_tf_vector(query)
         if not query_vec:
             self.stats["cache_misses"] += 1
             return None
 
+        # Candidate selection: Only entries sharing at least one token with query
+        candidate_indices = set()
+        for term in query_vec.keys():
+            if term in self.inverted_index:
+                candidate_indices.update(self.inverted_index[term])
+
         best_score = 0.0
         best_entry: Optional[Dict[str, Any]] = None
 
-        for entry in self.entries:
+        for idx in candidate_indices:
+            entry = self.entries[idx]
             cached_vec = entry.get("vector")
             if not cached_vec:
                 continue

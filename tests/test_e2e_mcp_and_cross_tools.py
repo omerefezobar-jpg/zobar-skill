@@ -80,6 +80,7 @@ class TestE2EMCPAndCrossTools(unittest.TestCase):
         self.assertGreaterEqual(len(tools), 8)
 
         tool_names = [t["name"] for t in tools]
+        self.assertGreaterEqual(len(tools), 10)
         self.assertIn("semantic_cache_query", tool_names)
         self.assertIn("smart_route", tool_names)
         self.assertIn("audit_supabase_sql", tool_names)
@@ -88,6 +89,8 @@ class TestE2EMCPAndCrossTools(unittest.TestCase):
         self.assertIn("simulate_unit_economics", tool_names)
         self.assertIn("generate_image_prompt", tool_names)
         self.assertIn("step_ecs_simulation", tool_names)
+        self.assertIn("search_asset_vault", tool_names)
+        self.assertIn("calculate_systems_math", tool_names)
 
     def test_03_tool_call_smart_route_execution(self):
         req = {
@@ -204,6 +207,26 @@ class TestE2EMCPAndCrossTools(unittest.TestCase):
         unknown_method = {"jsonrpc": "2.0", "id": 99, "method": "non_existent_method"}
         resp2 = self.send_rpc(unknown_method)
         self.assertEqual(resp2["error"]["code"], -32601)
+
+    def test_08_calculate_systems_math_e2e(self):
+        req = {
+            "jsonrpc": "2.0",
+            "id": 88,
+            "method": "tools/call",
+            "params": {
+                "name": "calculate_systems_math",
+                "arguments": {
+                    "math_type": "queueing",
+                    "parameters": {"arrival_rate_lambda": 350.0, "service_rate_mu": 500.0}
+                }
+            }
+        }
+        resp = self.send_rpc(req)
+        self.assertEqual(resp["id"], 88)
+        content = json.loads(resp["result"]["content"][0]["text"])
+        self.assertEqual(content["tool_status"], "SUCCESS")
+        self.assertEqual(content["result"]["system_status"], "STABLE")
+        self.assertLess(content["result"]["average_latency_ms"], 10.0)
 
 
 if __name__ == "__main__":

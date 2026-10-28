@@ -33,6 +33,7 @@ from scripts.unit_economics_investor_simulator import UnitEconomicsSimulator
 from scripts.image_prompt_synthesizer import ImagePromptSynthesizer
 from scripts.ecs_game_engine import ECSWorld, DeterministicGameLoop
 from scripts.query_asset_vault import AssetVaultQueryEngine
+from scripts.systems_math_engine import SystemsMathEngine
 
 
 class ZobarMCPServer:
@@ -161,6 +162,25 @@ class ZobarMCPServer:
                         "preferred_format": {"type": "string", "description": "Optional file format (GLTF, FBX, React, PNG, WAV)"}
                     }
                 }
+            },
+            {
+                "name": "calculate_systems_math",
+                "description": "Computes rigorous mathematical models: Berkeley Roofline (memory vs compute bound), Queueing Theory (M/M/1 Little's law tail latency), Amdahl speedup, Spring physics ODE, and Kelly Criterion.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "math_type": {
+                            "type": "string",
+                            "enum": ["roofline", "queueing", "amdahl", "spring_physics", "kelly"],
+                            "description": "The mathematical model to compute"
+                        },
+                        "parameters": {
+                            "type": "object",
+                            "description": "Parameters for the chosen calculation"
+                        }
+                    },
+                    "required": ["math_type"]
+                }
             }
         ]
 
@@ -237,6 +257,42 @@ class ZobarMCPServer:
                 "matches_found": len(matches),
                 "results": matches,
             }
+
+        elif name == "calculate_systems_math":
+            mtype = args.get("math_type", "roofline")
+            p = args.get("parameters", {})
+            if mtype == "roofline":
+                payload = SystemsMathEngine.calculate_roofline_analysis(
+                    total_flops=float(p.get("total_flops", 1e12)),
+                    total_bytes_transferred=float(p.get("total_bytes_transferred", 5e10)),
+                    hardware_target=p.get("hardware_target", "nvidia_a100_80gb")
+                )
+            elif mtype == "queueing":
+                payload = SystemsMathEngine.calculate_queueing_latency(
+                    arrival_rate_lambda=float(p.get("arrival_rate_lambda", 400.0)),
+                    service_rate_mu=float(p.get("service_rate_mu", 500.0)),
+                    concurrency_channels_c=int(p.get("concurrency_channels_c", 1))
+                )
+            elif mtype == "amdahl":
+                payload = SystemsMathEngine.calculate_amdahl_speedup(
+                    parallel_fraction_p=float(p.get("parallel_fraction_p", 0.90)),
+                    processor_cores_s=int(p.get("processor_cores_s", 16))
+                )
+            elif mtype == "spring_physics":
+                payload = SystemsMathEngine.calculate_spring_physics(
+                    mass_m=float(p.get("mass_m", 1.0)),
+                    stiffness_k=float(p.get("stiffness_k", 180.0)),
+                    damping_c=float(p.get("damping_c", 12.0)),
+                    initial_displacement=float(p.get("initial_displacement", 1.0))
+                )
+            elif mtype == "kelly":
+                payload = SystemsMathEngine.calculate_kelly_capital_allocation(
+                    win_probability_p=float(p.get("win_probability_p", 0.40)),
+                    upside_downside_ratio_b=float(p.get("upside_downside_ratio_b", 4.0)),
+                    bankroll_or_time_budget_usd=float(p.get("bankroll_or_time_budget_usd", 10000.0))
+                )
+            else:
+                raise ValueError(f"Unknown math_type: {mtype}")
 
         else:
             raise ValueError(f"Unknown tool name: {name}")
