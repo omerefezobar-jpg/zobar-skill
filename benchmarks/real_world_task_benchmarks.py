@@ -166,18 +166,35 @@ def run_real_world_benchmarks(version_tag: str = CURRENT_VERSION) -> Dict[str, A
         if execution_passed:
             sandbox_execution_passes += 1
 
-        # Metric C: Research Citation Presence
-        has_citations = stages["1_academic_ground_truth"]["curricula_count"] > 0
-        if has_citations:
+        # Metric C: Semantic Academic Research & Mental Model Grounding
+        acad_stage = stages["1_academic_ground_truth"]
+        mental_model = acad_stage.get("sample_mental_model", "")
+        curricula_count = acad_stage.get("curricula_count", 0)
+        papers_count = acad_stage.get("papers_count", 0)
+
+        # Non-tautological test: requires verified university curricula AND substantive mental model
+        is_research_grounded = (
+            curricula_count >= 1 and
+            len(mental_model) >= 20 and
+            mental_model != "N/A"
+        )
+        if is_research_grounded:
             research_citations_found += 1
 
-        # Metric D: Regulatory Classification Accuracy
-        reg_tier = stages["4_regulatory_compliance"]["classification_tier"]
+        # Metric D: Regulatory Classification & Exemption Accuracy
+        reg_stage = stages["4_regulatory_compliance"]
+        reg_tier = reg_stage.get("classification_tier", "")
+        stat_basis = reg_stage.get("statutory_basis", "")
         reg_pass = False
+
         if task["expected_risk_category"] == "HIGH_RISK":
             reg_pass = "Yüksek Riskli" in reg_tier or "Kritik" in reg_tier
         elif task["expected_risk_category"] == "LEGAL_EXEMPTION":
-            reg_pass = True  # Reverse engineering clean room has statutory exemption mapping
+            # Audits that Article 2(8) R&D exemption or Copyright Directive 2019/790 was spotted
+            reg_pass = (
+                ("Muafiyet" in reg_tier or "Minimal" in reg_tier or "Geliştirici" in reg_tier) and
+                ("2(8)" in stat_basis or "2019/790" in str(reg_stage.get("data_privacy", [])))
+            )
         else:
             reg_pass = "Minimal" in reg_tier or "Standart" in reg_tier or "Düşük" in reg_tier
         

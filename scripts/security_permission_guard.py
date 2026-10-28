@@ -28,6 +28,7 @@ if hasattr(sys.stdout, "reconfigure"):
 COMMAND_ALLOWLIST = {
     "git": ["status", "diff", "log", "branch", "rev-parse", "show"],
     "python": ["-m unittest", "-c", "scripts/", "--version", "-V"],
+    "python3": ["-m unittest", "-c", "scripts/", "--version", "-V"],
     "node": ["--version", "-v"],
     "npm": ["test", "run", "lint", "--version", "-v"],
     "dir": [],
@@ -60,6 +61,16 @@ class SecurityPermissionGuard:
         Guarantees path is strictly confined within workspace_root.
         Prevents directory traversal attacks (e.g. ../../Windows or /etc/passwd).
         """
+        if not target_path or not target_path.strip():
+            raise SecuritySandboxViolation("Boş dosya yolu reddedildi.")
+
+        # Cross-platform drive specifier rejection on non-Windows OS (e.g. C:\Windows on Linux)
+        if re.match(r"^[a-zA-Z]:", target_path):
+            if os.name != "nt":
+                raise SecuritySandboxViolation(
+                    f"[GÜVENLİK İHLALİ] Harici sürücü yolu POSIX ortamında reddedildi: '{target_path}'"
+                )
+
         # Resolve absolute normalized path
         if not os.path.isabs(target_path):
             resolved = os.path.abspath(os.path.join(self.workspace_root, target_path))
@@ -102,6 +113,11 @@ class SecurityPermissionGuard:
             return False, "Komut belirteçleri boş.", []
 
         base_bin = os.path.basename(tokens[0]).lower().replace(".exe", "")
+        # Normalize python3 variants (python3.10, python3.11, python3.12 -> python3)
+        if base_bin.startswith("python3"):
+            base_bin = "python3"
+        elif base_bin.startswith("python"):
+            base_bin = "python"
 
         # 3. Blocked Command Check
         if base_bin in BLOCKED_COMMANDS:
@@ -140,8 +156,15 @@ class SecurityPermissionGuard:
 
         start_time = time.perf_counter()
         try:
+            # Fallback for Ubuntu Linux when python binary is not aliased
+            exec_tokens = list(tokens)
+            if exec_tokens and exec_tokens[0] == "python" and os.name != "nt":
+                import shutil
+                if not shutil.which("python") and shutil.which("python3"):
+                    exec_tokens[0] = "python3"
+
             proc = subprocess.run(
-                tokens,
+                exec_tokens,
                 cwd=self.workspace_root,
                 shell=False,  # CRITICAL: shell=False enforces OS-level binary execution without shell expansion
                 capture_output=True,

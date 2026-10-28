@@ -337,6 +337,8 @@ export function {slug}Widget() {{
                 },
                 "4_regulatory_compliance": {
                     "classification_tier": reg_tier,
+                    "statutory_basis": compliance_data.get("eu_ai_act", {}).get("statutory_basis", ""),
+                    "data_privacy": compliance_data.get("data_privacy", []),
                     "legal_counsel_required": compliance_data.get("eu_ai_act", {}).get("requires_expert_counsel", False)
                 },
                 "5_systems_math_and_architecture": {
