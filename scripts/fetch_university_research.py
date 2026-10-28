@@ -13,9 +13,11 @@ Citations and peer-reviewed status are tracked to establish empirical credibilit
 import sys
 import re
 import json
+import time
 import urllib.request
 import urllib.parse
 import argparse
+from typing import Dict, List, Any, Optional, Tuple
 
 # Ensure UTF-8 output across all systems
 if hasattr(sys.stdout, "reconfigure"):
@@ -822,21 +824,33 @@ def find_university_curriculum(domain_query: str):
         "research_labs": matched_labs
     }
 
+_ACADEMIC_MEM_CACHE: Dict[str, Tuple[float, Any]] = {}
+
 def fetch_comprehensive_academic_ground_truth(topic: str, max_papers: int = 3):
     """
     Consolidated Phase 1 caller providing OpenAlex peer-reviewed papers
     combined with university syllabi and research laboratory mappings.
+    Includes in-memory TTL caching for sub-millisecond repeated queries.
     """
+    cache_key = f"{topic.lower().strip()}_{max_papers}"
+    now = time.time()
+    if cache_key in _ACADEMIC_MEM_CACHE:
+        ts, cached_val = _ACADEMIC_MEM_CACHE[cache_key]
+        if now - ts < 600:
+            return cached_val
+
     papers_res = fetch_openalex_papers(topic, max_results=max_papers)
     uni_res = find_university_curriculum(topic)
 
-    return {
+    res = {
         "topic": topic,
         "peer_reviewed_papers": papers_res.get("papers", []),
         "scholar_status": papers_res.get("status", "unknown"),
         "curriculum": uni_res["curriculum"],
         "research_labs": uni_res["research_labs"]
     }
+    _ACADEMIC_MEM_CACHE[cache_key] = (now, res)
+    return res
 
 def main():
     parser = argparse.ArgumentParser(description="Phase 1 University Curriculum & Peer-Reviewed Academic Engine")

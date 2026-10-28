@@ -41,3 +41,6 @@
 {"tick": 41, "timestamp_utc": "2026-10-28T23:41:36Z", "duration_ms": 1161.42, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
 {"tick": 42, "timestamp_utc": "2026-10-28T23:41:38Z", "duration_ms": 848.87, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
 {"tick": 43, "timestamp_utc": "2026-10-28T23:41:40Z", "duration_ms": 691.92, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": false}
+{"tick": 44, "timestamp_utc": "2026-10-28T23:47:34Z", "duration_ms": 1024.2, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
+{"tick": 45, "timestamp_utc": "2026-10-28T23:47:36Z", "duration_ms": 769.61, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
+{"tick": 46, "timestamp_utc": "2026-10-28T23:47:38Z", "duration_ms": 705.99, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": false}

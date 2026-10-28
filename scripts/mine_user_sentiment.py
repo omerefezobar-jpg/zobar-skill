@@ -242,11 +242,24 @@ def search_reddit_sentiment(query: str, max_comments: int = 4):
     results.sort(key=lambda x: x["friction_score"], reverse=True)
     return {"status": "ok", "comments": results[:max_comments]}
 
+import time
+from typing import Dict, Tuple, Any
+
+_SENTIMENT_MEM_CACHE: Dict[str, Tuple[float, Dict[str, Any]]] = {}
+
 def search_sentiment(query: str, max_comments: int = 5):
     """
     Queries both Hacker News and Reddit, reporting per-source health,
     clause-level friction scores, and primary pain points.
+    Includes in-memory TTL caching for sub-millisecond execution.
     """
+    cache_key = f"{query.lower().strip()}_{max_comments}"
+    now = time.time()
+    if cache_key in _SENTIMENT_MEM_CACHE:
+        ts, cached_res = _SENTIMENT_MEM_CACHE[cache_key]
+        if now - ts < 600:
+            return cached_res
+
     hn_res = search_hn_sentiment(query, max_comments=max_comments)
     reddit_res = search_reddit_sentiment(query, max_comments=max_comments)
 
@@ -267,10 +280,12 @@ def search_sentiment(query: str, max_comments: int = 5):
 
     combined.sort(key=lambda x: x["friction_score"], reverse=True)
 
-    return {
+    result = {
         "comments": combined[:max_comments],
         "summary": " | ".join(sources_status)
     }
+    _SENTIMENT_MEM_CACHE[cache_key] = (now, result)
+    return result
 
 def main():
     parser = argparse.ArgumentParser(description="Multi-source user sentiment and friction miner.")

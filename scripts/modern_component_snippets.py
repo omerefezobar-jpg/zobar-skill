@@ -8,13 +8,14 @@ import sys
 import os
 import json
 import argparse
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any, Optional, Tuple
 
 # Ensure UTF-8 stdout
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
 VAULT_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "references", "free_modern_components_vault.json"))
+_COMPONENTS_MEM_CACHE: Dict[str, Tuple[float, Any]] = {}
 
 class ModernComponentsEngine:
     def __init__(self, vault_path: Optional[str] = None):
@@ -24,8 +25,15 @@ class ModernComponentsEngine:
     def _load(self) -> Dict[str, Any]:
         if os.path.exists(self.path):
             try:
+                mtime = os.path.getmtime(self.path)
+                if self.path in _COMPONENTS_MEM_CACHE:
+                    cached_mtime, cached_data = _COMPONENTS_MEM_CACHE[self.path]
+                    if cached_mtime == mtime:
+                        return cached_data
                 with open(self.path, "r", encoding="utf-8") as f:
-                    return json.load(f)
+                    data = json.load(f)
+                    _COMPONENTS_MEM_CACHE[self.path] = (mtime, data)
+                    return data
             except Exception:
                 pass
         return {"components": []}

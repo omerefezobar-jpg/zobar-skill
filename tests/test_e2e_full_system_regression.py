@@ -54,6 +54,8 @@ class TestE2EFullSystemRegression(unittest.TestCase):
         self.assertIn("orchestration_topic", result)
         self.assertIn("pipeline_stages", result)
         self.assertIn("prototype_code", result)
+        self.assertIn("finops_telemetry", result)
+        self.assertTrue(result["finops_telemetry"]["sub_millisecond_cache_ready"])
 
         stages = result["pipeline_stages"]
         stage_keys = [

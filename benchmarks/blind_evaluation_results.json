@@ -14,7 +14,7 @@
       "ast_syntax_passed": true,
       "security_sandbox_passed": true,
       "evidence_quality_score": 75.0,
-      "latency_ms": 0.09,
+      "latency_ms": 0.11,
       "overall_passed": true,
       "details": {
         "ast_error": null,
@@ -30,7 +30,7 @@
       "ast_syntax_passed": true,
       "security_sandbox_passed": true,
       "evidence_quality_score": 75.0,
-      "latency_ms": 0.04,
+      "latency_ms": 0.05,
       "overall_passed": true,
       "details": {
         "ast_error": null,
@@ -190,7 +190,7 @@
       "ast_syntax_passed": true,
       "security_sandbox_passed": true,
       "evidence_quality_score": 75.0,
-      "latency_ms": 0.04,
+      "latency_ms": 0.02,
       "overall_passed": true,
       "details": {
         "ast_error": null,

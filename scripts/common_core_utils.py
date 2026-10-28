@@ -41,14 +41,23 @@ def tokenize_and_normalize(text: str, min_len: int = 2) -> Set[str]:
     words = re.findall(r"[a-zA-Z0-9çğıöşüÇĞİÖŞÜ_]+", text.lower())
     return {w for w in words if w not in COMMON_STOP_WORDS and len(w) >= min_len}
 
-# 4. Safe JSON Loader
+# 4. Safe & Ultra-Fast In-Memory Cached JSON Loader
+_JSON_MEM_CACHE: Dict[str, Tuple[float, Any]] = {}
+
 def load_json_safe(filepath: str, default: Optional[Any] = None) -> Any:
-    """Loads JSON file with robust UTF-8 encoding and fallback handling."""
+    """Loads JSON file with mtime-based in-memory caching to eliminate redundant disk I/O."""
     if not os.path.exists(filepath):
         return default if default is not None else {}
     try:
+        mtime = os.path.getmtime(filepath)
+        if filepath in _JSON_MEM_CACHE:
+            cached_mtime, cached_data = _JSON_MEM_CACHE[filepath]
+            if cached_mtime == mtime:
+                return cached_data
         with open(filepath, "r", encoding="utf-8", errors="replace") as f:
-            return json.load(f)
+            data = json.load(f)
+            _JSON_MEM_CACHE[filepath] = (mtime, data)
+            return data
     except Exception:
         return default if default is not None else {}
 

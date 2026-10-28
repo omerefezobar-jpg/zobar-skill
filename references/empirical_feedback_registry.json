@@ -463,6 +463,123 @@
       "latency_ms": 30.8,
       "error_details": null,
       "timestamp": 1793230894.9754214
+    },
+    {
+      "task_id": "TASK-SUCC-0",
+      "category": "Testing",
+      "pattern_applied": "test_pattern_1793231250225",
+      "status": "PASS",
+      "latency_ms": 1.5,
+      "error_details": null,
+      "timestamp": 1793231250.225013
+    },
+    {
+      "task_id": "TASK-SUCC-1",
+      "category": "Testing",
+      "pattern_applied": "test_pattern_1793231250225",
+      "status": "PASS",
+      "latency_ms": 1.5,
+      "error_details": null,
+      "timestamp": 1793231250.2260132
+    },
+    {
+      "task_id": "TASK-SUCC-2",
+      "category": "Testing",
+      "pattern_applied": "test_pattern_1793231250225",
+      "status": "PASS",
+      "latency_ms": 1.5,
+      "error_details": null,
+      "timestamp": 1793231250.2270017
+    },
+    {
+      "task_id": "TASK-SUCC-3",
+      "category": "Testing",
+      "pattern_applied": "test_pattern_1793231250225",
+      "status": "PASS",
+      "latency_ms": 1.5,
+      "error_details": null,
+      "timestamp": 1793231250.2270017
+    },
+    {
+      "task_id": "TASK-SUCC-4",
+      "category": "Testing",
+      "pattern_applied": "test_pattern_1793231250225",
+      "status": "PASS",
+      "latency_ms": 1.5,
+      "error_details": null,
+      "timestamp": 1793231250.2279968
+    },
+    {
+      "task_id": "TASK-SUCC-5",
+      "category": "Testing",
+      "pattern_applied": "test_pattern_1793231250225",
+      "status": "PASS",
+      "latency_ms": 1.5,
+      "error_details": null,
+      "timestamp": 1793231250.2289965
+    },
+    {
+      "task_id": "TRIAL_253308",
+      "category": "industrial automation",
+      "pattern_applied": "lock_free_ringbuffer",
+      "status": "PASS",
+      "latency_ms": 30.8,
+      "error_details": null,
+      "timestamp": 1793231253.308334
+    },
+    {
+      "task_id": "TRIAL_275868",
+      "category": "developer tools & cloud ides",
+      "pattern_applied": "lock_free_ringbuffer",
+      "status": "PASS",
+      "latency_ms": 30.8,
+      "error_details": null,
+      "timestamp": 1793231275.8682222
+    },
+    {
+      "task_id": "TRIAL_278020",
+      "category": "industrial robotics & aerospace",
+      "pattern_applied": "lock_free_ringbuffer",
+      "status": "PASS",
+      "latency_ms": 30.8,
+      "error_details": null,
+      "timestamp": 1793231278.0203688
+    },
+    {
+      "task_id": "TRIAL_279761",
+      "category": "enterprise saas",
+      "pattern_applied": "lock_free_ringbuffer",
+      "status": "PASS",
+      "latency_ms": 30.8,
+      "error_details": null,
+      "timestamp": 1793231279.7611225
+    },
+    {
+      "task_id": "TRIAL_281792",
+      "category": "fintech & algorithmic trading",
+      "pattern_applied": "lock_free_ringbuffer",
+      "status": "PASS",
+      "latency_ms": 30.8,
+      "error_details": null,
+      "timestamp": 1793231281.7928011
+    },
+    {
+      "task_id": "TRIAL_284237",
+      "category": "healthcare & medtech",
+      "pattern_applied": "lock_free_ringbuffer",
+      "status": "PASS",
+      "latency_ms": 30.8,
+      "error_details": null,
+      "timestamp": 1793231284.2374797
+    },
+    {
+      "task_id": "TRIAL_285898",
+      "category": "cybersecurity & binary analysis",
+      "pattern_applied": "lock_free_ringbuffer",
+      "status": "PASS",
+      "latency_ms": 30.8,
+      "error_details": null,
+      "timestamp": 1793231285.8984594
     }
   ],
   "registered_patterns": [
@@ -473,6 +590,7 @@
     "monolithic_polling_sleep",
     "test_pattern_1793230829167",
     "test_pattern_1793230845774",
-    "test_pattern_1793230893055"
+    "test_pattern_1793230893055",
+    "test_pattern_1793231250225"
   ]
 }

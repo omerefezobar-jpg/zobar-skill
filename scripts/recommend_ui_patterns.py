@@ -10,6 +10,7 @@ import sys
 import os
 import json
 import argparse
+import functools
 
 # Ensure UTF-8 output across all systems
 if hasattr(sys.stdout, "reconfigure"):
@@ -17,8 +18,9 @@ if hasattr(sys.stdout, "reconfigure"):
 
 VAULT_PATH = os.path.join(os.path.dirname(__file__), "..", "references", "s_tier_design_vault.json")
 
+@functools.lru_cache(maxsize=2)
 def load_design_vault():
-    """Loads the 100+ S-Tier Design Vault JSON database."""
+    """Loads the 410+ S-Tier Design Vault JSON database with instant in-memory LRU caching."""
     if not os.path.exists(VAULT_PATH):
         return {"categories": []}
     with open(VAULT_PATH, "r", encoding="utf-8") as f:

@@ -13,8 +13,9 @@ Kategoriler:
 import os
 import sys
 import json
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List, Optional, Tuple
 
+_ASSET_MEM_CACHE: Dict[str, Tuple[float, Any]] = {}
 
 class AssetVaultQueryEngine:
     def __init__(self, vault_path: Optional[str] = None):
@@ -30,8 +31,15 @@ class AssetVaultQueryEngine:
     def load(self) -> None:
         if os.path.exists(self.vault_path):
             try:
+                mtime = os.path.getmtime(self.vault_path)
+                if self.vault_path in _ASSET_MEM_CACHE:
+                    cached_mtime, cached_data = _ASSET_MEM_CACHE[self.vault_path]
+                    if cached_mtime == mtime:
+                        self.data = cached_data
+                        return
                 with open(self.vault_path, "r", encoding="utf-8") as f:
                     self.data = json.load(f)
+                    _ASSET_MEM_CACHE[self.vault_path] = (mtime, self.data)
             except Exception:
                 pass
 
