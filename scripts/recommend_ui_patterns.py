@@ -34,13 +34,22 @@ def match_s_tier_patterns(query: str, max_results: int = 4):
     
     # Keyword domain affinity mapping
     domain_category_weights = {
+        "Heavy Pro Desktop & Creative Powerhouses": ["steam", "excel", "premiere", "blender", "vscode", "ableton", "unreal", "davinci", "photoshop", "autocad", "unity", "fl studio", "desktop", "timeline", "daw", "cad", "3d", "video editing", "workstation"],
+        "Heavy Grid & Spreadsheet Operating Systems": ["spreadsheet", "excel", "sheets", "airtable", "grid", "rows", "table", "cells", "calculation", "formula", "retool", "coda"],
+        "Gaming, Esports & Game Launchers": ["gaming", "game", "steam", "epic games", "riot", "esports", "tournament", "match", "bracket", "launcher", "speedrun", "roblox"],
         "Streaming & Immersive Entertainment": ["stream", "video", "media", "audio", "music", "movie", "film", "player", "watch", "content", "netflix", "spotify", "entertainment"],
         "Developer Tools & Cloud Infrastructure": ["developer", "code", "compiler", "ast", "cli", "terminal", "cloud", "infra", "git", "api", "database", "sql", "deploy", "linter", "parser", "telemetry", "devops", "linear", "vercel"],
+        "Developer Platforms, Cloud & Modern APIs": ["api", "postman", "docker", "kubernetes", "postgres", "redis", "sentry", "auth", "clerk", "resend", "neon", "turso"],
+        "Enterprise Data, Analytics & BI": ["analytics", "bi", "snowflake", "palantir", "grafana", "metrics", "tableau", "charts", "sql", "dashboard", "mixpanel", "posthog"],
+        "Security, Identity & Cloud Operations": ["security", "password", "firewall", "vpn", "zero trust", "crowdstrike", "tailscale", "audit", "vault", "1password", "bitwarden", "wiz"],
         "High-End FinTech & Banking": ["fintech", "finance", "bank", "pay", "credit", "money", "wallet", "crypto", "trading", "investment", "invoice", "spend", "treasury", "stripe", "ramp", "loan"],
         "Modern AI & Generative Intelligence": ["ai", "llm", "agent", "prompt", "model", "generative", "neural", "vision", "chat", "voice", "speech", "diffusion", "openai", "perplexity", "claude"],
         "Design, Creative & Collaborative Canvas": ["design", "canvas", "graphic", "vector", "creative", "draw", "ui", "ux", "figma", "framer", "pitch", "deck", "slide", "animation", "motion"],
         "Productivity, Notes & Workspace": ["note", "calendar", "task", "project", "doc", "team", "collaborat", "work", "schedule", "chat", "message", "slack", "notion", "amie"],
         "E-Commerce & High-End Brand Showcase": ["shop", "store", "commerce", "product", "cart", "brand", "retail", "shoes", "car", "apple", "nike", "airbnb", "checkout"],
+        "Luxury, Architecture & Industrial Design": ["luxury", "watch", "car", "porsche", "leica", "architecture", "furniture", "industrial", "rimowa", "rolex", "vitra"],
+        "Education, EdTech & Interactive Learning": ["learn", "course", "quiz", "student", "duolingo", "education", "practice", "leetcode", "khan academy", "edx", "coursera"],
+        "Modern Social, Creator Economy & Community": ["social", "creator", "community", "feed", "patreon", "twitter", "threads", "reddit", "donation", "product hunt", "gumroad"],
         "Design Systems & Component Libraries": ["component", "system", "token", "library", "primitive", "accessible", "radix", "tailwind", "shadcn", "theme", "dark mode"],
         "Web3, Decentralized & Crypto Ecosystems": ["web3", "crypto", "blockchain", "nft", "token", "defi", "swap", "solana", "ethereum", "wallet", "decentralized", "dao"],
         "Editorial, Media & Publishing": ["editorial", "article", "blog", "news", "read", "magazine", "post", "medium", "substack", "verge", "typography", "journal"]

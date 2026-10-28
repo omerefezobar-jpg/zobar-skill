@@ -227,11 +227,26 @@ class TestAutomatedArchitectureAndTRIZInventions(unittest.TestCase):
     def test_s_tier_design_vault_matching(self):
         from scripts.recommend_ui_patterns import match_s_tier_patterns
         res_stream = match_s_tier_patterns("video streaming cinema", max_results=2)
-        self.assertGreaterEqual(res_stream["total_vault_size"], 100)
+        self.assertGreaterEqual(res_stream["total_vault_size"], 200)
         self.assertTrue(any("Netflix" in s["name"] or "Spotify" in s["name"] for s in res_stream["matched_sites"]))
 
         res_fintech = match_s_tier_patterns("fintech payments banking", max_results=2)
         self.assertTrue(any("Stripe" in s["name"] or "Ramp" in s["name"] for s in res_fintech["matched_sites"]))
+
+    def test_heavy_app_architecture_blueprints(self):
+        from scripts.analyze_heavy_app_architecture import match_heavy_app_blueprint
+        res_steam = match_heavy_app_blueprint("steam game launcher")
+        self.assertGreaterEqual(len(res_steam["matched_blueprints"]), 1)
+        steam = res_steam["matched_blueprints"][0]
+        self.assertEqual(steam["app_name"], "Steam")
+        self.assertIn("CEF", steam["how_it_was_built"]["architecture"])
+        self.assertIn("Tauri", steam["how_we_build_it_10x_better"]["core_technology"])
+
+        res_excel = match_heavy_app_blueprint("excel spreadsheet formula grid")
+        self.assertGreaterEqual(len(res_excel["matched_blueprints"]), 1)
+        excel = res_excel["matched_blueprints"][0]
+        self.assertEqual(excel["app_name"], "Microsoft Excel")
+        self.assertIn("WebGPU", excel["how_we_build_it_10x_better"]["core_technology"])
 
     def test_phase_6_triz_invention_generation(self):
         inventions_data = generate_validated_inventions("Code Analysis")

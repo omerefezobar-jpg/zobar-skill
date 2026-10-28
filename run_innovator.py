@@ -224,6 +224,29 @@ def generate_dossier(topic: str, output_path: str = None, html_path: str = None)
             dossier_lines.append(f"- **Renk & Stil Tokenları:** Arka Plan: `{s['color_tokens']['background']}` | Vurgu: `{s['color_tokens']['accent']}`")
             dossier_lines.append(f"- **Önerilen UI Kütüphaneleri:** `{', '.join(s['recommended_libraries'])}`\n")
 
+    if arch.get("heavy_app_blueprints"):
+        dossier_lines.append("### 🏗️ Monolitik Ağır Uygulama Mühendislik Analizi & 10x Yeniden İnşa:")
+        for bp in arch["heavy_app_blueprints"]:
+            dossier_lines.append(f"#### [{bp['app_name']}]({bp['official_url']}) — *{bp['category']} ({bp['vendor']})*")
+            dossier_lines.append("##### ⚙️ Nasıl Yapılmış (Mevcut Mimari):")
+            hw = bp['how_it_was_built']
+            dossier_lines.append(f"- **Çekirdek Mimari:** {hw['architecture']}")
+            dossier_lines.append(f"- **Çalışma Zamanı (Runtime):** {hw['runtime']}")
+            dossier_lines.append(f"- **Render Motoru:** {hw['rendering']}")
+            dossier_lines.append(f"- **Süreçler Arası İletişim (IPC):** {hw['ipc']}")
+            dossier_lines.append("##### ⚠️ Yapısal Kör Noktalar & Zaaflar:")
+            for sb in bp['structural_blindspots']:
+                dossier_lines.append(f"- {sb}")
+            dossier_lines.append("##### 🚀 Biz Nasıl 10x Daha İyisini Yaparız (10x Blueprint):")
+            hw10 = bp['how_we_build_it_10x_better']
+            dossier_lines.append(f"- **Önerilen Çekirdek:** {hw10['core_technology']}")
+            dossier_lines.append(f"- **Bellek & RAM Optimizasyonu:** {hw10['memory_optimization']}")
+            dossier_lines.append(f"- **Render & Hesaplama Motoru:** {hw10['rendering_engine']}")
+            dossier_lines.append("##### 🧩 Önerilen Bileşen Mimarisi:")
+            for kc in bp['key_components']:
+                dossier_lines.append(f"- `{kc}`")
+            dossier_lines.append("")
+
     dossier_lines.append("---")
     dossier_lines.append("## 🚀 FAZ 6: TRIZ Radikal İcatları & Dinamik Doğrulama Kapısı")
     dossier_lines.append("> 📌 **Kanıt Ayrımı:** Dokümandaki TRL ve WTP değerleri alan kısıtlarına ve mevzuat zorluklarına göre dinamik olarak hesaplanmış olup deneysel geçerleme kapıları belirtilmiştir.\n")

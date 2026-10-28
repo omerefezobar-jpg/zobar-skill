@@ -3,8 +3,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![CI & Quality Gate](https://github.com/omerefezobar-jpg/zobar-skill/actions/workflows/ci.yml/badge.svg)](https://github.com/omerefezobar-jpg/zobar-skill/actions)
 [![Regression Suite](https://img.shields.io/badge/Regression%20Suite-20%2F20%20Passing%20(Zero%20Tolerance)-blue.svg)](./benchmarks/BENCHMARK_REPORT.md)
-[![Unit Tests](https://img.shields.io/badge/Unit%20Tests-22%2F22%20Passing-brightgreen.svg)](https://github.com/omerefezobar-jpg/zobar-skill/actions)
-[![S--Tier Design Vault](https://img.shields.io/badge/S--Tier%20Design%20Vault-104%20Sites-blueviolet.svg)](./references/s_tier_design_vault.json)
+[![Unit Tests](https://img.shields.io/badge/Unit%20Tests-23%2F23%20Passing-brightgreen.svg)](https://github.com/omerefezobar-jpg/zobar-skill/actions)
+[![S--Tier Design Vault](https://img.shields.io/badge/S--Tier%20Design%20Vault-202%20Sites-blueviolet.svg)](./references/s_tier_design_vault.json)
+[![Heavy Apps Blueprints](https://img.shields.io/badge/Pro%20Apps%2010x-Steam%20%7C%20Excel%20%7C%20Premiere-orange.svg)](./references/heavy_apps_engineering_blueprints.json)
 [![Python: 3.10+](https://img.shields.io/badge/Python-3.10+-3776AB.svg?logo=python&logoColor=white)](https://python.org)
 [![Security: XSS Hardened](https://img.shields.io/badge/Security-XSS%20Hardened%20(No%20Eval)-green.svg)](https://github.com/omerefezobar-jpg/zobar-skill)
 
@@ -20,7 +21,7 @@ Sıradan bir prompt veya yapay zeka asistanı afaki ve süslü laflar üretirken
 * 💬 **Tümce Düzeyinde Kullanıcı Sürtünmesi (Faz 2):** Hacker News ve Reddit topluluklarında karşıt bağlaçlar (*"but", "however", "ama"*) ve olumsuzlama ifadelerini (*"not slow and never crashed" = 0 puan*) tümce seviyesinde izole ederek gerçek acı noktalarını ağırlıklandırır.
 * ⚔️ **Hibrit Rakip Benchmark'ı (Faz 3):** Hem kurumsal/kapalı kaynaklı pazar liderlerinin (SonarQube, Snyk, Epic Systems, Confluent vb.) doğrulanmış fiyatlandırma modellerini hem de GitHub açık kaynak projelerinin canlı telemetrisini ve yayınlanmış npm/PyPI paket kayıtlarını birleştirir.
 * ⚖️ **Madde Bazlı Hukuki Zırh (Faz 4):** Google Patents öncelikli teknik (prior art) taraması yapar; **EU AI Act Madde 5(1) (Yasaklı), Madde 6 & Ek I/III (Yüksek Risk), Madde 50 (Şeffaflık), Madde 2(8) (Ar-Ge Muafiyeti)**, **MDR Kural 11 (Klinik vs İdari Ayrımı)** ve GDPR Madde 6/9/22 üzerinden madde bazlı regülasyon analizi sunar.
-* 🛠️ **Otomatik Sistem Mimarisi & 100+ S-Tier Tasarım Havuzu (Faz 5):** Bilişsel yükü sıfırlayan Tauri v2 + Radix UI ve yüksek performanslı Rust/Go çekirdek seçimini gerekçelendirir; **Netflix, Stripe, Linear, Apple, Spotify gibi 100+ S-Tier siteden** doğrudan tasarım paradigması, bileşen yapısı, mikro-etkileşimler ve renk tokenları haritalandırır.
+* 🛠️ **Otomatik Sistem Mimarisi & 200+ S-Tier Tasarım Havuzu (Faz 5):** Bilişsel yükü sıfırlayan Tauri v2 + Radix UI ve yüksek performanslı Rust/Go çekirdek seçimini gerekçelendirir; **Netflix, Stripe, Linear, Apple, Spotify gibi 200+ S-Tier siteden** doğrudan tasarım paradigması, bileşen yapısı, mikro-etkileşimler ve renk tokenları haritalandırır. Ayrıca **Steam, Excel, Premiere Pro, Blender, VS Code, Ableton Live, Unreal Engine 5** gibi devasa monolitik uygulamaların mimari analizini (*nasıl yapılmış, yapısal kör noktaları neler, biz nasıl 10x daha iyisini yaparız*) otomatik sunar.
 * 🚀 **TRIZ Radikal İcatları & Dinamik Doğrulama Kapısı (Faz 6):** Sistem çelişkilerini TRIZ prensipleriyle çözer. Üretilen her icat için **dinamik TRL seviyesi, TRL ilerleme kapısı, algoritmik ICE skoru, WTP hipotezi, 3 kritik hata modu ve Mermaid mimari şeması** otomatik üretilir.
 
 ---
@@ -85,7 +86,8 @@ zobar-skill/
 │   ├── search_prior_art.py           # Google Patents üzerinden ön patent & prior art tarayıcı
 │   ├── scan_regulations.py           # 20 senaryolu madde bazlı mevzuat screener (EU AI Act, MDR, GDPR)
 │   ├── synthesize_architecture.py    # Faz 5: Otomatik sistem mimarisi ve UI spesifikasyon motoru
-│   ├── recommend_ui_patterns.py      # 100+ S-Tier siteden (Netflix, Stripe vb.) bileşen & UI deseni seçici
+│   ├── recommend_ui_patterns.py      # 200+ S-Tier siteden (Netflix, Stripe vb.) bileşen & UI deseni seçici
+│   ├── analyze_heavy_app_architecture.py # Steam, Excel, Premiere Pro 10x mimari yeniden inşa motoru
 │   ├── validate_inventions.py        # Faz 6: TRIZ radikal icat, dinamik TRL/ICE/WTP ve Mermaid mimarı
 │   └── export_html_report.py         # XSS korumalı, CSP uyumlu ('unsafe-eval' içermez) HTML çevirici
 ├── benchmarks/                       # 20 vakalık sıfır toleranslı regresyon denetim sistemi
@@ -93,8 +95,9 @@ zobar-skill/
 │   ├── BENCHMARK_REPORT.md           # Üretilen denetim ve başarı skorkartı
 │   └── benchmark_results.json        # Makine tarafından okunabilir benchmark çıktısı
 ├── references/                       # Zihinsel modeller, First Principles, TRIZ matrisi
-│   └── s_tier_design_vault.json      # 104 adet doğrulanmış S-Tier site ve bileşen tasarım veri tabanı
-├── tests/                            # 21/21 Çevrimdışı mock'lu deterministik birim test paketi
+│   ├── s_tier_design_vault.json      # 202 adet doğrulanmış S-Tier site ve bileşen tasarım veri tabanı
+│   └── heavy_apps_engineering_blueprints.json # Steam, Excel, Premiere vb. 10x mühendislik analizleri
+├── tests/                            # 23/23 Çevrimdışı mock'lu deterministik birim test paketi
 └── examples/                         # Örnek rapor (Markdown + HTML formatında)
 ```
 
