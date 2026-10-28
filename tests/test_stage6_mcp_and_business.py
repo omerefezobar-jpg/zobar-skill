@@ -41,11 +41,23 @@ class TestStage6MCPAndBusiness(unittest.TestCase):
         self.assertIn("my-db", config["mcpServers"])
         self.assertEqual(config["mcpServers"]["my-db"]["command"], "python")
 
-    def test_business_school_porter_forces(self):
-        forces = BusinessSchoolCaseEngine.analyze_porter_five_forces("LegalTech AI")
-        self.assertEqual(forces["framework"], "Harvard Business School (HBS) — Porter's 5 Forces")
-        self.assertIn("threat_of_new_entrants", forces["forces"])
-        self.assertIn("bargaining_power_of_suppliers", forces["forces"])
+    def test_business_school_porter_forces_dynamic_archetypes(self):
+        # 1. Biotech
+        bio = BusinessSchoolCaseEngine.analyze_porter_five_forces("Biotech Oncology Clinical Drugs")
+        self.assertEqual(bio["detected_archetype"], "Regulated Life Sciences & Biotech")
+        self.assertEqual(bio["forces"]["threat_of_new_entrants"]["score"], 1)
+        self.assertGreater(bio["industry_attractiveness_index"], 60)
+
+        # 2. Consumer E-Commerce
+        comm = BusinessSchoolCaseEngine.analyze_porter_five_forces("Consumer Fashion E-Commerce Retail")
+        self.assertEqual(comm["detected_archetype"], "High-Churn Consumer & E-Commerce")
+        self.assertEqual(comm["forces"]["bargaining_power_of_buyers"]["score"], 10)
+        self.assertLess(comm["industry_attractiveness_index"], 45)
+
+        # 3. B2B SaaS
+        saas = BusinessSchoolCaseEngine.analyze_porter_five_forces("B2B Cloud Developer Tools")
+        self.assertEqual(saas["detected_archetype"], "B2B Software, Cloud & AI Engineering")
+        self.assertIn("threat_of_new_entrants", saas["forces"])
 
     def test_lean_ai_workforce_calculation(self):
         calc = BusinessSchoolCaseEngine.calculate_lean_ai_workforce_multiplier(

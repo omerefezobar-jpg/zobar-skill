@@ -93,10 +93,11 @@ class ContinualMemoryEngine:
         extracted = []
         text_lower = text.lower()
 
-        # Language extractions
+        # Language extractions (with safe regex escaping for Python 3.10 compatibility, e.g. c++)
         languages = ["python", "rust", "typescript", "c++", "go", "sql", "elixir"]
         for lang in languages:
-            if re.search(rf"\b{lang}\b", text_lower):
+            escaped_lang = re.escape(lang)
+            if re.search(rf"(?:^|[^\w]){escaped_lang}(?:$|[^\w])", text_lower):
                 if lang not in self.user_profile["preferred_languages"]:
                     self.user_profile["preferred_languages"].append(lang)
                 self.add_triple("user", "prefers_language", lang)
@@ -105,7 +106,8 @@ class ContinualMemoryEngine:
         # Framework / Stack extractions
         frameworks = ["supabase", "tauri", "react", "next.js", "webrtc", "opus", "redis", "postgres", "pgvector"]
         for fw in frameworks:
-            if re.search(rf"\b{fw}\b", text_lower):
+            escaped_fw = re.escape(fw)
+            if re.search(rf"(?:^|[^\w]){escaped_fw}(?:$|[^\w])", text_lower):
                 if fw not in self.user_profile["preferred_frameworks"]:
                     self.user_profile["preferred_frameworks"].append(fw)
                 self.add_triple("user", "uses_framework", fw)

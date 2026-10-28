@@ -61,32 +61,73 @@ class BusinessSchoolCaseEngine:
     @classmethod
     def analyze_porter_five_forces(cls, industry: str) -> Dict[str, Any]:
         """
-        Harvard Business School: Michael Porter's 5 Forces Analysis.
+        Harvard Business School: Michael Porter's 5 Forces Dynamic Analysis.
+        Dynamically adjusts scores, threat levels, and defenses based on the target industry.
         """
+        ind = industry.lower()
+
+        # 1. Biotech / Pharma / Clinical
+        if any(w in ind for w in ["biotech", "pharma", "ilaç", "klinik", "medical", "sağlık", "genetik"]):
+            archetype = "Regulated Life Sciences & Biotech"
+            entrants = {"level": "Düşük (1/10)", "score": 1, "reason": "FDA/MDR regülasyonları, 10 yıllık klinik deneyler ve patent duvarları.", "defense": "Tescilli molekül/algoritma patentleri ve münhasır lisanslar."}
+            buyers = {"level": "Düşük - Orta (3/10)", "score": 3, "reason": "Hayati önem taşıyan tedavilerde sigorta ve hastanelerin fiyat esnekliği düşüktür.", "defense": "Klinik sonuç üstünlüğü ve geri ödeme (reimbursement) kodları."}
+            suppliers = {"level": "Yüksek (8/10)", "score": 8, "reason": "Özel biyoreaktörler, saflaştırılmış enzimler ve CRO laboratuvar tekelindedir.", "defense": "Çoklu tedarikçi anlaşmaları ve kritik bileşenleri dikey entegre etme."}
+            substitutes = {"level": "Düşük (2/10)", "score": 2, "reason": "Onaylı bir ilacın veya klinik cihazın ikamesi yıllarca çıkamaz.", "defense": "Patent süresi uzatma (evergreening) ve endikasyon genişletme."}
+            rivalry = {"level": "Orta (5/10)", "score": 5, "reason": "Pazar oligopolistiktir; şirketler fiyatla değil Ar-Ge ile yarışır.", "defense": "İlk giren avantajı (first-in-class) ve küresel dağıtım ortaklıkları."}
+
+        # 2. FinTech / Banking / Payments
+        elif any(w in ind for w in ["fintech", "bank", "ödeme", "kredi", "sigorta", "crypto", "defi", "trading"]):
+            archetype = "Regulated Financial Services & FinTech"
+            entrants = {"level": "Orta (5/10)", "score": 5, "reason": "Bankacılık lisansları ve BDDK/SEC/MiFID II uyum maliyeti korur; ancak API-first çözümler artmaktadır.", "defense": "Düzenleyici lisanslar ve doğrudan takas ağı (SWIFT/SEPA/FAST) entegrasyonu."}
+            buyers = {"level": "Yüksek (7/10)", "score": 7, "reason": "Finansal tüketiciler ve kurumlar en düşük komisyonu ve en yüksek faizi arar.", "defense": "Gömülü finans (Embedded Finance) ile ERP sistemlerinin içine kilitlenme."}
+            suppliers = {"level": "Yüksek (7/10)", "score": 7, "reason": "Kart şemaları (Visa/Mastercard) ve ana bankacılık sağlayıcıları komisyon dayatır.", "defense": "Açık bankacılık (Account-to-Account) ve çoklu borsa likidite yönlendirmesi."}
+            substitutes = {"level": "Yüksek (7/10)", "score": 7, "reason": "Kripto varlıklar, doğrudan takas ve alternatif ödeme yöntemleri hızla ikame yaratır.", "defense": "Hız, sıfır dolandırıcılık garantisi ve mevzuat zırhı."}
+            rivalry = {"level": "Şiddetli (8/10)", "score": 8, "reason": "Geleneksel bankalar ile çevik neobank'lar aynı mevduat için yarışır.", "defense": "Niş B2B dikeylerine (örn. sadece sınır ötesi lojistikçilere kredi) odaklanma."}
+
+        # 3. Hardware / Automotive / Robotics
+        elif any(w in ind for w in ["hardware", "donanım", "robot", "otomotiv", "automotive", "araba", "üretim", "fabrika"]):
+            archetype = "Capital-Intensive Industrial & Hardware"
+            entrants = {"level": "Düşük - Orta (3/10)", "score": 3, "reason": "Takım tezgahı, kalıp maliyetleri (NRE) ve fabrika yatırımları gerektirir.", "defense": "Tescilli donanım mimarisi ve tedarik zinciri hacim indirimleri."}
+            buyers = {"level": "Yüksek (8/10)", "score": 8, "reason": "Büyük alıcılar (OEM'ler) her çeyrek marj kırma baskısı yapar.", "defense": "Donanıma gömülü abonelik yazılımı (Hardware-enabled SaaS) satmak."}
+            suppliers = {"level": "Aşırı Yüksek (9/10)", "score": 9, "reason": "TSMC yarı iletken fabrikaları, lityum madenleri ve sensör tedarikçileri kısıtlıdır.", "defense": "Kritik çiplerde ikili kaynak (dual-sourcing) ve stratejik stoklama."}
+            substitutes = {"level": "Düşük (3/10)", "score": 3, "reason": "Fiziksel bir robotun veya aracın yerini salt yazılım tutamaz.", "defense": "Modüler genişleme yuvaları ve uzun ömürlü endüstriyel güvenilirlik."}
+            rivalry = {"level": "Yüksek (7/10)", "score": 7, "reason": "Global üreticiler arasındaki birim maliyet ve enerji verimliliği savaşı.", "defense": "Sensör füzyonu ve üstün yazılım/firmware optimizasyonu."}
+
+        # 4. Consumer Apps / E-Commerce / Retail
+        elif any(w in ind for w in ["consumer", "tüketici", "e-ticaret", "retail", "perakende", "moda", "social"]):
+            archetype = "High-Churn Consumer & E-Commerce"
+            entrants = {"level": "Aşırı Yüksek (9/10)", "score": 9, "reason": "Shopify veya App Store üzerinde dakikalar içinde yeni rakip doğabilir.", "defense": "Güçlü marka kimliği, organik topluluk ve viral döngü (K-factor > 1)."}
+            buyers = {"level": "Aşırı Yüksek (10/10)", "score": 10, "reason": "Sıfır geçiş maliyeti (switching cost); kullanıcı tek tıkla rakibe geçer.", "defense": "Sadakat puanları, kişiselleştirilmiş AI önerileri ve anında teslimat."}
+            suppliers = {"level": "Düşük - Orta (4/10)", "score": 4, "reason": "Toptancı ve fason üretici bolluğu mevcuttur.", "defense": "Doğrudan tüketiciye (D2C) satış ile aracı komisyonlarını kesmek."}
+            substitutes = {"level": "Yüksek (8/10)", "score": 8, "reason": "Binlerce alternatif eğlence ve alışveriş kanalı mevcuttur.", "defense": "Benzersiz kullanıcı deneyimi ve alışkanlık döngüleri (Hook Model)."}
+            rivalry = {"level": "Kanlı Kırmızı Okyanus (10/10)", "score": 10, "reason": "Fiyat kırma ve reklam açık artırması (CAC enflasyonu) çok yüksektir.", "defense": "Ücretli reklamlara bağımlılığı kesip organik dağıtım kanalları kurmak."}
+
+        # 5. Default: B2B SaaS, Cloud & Developer Tools
+        else:
+            archetype = "B2B Software, Cloud & AI Engineering"
+            entrants = {"level": "Yüksek (8/10)", "score": 8, "reason": "Yapay zekâ ve vibe coding ile kod yazım bariyeri sıfırlandı; yeni SaaS klonları hızla türer.", "defense": "Tescilli veri seti, derin veritabanı entegrasyonu ve yüksek geçiş maliyeti."}
+            buyers = {"level": "Orta - Yüksek (6/10)", "score": 6, "reason": "B2B müşterileri bütçe kısıntısında ilk olarak gereksiz yazılım aboneliklerini iptal eder.", "defense": "Şirketin ana gelir akışını sağlayan vazgeçilmez (mission-critical) sistem olmak."}
+            suppliers = {"level": "Orta (5/10)", "score": 5, "reason": "OpenAI, Anthropic ve AWS fiyat kırsa da tescilli modellere bağımlılık riski vardır.", "defense": "Açık kaynak yerel modeller (Llama, Mistral) ve çoklu model router kullanmak."}
+            substitutes = {"level": "Yüksek (7/10)", "score": 7, "reason": "Açık kaynak GitHub projeleri ve şirket içi dahili araçlar hızla alternatif olur.", "defense": "Sadece yazılım satmayıp doğrudan ölçülebilir iş sonucu ve SLA garantisi sunmak."}
+            rivalry = {"level": "Şiddetli (8/10)", "score": 8, "reason": "Silikon Vadisi ve küresel mikro-SaaS girişimcilerinin yoğun rekabeti.", "defense": "Mavi Okyanus stratejisiyle hiper-niş bir dikey uzmanlığa odaklanmak."}
+
+        # Calculate Overall Industry Profitability Attractiveness (0-100)
+        # Lower total threat scores mean higher structural profitability attractiveness
+        total_threat = entrants["score"] + buyers["score"] + suppliers["score"] + substitutes["score"] + rivalry["score"]
+        attractiveness_index = max(min(int(100 - (total_threat - 5) * (100 / 45)), 100), 5)
+
         return {
             "framework": "Harvard Business School (HBS) — Porter's 5 Forces",
             "target_industry": industry,
+            "detected_archetype": archetype,
+            "industry_attractiveness_index": attractiveness_index,
+            "profitability_outlook": "YÜKSEK YAPISAL KÂRLILIK" if attractiveness_index >= 65 else ("ORTA KÂRLILIK / DİKKATLİ NİŞLEŞME GEREKİR" if attractiveness_index >= 40 else "ZORLU / KANLI KIRMIZI OKYANUS"),
             "forces": {
-                "threat_of_new_entrants": {
-                    "level": "Yüksek (Yapay Zekâ ile kodlama kolaylaştı)",
-                    "defense": "Fikri mülkiyet, tescilli veri seti ve yüksek müşteri geçiş maliyeti (switching cost) kurun."
-                },
-                "bargaining_power_of_buyers": {
-                    "level": "Orta - Yüksek",
-                    "defense": "Ağ etkisi (Network Effects) ve derin entegrasyon ile alternatifsiz hale gelin."
-                },
-                "bargaining_power_of_suppliers": {
-                    "level": "Orta (Büyük model sağlayıcıları OpenAI/Anthropic fiyat kırıyor)",
-                    "defense": "Açık kaynak yerel modeller (Llama, Mistral) ve çoklu model yönlendiricisi kullanın."
-                },
-                "threat_of_substitutes": {
-                    "level": "Yüksek",
-                    "defense": "Yalnızca yazılım satmayın; kullanıcıya doğrudan iş sonucu (outcome) sunun."
-                },
-                "competitive_rivalry": {
-                    "level": "Şiddetli",
-                    "defense": "Mavi Okyanus stratejisiyle rekabetin olmadığı niş dikey pazara odaklanın."
-                }
+                "threat_of_new_entrants": entrants,
+                "bargaining_power_of_buyers": buyers,
+                "bargaining_power_of_suppliers": suppliers,
+                "threat_of_substitutes": substitutes,
+                "competitive_rivalry": rivalry,
             }
         }
 

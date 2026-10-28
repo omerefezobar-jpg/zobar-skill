@@ -59,11 +59,13 @@ class TestStage2ContinualLearning(unittest.TestCase):
         self.assertEqual(len(res["active_messages"]), 2)
 
     def test_continual_memory_learns_and_recalls(self):
-        text = "Benim projelerimde kesinlikle Rust ve Supabase olmalı, mimari olarak ECS kullanıyorum ve her şey sub-millisecond hızlı olmalı."
+        # Including 'c++' which triggers re.error: multiple repeat on Python 3.10 if not properly escaped
+        text = "Benim projelerimde kesinlikle Rust, c++ ve Supabase olmalı, mimari olarak ECS kullanıyorum ve her şey sub-millisecond hızlı olmalı."
         extracted = self.memory.learn_from_text(text)
 
         self.assertGreater(len(extracted), 0)
         self.assertIn("rust", self.memory.user_profile["preferred_languages"])
+        self.assertIn("c++", self.memory.user_profile["preferred_languages"])
         self.assertIn("supabase", self.memory.user_profile["preferred_frameworks"])
         self.assertIn("ECS", self.memory.user_profile["core_architectures"])
 
