@@ -397,6 +397,18 @@ class ZobarMCPServer:
                     },
                     "required": ["action"]
                 }
+            },
+            {
+                "name": "synthesize_cinematic_art_direction",
+                "description": "Synthesizes world-class cinematic visual grammar (Kubrick, Deakins, Wong Kar-wai, Wes Anderson, Miyazaki), Aristotelian Poetics UX arc, and Calvino Six Memos interface tokens.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "product_vision": {"type": "string", "description": "The software or product vision to critique and stylize"},
+                        "target_mood": {"type": "string", "enum": ["kubrickian_symmetry", "deakins_chiaroscuro", "wong_kar_wai_neon_melancholy", "wes_anderson_diegetic_whimsy", "miyazaki_ma_contemplation"], "description": "Optional specific cinematic director mood"}
+                    },
+                    "required": ["product_vision"]
+                }
             }
         ]
 
@@ -685,6 +697,12 @@ class ZobarMCPServer:
                     "tier_distribution": data["tier_distribution"],
                     "total_audited": data["total_modules_audited"]
                 }
+
+        elif name == "synthesize_cinematic_art_direction":
+            from scripts.cinematic_literary_criticism_engine import CinematicLiteraryCriticismEngine
+            vision = args.get("product_vision", "")
+            mood = args.get("target_mood")
+            payload = CinematicLiteraryCriticismEngine.critique_and_synthesize_art_direction(vision, target_mood=mood)
 
         else:
             raise ValueError(f"Unknown tool name: {name}")

@@ -47,6 +47,7 @@ from security_permission_guard import SecurityPermissionGuard
 from semantic_cache import SemanticCache
 from smart_model_router import SmartModelRouter
 from context_compressor import ContextCompressor
+from cinematic_literary_criticism_engine import CinematicLiteraryCriticismEngine
 
 
 class UnifiedSystemOrchestrator:
@@ -288,8 +289,9 @@ export function {slug}Widget() {{
             url_or_identifier="https://eur-lex.europa.eu"
         )
 
-        # Phase 5: Architecture, Systems Math & UI Synthesis
+        # Phase 5: Architecture, Systems Math & Cinematic Art Direction
         architecture_data = synthesize_tech_stack(product_vision)
+        cinematic_art = CinematicLiteraryCriticismEngine.critique_and_synthesize_art_direction(product_vision)
         math_analysis = SystemsMathEngine.calculate_queueing_latency(arrival_rate_lambda=2500, service_rate_mu=4000, concurrency_channels_c=1)
 
         # Phase 6: Code Prototype Generation
@@ -374,7 +376,9 @@ export function {slug}Widget() {{
                     "core_language": architecture_data.get("core_language"),
                     "data_layer": architecture_data.get("data_storage"),
                     "littles_law_concurrency": math_analysis.get("average_queue_length_items", 0.0),
-                    "average_latency_ms": math_analysis.get("average_latency_ms", 0.0)
+                    "average_latency_ms": math_analysis.get("average_latency_ms", 0.0),
+                    "cinematic_aesthetic": cinematic_art.get("chosen_cinematic_aesthetic", "N/A"),
+                    "poetics_catharsis_arc": cinematic_art.get("dramatic_narrative_journey", {}).get("act_3_anagnorisis_and_catharsis", {}).get("dramatic_phase", "Catharsis")
                 },
                 "6_code_artifacts": {
                     "python_lines": len(code_artifacts["python_core_engine"].splitlines()),

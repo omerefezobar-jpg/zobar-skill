@@ -580,6 +580,69 @@
       "latency_ms": 30.8,
       "error_details": null,
       "timestamp": 1793231285.8984594
+    },
+    {
+      "task_id": "TASK-SUCC-0",
+      "category": "Testing",
+      "pattern_applied": "test_pattern_1793231541195",
+      "status": "PASS",
+      "latency_ms": 1.5,
+      "error_details": null,
+      "timestamp": 1793231541.195098
+    },
+    {
+      "task_id": "TASK-SUCC-1",
+      "category": "Testing",
+      "pattern_applied": "test_pattern_1793231541195",
+      "status": "PASS",
+      "latency_ms": 1.5,
+      "error_details": null,
+      "timestamp": 1793231541.1956844
+    },
+    {
+      "task_id": "TASK-SUCC-2",
+      "category": "Testing",
+      "pattern_applied": "test_pattern_1793231541195",
+      "status": "PASS",
+      "latency_ms": 1.5,
+      "error_details": null,
+      "timestamp": 1793231541.1962655
+    },
+    {
+      "task_id": "TASK-SUCC-3",
+      "category": "Testing",
+      "pattern_applied": "test_pattern_1793231541195",
+      "status": "PASS",
+      "latency_ms": 1.5,
+      "error_details": null,
+      "timestamp": 1793231541.197575
+    },
+    {
+      "task_id": "TASK-SUCC-4",
+      "category": "Testing",
+      "pattern_applied": "test_pattern_1793231541195",
+      "status": "PASS",
+      "latency_ms": 1.5,
+      "error_details": null,
+      "timestamp": 1793231541.1981397
+    },
+    {
+      "task_id": "TASK-SUCC-5",
+      "category": "Testing",
+      "pattern_applied": "test_pattern_1793231541195",
+      "status": "PASS",
+      "latency_ms": 1.5,
+      "error_details": null,
+      "timestamp": 1793231541.1992269
+    },
+    {
+      "task_id": "TRIAL_543195",
+      "category": "industrial automation",
+      "pattern_applied": "lock_free_ringbuffer",
+      "status": "PASS",
+      "latency_ms": 30.8,
+      "error_details": null,
+      "timestamp": 1793231543.195523
     }
   ],
   "registered_patterns": [
@@ -591,6 +654,7 @@
     "test_pattern_1793230829167",
     "test_pattern_1793230845774",
     "test_pattern_1793230893055",
-    "test_pattern_1793231250225"
+    "test_pattern_1793231250225",
+    "test_pattern_1793231541195"
   ]
 }
