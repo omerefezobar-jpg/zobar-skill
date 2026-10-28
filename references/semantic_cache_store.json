@@ -40,18 +40,18 @@
       "response": "ans",
       "remote_latency_ms": 1200.0,
       "cost_saved_usd": 0.015,
-      "hit_count": 1,
+      "hit_count": 26,
       "created_at": 1793219047.693413,
       "metadata": {},
-      "last_hit_at": 1793219047.6944177
+      "last_hit_at": 1793220087.6286864
     }
   ],
   "stats": {
-    "total_queries": 1,
-    "cache_hits": 1,
-    "cache_misses": 0,
-    "total_saved_usd": 0.015,
-    "total_time_saved_ms": 1199.9580000294372
+    "total_queries": 51,
+    "cache_hits": 26,
+    "cache_misses": 25,
+    "total_saved_usd": 0.39000000000000024,
+    "total_time_saved_ms": 31198.87069966644
   },
-  "last_updated": 1793219047.6944177
+  "last_updated": 1793220087.6286864
 }
