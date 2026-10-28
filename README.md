@@ -41,14 +41,15 @@ Zobar Skill, çıktı tutarlılığını, yasal madde isabetini ve kanıt takson
 python benchmarks/run_benchmarks.py
 ```
 
-| Kod | Test Edilen Senaryo | Hedeflenen Yasal & Mimari Kriter | Durum |
+| Kod | Test Edilen Senaryo | Resmî Hukuki Emsal / Yasal Dayanak | Durum |
 | :--- | :--- | :--- | :--- |
-| **CASE-01** | Kritik Tıbbi Teşhis ve Hasta Telemetrisi | EU AI Act Madde 6 & Ek III (Yüksek Risk) + Rust | **100/100 (Başarılı)** |
-| **CASE-02** | Yüksek Başarımlı AST Derleyici & Analiz Motoru | EU AI Act Recital 34 (Genel Yazılım) + Rust AST | **100/100 (Başarılı)** |
-| **CASE-03** | Üretken Kod Asistanı & Otonom LLM Ajanı | EU AI Act Madde 50 (Şeffaflık) + Hibrit Mimari | **100/100 (Başarılı)** |
-| **CASE-04** | Sosyal Puanlama & İzinsiz Biyometrik Veri | EU AI Act Madde 5(1) (Yasaklı Uygulama) | **100/100 (Başarılı)** |
-| **CASE-05** | Banka Kredi Skoru & Finansal Uygunluk | EU AI Act Ek III (Yüksek Risk) + Danışmanlık Şart | **100/100 (Başarılı)** |
-| **CASE-06** | Dağıtık Mikro-Servis Ağı & API Gateway | Minimal Risk (Recital 34) + Go Dili Seçimi | **100/100 (Başarılı)** |
+| **CASE-01** | Klinik Tıbbi Teşhis ve Hasta Karar Desteği | MDR (AB) 2017/745 Kural 11 & AI Act Madde 6(1) (Yüksek Risk) | **100/100 (Başarılı)** |
+| **CASE-02** | Hastane İdari Randevu & Vardiya Planlama | MDR 2017/745 Ek VIII Kural 11 (İdari Yazılım Muafiyeti) | **100/100 (Başarılı)** |
+| **CASE-03** | Geliştirici Aracı, AST Ayrıştırıcı & Statik Analiz | EU AI Act Madde 2(8) (Ar-Ge ve Geliştirici Aracı Muafiyeti) | **100/100 (Başarılı)** |
+| **CASE-04** | Kullanıcıyla Doğrudan Etkileşen Sohbet Botu | EU AI Act Madde 50(1) (Doğrudan İnsan Etkileşimi Şeffaflığı) | **100/100 (Başarılı)** |
+| **CASE-05** | Sosyal Puanlama & İzinsiz Biyometrik Veri | EU AI Act Madde 5(1)(a)-(h) (Yasaklı Uygulama) | **100/100 (Başarılı)** |
+| **CASE-06** | Tüketici Kredi Puanlama ve Finansal Risk | EU AI Act Ek III Nokta 5(b) & EDPB WP251 (Yüksek Risk) | **100/100 (Başarılı)** |
+| **CASE-07** | Dağıtık Mikro-Servis Ağı & API Gateway | EU AI Act Recital 34 (Genel Altyapı / Minimal Risk) | **100/100 (Başarılı)** |
 
 Detaylı denetim günlüğü için [BENCHMARK_REPORT.md](./benchmarks/BENCHMARK_REPORT.md) dosyasını inceleyin.
 

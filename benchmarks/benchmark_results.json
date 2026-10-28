@@ -1,88 +1,66 @@
 {
-  "timestamp": "2026-10-28T19:21:04.156603+00:00",
+  "timestamp": "2026-10-28T19:25:59.438485+00:00",
+  "policy": "Strict Zero-Tolerance (Any failure fails CI)",
   "pass_rate_percentage": 100.0,
-  "total_score": 600,
-  "max_score": 600,
-  "statutory_matches": "6/6",
-  "architecture_matches": "6/6",
+  "total_cases": 7,
+  "successful_cases": 7,
+  "total_failures": 0,
   "cases": [
     {
       "id": "CASE-01",
-      "name": "Kritik Tıbbi Teşhis ve Hasta Telemetrisi (Medical Diagnostics)",
+      "name": "Klinik Tıbbi Teşhis ve Hasta Karar Desteği (Clinical Diagnostic)",
+      "status": "✅ KUSURSUZ (100/100)",
       "score": 100,
-      "max": 100,
-      "notes": [
-        "✅ Sınıflandırma: Tam İsabet (Yüksek Riskli Sistem (High-Risk AI System))",
-        "✅ Kanun Maddesi: Madde 6",
-        "✅ Hukuki Mütalaa Bayrağı: Doğru",
-        "✅ Çekirdek Dil: Rust",
-        "✅ Kanıt Taksonomisi: Model hipotezi ve hata modları eksiksiz"
-      ]
+      "failures": [],
+      "ground_truth_precedent": "EU 2024/1689 Article 6(1) & MDR (EU) 2017/745 Annex VIII Rule 11 (Software as a Medical Device)"
     },
     {
       "id": "CASE-02",
-      "name": "Yüksek Başarımlı AST Derleyici & Statik Kod Analizi (Compiler Engine)",
+      "name": "Hastane İdari Randevu & Vardiya Planlama (Hospital Administrative Scheduling)",
+      "status": "✅ KUSURSUZ (100/100)",
       "score": 100,
-      "max": 100,
-      "notes": [
-        "✅ Sınıflandırma: Tam İsabet (Minimal / Düşük Risk (Genel Yazılım Kapsamı))",
-        "✅ Kanun Maddesi: Recital 34",
-        "✅ Hukuki Mütalaa Bayrağı: Doğru",
-        "✅ Çekirdek Dil: Rust",
-        "✅ Kanıt Taksonomisi: Model hipotezi ve hata modları eksiksiz"
-      ]
+      "failures": [],
+      "ground_truth_precedent": "MDR (EU) 2017/745 Annex VIII Rule 11 (Administrative hospital software is excluded from high risk)"
     },
     {
       "id": "CASE-03",
-      "name": "Üretken Kod Asistanı & Otonom LLM Ajanı (Generative Coding Agent)",
+      "name": "Geliştirici Aracı, AST Ayrıştırıcı & Statik Analiz (Compiler & Linter)",
+      "status": "✅ KUSURSUZ (100/100)",
       "score": 100,
-      "max": 100,
-      "notes": [
-        "✅ Sınıflandırma: Tam İsabet (Belirli Şeffaflık Yükümlülüğü (Transparency Obligations))",
-        "✅ Kanun Maddesi: Madde 50",
-        "✅ Hukuki Mütalaa Bayrağı: Doğru",
-        "✅ Çekirdek Dil: TypeScript / Rust (Hibrit Mimari)",
-        "✅ Kanıt Taksonomisi: Model hipotezi ve hata modları eksiksiz"
-      ]
+      "failures": [],
+      "ground_truth_precedent": "Regulation (EU) 2024/1689 Article 2(8) (Exemption for AI systems developed solely for research & development)"
     },
     {
       "id": "CASE-04",
-      "name": "Sosyal Puanlama & İzinsiz Biyometrik Veri Kazıma (Prohibited System)",
+      "name": "Kullanıcıyla Doğrudan Etkileşen Sohbet Botu (Conversational Chatbot)",
+      "status": "✅ KUSURSUZ (100/100)",
       "score": 100,
-      "max": 100,
-      "notes": [
-        "✅ Sınıflandırma: Tam İsabet (Yasaklanmış Yapay Zeka Uygulaması (Prohibited AI Practice))",
-        "✅ Kanun Maddesi: Madde 5(1)",
-        "✅ Hukuki Mütalaa Bayrağı: Doğru",
-        "✅ Çekirdek Dil: TypeScript / Rust (Hibrit Mimari)",
-        "✅ Kanıt Taksonomisi: Model hipotezi ve hata modları eksiksiz"
-      ]
+      "failures": [],
+      "ground_truth_precedent": "Regulation (EU) 2024/1689 Article 50(1) (Transparency obligation for AI interacting with humans)"
     },
     {
       "id": "CASE-05",
-      "name": "Banka Kredi Skoru & Finansal Uygunluk Değerlendirmesi (Credit Scoring)",
+      "name": "Sosyal Puanlama & İzinsiz Biyometrik Veri Tabanı (Prohibited AI Practice)",
+      "status": "✅ KUSURSUZ (100/100)",
       "score": 100,
-      "max": 100,
-      "notes": [
-        "✅ Sınıflandırma: Tam İsabet (Yüksek Riskli Sistem (High-Risk AI System))",
-        "✅ Kanun Maddesi: Ek III",
-        "✅ Hukuki Mütalaa Bayrağı: Doğru",
-        "✅ Çekirdek Dil: TypeScript / Rust (Hibrit Mimari)",
-        "✅ Kanıt Taksonomisi: Model hipotezi ve hata modları eksiksiz"
-      ]
+      "failures": [],
+      "ground_truth_precedent": "Regulation (EU) 2024/1689 Article 5(1)(a)-(h) (Prohibited AI Practices)"
     },
     {
       "id": "CASE-06",
-      "name": "Dağıtık Mikro-Servis Ağı & API Gateway (Distributed Microservices)",
+      "name": "Tüketici Kredi Puanlama ve Finansal Risk Değerlendirmesi (Credit Scoring)",
+      "status": "✅ KUSURSUZ (100/100)",
       "score": 100,
-      "max": 100,
-      "notes": [
-        "✅ Sınıflandırma: Tam İsabet (Minimal / Düşük Risk (Genel Yazılım Kapsamı))",
-        "✅ Kanun Maddesi: Recital 34",
-        "✅ Hukuki Mütalaa Bayrağı: Doğru",
-        "✅ Çekirdek Dil: Go",
-        "✅ Kanıt Taksonomisi: Model hipotezi ve hata modları eksiksiz"
-      ]
+      "failures": [],
+      "ground_truth_precedent": "Regulation (EU) 2024/1689 Annex III Point 5(b) & EDPB Guidelines WP251 on Automated Decision-Making"
+    },
+    {
+      "id": "CASE-07",
+      "name": "Dağıtık Mikro-Servis Ağı & API Gateway (Distributed Infrastructure)",
+      "status": "✅ KUSURSUZ (100/100)",
+      "score": 100,
+      "failures": [],
+      "ground_truth_precedent": "Regulation (EU) 2024/1689 Recital 34 (General software not listed in Annex III is minimal risk)"
     }
   ]
 }

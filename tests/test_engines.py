@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """
-Comprehensive Ground-Truth Unit & Benchmark Test Suite for Frontier Innovator.
-Tests all 6 autonomous phases, statutory regulatory screening, hybrid competitor
-benchmarking, tech stack synthesis, TRIZ invention generation, and strict CSP security.
+Comprehensive Ground-Truth Unit & Benchmark Test Suite for Zobar Skill.
+Tests statutory compliance precision with intended-purpose discrimination,
+hybrid competitor benchmarking, tech stack synthesis, TRIZ invention generation,
+and strict CSP security.
 """
 
 import unittest
@@ -83,14 +84,29 @@ class TestStatutoryRegulatoryCompliance(unittest.TestCase):
         self.assertIn("Madde 5(1)", res["eu_ai_act"]["statutory_basis"])
         self.assertTrue(res["eu_ai_act"]["requires_expert_counsel"])
 
-    def test_statutory_high_risk_trigger(self):
-        res = evaluate_compliance("autonomous medical diagnostics agent")
+    def test_clinical_decision_support_high_risk_mdr_rule_11(self):
+        """Tests that clinical diagnosis/treatment is High-Risk under MDR Rule 11."""
+        res = evaluate_compliance("medical diagnostic patient telemetry clinical treatment decision AI")
         self.assertEqual(res["eu_ai_act"]["tier"], "Yüksek Riskli Sistem (High-Risk AI System)")
-        self.assertIn("Madde 6", res["eu_ai_act"]["statutory_basis"])
-        self.assertIn("Ek III", res["eu_ai_act"]["statutory_basis"])
+        self.assertIn("MDR (AB) 2017/745 Kural 11", res["eu_ai_act"]["statutory_basis"])
+        self.assertTrue(res["eu_ai_act"]["requires_expert_counsel"])
 
-    def test_statutory_transparency_trigger(self):
-        res = evaluate_compliance("LLM code generation assistant")
+    def test_hospital_administrative_scheduling_minimal_risk(self):
+        """Tests that hospital administrative/scheduling software is EXEMPT from high risk."""
+        res = evaluate_compliance("hospital administrative scheduling patient appointment billing shift management")
+        self.assertEqual(res["eu_ai_act"]["tier"], "Minimal / Düşük Risk (İdari Sağlık Yazılımı)")
+        self.assertIn("MDR (AB) 2017/745 Kapsam Dışı", res["eu_ai_act"]["statutory_basis"])
+        self.assertFalse(res["eu_ai_act"]["requires_expert_counsel"])
+
+    def test_compiler_developer_tool_article_2_8_exemption(self):
+        """Tests that developer tools and AST parsers qualify for Art 2(8) development exemption."""
+        res = evaluate_compliance("AST parser compiler code analysis static linter refactoring tool")
+        self.assertEqual(res["eu_ai_act"]["tier"], "Minimal / Düşük Risk (Geliştirici Aracı / AI Act Muafiyeti)")
+        self.assertIn("Madde 2(8)", res["eu_ai_act"]["statutory_basis"])
+        self.assertFalse(res["eu_ai_act"]["requires_expert_counsel"])
+
+    def test_statutory_transparency_conversational_bot(self):
+        res = evaluate_compliance("conversational bot customer service chatbot interaction natural person")
         self.assertEqual(res["eu_ai_act"]["tier"], "Belirli Şeffaflık Yükümlülüğü (Transparency Obligations)")
         self.assertIn("Madde 50", res["eu_ai_act"]["statutory_basis"])
 
@@ -147,7 +163,6 @@ class TestAutomatedArchitectureAndTRIZInventions(unittest.TestCase):
         self.assertIn("Model Hipotezi", inv1["trl_evidence_type"])
         self.assertGreater(inv1["ice_score"]["total"], 0)
         self.assertEqual(len(inv1["failure_modes"]), 3)
-        # Ensure generated Mermaid diagram is valid and contains domain
         self.assertIn("flowchart TD", inventions_data["system_architecture_mermaid"])
 
 if __name__ == "__main__":

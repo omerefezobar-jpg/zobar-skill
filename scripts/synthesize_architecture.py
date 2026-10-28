@@ -19,9 +19,9 @@ def synthesize_tech_stack(domain: str):
     lowered = domain.lower()
     
     # 1. Core Engine Language Selection
-    if any(k in lowered for k in ["compiler", "ast", "parser", "realtime", "high performance", "system", "embedded", "crypto"]):
+    if any(k in lowered for k in ["compiler", "ast", "parser", "realtime", "high performance", "system", "embedded", "crypto", "telemetry", "diagnostic", "safety critical"]):
         core_lang = "Rust"
-        core_reason = "Bellek güvenliği (ownership & borrow checker), sıfır maliyetli soyutlama (zero-cost abstractions) ve nanosaniye seviyesinde Tree-sitter AST analizi."
+        core_reason = "Bellek güvenliği (ownership & borrow checker), sıfır maliyetli soyutlama (zero-cost abstractions) ve nanosaniye seviyesinde deterministik analiz süresi."
         core_libs = ["tree-sitter", "tokio", "rayon", "serde", "wasmtime"]
     elif any(k in lowered for k in ["distributed", "network", "microservice", "gateway", "orchestrat"]):
         core_lang = "Go"
