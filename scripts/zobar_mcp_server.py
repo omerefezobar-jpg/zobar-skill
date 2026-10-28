@@ -385,6 +385,18 @@ class ZobarMCPServer:
                     },
                     "required": ["action"]
                 }
+            },
+            {
+                "name": "audit_module_maturity",
+                "description": "Audits, benchmarks, and categorizes system modules into Capability Maturity Levels: Level 3 (Production Proven - Live API/Sandbox/Statute), Level 2 (Heuristic Hybrid - Rules/AST/Templates), and Level 1 (Experimental Prototype - Simulation).",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "action": {"type": "string", "enum": ["get_summary", "get_module", "generate_report"], "description": "Audit action to run"},
+                        "module_name": {"type": "string", "description": "Optional module script name to inspect (e.g. security_permission_guard.py)"}
+                    },
+                    "required": ["action"]
+                }
             }
         ]
 
@@ -652,6 +664,27 @@ class ZobarMCPServer:
                 payload = {"source": source, "count": len(items), "tricks": items}
             else:
                 raise ValueError(f"Unknown trend harvest action: {action}")
+
+        elif name == "audit_module_maturity":
+            from scripts.module_maturity_auditor import ModuleMaturityAuditor
+            auditor = ModuleMaturityAuditor()
+            action = args.get("action", "get_summary")
+            if action == "generate_report":
+                json_path, md_path = auditor.persist_reports()
+                payload = {"status": "SUCCESS", "json_path": json_path, "md_report_path": md_path}
+            elif action == "get_module":
+                mod_name = args.get("module_name", "")
+                data = auditor.audit_all_modules()
+                mod_info = data["modules"].get(mod_name)
+                payload = mod_info if mod_info else {"error": f"Module '{mod_name}' not found in catalog."}
+            else:
+                data = auditor.audit_all_modules()
+                payload = {
+                    "system_maturity_index": data["system_maturity_index"],
+                    "average_score": data["average_module_score"],
+                    "tier_distribution": data["tier_distribution"],
+                    "total_audited": data["total_modules_audited"]
+                }
 
         else:
             raise ValueError(f"Unknown tool name: {name}")

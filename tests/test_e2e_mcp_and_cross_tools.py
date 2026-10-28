@@ -96,6 +96,7 @@ class TestE2EMCPAndCrossTools(unittest.TestCase):
         self.assertIn("query_evidence_provenance", tool_names)
         self.assertIn("query_learning_registry", tool_names)
         self.assertIn("harvest_trending_tricks", tool_names)
+        self.assertIn("audit_module_maturity", tool_names)
 
     def test_03_tool_call_smart_route_execution(self):
         req = {
@@ -323,6 +324,24 @@ class TestE2EMCPAndCrossTools(unittest.TestCase):
         self.assertEqual(content["tool_status"], "SUCCESS")
         self.assertIn("matches", content["result"])
         self.assertGreaterEqual(len(content["result"]["matches"]), 1)
+
+    def test_13_audit_module_maturity_e2e(self):
+        req = {
+            "jsonrpc": "2.0",
+            "id": 131,
+            "method": "tools/call",
+            "params": {
+                "name": "audit_module_maturity",
+                "arguments": {
+                    "action": "get_summary"
+                }
+            }
+        }
+        resp = self.send_rpc(req)
+        content = json.loads(resp["result"]["content"][0]["text"])
+        self.assertEqual(content["tool_status"], "SUCCESS")
+        self.assertIn("system_maturity_index", content["result"])
+        self.assertIn("tier_distribution", content["result"])
 
 
 if __name__ == "__main__":

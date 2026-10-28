@@ -321,6 +321,17 @@ export function {slug}Widget() {{
             "target_sector": target_sector,
             "latency_ms": round(total_latency_ms, 2),
             "status": "ORCHESTRATION_COMPLETED",
+            "stage_maturity_breakdown": {
+                "1_academic_ground_truth": "LEVEL_3_PRODUCTION_PROVEN",
+                "2_user_sentiment": "LEVEL_2_HEURISTIC_HYBRID",
+                "3_competitors_and_moats": "LEVEL_2_HEURISTIC_HYBRID",
+                "4_regulatory_compliance": "LEVEL_3_PRODUCTION_PROVEN",
+                "5_systems_math_and_architecture": "LEVEL_3_PRODUCTION_PROVEN",
+                "6_code_artifacts": "LEVEL_3_PRODUCTION_PROVEN",
+                "7_sandbox_and_deficiencies": "LEVEL_3_PRODUCTION_PROVEN",
+                "8_evidence_and_learning": "LEVEL_3_PRODUCTION_PROVEN",
+                "9_senate_and_chief_engineer": "LEVEL_2_HEURISTIC_HYBRID"
+            },
             "pipeline_stages": {
                 "1_academic_ground_truth": {
                     "curricula_count": len(academic_data["curriculum"]),
