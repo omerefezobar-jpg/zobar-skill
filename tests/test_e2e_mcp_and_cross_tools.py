@@ -80,7 +80,7 @@ class TestE2EMCPAndCrossTools(unittest.TestCase):
         self.assertGreaterEqual(len(tools), 8)
 
         tool_names = [t["name"] for t in tools]
-        self.assertGreaterEqual(len(tools), 20)
+        self.assertGreaterEqual(len(tools), 24)
         self.assertIn("semantic_cache_query", tool_names)
         self.assertIn("smart_route", tool_names)
         self.assertIn("audit_supabase_sql", tool_names)
@@ -95,6 +95,7 @@ class TestE2EMCPAndCrossTools(unittest.TestCase):
         self.assertIn("audit_security_sandbox", tool_names)
         self.assertIn("query_evidence_provenance", tool_names)
         self.assertIn("query_learning_registry", tool_names)
+        self.assertIn("harvest_trending_tricks", tool_names)
 
     def test_03_tool_call_smart_route_execution(self):
         req = {
@@ -303,6 +304,25 @@ class TestE2EMCPAndCrossTools(unittest.TestCase):
         content = json.loads(resp["result"]["content"][0]["text"])
         self.assertEqual(content["tool_status"], "SUCCESS")
         self.assertIn("total_evidence", content["result"])
+
+    def test_12_harvest_trending_tricks_e2e(self):
+        req = {
+            "jsonrpc": "2.0",
+            "id": 121,
+            "method": "tools/call",
+            "params": {
+                "name": "harvest_trending_tricks",
+                "arguments": {
+                    "action": "search_tricks",
+                    "keyword": "mcp"
+                }
+            }
+        }
+        resp = self.send_rpc(req)
+        content = json.loads(resp["result"]["content"][0]["text"])
+        self.assertEqual(content["tool_status"], "SUCCESS")
+        self.assertIn("matches", content["result"])
+        self.assertGreaterEqual(len(content["result"]["matches"]), 1)
 
 
 if __name__ == "__main__":

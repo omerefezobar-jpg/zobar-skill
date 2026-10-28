@@ -58,6 +58,7 @@ from scripts.security_permission_guard import SecurityPermissionGuard
 from scripts.evidence_provenance_engine import EvidenceProvenanceGraph
 from scripts.feedback_outcome_learning_engine import FeedbackOutcomeEngine
 from scripts.unified_system_orchestrator import UnifiedSystemOrchestrator
+from scripts.trend_trick_harvester_engine import TrendTrickHarvesterEngine
 
 
 class ZobarMCPServer:
@@ -74,6 +75,7 @@ class ZobarMCPServer:
         self.provenance_graph = EvidenceProvenanceGraph()
         self.learning_engine = FeedbackOutcomeEngine()
         self.unified_orchestrator = UnifiedSystemOrchestrator()
+        self.trend_harvester = TrendTrickHarvesterEngine()
 
     def get_tools_manifest(self) -> List[Dict[str, Any]]:
         return [
@@ -369,6 +371,20 @@ class ZobarMCPServer:
                     },
                     "required": ["pattern_name"]
                 }
+            },
+            {
+                "name": "harvest_trending_tricks",
+                "description": "Continuous Real-Time Trend & Trick Harvester. Monitors viral tech Reels & YouTube Shorts, trending GitHub breakout repos, and global tech news wires. Auto-assimilates fresh developer tricks into continual memory and active sessions.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "action": {"type": "string", "enum": ["sync_session", "search_tricks", "get_daily_brief", "harvest_source"], "description": "Action to run"},
+                        "source": {"type": "string", "enum": ["reels_shorts", "github_trending", "global_news", "all"], "description": "Target source if harvest_source chosen"},
+                        "keyword": {"type": "string", "description": "Search keyword or topic (default: all)"},
+                        "max_items": {"type": "integer", "description": "Maximum tricks to retrieve (default: 4)"}
+                    },
+                    "required": ["action"]
+                }
             }
         ]
 
@@ -603,6 +619,39 @@ class ZobarMCPServer:
         elif name == "query_learning_registry":
             pattern_name = args.get("pattern_name", "")
             payload = self.learning_engine.get_pattern_reputation(pattern_name)
+
+        elif name == "harvest_trending_tricks":
+            action = args.get("action", "sync_session")
+            keyword = args.get("keyword", "")
+            source = args.get("source", "all")
+            max_items = args.get("max_items", 4)
+
+            if action == "sync_session":
+                payload = self.trend_harvester.sync_active_session()
+            elif action == "get_daily_brief":
+                payload = {"brief_markdown": self.trend_harvester.generate_daily_trick_brief()}
+            elif action == "search_tricks":
+                platform = None if source == "all" else source
+                payload = {
+                    "keyword": keyword,
+                    "matches": self.trend_harvester.search_tricks(keyword=keyword, platform=platform)
+                }
+            elif action == "harvest_source":
+                if source == "reels_shorts":
+                    items = self.trend_harvester.harvest_youtube_instagram_reels(topic=keyword or "coding tricks", max_items=max_items)
+                elif source == "github_trending":
+                    items = self.trend_harvester.harvest_github_trending_repos(query=keyword or "ai-agent", max_items=max_items)
+                elif source == "global_news":
+                    items = self.trend_harvester.harvest_global_tech_news(category=keyword or "ai", max_items=max_items)
+                else:
+                    items = (
+                        self.trend_harvester.harvest_youtube_instagram_reels(max_items=2) +
+                        self.trend_harvester.harvest_github_trending_repos(max_items=2) +
+                        self.trend_harvester.harvest_global_tech_news(max_items=2)
+                    )
+                payload = {"source": source, "count": len(items), "tricks": items}
+            else:
+                raise ValueError(f"Unknown trend harvest action: {action}")
 
         else:
             raise ValueError(f"Unknown tool name: {name}")

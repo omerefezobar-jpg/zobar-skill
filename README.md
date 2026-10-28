@@ -3,9 +3,10 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![CI & Quality Gate](https://github.com/omerefezobar-jpg/zobar-skill/actions/workflows/ci.yml/badge.svg)](https://github.com/omerefezobar-jpg/zobar-skill/actions)
 [![Regression Suite](https://img.shields.io/badge/Regression%20Suite-30%2F30%20Passing%20(Zero%20Tolerance)-blue.svg)](./benchmarks/BENCHMARK_REPORT.md)
-[![Unit Tests](https://img.shields.io/badge/Unit%20Tests-124%2F124%20Passing-brightgreen.svg)](https://github.com/omerefezobar-jpg/zobar-skill/actions)
+[![Unit Tests](https://img.shields.io/badge/Unit%20Tests-133%2F133%20Passing-brightgreen.svg)](https://github.com/omerefezobar-jpg/zobar-skill/actions)
 [![Real--World Tasks](https://img.shields.io/badge/Real--World%20Tasks-100.0%25%20Composite%20Score-success.svg)](./benchmarks/real_world_task_benchmarks.py)
-[![Live MCP Engine](https://img.shields.io/badge/Live%20MCP%20Server-23%20Tools%20(Sub--1ms)-blue.svg)](./benchmarks/MCP_BENCHMARK_REPORT.md)
+[![Live MCP Engine](https://img.shields.io/badge/Live%20MCP%20Server-24%20Tools%20(Sub--1ms)-blue.svg)](./benchmarks/MCP_BENCHMARK_REPORT.md)
+[![Trend & Trick Harvester](https://img.shields.io/badge/Active%20Trend%20Session-Reels%20%7C%20Shorts%20%7C%20GitHub-ff69b4.svg)](./scripts/trend_trick_harvester_engine.py)
 [![Security & Sandbox](https://img.shields.io/badge/Security%20Guard-Path%20Jail%20%7C%20No%20Shell--True-red.svg)](./scripts/security_permission_guard.py)
 [![Unified Orchestrator](https://img.shields.io/badge/Unified%20Orchestrator-9--Phase%20End--to--End-blueviolet.svg)](./scripts/unified_system_orchestrator.py)
 [![Evidence & Learning](https://img.shields.io/badge/Bayesian%20Learning-Provenance%20Graph%20%7C%20Beta--Binomial-success.svg)](./scripts/evidence_provenance_engine.py)
@@ -142,7 +143,8 @@ zobar-skill/
 │   ├── evidence_provenance_engine.py # 5 Kademeli güven grafiği, nedensel karar bağlantıları & bayatlık denetimi
 │   ├── feedback_outcome_learning_engine.py # Bayesyen Beta-Binomial ampirik deneme ve desen ağırlık kaydı
 │   ├── unified_system_orchestrator.py# Fikirden AST derlemeli koda & başmühendis onayına 9 fazlı bütünleşik sistem
-│   ├── zobar_mcp_server.py           # 23 Araçlı resmi Model Context Protocol (MCP) JSON-RPC 2.0 sunucusu
+│   ├── trend_trick_harvester_engine.py # Canlı YouTube Shorts, IG Reels, GitHub Trending & Haber trick motoru
+│   ├── zobar_mcp_server.py           # 24 Araçlı resmi Model Context Protocol (MCP) JSON-RPC 2.0 sunucusu
 │   ├── validate_inventions.py        # Faz 6: TRIZ radikal icat, dinamik TRL/ICE/WTP ve Mermaid mimarı
 │   └── export_html_report.py         # XSS korumalı, CSP uyumlu ('unsafe-eval' içermez) HTML çevirici
 ├── benchmarks/                       # 30 vakalık yasal ve 6 vakalık gerçek görev benchmark sistemleri
@@ -152,6 +154,8 @@ zobar-skill/
 │   ├── BENCHMARK_REPORT.md           # Üretilen denetim ve başarı skorkartı
 │   └── benchmark_results.json        # Makine tarafından okunabilir benchmark çıktısı
 ├── references/                       # Zihinsel modeller, First Principles, TRIZ matrisi
+│   ├── viral_tricks_and_trends_vault.json # Canlı Reels, Shorts ve GitHub trickleri ve kod şablonları
+│   ├── active_trend_session.json     # Sürekli aktif izleme oturumu ve yeni trick kuyruğu
 │   ├── free_modern_components_vault.json # Hazır modern React/Tailwind bileşen kodları (Shimmer, Bento, CTA)
 │   ├── empirical_feedback_registry.json # Bayesyen kazanma oranları ve ampirik deneme telemetrileri
 │   ├── evolutionary_design_memory.json # Tekrarsız tasarım oturum hafızası ve kromozom bankası
@@ -160,7 +164,7 @@ zobar-skill/
 │   ├── s_tier_design_vault.json      # 202 adet doğrulanmış S-Tier site ve bileşen tasarım veri tabanı
 │   ├── heavy_apps_engineering_blueprints.json # Steam, Excel, Premiere vb. 10x mühendislik analizleri
 │   └── supabase_production_schema.sql# Multi-tenant RLS, pgvector HNSW ve Realtime PostgreSQL şeması
-├── tests/                            # 113/113 Çevrimdışı mock'lu deterministik birim test paketi
+├── tests/                            # 133/133 Çevrimdışı mock'lu deterministik birim test paketi
 └── examples/                         # Örnek rapor (Markdown + HTML formatında)
 ```
 
