@@ -171,6 +171,48 @@ class TestStatutoryRegulatoryCompliance(unittest.TestCase):
         self.assertEqual(res["eu_ai_act"]["tier"], "Belirli Şeffaflık Yükümlülüğü (Transparency Obligations)")
         self.assertIn("Madde 50(1)", res["eu_ai_act"]["statutory_basis"])
 
+    def test_sensitive_biometrics_prohibited_article_5_1_g(self):
+        res = evaluate_compliance("biometric categorization sensitive political sexual orientation religious belief discrimination")
+        self.assertEqual(res["eu_ai_act"]["tier"], "Yasaklanmış Yapay Zeka Uygulaması (Prohibited AI Practice)")
+        self.assertIn("Madde 5(1)(g)", res["eu_ai_act"]["statutory_basis"])
+        self.assertTrue(res["eu_ai_act"]["requires_expert_counsel"])
+
+    def test_systemic_gpai_article_51_52(self):
+        res = evaluate_compliance("frontier general purpose gpai model systemic risk high compute training 10^25 flops evaluation")
+        self.assertEqual(res["eu_ai_act"]["tier"], "Sistemik Riskli GPAI Modeli (Systemic Risk GPAI Model)")
+        self.assertIn("Madde 51", res["eu_ai_act"]["statutory_basis"])
+        self.assertTrue(res["eu_ai_act"]["requires_expert_counsel"])
+
+    def test_workplace_dismissal_high_risk_annex_iii_4b(self):
+        res = evaluate_compliance("workplace algorithmic termination worker task allocation employee performance dismissal decision")
+        self.assertEqual(res["eu_ai_act"]["tier"], "Yüksek Riskli Sistem (High-Risk AI System)")
+        self.assertIn("Ek III Nokta 4(b)", res["eu_ai_act"]["statutory_basis"])
+        self.assertTrue(res["eu_ai_act"]["requires_expert_counsel"])
+
+    def test_insurance_underwriting_high_risk_annex_iii_5a(self):
+        res = evaluate_compliance("life health insurance underwriting risk assessment pricing policy eligibility determination")
+        self.assertEqual(res["eu_ai_act"]["tier"], "Yüksek Riskli Sistem (High-Risk AI System)")
+        self.assertIn("Ek III Nokta 5(a)", res["eu_ai_act"]["statutory_basis"])
+        self.assertTrue(res["eu_ai_act"]["requires_expert_counsel"])
+
+    def test_emergency_112_dispatch_high_risk_annex_iii_5d(self):
+        res = evaluate_compliance("emergency 112 service dispatch call triage ambulance emergency response prioritization")
+        self.assertEqual(res["eu_ai_act"]["tier"], "Yüksek Riskli Sistem (High-Risk AI System)")
+        self.assertIn("Ek III Nokta 5(d)", res["eu_ai_act"]["statutory_basis"])
+        self.assertTrue(res["eu_ai_act"]["requires_expert_counsel"])
+
+    def test_judicial_sentencing_high_risk_annex_iii_8a(self):
+        res = evaluate_compliance("judicial authority sentencing evidence interpretation court legal fact finding dispute resolution")
+        self.assertEqual(res["eu_ai_act"]["tier"], "Yüksek Riskli Sistem (High-Risk AI System)")
+        self.assertIn("Ek III Nokta 8(a)", res["eu_ai_act"]["statutory_basis"])
+        self.assertTrue(res["eu_ai_act"]["requires_expert_counsel"])
+
+    def test_satirical_deepfake_transparency_article_50_4(self):
+        res = evaluate_compliance("investigative journalism parody artistic satire synthetic media deepfake artistic freedom")
+        self.assertEqual(res["eu_ai_act"]["tier"], "Belirli Şeffaflık Yükümlülüğü (Transparency Obligations)")
+        self.assertIn("Madde 50(4)", res["eu_ai_act"]["statutory_basis"])
+        self.assertFalse(res["eu_ai_act"]["requires_expert_counsel"])
+
 class TestHybridCompetitorAndMarketBenchmark(unittest.TestCase):
     def test_curated_commercial_incumbents_lookup(self):
         incumbents = search_commercial_incumbents("static analysis code quality")

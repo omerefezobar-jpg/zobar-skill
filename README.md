@@ -2,9 +2,10 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![CI & Quality Gate](https://github.com/omerefezobar-jpg/zobar-skill/actions/workflows/ci.yml/badge.svg)](https://github.com/omerefezobar-jpg/zobar-skill/actions)
-[![Regression Suite](https://img.shields.io/badge/Regression%20Suite-20%2F20%20Passing%20(Zero%20Tolerance)-blue.svg)](./benchmarks/BENCHMARK_REPORT.md)
-[![Unit Tests](https://img.shields.io/badge/Unit%20Tests-73%2F73%20Passing-brightgreen.svg)](https://github.com/omerefezobar-jpg/zobar-skill/actions)
+[![Regression Suite](https://img.shields.io/badge/Regression%20Suite-30%2F30%20Passing%20(Zero%20Tolerance)-blue.svg)](./benchmarks/BENCHMARK_REPORT.md)
+[![Unit Tests](https://img.shields.io/badge/Unit%20Tests-80%2F80%20Passing-brightgreen.svg)](https://github.com/omerefezobar-jpg/zobar-skill/actions)
 [![Systems Math Engine](https://img.shields.io/badge/Systems%20Math-Roofline%20%7C%20Queueing%20%7C%20Amdahl-blueviolet.svg)](./scripts/systems_math_engine.py)
+[![Modern Design Styles](https://img.shields.io/badge/Modern%20Design%20Styles-Glassmorphism%20%7C%20Aurora%20%7C%20Bento-ff69b4.svg)](./references/modern_design_styles_vault.json)
 [![3D & Asset Vault](https://img.shields.io/badge/Ready%20Assets-3D%20%7C%20PBR%20%7C%20SFX%20%7C%20UI-orange.svg)](./references/free_assets_and_3d_vault.json)
 [![Live MCP Engine](https://img.shields.io/badge/Live%20MCP%20Server-JSON--RPC%202.0%20(Sub--1ms)-blue.svg)](./benchmarks/MCP_BENCHMARK_REPORT.md)
 [![Universal Vibe Coding](https://img.shields.io/badge/Vibe%20Coding-Cursor%20%7C%20Claude%20%7C%20Windsurf%20%7C%20Copilot-blueviolet.svg)](./scripts/vibe_coding_bridge.py)
@@ -16,7 +17,7 @@
 [![Python: 3.10+](https://img.shields.io/badge/Python-3.10+-3776AB.svg?logo=python&logoColor=white)](https://python.org)
 [![Security: XSS Hardened](https://img.shields.io/badge/Security-XSS%20Hardened%20(No%20Eval)-green.svg)](https://github.com/omerefezobar-jpg/zobar-skill)
 
-**Zobar Skill**, yapay zeka ajanlarını yüzeysel cevaplar veren asistanlardan; bir konuyu **seçkin üniversite müfredatları (MIT, Stanford, ETH Zürich, Oxford)**, **hakemli akademik yayınlar (OpenAlex Scholarly Graph) & arXiv ön baskıları**, **tümce düzeyinde olumsuzlama (negation) ayrıştırmalı kullanıcı sürtünmeleri (HN + Reddit)**, **hibrit pazar analizi (Ticari Liderler + Canlı GitHub & Paket Telemetrisi)**, **madde bazlı 20-senaryolu yasal mevzuat denetimi (EU AI Act, MDR Kural 11 & GDPR)**, **otomatik teknik mimari sentezi** ve **dinamik TRL/ICE formülleriyle kanıtlanmış radikal icatlarla** sıfırdan kurgulayan **uçtan uca otonom bir Deep-Tech Ar-Ge ve İnovasyon Motorudur**.
+**Zobar Skill**, yapay zeka ajanlarını yüzeysel cevaplar veren asistanlardan; bir konuyu **seçkin üniversite müfredatları (MIT, Stanford, ETH Zürich, Oxford)**, **hakemli akademik yayınlar (OpenAlex Scholarly Graph) & arXiv ön baskıları**, **tümce düzeyinde olumsuzlama (negation) ayrıştırmalı kullanıcı sürtünmeleri (HN + Reddit)**, **hibrit pazar analizi (Ticari Liderler + Canlı GitHub & Paket Telemetrisi)**, **madde bazlı 30-senaryolu yasal mevzuat denetimi (EU AI Act, MDR Kural 11 & GDPR)**, **Berkeley Roofline & Little's Law kuyruk teorisi destekli matematiksel sistem mühendisliği**, **Glassmorphism / Aurora / Bento S-Tier hazır tasarım havuzu**, **otomatik teknik mimari sentezi** ve **dinamik TRL/ICE formülleriyle kanıtlanmış radikal icatlarla** sıfırdan kurgulayan **uçtan uca otonom bir Deep-Tech Ar-Ge ve İnovasyon Motorudur**.
 
 ---
 
@@ -42,7 +43,7 @@ python run_innovator.py "Autonomous Code Analysis" --output analiz.md --html pan
 
 ---
 
-## 🧪 Sıfır Toleranslı 20-Vakalık Resmî Benchmark Skorkartı
+## 🧪 Sıfır Toleranslı 30-Vakalık Resmî Benchmark Skorkartı
 
 Zobar Skill, çıktı tutarlılığını, yasal madde isabetini ve kanıt taksonomisini **otomatik, sıfır toleranslı (zero tolerance) test ortamında (`benchmarks/run_benchmarks.py`)** denetler:
 
@@ -72,6 +73,16 @@ python benchmarks/run_benchmarks.py
 | **CASE-18** | E-Ticaret Ürün Tavsiye & Sıralama | EU AI Act Recital 34 (Genel Tüketici Yazılımı / Minimal Risk) | **100/100 (Başarılı)** |
 | **CASE-19** | Gerçek Zamanlı Yüksek Frekanslı Algoritmik Ticaret | EU AI Act Recital 34 & MiFID II (Minimal Risk AI Kapsamı) | **100/100 (Başarılı)** |
 | **CASE-20** | Uç Nokta Akıllı Termostat Firmware'i | EU AI Act Recital 34 (Ev Otomasyonu / Minimal Risk) | **100/100 (Başarılı)** |
+| **CASE-21** | Hassas Biyometrik Kategorizasyon | EU AI Act Madde 5(1)(g) (Hassas Niteliklerin Çıkarılması Yasağı) | **100/100 (Başarılı)** |
+| **CASE-22** | Kamusal Alanda Uzaktan Gerçek Zamanlı Biyometri | EU AI Act Madde 5(1)(h) (Kamusal Biyometrik Takip Yasağı) | **100/100 (Başarılı)** |
+| **CASE-23** | Kritik Su ve Baraj Yönetimi SCADA Güvenliği | EU AI Act Ek III Nokta 2 (Su ve Altyapı Güvenlik Bileşeni) | **100/100 (Başarılı)** |
+| **CASE-24** | Sistemik Risk Taşıyan Frontier GPAI Modeli | EU AI Act Madde 51 & 52 (> 10^25 FLOPs Kırmızı Takım / Bildirim) | **100/100 (Başarılı)** |
+| **CASE-25** | İşyerinde Görev Dağılımı ve Fesih Kararı | EU AI Act Ek III Nokta 4(b) (Çalışan Fesih ve Görev Atama) | **100/100 (Başarılı)** |
+| **CASE-26** | Hayat & Sağlık Sigortası Risk Değerlendirmesi | EU AI Act Ek III Nokta 5(a) (Sigorta Poliçeleme ve Primleme) | **100/100 (Başarılı)** |
+| **CASE-27** | Acil Servis 112 Çağrı Merkezi Triyaj ve Sevk | EU AI Act Ek III Nokta 5(d) (Acil Sağlık ve İtfaiye Önceliği) | **100/100 (Başarılı)** |
+| **CASE-28** | Mahkemeler İçin Hukuki Delil ve Hüküm Asistanı | EU AI Act Ek III Nokta 8(a) (Yargı ve Adli Karar Desteği) | **100/100 (Başarılı)** |
+| **CASE-29** | Parodi, Hiciv ve Gazetecilik Sentetik Medyası | EU AI Act Madde 50(4) (Sanat ve Basın Özgürlüğü Şeffaflığı) | **100/100 (Başarılı)** |
+| **CASE-30** | Kurumsal E-Posta Spam ve Ağ Güvenlik Duvarı | EU AI Act Recital 34 (Siber Güvenlik Standart Ağ Yazılımı) | **100/100 (Başarılı)** |
 
 Detaylı denetim günlüğü için [BENCHMARK_REPORT.md](./benchmarks/BENCHMARK_REPORT.md) dosyasını inceleyin.
 
@@ -91,11 +102,13 @@ zobar-skill/
 │   ├── mine_user_sentiment.py        # Tümce düzeyinde olumsuzlama filtreli HN & Reddit şikayet madencisi
 │   ├── benchmark_competitors.py      # Ticari pazar liderleri + canlı GitHub ve paket telemetrisi
 │   ├── search_prior_art.py           # Google Patents üzerinden ön patent & prior art tarayıcı
-│   ├── scan_regulations.py           # 20 senaryolu madde bazlı mevzuat screener (EU AI Act, MDR, GDPR)
+│   ├── scan_regulations.py           # 30 senaryolu madde bazlı mevzuat screener (EU AI Act, MDR, GDPR)
 │   ├── synthesize_architecture.py    # Faz 5: Otomatik sistem mimarisi ve UI spesifikasyon motoru
 │   ├── recommend_ui_patterns.py      # 200+ S-Tier siteden (Netflix, Stripe vb.) bileşen & UI deseni seçici
 │   ├── analyze_heavy_app_architecture.py # Steam, Excel, Premiere Pro 10x mimari yeniden inşa motoru
-│   ├── semantic_cache.py             # FinOps: <1ms yanıt süreli sıfır maliyetli semantik önbellek
+│   ├── systems_math_engine.py        # Berkeley Roofline, Little's Law kuyruk, Amdahl & Spring ODE motoru
+│   ├── design_system_generator.py    # Glassmorphism, Aurora, Cyberpunk HUD, Bento, Neo-Brutalist tasarım üretici
+│   ├── semantic_cache.py             # FinOps: <0.1ms yanıt süreli ters indeksli semantik önbellek
 │   ├── smart_model_router.py         # Kademeli model yönlendirici (%85-95 API fatura tasarrufu)
 │   ├── supabase_db_optimizer.py      # Supabase RLS ve pgvector HNSW indeks sağlık denetleyicisi
 │   ├── context_compressor.py         # Özyinelemeli durum özeti ve semantik token budama motoru
@@ -105,17 +118,20 @@ zobar-skill/
 │   ├── realtime_audio_voice_engine.py# Discord WebRTC/SFU ses yönlendirici & ElevenLabs streaming TTS
 │   ├── llm_hardware_accelerator.py   # PagedAttention, Speculative Decoding ve AWQ/INT4 hızlandırma motoru
 │   ├── unit_economics_investor_simulator.py # LTV/CAC > 3 ve sıfır sermayeli asimetrik girişim simülatörü
+│   ├── zobar_mcp_server.py           # 11 Araçlı resmi Model Context Protocol (MCP) JSON-RPC 2.0 sunucusu
 │   ├── validate_inventions.py        # Faz 6: TRIZ radikal icat, dinamik TRL/ICE/WTP ve Mermaid mimarı
 │   └── export_html_report.py         # XSS korumalı, CSP uyumlu ('unsafe-eval' içermez) HTML çevirici
-├── benchmarks/                       # 20 vakalık sıfır toleranslı regresyon denetim sistemi
+├── benchmarks/                       # 30 vakalık sıfır toleranslı regresyon denetim sistemi
 │   ├── run_benchmarks.py             # Otomatik benchmark çalıştırıcısı
 │   ├── BENCHMARK_REPORT.md           # Üretilen denetim ve başarı skorkartı
 │   └── benchmark_results.json        # Makine tarafından okunabilir benchmark çıktısı
 ├── references/                       # Zihinsel modeller, First Principles, TRIZ matrisi
+│   ├── modern_design_styles_vault.json # Glassmorphism, Aurora, Cyberpunk HUD, Neo-Brutalist token havuzu
+│   ├── free_assets_and_3d_vault.json # 3D, GLTF, PBR texture, ses ve arayüz asset havuzu
 │   ├── s_tier_design_vault.json      # 202 adet doğrulanmış S-Tier site ve bileşen tasarım veri tabanı
 │   ├── heavy_apps_engineering_blueprints.json # Steam, Excel, Premiere vb. 10x mühendislik analizleri
 │   └── supabase_production_schema.sql# Multi-tenant RLS, pgvector HNSW ve Realtime PostgreSQL şeması
-├── tests/                            # 42/42 Çevrimdışı mock'lu deterministik birim test paketi
+├── tests/                            # 80/80 Çevrimdışı mock'lu deterministik birim test paketi
 └── examples/                         # Örnek rapor (Markdown + HTML formatında)
 ```
 

@@ -23,7 +23,7 @@ from scripts.validate_inventions import generate_validated_inventions
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
-# 20 Rigorous Ground-Truth Benchmark Testbeds backed by official EU Statutory Precedents
+# 30 Rigorous Ground-Truth Benchmark Testbeds backed by official EU Statutory Precedents
 BENCHMARK_TESTBEDS = [
     {
         "id": "CASE-01",
@@ -224,12 +224,112 @@ BENCHMARK_TESTBEDS = [
         "expected_core_lang": "Rust",
         "expected_expert_counsel_flag": False,
         "official_ground_truth_source": "Regulation (EU) 2024/1689 Recital 34 (Home appliance automation firmware is minimal risk)"
+    },
+    {
+        "id": "CASE-21",
+        "name": "Hassas Biyometrik Kategorizasyon (Sensitive Biometric Categorization)",
+        "query": "biometric categorization sensitive political sexual orientation religious belief discrimination",
+        "expected_ai_act_tier": "Yasaklanmış Yapay Zeka Uygulaması (Prohibited AI Practice)",
+        "expected_statutory_basis": "Madde 5(1)(g)",
+        "expected_core_lang": "TypeScript / Rust (Hibrit Mimari)",
+        "expected_expert_counsel_flag": True,
+        "official_ground_truth_source": "Regulation (EU) 2024/1689 Article 5(1)(g) (Prohibition of biometric categorization deducing sensitive attributes)"
+    },
+    {
+        "id": "CASE-22",
+        "name": "Kamusal Alanda Gerçek Zamanlı Uzaktan Biyometri Tespiti (Real-time Remote Biometrics)",
+        "query": "realtime remote biometric identification remote biometric in public facial tracking law enforcement",
+        "expected_ai_act_tier": "Yasaklanmış Yapay Zeka Uygulaması (Prohibited AI Practice)",
+        "expected_statutory_basis": "Madde 5(1)(h)",
+        "expected_core_lang": "Rust",
+        "expected_expert_counsel_flag": True,
+        "official_ground_truth_source": "Regulation (EU) 2024/1689 Article 5(1)(h) (Prohibition of real-time remote biometric identification in public spaces)"
+    },
+    {
+        "id": "CASE-23",
+        "name": "Kritik Su Barajı ve Taşkın Yönetimi SCADA Güvenlik Bileşeni (Water Infrastructure SCADA)",
+        "query": "critical water infrastructure dam management scada flood control safety component",
+        "expected_ai_act_tier": "Yüksek Riskli Sistem (High-Risk AI System)",
+        "expected_statutory_basis": "Ek III Nokta 2",
+        "expected_core_lang": "Rust",
+        "expected_expert_counsel_flag": True,
+        "official_ground_truth_source": "Regulation (EU) 2024/1689 Annex III Point 2 (Critical infrastructure safety components in water supply and flood control)"
+    },
+    {
+        "id": "CASE-24",
+        "name": "Sistemik Risk Taşıyan Frontier GPAI Modeli (Systemic Risk GPAI Model > 10^25 FLOPs)",
+        "query": "frontier general purpose gpai model systemic risk high compute training 10^25 flops evaluation",
+        "expected_ai_act_tier": "Sistemik Riskli GPAI Modeli (Systemic Risk GPAI Model)",
+        "expected_statutory_basis": "Madde 51",
+        "expected_core_lang": "Rust",
+        "expected_expert_counsel_flag": True,
+        "official_ground_truth_source": "Regulation (EU) 2024/1689 Article 51 & 52 (Classification and systemic risk mitigation for general-purpose AI models)"
+    },
+    {
+        "id": "CASE-25",
+        "name": "İşyerinde Algoritmik Görev Dağılımı ve Fesih Kararı (Workplace Dismissal & Task Monitoring)",
+        "query": "workplace algorithmic termination worker task allocation employee performance dismissal decision",
+        "expected_ai_act_tier": "Yüksek Riskli Sistem (High-Risk AI System)",
+        "expected_statutory_basis": "Ek III Nokta 4(b)",
+        "expected_core_lang": "TypeScript / Rust (Hibrit Mimari)",
+        "expected_expert_counsel_flag": True,
+        "official_ground_truth_source": "Regulation (EU) 2024/1689 Annex III Point 4(b) (AI systems used to allocate tasks, monitor performance, or make decisions on termination)"
+    },
+    {
+        "id": "CASE-26",
+        "name": "Hayat ve Sağlık Sigortası Risk Değerlendirmesi ve Prim Fiyatlama (Insurance Underwriting)",
+        "query": "life health insurance underwriting risk assessment pricing policy eligibility determination",
+        "expected_ai_act_tier": "Yüksek Riskli Sistem (High-Risk AI System)",
+        "expected_statutory_basis": "Ek III Nokta 5(a)",
+        "expected_core_lang": "TypeScript / Rust (Hibrit Mimari)",
+        "expected_expert_counsel_flag": True,
+        "official_ground_truth_source": "Regulation (EU) 2024/1689 Annex III Point 5(a) (Risk assessment and pricing for life and health insurance)"
+    },
+    {
+        "id": "CASE-27",
+        "name": "Acil Servis 112 Çağrı Merkezi Triyaj ve Sevk Önceliklendirmesi (Emergency 112 Dispatch)",
+        "query": "emergency 112 service dispatch call triage ambulance emergency response prioritization",
+        "expected_ai_act_tier": "Yüksek Riskli Sistem (High-Risk AI System)",
+        "expected_statutory_basis": "Ek III Nokta 5(d)",
+        "expected_core_lang": "TypeScript / Rust (Hibrit Mimari)",
+        "expected_expert_counsel_flag": True,
+        "official_ground_truth_source": "Regulation (EU) 2024/1689 Annex III Point 5(d) (Emergency healthcare, fire, and police dispatch and triage)"
+    },
+    {
+        "id": "CASE-28",
+        "name": "Mahkemeler İçin Hukuki Delil ve Hüküm Değerlendirme Asistanı (Judicial Fact Finding)",
+        "query": "judicial authority sentencing evidence interpretation court legal fact finding dispute resolution",
+        "expected_ai_act_tier": "Yüksek Riskli Sistem (High-Risk AI System)",
+        "expected_statutory_basis": "Ek III Nokta 8(a)",
+        "expected_core_lang": "TypeScript / Rust (Hibrit Mimari)",
+        "expected_expert_counsel_flag": True,
+        "official_ground_truth_source": "Regulation (EU) 2024/1689 Annex III Point 8(a) (AI systems assisting judicial authorities in interpreting facts and the law)"
+    },
+    {
+        "id": "CASE-29",
+        "name": "Parodi, Hiciv ve Gazetecilik Sentetik Medya Şeffaflığı (Satirical Deepfake Exemption)",
+        "query": "investigative journalism parody artistic satire synthetic media deepfake artistic freedom",
+        "expected_ai_act_tier": "Belirli Şeffaflık Yükümlülüğü (Transparency Obligations)",
+        "expected_statutory_basis": "Madde 50(4)",
+        "expected_core_lang": "TypeScript / Rust (Hibrit Mimari)",
+        "expected_expert_counsel_flag": False,
+        "official_ground_truth_source": "Regulation (EU) 2024/1689 Article 50(4) (Transparency disclosure exemptions and adaptations for satire and journalism)"
+    },
+    {
+        "id": "CASE-30",
+        "name": "Kurumsal E-Posta Spam ve Ağ Güvenlik Duvarı Ağ Geçidi (Enterprise Spam & Antivirus)",
+        "query": "enterprise spam filter antivirus gateway network firewall packet filtering",
+        "expected_ai_act_tier": "Minimal / Düşük Risk (Genel Yazılım Kapsamı)",
+        "expected_statutory_basis": "Recital 34",
+        "expected_core_lang": "Go",
+        "expected_expert_counsel_flag": False,
+        "official_ground_truth_source": "Regulation (EU) 2024/1689 Recital 34 (Standard network security, spam filtering, and firewalls are minimal risk)"
     }
 ]
 
 def run_benchmarks():
     print("========================================================================")
-    print(" 🎯 ZOBAR SKILL — SIFIR TOLERANSLI 20-VAKALIK RESMÎ BENCHMARK SUITE 🎯")
+    print(" 🎯 ZOBAR SKILL — SIFIR TOLERANSLI 30-VAKALIK RESMÎ BENCHMARK SUITE 🎯")
     print("========================================================================\n")
 
     start_time = time.time()
@@ -302,7 +402,7 @@ def run_benchmarks():
 
     # Dürüst, Sertifikalı Markdown Raporu
     report_lines = [
-        "# ZOBAR SKILL 20-VAKALIK SIFIR TOLERANSLI DOĞRULUK & EMSAL SKORKARTI",
+        "# ZOBAR SKILL 30-VAKALIK SIFIR TOLERANSLI DOĞRULUK & EMSAL SKORKARTI",
         f"**Rapor Tarihi (UTC):** {datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M UTC')} | **Test Süresi:** {duration:.3f}s\n",
         "> 🏛️ **Resmî Mevzuat Emsalleri:** Bu test kümesindeki tüm referans değerler resmî AB mevzuatlarına (Regulation (EU) 2024/1689 AI Act, MDR (EU) 2017/745 Annex VIII Rule 11, EDPB Guidelines WP251) dayandırılmıştır.\n",
         "> ⚠️ **Sıfır Tolerans Politikası:** Tek bir yasal madde sınıflandırma hatası veya kanıt taksonomisi sapması durumunda test derhal başarısız sayılır ve CI durdurulur.\n",

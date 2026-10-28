@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-28T20:58:56.931652+00:00",
+  "timestamp": "2026-10-28T21:08:26.416729+00:00",
   "policy": "Strict Zero-Tolerance (Any failure fails CI)",
   "pass_rate_percentage": 100.0,
-  "total_cases": 20,
-  "successful_cases": 20,
+  "total_cases": 30,
+  "successful_cases": 30,
   "total_failures": 0,
   "cases": [
     {
@@ -165,6 +165,86 @@
       "score": 100,
       "failures": [],
       "ground_truth_precedent": "Regulation (EU) 2024/1689 Recital 34 (Home appliance automation firmware is minimal risk)"
+    },
+    {
+      "id": "CASE-21",
+      "name": "Hassas Biyometrik Kategorizasyon (Sensitive Biometric Categorization)",
+      "status": "✅ KUSURSUZ (100/100)",
+      "score": 100,
+      "failures": [],
+      "ground_truth_precedent": "Regulation (EU) 2024/1689 Article 5(1)(g) (Prohibition of biometric categorization deducing sensitive attributes)"
+    },
+    {
+      "id": "CASE-22",
+      "name": "Kamusal Alanda Gerçek Zamanlı Uzaktan Biyometri Tespiti (Real-time Remote Biometrics)",
+      "status": "✅ KUSURSUZ (100/100)",
+      "score": 100,
+      "failures": [],
+      "ground_truth_precedent": "Regulation (EU) 2024/1689 Article 5(1)(h) (Prohibition of real-time remote biometric identification in public spaces)"
+    },
+    {
+      "id": "CASE-23",
+      "name": "Kritik Su Barajı ve Taşkın Yönetimi SCADA Güvenlik Bileşeni (Water Infrastructure SCADA)",
+      "status": "✅ KUSURSUZ (100/100)",
+      "score": 100,
+      "failures": [],
+      "ground_truth_precedent": "Regulation (EU) 2024/1689 Annex III Point 2 (Critical infrastructure safety components in water supply and flood control)"
+    },
+    {
+      "id": "CASE-24",
+      "name": "Sistemik Risk Taşıyan Frontier GPAI Modeli (Systemic Risk GPAI Model > 10^25 FLOPs)",
+      "status": "✅ KUSURSUZ (100/100)",
+      "score": 100,
+      "failures": [],
+      "ground_truth_precedent": "Regulation (EU) 2024/1689 Article 51 & 52 (Classification and systemic risk mitigation for general-purpose AI models)"
+    },
+    {
+      "id": "CASE-25",
+      "name": "İşyerinde Algoritmik Görev Dağılımı ve Fesih Kararı (Workplace Dismissal & Task Monitoring)",
+      "status": "✅ KUSURSUZ (100/100)",
+      "score": 100,
+      "failures": [],
+      "ground_truth_precedent": "Regulation (EU) 2024/1689 Annex III Point 4(b) (AI systems used to allocate tasks, monitor performance, or make decisions on termination)"
+    },
+    {
+      "id": "CASE-26",
+      "name": "Hayat ve Sağlık Sigortası Risk Değerlendirmesi ve Prim Fiyatlama (Insurance Underwriting)",
+      "status": "✅ KUSURSUZ (100/100)",
+      "score": 100,
+      "failures": [],
+      "ground_truth_precedent": "Regulation (EU) 2024/1689 Annex III Point 5(a) (Risk assessment and pricing for life and health insurance)"
+    },
+    {
+      "id": "CASE-27",
+      "name": "Acil Servis 112 Çağrı Merkezi Triyaj ve Sevk Önceliklendirmesi (Emergency 112 Dispatch)",
+      "status": "✅ KUSURSUZ (100/100)",
+      "score": 100,
+      "failures": [],
+      "ground_truth_precedent": "Regulation (EU) 2024/1689 Annex III Point 5(d) (Emergency healthcare, fire, and police dispatch and triage)"
+    },
+    {
+      "id": "CASE-28",
+      "name": "Mahkemeler İçin Hukuki Delil ve Hüküm Değerlendirme Asistanı (Judicial Fact Finding)",
+      "status": "✅ KUSURSUZ (100/100)",
+      "score": 100,
+      "failures": [],
+      "ground_truth_precedent": "Regulation (EU) 2024/1689 Annex III Point 8(a) (AI systems assisting judicial authorities in interpreting facts and the law)"
+    },
+    {
+      "id": "CASE-29",
+      "name": "Parodi, Hiciv ve Gazetecilik Sentetik Medya Şeffaflığı (Satirical Deepfake Exemption)",
+      "status": "✅ KUSURSUZ (100/100)",
+      "score": 100,
+      "failures": [],
+      "ground_truth_precedent": "Regulation (EU) 2024/1689 Article 50(4) (Transparency disclosure exemptions and adaptations for satire and journalism)"
+    },
+    {
+      "id": "CASE-30",
+      "name": "Kurumsal E-Posta Spam ve Ağ Güvenlik Duvarı Ağ Geçidi (Enterprise Spam & Antivirus)",
+      "status": "✅ KUSURSUZ (100/100)",
+      "score": 100,
+      "failures": [],
+      "ground_truth_precedent": "Regulation (EU) 2024/1689 Recital 34 (Standard network security, spam filtering, and firewalls are minimal risk)"
     }
   ]
 }

@@ -34,6 +34,7 @@ from scripts.image_prompt_synthesizer import ImagePromptSynthesizer
 from scripts.ecs_game_engine import ECSWorld, DeterministicGameLoop
 from scripts.query_asset_vault import AssetVaultQueryEngine
 from scripts.systems_math_engine import SystemsMathEngine
+from scripts.design_system_generator import ModernDesignStylesEngine
 
 
 class ZobarMCPServer:
@@ -44,6 +45,7 @@ class ZobarMCPServer:
         self.memory_engine = ContinualMemoryEngine()
         self.image_synthesizer = ImagePromptSynthesizer()
         self.asset_vault = AssetVaultQueryEngine()
+        self.design_styles = ModernDesignStylesEngine()
 
     def get_tools_manifest(self) -> List[Dict[str, Any]]:
         return [
@@ -181,6 +183,20 @@ class ZobarMCPServer:
                     },
                     "required": ["math_type"]
                 }
+            },
+            {
+                "name": "get_design_style",
+                "description": "Provides production-ready CSS, Tailwind classes, and React component code for S-Tier design paradigms: glassmorphism (frosted glass), aurora_mesh_gradient, neo_brutalism, cyberpunk_hud, dark_mode_bento, claymorphism.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "style_name": {
+                            "type": "string",
+                            "description": "Design style key (glassmorphism, aurora_mesh_gradient, neo_brutalism, cyberpunk_hud, dark_mode_bento, claymorphism)"
+                        }
+                    },
+                    "required": ["style_name"]
+                }
             }
         ]
 
@@ -293,6 +309,20 @@ class ZobarMCPServer:
                 )
             else:
                 raise ValueError(f"Unknown math_type: {mtype}")
+
+        elif name == "get_design_style":
+            style_name = args.get("style_name", "glassmorphism")
+            style_data = self.design_styles.get_style(style_name)
+            if not style_data:
+                payload = {
+                    "error": f"Style '{style_name}' not found.",
+                    "available_styles": [s["key"] for s in self.design_styles.list_styles()]
+                }
+            else:
+                payload = {
+                    "style_name": style_name,
+                    "tokens": style_data,
+                }
 
         else:
             raise ValueError(f"Unknown tool name: {name}")

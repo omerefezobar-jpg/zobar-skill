@@ -1,11 +1,11 @@
-# ZOBAR SKILL 20-VAKALIK SIFIR TOLERANSLI DOĞRULUK & EMSAL SKORKARTI
-**Rapor Tarihi (UTC):** 2026-10-28 20:58 UTC | **Test Süresi:** 0.024s
+# ZOBAR SKILL 30-VAKALIK SIFIR TOLERANSLI DOĞRULUK & EMSAL SKORKARTI
+**Rapor Tarihi (UTC):** 2026-10-28 21:08 UTC | **Test Süresi:** 0.037s
 
 > 🏛️ **Resmî Mevzuat Emsalleri:** Bu test kümesindeki tüm referans değerler resmî AB mevzuatlarına (Regulation (EU) 2024/1689 AI Act, MDR (EU) 2017/745 Annex VIII Rule 11, EDPB Guidelines WP251) dayandırılmıştır.
 
 > ⚠️ **Sıfır Tolerans Politikası:** Tek bir yasal madde sınıflandırma hatası veya kanıt taksonomisi sapması durumunda test derhal başarısız sayılır ve CI durdurulur.
 
-### 🎯 Başarı Oranı: %100.0 (20/20 Vaka Sıfır Hatayla Geçti)
+### 🎯 Başarı Oranı: %100.0 (30/30 Vaka Sıfır Hatayla Geçti)
 
 ---
 ## 📋 Vaka Bazlı Denetim Tablosu
@@ -32,6 +32,16 @@
 | CASE-18 | E-Ticaret Ürün Tavsiye ve Arama Sıralaması (Product Recommendation) | *Regulation (EU) 2024/1689 Recital 34 (General consumer search ranking is minimal risk)* | **100/100** | ✅ KUSURSUZ (100/100) |
 | CASE-19 | Gerçek Zamanlı Yüksek Frekanslı Algoritmik Ticaret (HFT Algorithmic Trading) | *Regulation (EU) 2024/1689 Recital 34 (Financial trading is minimal risk under AI Act, regulated under MiFID II)* | **100/100** | ✅ KUSURSUZ (100/100) |
 | CASE-20 | Uç Nokta Akıllı Termostat Firmware'i (Edge IoT Smart Thermostat) | *Regulation (EU) 2024/1689 Recital 34 (Home appliance automation firmware is minimal risk)* | **100/100** | ✅ KUSURSUZ (100/100) |
+| CASE-21 | Hassas Biyometrik Kategorizasyon (Sensitive Biometric Categorization) | *Regulation (EU) 2024/1689 Article 5(1)(g) (Prohibition of biometric categorization deducing sensitive attributes)* | **100/100** | ✅ KUSURSUZ (100/100) |
+| CASE-22 | Kamusal Alanda Gerçek Zamanlı Uzaktan Biyometri Tespiti (Real-time Remote Biometrics) | *Regulation (EU) 2024/1689 Article 5(1)(h) (Prohibition of real-time remote biometric identification in public spaces)* | **100/100** | ✅ KUSURSUZ (100/100) |
+| CASE-23 | Kritik Su Barajı ve Taşkın Yönetimi SCADA Güvenlik Bileşeni (Water Infrastructure SCADA) | *Regulation (EU) 2024/1689 Annex III Point 2 (Critical infrastructure safety components in water supply and flood control)* | **100/100** | ✅ KUSURSUZ (100/100) |
+| CASE-24 | Sistemik Risk Taşıyan Frontier GPAI Modeli (Systemic Risk GPAI Model > 10^25 FLOPs) | *Regulation (EU) 2024/1689 Article 51 & 52 (Classification and systemic risk mitigation for general-purpose AI models)* | **100/100** | ✅ KUSURSUZ (100/100) |
+| CASE-25 | İşyerinde Algoritmik Görev Dağılımı ve Fesih Kararı (Workplace Dismissal & Task Monitoring) | *Regulation (EU) 2024/1689 Annex III Point 4(b) (AI systems used to allocate tasks, monitor performance, or make decisions on termination)* | **100/100** | ✅ KUSURSUZ (100/100) |
+| CASE-26 | Hayat ve Sağlık Sigortası Risk Değerlendirmesi ve Prim Fiyatlama (Insurance Underwriting) | *Regulation (EU) 2024/1689 Annex III Point 5(a) (Risk assessment and pricing for life and health insurance)* | **100/100** | ✅ KUSURSUZ (100/100) |
+| CASE-27 | Acil Servis 112 Çağrı Merkezi Triyaj ve Sevk Önceliklendirmesi (Emergency 112 Dispatch) | *Regulation (EU) 2024/1689 Annex III Point 5(d) (Emergency healthcare, fire, and police dispatch and triage)* | **100/100** | ✅ KUSURSUZ (100/100) |
+| CASE-28 | Mahkemeler İçin Hukuki Delil ve Hüküm Değerlendirme Asistanı (Judicial Fact Finding) | *Regulation (EU) 2024/1689 Annex III Point 8(a) (AI systems assisting judicial authorities in interpreting facts and the law)* | **100/100** | ✅ KUSURSUZ (100/100) |
+| CASE-29 | Parodi, Hiciv ve Gazetecilik Sentetik Medya Şeffaflığı (Satirical Deepfake Exemption) | *Regulation (EU) 2024/1689 Article 50(4) (Transparency disclosure exemptions and adaptations for satire and journalism)* | **100/100** | ✅ KUSURSUZ (100/100) |
+| CASE-30 | Kurumsal E-Posta Spam ve Ağ Güvenlik Duvarı Ağ Geçidi (Enterprise Spam & Antivirus) | *Regulation (EU) 2024/1689 Recital 34 (Standard network security, spam filtering, and firewalls are minimal risk)* | **100/100** | ✅ KUSURSUZ (100/100) |
 
 ---
 ## 🔍 Sıfır Tolerans Denetim Günlüğü
@@ -114,4 +124,44 @@
 
 ### CASE-20: Uç Nokta Akıllı Termostat Firmware'i (Edge IoT Smart Thermostat)
 - **Resmî Hukuki Emsal:** Regulation (EU) 2024/1689 Recital 34 (Home appliance automation firmware is minimal risk)
+- ✅ Mevzuat sınıflandırması, kullanım amacı ayrımı, mimari seçim ve kanıt taksonomisi tam uyumlu.
+
+### CASE-21: Hassas Biyometrik Kategorizasyon (Sensitive Biometric Categorization)
+- **Resmî Hukuki Emsal:** Regulation (EU) 2024/1689 Article 5(1)(g) (Prohibition of biometric categorization deducing sensitive attributes)
+- ✅ Mevzuat sınıflandırması, kullanım amacı ayrımı, mimari seçim ve kanıt taksonomisi tam uyumlu.
+
+### CASE-22: Kamusal Alanda Gerçek Zamanlı Uzaktan Biyometri Tespiti (Real-time Remote Biometrics)
+- **Resmî Hukuki Emsal:** Regulation (EU) 2024/1689 Article 5(1)(h) (Prohibition of real-time remote biometric identification in public spaces)
+- ✅ Mevzuat sınıflandırması, kullanım amacı ayrımı, mimari seçim ve kanıt taksonomisi tam uyumlu.
+
+### CASE-23: Kritik Su Barajı ve Taşkın Yönetimi SCADA Güvenlik Bileşeni (Water Infrastructure SCADA)
+- **Resmî Hukuki Emsal:** Regulation (EU) 2024/1689 Annex III Point 2 (Critical infrastructure safety components in water supply and flood control)
+- ✅ Mevzuat sınıflandırması, kullanım amacı ayrımı, mimari seçim ve kanıt taksonomisi tam uyumlu.
+
+### CASE-24: Sistemik Risk Taşıyan Frontier GPAI Modeli (Systemic Risk GPAI Model > 10^25 FLOPs)
+- **Resmî Hukuki Emsal:** Regulation (EU) 2024/1689 Article 51 & 52 (Classification and systemic risk mitigation for general-purpose AI models)
+- ✅ Mevzuat sınıflandırması, kullanım amacı ayrımı, mimari seçim ve kanıt taksonomisi tam uyumlu.
+
+### CASE-25: İşyerinde Algoritmik Görev Dağılımı ve Fesih Kararı (Workplace Dismissal & Task Monitoring)
+- **Resmî Hukuki Emsal:** Regulation (EU) 2024/1689 Annex III Point 4(b) (AI systems used to allocate tasks, monitor performance, or make decisions on termination)
+- ✅ Mevzuat sınıflandırması, kullanım amacı ayrımı, mimari seçim ve kanıt taksonomisi tam uyumlu.
+
+### CASE-26: Hayat ve Sağlık Sigortası Risk Değerlendirmesi ve Prim Fiyatlama (Insurance Underwriting)
+- **Resmî Hukuki Emsal:** Regulation (EU) 2024/1689 Annex III Point 5(a) (Risk assessment and pricing for life and health insurance)
+- ✅ Mevzuat sınıflandırması, kullanım amacı ayrımı, mimari seçim ve kanıt taksonomisi tam uyumlu.
+
+### CASE-27: Acil Servis 112 Çağrı Merkezi Triyaj ve Sevk Önceliklendirmesi (Emergency 112 Dispatch)
+- **Resmî Hukuki Emsal:** Regulation (EU) 2024/1689 Annex III Point 5(d) (Emergency healthcare, fire, and police dispatch and triage)
+- ✅ Mevzuat sınıflandırması, kullanım amacı ayrımı, mimari seçim ve kanıt taksonomisi tam uyumlu.
+
+### CASE-28: Mahkemeler İçin Hukuki Delil ve Hüküm Değerlendirme Asistanı (Judicial Fact Finding)
+- **Resmî Hukuki Emsal:** Regulation (EU) 2024/1689 Annex III Point 8(a) (AI systems assisting judicial authorities in interpreting facts and the law)
+- ✅ Mevzuat sınıflandırması, kullanım amacı ayrımı, mimari seçim ve kanıt taksonomisi tam uyumlu.
+
+### CASE-29: Parodi, Hiciv ve Gazetecilik Sentetik Medya Şeffaflığı (Satirical Deepfake Exemption)
+- **Resmî Hukuki Emsal:** Regulation (EU) 2024/1689 Article 50(4) (Transparency disclosure exemptions and adaptations for satire and journalism)
+- ✅ Mevzuat sınıflandırması, kullanım amacı ayrımı, mimari seçim ve kanıt taksonomisi tam uyumlu.
+
+### CASE-30: Kurumsal E-Posta Spam ve Ağ Güvenlik Duvarı Ağ Geçidi (Enterprise Spam & Antivirus)
+- **Resmî Hukuki Emsal:** Regulation (EU) 2024/1689 Recital 34 (Standard network security, spam filtering, and firewalls are minimal risk)
 - ✅ Mevzuat sınıflandırması, kullanım amacı ayrımı, mimari seçim ve kanıt taksonomisi tam uyumlu.

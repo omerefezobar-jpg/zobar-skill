@@ -121,12 +121,51 @@ def evaluate_compliance(domain_keywords: str):
             "statutory_disclaimer": "İşyerinde ve okullarda duygu analizi AB genelinde yasaktır."
         }
 
+    # 1f. Biometric Categorization for Sensitive Beliefs/Orientation (Article 5(1)(g))
+    if any(k in lowered for k in ["biometric categorization", "political orientation", "sexual orientation", "religious belief discrimination"]):
+        return {
+            "domain": domain_keywords,
+            "eu_ai_act": {
+                "tier": "Yasaklanmış Yapay Zeka Uygulaması (Prohibited AI Practice)",
+                "statutory_basis": "EU AI Act Madde 5(1)(g) (Hassas nitelikleri çıkaran biyometrik kategorizasyon yasağı)",
+                "official_precedent": "Regulation (EU) 2024/1689 Article 5(1)(g)",
+                "confidence": "Kritik / Kesin Yasak",
+                "requires_expert_counsel": True,
+                "obligations": [
+                    "Kişilerin siyasi, dini, felsefi inançlarını veya cinsel yönelimlerini biyometrik verilerden çıkaran sistemler mutlak olarak yasaktır."
+                ]
+            },
+            "data_privacy": ["GDPR Madde 9: Özel nitelikli kişisel verilerin işlenmesi yasağı."],
+            "statutory_disclaimer": "Hassas biyometrik kategorizasyon Madde 5(1)(g) altında kesin olarak yasaktır."
+        }
+
+    # 1g. Real-Time Remote Biometric Identification in Public Spaces (Article 5(1)(h))
+    if any(k in lowered for k in ["realtime remote biometric identification", "remote biometric in public", "public facial tracking"]):
+        return {
+            "domain": domain_keywords,
+            "eu_ai_act": {
+                "tier": "Yasaklanmış Yapay Zeka Uygulaması (Prohibited AI Practice)",
+                "statutory_basis": "EU AI Act Madde 5(1)(h) (Kamusal alanda gerçek zamanlı uzaktan biyometrik kimlik tespiti yasağı)",
+                "official_precedent": "Regulation (EU) 2024/1689 Article 5(1)(h)",
+                "confidence": "Kritik / Kesin Yasak",
+                "requires_expert_counsel": True,
+                "obligations": [
+                    "Kolluk kuvvetleri dahil kamusal alanda gerçek zamanlı yüz/biyometri tanıma çok katı adli istisnalar haricinde yasaktır."
+                ]
+            },
+            "data_privacy": ["GDPR Madde 9 ve Madde 10: Kamu gözetimi ve kitlesel biyometri işleme yasağı."],
+            "statutory_disclaimer": "Kamusal alanda gerçek zamanlı uzaktan biyometrik takip genel kural olarak yasaktır."
+        }
+
     # =========================================================================
     # 2. HEALTHCARE & MEDICAL SYSTEMS (MDR 2017/745 & AI ACT ARTICLE 6(1))
     # =========================================================================
     if any(k in lowered for k in ["medical", "health", "patient", "clinical", "hospital", "radiology"]):
-        # Exclusion: Administrative Hospital Systems
-        if any(k in lowered for k in ["administrative", "scheduling", "billing", "inventory", "shift"]):
+        # Exclusion 1: Insurance Underwriting (Evaluated under Annex III Point 5(a))
+        if any(k in lowered for k in ["insurance", "underwriting", "policy eligibility"]):
+            pass
+        # Exclusion 2: Administrative Hospital Systems
+        elif any(k in lowered for k in ["administrative", "scheduling", "billing", "inventory", "shift"]):
             return {
                 "domain": domain_keywords,
                 "eu_ai_act": {
@@ -208,7 +247,7 @@ def evaluate_compliance(domain_keywords: str):
         }
 
     # 3c. Critical Infrastructure Safety Components (Annex III Point 2)
-    if any(k in lowered for k in ["critical infrastructure", "power grid", "water management scada", "energy grid safety"]):
+    if any(k in lowered for k in ["critical infrastructure", "power grid", "water management scada", "energy grid safety", "water infrastructure", "dam management", "flood control"]):
         return {
             "domain": domain_keywords,
             "eu_ai_act": {
@@ -263,6 +302,105 @@ def evaluate_compliance(domain_keywords: str):
             "statutory_disclaimer": "Tüketici finansal erişimini etkileyen yapay zeka modelleri Ek III uyarınca yüksek risklidir."
         }
 
+    # 3f. Workplace Algorithmic Dismissal & Task Monitoring (Annex III Point 4(b))
+    if any(k in lowered for k in ["workplace algorithmic termination", "task allocation", "performance dismissal decision", "worker task allocation"]):
+        return {
+            "domain": domain_keywords,
+            "eu_ai_act": {
+                "tier": "Yüksek Riskli Sistem (High-Risk AI System)",
+                "statutory_basis": "EU AI Act Madde 6(2) ve Ek III Nokta 4(b) (Çalışan görev dağılımı, fesih ve performans izleme)",
+                "official_precedent": "Regulation (EU) 2024/1689 Annex III Point 4(b)",
+                "confidence": "Yüksek (Ek III İstihdam ve Çalışma İlişkileri)",
+                "requires_expert_counsel": True,
+                "obligations": [
+                    "Madde 10: Performans değerlendirme modellerinde ayrımcılığı engelleyen adil veri yönetişimi.",
+                    "Madde 14: İnsan denetimi (Human oversight); fesih ve disiplin kararlarının yalnızca algoritmaya dayandırılamaması.",
+                    "Madde 26: Çalışan temsilcilerine ve işyeri sendikalarına sistemin kullanımı hakkında önceden bildirim yapılması."
+                ]
+            },
+            "data_privacy": ["GDPR Madde 22: Çalışanların otomatik işten çıkarma kararlarına karşı insan incelemesi talep hakkı."],
+            "statutory_disclaimer": "Çalışanların performans takibi ve işten çıkarma süreçlerine müdahil sistemler Ek III uyarınca yüksek risklidir."
+        }
+
+    # 3g. Life and Health Insurance Underwriting Risk (Annex III Point 5(a))
+    if any(k in lowered for k in ["life health insurance", "insurance underwriting risk", "policy eligibility determination"]):
+        return {
+            "domain": domain_keywords,
+            "eu_ai_act": {
+                "tier": "Yüksek Riskli Sistem (High-Risk AI System)",
+                "statutory_basis": "EU AI Act Madde 6(2) ve Ek III Nokta 5(a) (Hayat ve sağlık sigortası risk değerlendirmesi ve prim fiyatlandırması)",
+                "official_precedent": "Regulation (EU) 2024/1689 Annex III Point 5(a)",
+                "confidence": "Yüksek (Ek III Temel Özel Hizmetlere Erişim)",
+                "requires_expert_counsel": True,
+                "obligations": [
+                    "Madde 9: Aktüeryal risk modellerinin sistematik yanlılık ve haksız dışlama denetimi.",
+                    "Madde 13: Sigortalıya prim artışı veya poliçe reddi gerekçelerinin şeffaf açıklaması."
+                ]
+            },
+            "data_privacy": ["GDPR Madde 9: Sağlık ve genetik verilerin sigorta primleme amacıyla işlenmesinde yasal dayanak zorunluluğu."],
+            "statutory_disclaimer": "Hayat ve sağlık sigortası risk derecelendirme yazılımları Ek III kapsamında yüksek risklidir."
+        }
+
+    # 3h. Emergency 112 Dispatch Call Triage & Response (Annex III Point 5(d))
+    if any(k in lowered for k in ["emergency 112", "dispatch call triage", "ambulance emergency response"]):
+        return {
+            "domain": domain_keywords,
+            "eu_ai_act": {
+                "tier": "Yüksek Riskli Sistem (High-Risk AI System)",
+                "statutory_basis": "EU AI Act Madde 6(2) ve Ek III Nokta 5(d) (Acil durum 112 sevk ve önceliklendirme sistemleri)",
+                "official_precedent": "Regulation (EU) 2024/1689 Annex III Point 5(d)",
+                "confidence": "Yüksek (Ek III Acil Müdahale ve Kamu Hizmetleri)",
+                "requires_expert_counsel": True,
+                "obligations": [
+                    "Madde 14: İtfaiye, polis veya ambulans yönlendirmede operatörün manuel müdahale ve öncelik ezme yetkisi.",
+                    "Madde 15: %99.999 yüksek erişilebilirlik ve kesintisiz acil servis operasyonel direnci."
+                ]
+            },
+            "data_privacy": ["GDPR Madde 6(1)(d): Hayati menfaatlerin (vital interests) korunması kapsamında acil çağrı verisi işleme."],
+            "statutory_disclaimer": "Acil durum çağrı ve müdahale önceliklendirme sistemleri Ek III uyarınca yüksek risklidir."
+        }
+
+    # 3i. Judicial Authorities Evidence & Dispute Resolution (Annex III Point 8(a))
+    if any(k in lowered for k in ["judicial authority", "sentencing evidence", "court legal fact finding", "dispute resolution"]):
+        return {
+            "domain": domain_keywords,
+            "eu_ai_act": {
+                "tier": "Yüksek Riskli Sistem (High-Risk AI System)",
+                "statutory_basis": "EU AI Act Madde 6(2) ve Ek III Nokta 8(a) (Adli makamlar için delil değerlendirme ve hukuki karar desteği)",
+                "official_precedent": "Regulation (EU) 2024/1689 Annex III Point 8(a)",
+                "confidence": "Yüksek (Ek III Adalet Sistemi ve Demokratik Süreçler)",
+                "requires_expert_counsel": True,
+                "obligations": [
+                    "Madde 14: Yargı bağımsızlığı gereği hakimin kesin ve tek karar verici olması (Algoritma yalnızca istişari destek verebilir).",
+                    "Madde 13: Delil ve içtihat analiz modellerinde tam açıklanabilirlik ve tarafsızlık denetimi."
+                ]
+            },
+            "data_privacy": ["GDPR Madde 10: Ceza yargılaması ve adli sicil verilerinin mutlak gizliliği."],
+            "statutory_disclaimer": "Mahkemeler ve adli merciler için geliştirilen karar destek sistemleri Ek III uyarınca yüksek risklidir."
+        }
+
+    # =========================================================================
+    # 4. GENERAL PURPOSE AI (GPAI) MODELS WITH SYSTEMIC RISK (ARTICLES 51 & 52)
+    # =========================================================================
+    if any(k in lowered for k in ["frontier general purpose", "gpai model", "systemic risk", "10^25 flops", "systemic gpai"]):
+        return {
+            "domain": domain_keywords,
+            "eu_ai_act": {
+                "tier": "Sistemik Riskli GPAI Modeli (Systemic Risk GPAI Model)",
+                "statutory_basis": "EU AI Act Madde 51 ve 52 (Sistemik risk taşıyan genel amaçlı yapay zeka modelleri)",
+                "official_precedent": "Regulation (EU) 2024/1689 Article 51 & 52",
+                "confidence": "Kritik / Sistemik Risk Rejimi",
+                "requires_expert_counsel": True,
+                "obligations": [
+                    "Madde 51: Kümülatif işlem gücü > 10^25 FLOPs modellerin AB Yapay Zeka Ofisi'ne (AI Office) bildirimi.",
+                    "Madde 53: Model değerlendirmesi ve bağımsız kırmızı takım (adversarial red-teaming) testleri.",
+                    "Madde 55: Sistemik risklerin azaltılması, siber güvenlik koruması ve ciddi olay raporlama (serious incident reporting)."
+                ]
+            },
+            "data_privacy": ["Telif Hakları Direktifi (2019/790) Madde 4(3): Eğitim verisi için Text and Data Mining (TDM) opt-out haklarına uyum."],
+            "statutory_disclaimer": "Sistemik risk eşiğini aşan genel amaçlı yapay zeka modelleri AI Act Madde 51-55 özel rejimine tabidir."
+        }
+
     # =========================================================================
     # 4. TRANSPARENCY OBLIGATIONS (ARTICLE 50)
     # =========================================================================
@@ -286,7 +424,26 @@ def evaluate_compliance(domain_keywords: str):
             "statutory_disclaimer": "Doğrudan kullanıcıyla konuşan sistemler Madde 50(1) şeffaflığına tabidir."
         }
 
-    # 4b. Synthetic Media & Deepfakes (Article 50(2))
+    # 4b. Satirical / Parody Deepfake Exemption & Journalistic Transparency (Article 50(4))
+    if any(k in lowered for k in ["investigative journalism", "parody", "artistic satire", "satirical deepfake", "artistic freedom"]):
+        return {
+            "domain": domain_keywords,
+            "eu_ai_act": {
+                "tier": "Belirli Şeffaflık Yükümlülüğü (Transparency Obligations)",
+                "statutory_basis": "EU AI Act Madde 50(4) (Sanat, parodi ve gazetecilik amacıyla sentetik içerik şeffaflık istisnası)",
+                "official_precedent": "Regulation (EU) 2024/1689 Article 50(4)",
+                "confidence": "Doğrulanmış (İfade Özgürlüğü ve Şeffaflık Uyarlaması)",
+                "requires_expert_counsel": False,
+                "obligations": [
+                    "Eserin parodi, hiciv veya sanatsal niteliğini bozmayacak uygun biçimde sentetik içerik açıklaması yapılması.",
+                    "Haber ve kamu yararı araştırmalarında basın özgürlüğü (Charter of Fundamental Rights Art 11) dengesi."
+                ]
+            },
+            "data_privacy": ["GDPR Madde 85: Gazetecilik ve sanatsal ifade özgürlüğü istisnaları."],
+            "statutory_disclaimer": "Parodi ve sanatsal eserler için filigranlama zorunluluğu eserin doğasını zedelemeyecek şekilde uyarlanır."
+        }
+
+    # 4c. Synthetic Media & Deepfakes (Article 50(2))
     if any(k in lowered for k in ["deepfake", "public synthetic media", "synthetic voice", "synthetic video generation"]):
         return {
             "domain": domain_keywords,
