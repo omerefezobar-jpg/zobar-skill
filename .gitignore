@@ -1,0 +1,13 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Antigravity local workspace discovery
+.agents/
+.gemini/
+
+# OS / Editor files
+.DS_Store
+Thumbs.db
+*.tmp
