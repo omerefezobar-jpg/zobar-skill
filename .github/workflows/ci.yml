@@ -1,4 +1,4 @@
-name: CI & Validation
+name: CI & Quality Gate
 
 on:
   push:
@@ -21,19 +21,11 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
 
-    - name: Test Academic Paper Fetcher (arXiv)
+    - name: Run Deterministic Unit Tests & Security Suite
       run: |
-        python scripts/fetch_academic_papers.py "distributed consensus" --max 2
+        python -m unittest discover tests
 
-    - name: Test Sentiment Miner (Hacker News)
+    - name: Run Dossier & HTML Export Smoke Test
       run: |
-        python scripts/mine_user_sentiment.py "microservices" --max 2
-
-    - name: Test Patent Prior Art Searcher (Google Patents)
-      run: |
-        python scripts/search_prior_art.py "distributed consensus" --max 2
-
-    - name: Test Dossier Orchestrator
-      run: |
-        python run_innovator.py "Artificial Intelligence" --output ci_test.md
-        cat ci_test.md
+        python scripts/export_html_report.py examples/sample-innovator-report.md --output ci_report.html
+        test -f ci_report.html

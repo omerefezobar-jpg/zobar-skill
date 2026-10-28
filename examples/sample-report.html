@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval';">
     <title>Frontier Innovator Report</title>
     <!-- Tailwind CSS (via CDN) -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -29,11 +30,11 @@
     <!-- Mermaid.js (via CDN) -->
     <script type="module">
         import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+        mermaid.initialize({ startOnLoad: true, theme: 'dark', securityLevel: 'strict' });
     </script>
     <style>
         body { background-color: #0b0f19; color: #e2e8f0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-        .mermaid { background: #111827; padding: 1.5rem; border-radius: 0.75rem; border: 1px solid #1f2937; margin: 1.5rem 0; }
+        .mermaid { background: #111827; padding: 1.5rem; border-radius: 0.75rem; border: 1px solid #1f2937; margin: 1.5rem 0; overflow-x: auto; }
         pre code { background: #111827; border-radius: 0.5rem; padding: 1rem; display: block; overflow-x: auto; border: 1px solid #1f2937; }
         blockquote { border-left: 4px solid #38bdf8; padding-left: 1rem; color: #94a3b8; font-style: italic; margin: 1rem 0; }
         table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
@@ -48,136 +49,129 @@
     </style>
 </head>
 <body class="p-6 md:p-12 max-w-5xl mx-auto">
-    <div class="mb-8 flex items-center justify-between border-b border-gray-800 pb-4">
+    <header class="mb-8 flex items-center justify-between border-b border-gray-800 pb-4">
         <div class="flex items-center space-x-3">
-            <span class="text-3xl">⚡</span>
+            <span class="text-3xl" aria-hidden="true">⚡</span>
             <div>
                 <h2 class="text-xl font-bold text-white tracking-wide uppercase !m-0">Frontier Innovator</h2>
                 <p class="text-xs text-gray-400">Deep-Tech & Radical Invention Dashboard</p>
             </div>
         </div>
         <span class="px-3 py-1 text-xs font-semibold rounded-full bg-cyan-950 text-cyan-400 border border-cyan-800">
-            Frontier Grade
+            Frontier Production Grade
         </span>
-    </div>
+    </header>
 
     <main class="space-y-6">
-        <h1>Örnek Çıktı: "AetherCode" — Otonom Kendi Kendini İyileştiren Kod Tabanı Platformu</h1>
-<br />
-<blockquote>Bu doküman, `frontier-innovator` skill'inin gerçek bir senaryoda üreteceği uç nokta analizi ve mimari raporunun birebir örneğidir.</blockquote>
-<br />
+        <h1>Örnek Çıktı: &quot;AetherCode&quot; — Otonom Kendi Kendini İyileştiren Kod Tabanı Platformu</h1>
+<blockquote>Bu doküman, <code class="px-1.5 py-0.5 rounded bg-gray-800 text-cyan-300 text-xs font-mono">frontier-innovator</code> skill&#x27;inin gerçek bir senaryoda üreteceği uç nokta analizi ve mimari raporunun birebir örneğidir.</blockquote>
 <hr class="border-gray-800 my-6" />
-<br />
-<h2>📌 Yönetici Özeti & Çekirdek Tez</h2>
-<p class="text-gray-300 leading-relaxed">Geleneksel CI/CD ve statik kod analizi (SonarQube, Snyk vb.) araçları reaktiftir: Hatayı bulur, geliştiriciye bir "rapor" fırlatır ve geliştiricinin bilişsel yükünü artırır. <strong class="text-white">AetherCode</strong>, akademik program analizi (formal verification) ile otonom LLM ajanlarını birleştirerek; kod tabanını izleyen, hatayı oluştuğu an deterministik kanıtıyla bulan ve geliştirici onayına sunulacak "sıfır-regresyon" garantili patch'i kendi kendine üreten proaktif bir bağışıklık sistemidir.</p>
-<br />
+<h2>📌 Yönetici Özeti &amp; Çekirdek Tez</h2>
+<p class="text-gray-300 leading-relaxed">Geleneksel CI/CD ve statik kod analizi (SonarQube, Snyk vb.) araçları reaktiftir: Hatayı bulur, geliştiriciye bir &quot;rapor&quot; fırlatır ve geliştiricinin bilişsel yükünü artırır. <strong class="text-white font-semibold">AetherCode</strong>, akademik program analizi (formal verification) ile otonom LLM ajanlarını birleştirerek; kod tabanını izleyen, hatayı oluştuğu an deterministik kanıtıyla bulan ve geliştirici onayına sunulacak &quot;sıfır-regresyon&quot; garantili patch&#x27;i kendi kendine üreten proaktif bir bağışıklık sistemidir.</p>
 <hr class="border-gray-800 my-6" />
-<br />
-<h2>🏛️ 1. Akademik & Teorik Zemin</h2>
+<h2>🏛️ 1. Akademik &amp; Teorik Zemin</h2>
 <ul class="list-disc pl-6 space-y-1 text-gray-300">
-<li>**Teorik Temel (Formal Verification & Abstract Interpretation):**</li>
-<li>Patrick Cousot'nun *Soyut Yorumlama (Abstract Interpretation)* teorisi. Kodun olası tüm çalışma durumlarını çalıştırmadan matematiksel olarak sınırlar.</li>
-<li>Leslie Lamport'un *TLA+ Spesifikasyonu*: Dağıtık sistemlerde concurrency ve race condition hatalarını kod seviyesine inmeden matematiksel mantıkla kanıtlama.</li>
-<li>**Büyük Düşünürlerin / Profesörlerin Perspektifi:**</li>
-<li>Donald Knuth: *"Erken optimizasyon tüm kötülüklerin anasıdır; ama yapısal doğruluk sonradan eklenemez."*</li>
+<li><strong class="text-white font-semibold">Teorik Temel (Formal Verification &amp; Abstract Interpretation):</strong></li>
+<li>Patrick Cousot&#x27;nun <em class="italic text-gray-300">Soyut Yorumlama (Abstract Interpretation)</em> teorisi. Kodun olası tüm çalışma durumlarını çalıştırmadan matematiksel olarak sınırlar.</li>
+<li>Leslie Lamport&#x27;un <em class="italic text-gray-300">TLA+ Spesifikasyonu</em>: Dağıtık sistemlerde concurrency ve race condition hatalarını kod seviyesine inmeden matematiksel mantıkla kanıtlama.</li>
+<li><strong class="text-white font-semibold">Büyük Düşünürlerin / Profesörlerin Perspektifi:</strong></li>
+<li>Donald Knuth: <em class="italic text-gray-300">&quot;Erken optimizasyon tüm kötülüklerin anasıdır; ama yapısal doğruluk sonradan eklenemez.&quot;</em></li>
 <li>Barbara Liskov (Liskov Substitution Principle): Tip hiyerarşisinde güvenli polimorfizm ve sözleşmeye dayalı tasarım (Design by Contract).</li>
 </ul>
-<br />
 <hr class="border-gray-800 my-6" />
-<br />
-<h2>💬 2. Filtresiz Kullanıcı Duygusu & Pazarın Çığlığı</h2>
+<h2>💬 2. Filtresiz Kullanıcı Duygusu &amp; Pazarın Çığlığı</h2>
 <ul class="list-disc pl-6 space-y-1 text-gray-300">
-<li>**En Büyük Şikayetler (Reddit `r/devops`, Hacker News):**</li>
-<li>*"SonarQube 400 sayfa false-positive çıkarıyor, kimse bakmıyor, herkes `// NOSONAR` yazıp geçiyor."*</li>
-<li>*"Güvenlik araçları uyarı veriyor ama nasıl düzelteceğimi söylemiyor, üstüne bir de kütüphane güncellenince her şey kırılıyor."*</li>
-<li>**Karşılanmamış Gizli Talepler:**</li>
-<li>"Bana uyarı verme, çalışan ve testleri geçen çözümü PR olarak aç."</li>
-<li>"Benim kod tabanımın iş mantığını (business domain) anlayan bir sistem olsun."</li>
+<li><strong class="text-white font-semibold">En Büyük Şikayetler (Reddit <code class="px-1.5 py-0.5 rounded bg-gray-800 text-cyan-300 text-xs font-mono">r/devops</code>, Hacker News):</strong></li>
+<li><em class="italic text-gray-300">&quot;SonarQube 400 sayfa false-positive çıkarıyor, kimse bakmıyor, herkes <code class="px-1.5 py-0.5 rounded bg-gray-800 text-cyan-300 text-xs font-mono">// NOSONAR</code> yazıp geçiyor.&quot;</em></li>
+<li><em class="italic text-gray-300">&quot;Güvenlik araçları uyarı veriyor ama nasıl düzelteceğimi söylemiyor, üstüne bir de kütüphane güncellenince her şey kırılıyor.&quot;</em></li>
+<li><strong class="text-white font-semibold">Karşılanmamış Gizli Talepler:</strong></li>
+<li>&quot;Bana uyarı verme, çalışan ve testleri geçen çözümü PR olarak aç.&quot;</li>
+<li>&quot;Benim kod tabanımın iş mantığını (business domain) anlayan bir sistem olsun.&quot;</li>
 </ul>
-<br />
 <hr class="border-gray-800 my-6" />
-<br />
-<h2>⚔️ 3. Rakip Teardown & 10x Moat</h2>
-<table>
+<h2>⚔️ 3. Rakip Teardown &amp; 10x Moat</h2>
+<table class="w-full text-sm">
 <tr><th>Rakip</th><th>Zayıf Karın (Kör Nokta)</th><th>AetherCode 10x Karşı Hamlesi</th></tr>
-<tr><td>**SonarQube**</td><td>Statik kural motoru, devasa false-positive oranı, bağlamsız.</td><td>**10x Doğruluk:** Semantik AST analizi + Dinamik Sandbox doğrulama (False positive = %0'a yakın).</td></tr>
-<tr><td>**Dependabot / Renovate**</td><td>Versiyon yükseltir ama breaking change olursa kod patlar.</td><td>**10x Güven:** Breaking change'i tespit edip çağıran fonksiyonları otomatik refactor eden yamayı yazar.</td></tr>
-<tr><td>**GitHub Copilot Autofix**</td><td>Deterministik değildir, olasılıksal kod üretir, derleme garantisi vermez.</td><td>**10x Güvenilirlik:** Formal test üretimi + derleyici döngüsü içinde kendini düzelten döngü.</td></tr>
+<tr><td><strong class="text-white font-semibold">SonarQube</strong></td><td>Statik kural motoru, devasa false-positive oranı, bağlamsız.</td><td><strong class="text-white font-semibold">10x Doğruluk:</strong> Semantik AST analizi + Dinamik Sandbox doğrulama (False positive = %0&#x27;a yakın).</td></tr>
+<tr><td><strong class="text-white font-semibold">Dependabot / Renovate</strong></td><td>Versiyon yükseltir ama breaking change olursa kod patlar.</td><td><strong class="text-white font-semibold">10x Güven:</strong> Breaking change&#x27;i tespit edip çağıran fonksiyonları otomatik refactor eden yamayı yazar.</td></tr>
+<tr><td><strong class="text-white font-semibold">GitHub Copilot Autofix</strong></td><td>Deterministik değildir, olasılıksal kod üretir, derleme garantisi vermez.</td><td><strong class="text-white font-semibold">10x Güvenilirlik:</strong> Formal test üretimi + derleyici döngüsü içinde kendini düzelten döngü.</td></tr>
 </table>
-<br />
 <hr class="border-gray-800 my-6" />
-<br />
-<h2>⚖️ 4. Hukuki Zırh & Regülasyon</h2>
+<h2>⚖️ 4. Hukuki Zırh &amp; Regülasyon</h2>
 <ul class="list-disc pl-6 space-y-1 text-gray-300">
-<li>**Fikri Mülkiyet (IP):** Kodlar harici LLM sağlayıcılarına eğitilmek üzere asla iletilmez (Zero Data Retention anlaşmaları ve on-premise SLM seçenekleri).</li>
-<li>**Lisans İhlali Taraması:** GPLv3 bulaşma risklerini AST seviyesinde tespit eden ve telif hakkı ihlallerini engelleyen otomatik lisans temizleyici.</li>
-<li>**EU AI Act Uyumu:** Kod üretiminde şeffaflık, denetlenebilirlik (audit log) ve insan denetimi (Human-in-the-loop).</li>
+<li><strong class="text-white font-semibold">Fikri Mülkiyet (IP):</strong> Kodlar harici LLM sağlayıcılarına eğitilmek üzere asla iletilmez (Zero Data Retention anlaşmaları ve on-premise SLM seçenekleri).</li>
+<li><strong class="text-white font-semibold">Lisans İhlali Taraması:</strong> GPLv3 bulaşma risklerini AST seviyesinde tespit eden ve telif hakkı ihlallerini engelleyen otomatik lisans temizleyici.</li>
+<li><strong class="text-white font-semibold">EU AI Act Uyumu:</strong> Kod üretiminde şeffaflık, denetlenebilirlik (audit log) ve insan denetimi (Human-in-the-loop).</li>
 </ul>
-<br />
 <hr class="border-gray-800 my-6" />
-<br />
-<h2>🛠️ 5. Teknik Mimari & UI/UX Bileşenleri</h2>
+<h2>🛠️ 5. Teknik Mimari &amp; UI/UX Bileşenleri</h2>
 <ul class="list-disc pl-6 space-y-1 text-gray-300">
-<li>**Çekirdek Dil (Core Engine):** **Rust** (Tree-sitter ile AST parsing, bellek güvenliği, nanosaniye seviyesinde analiz süresi).</li>
-<li>**Ajan Orkestrasyonu:** **Go** (Yüksek concurrency, hafif goroutine'ler ile mikro-servis yönetimi).</li>
-<li>**UI / UX Arayüzü:**</li>
-<li>**Tauri + React + Tailwind + Radix UI**: Hafif, native masaüstü performansı.</li>
-<li>**Monaco Editor / WebGL Canvas**: Kod diff'lerini ve mimari bağımlılık graflarını 60 FPS gösteren interaktif görsel arayüz.</li>
+<li><strong class="text-white font-semibold">Çekirdek Dil (Core Engine):</strong> <strong class="text-white font-semibold">Rust</strong> (Tree-sitter ile AST parsing, bellek güvenliği, nanosaniye seviyesinde analiz süresi).</li>
+<li><strong class="text-white font-semibold">Ajan Orkestrasyonu:</strong> <strong class="text-white font-semibold">Go</strong> (Yüksek concurrency, hafif goroutine&#x27;ler ile mikro-servis yönetimi).</li>
+<li><strong class="text-white font-semibold">UI / UX Arayüzü:</strong></li>
+<li><strong class="text-white font-semibold">Tauri + React + Tailwind + Radix UI</strong>: Hafif, native masaüstü performansı.</li>
+<li><strong class="text-white font-semibold">Monaco Editor / WebGL Canvas</strong>: Kod diff&#x27;lerini ve mimari bağımlılık graflarını 60 FPS gösteren interaktif görsel arayüz.</li>
 </ul>
-<br />
 <hr class="border-gray-800 my-6" />
-<br />
-<h2>🚀 6. Radikal İcatlar & Sınırları Zorlayan Mekanikler</h2>
-<br />
-<p class="text-gray-300 leading-relaxed">1. <strong class="text-white">İcat #1: Biyolojik Kod Bağışıklık Sistemi (ImmuneAST):</strong></p>
+<h2>🚀 6. Radikal İcatlar &amp; Fizibilite Doğrulama Kapısı</h2>
+<h3>İcat #1: Biyolojik Kod Bağışıklık Sistemi (ImmuneAST)</h3>
 <ul class="list-disc pl-6 space-y-1 text-gray-300">
-<li>Kod tabanındaki her fonksiyona bir "antikor" (otomatik türetilmiş property-based test) tanımlanır. Kod değiştikçe bağışıklık sistemi fonksiyonun mutasyon testlerini mikro-saniyeler içinde çalıştırarak regresyonu anında izole eder.</li>
+<li><strong class="text-white font-semibold">Çalışma Prensibi:</strong> Kod tabanındaki her fonksiyona bir &quot;antikor&quot; (otomatik türetilmiş property-based test) tanımlanır. Kod değiştikçe bağışıklık sistemi fonksiyonun mutasyon testlerini mikro-saniyeler içinde çalıştırarak regresyonu anında izole eder.</li>
+<li><strong class="text-white font-semibold">TRL Olgunluk Seviyesi:</strong> TRL 5 (Simüle sandbox ortamında doğrulanmış çalışan model).</li>
+<li><strong class="text-white font-semibold">ICE Skoru:</strong> Etki: 9/10 | Güven: 8/10 | Kolaylık: 6/10 (ICE Puanı: 43.2).</li>
+<li><strong class="text-white font-semibold">Ticari Talep &amp; WTP:</strong> Geliştirme ekipleri CI/CD bekleme sürelerini ve post-deployment hatalarını %70 azaltmak için geliştirici başına aylık $49-$99 ödemeye hazırdır.</li>
+<li><strong class="text-white font-semibold">Hata Modları:</strong> 1) Aşırı büyük fonksiyonlarda AST parse süresinin patlaması, 2) Deterministik olmayan harici API çağrılarında yanlış alarmlar (mocking ile çözüldü), 3) Yetersiz bellek ortamında testlerin OOM olması.</li>
 </ul>
-<p class="text-gray-300 leading-relaxed">2. <strong class="text-white">İcat #2: Deterministik Zaman-Yolculuklu Yamalama (Time-Travel Patching):</strong></p>
+<h3>İcat #2: Deterministik Zaman-Yolculuklu Yamalama (Time-Travel Patching)</h3>
 <ul class="list-disc pl-6 space-y-1 text-gray-300">
-<li>LLM'in önerdiği çözüm sadece gelecekteki testleri değil, geçmişteki son 1000 commit'in log ve trace verilerini sanal bir sandbox'ta canlandırarak ("replay") hatayı doğrular.</li>
+<li><strong class="text-white font-semibold">Çalışma Prensibi:</strong> LLM&#x27;in önerdiği çözüm sadece gelecekteki testleri değil, geçmişteki son 1000 commit&#x27;in log ve trace verilerini sanal bir WASM sandbox&#x27;ında canlandırarak (&quot;replay&quot;) hatayı ve çözümü doğrular.</li>
+<li><strong class="text-white font-semibold">TRL Olgunluk Seviyesi:</strong> TRL 4 (Laboratuvar ortamında geçerlenmiş bileşen).</li>
+<li><strong class="text-white font-semibold">ICE Skoru:</strong> Etki: 9/10 | Güven: 7/10 | Kolaylık: 5/10 (ICE Puanı: 31.5).</li>
+<li><strong class="text-white font-semibold">Ticari Talep &amp; WTP:</strong> Kritik finans ve sağlık altyapılarında regresyon sigortası olarak yıllık sözleşmelerde $15k-$50k bütçelendirilebilir.</li>
+<li><strong class="text-white font-semibold">Hata Modları:</strong> 1) Veritabanı state&#x27;inin replay sırasında tutarsız kalması (Copy-on-write snapshot ile engellendi), 2) Gizli donanım bağımlılıkları, 3) Lisans kısıtlı loglar.</li>
 </ul>
-<p class="text-gray-300 leading-relaxed">3. <strong class="text-white">İcat #3: Ses Düzeyi Ayarlı Bilişsel Kalkan (Zero-Noise Triage):</strong></p>
+<h3>İcat #3: Ses Düzeyi Ayarlı Bilişsel Kalkan (Zero-Noise Triage)</h3>
 <ul class="list-disc pl-6 space-y-1 text-gray-300">
-<li>Geliştiriciye asla ham metin uyarısı gitmez; sistem sadece tek tıkla "Merge" edilebilecek, testleri yeşil yanmış, mimari uyumu ispatlanmış PR'lar üretir.</li>
+<li><strong class="text-white font-semibold">Çalışma Prensibi:</strong> Geliştiriciye asla ham metin uyarısı gitmez; sistem sadece tek tıkla &quot;Merge&quot; edilebilecek, testleri yeşil yanmış, mimari uyumu ispatlanmış PR&#x27;lar üretir.</li>
+<li><strong class="text-white font-semibold">TRL Olgunluk Seviyesi:</strong> TRL 6 (Temsili operasyonel ortamda çalışan prototip).</li>
+<li><strong class="text-white font-semibold">ICE Skoru:</strong> Etki: 8/10 | Güven: 9/10 | Kolaylık: 8/10 (ICE Puanı: 57.6).</li>
+<li><strong class="text-white font-semibold">Ticari Talep &amp; WTP:</strong> Mühendislik yöneticileri bildirim kirliliğini (alert fatigue) sıfırlamak için mevcut monitoring bütçelerini buraya aktarır.</li>
+<li><strong class="text-white font-semibold">Hata Modları:</strong> 1) Geliştiricinin aşırı güvenip kodu incelemeden merge etmesi (mandatory explanation summary eklendi), 2) Monorepo ölçeğinde PR patlaması, 3) Git hook yetki kısıtları.</li>
 </ul>
-<br />
-<h3>Sistem Mimarisi & Otonom İyileştirme Döngüsü</h3>
-<br />
-<p class="text-gray-300 leading-relaxed"><div class="mermaid"></p>
-<p class="text-gray-300 leading-relaxed">flowchart LR</p>
-<p class="text-gray-300 leading-relaxed">    subgraph Girdi["Geliştirici Ortamı"]</p>
-<p class="text-gray-300 leading-relaxed">        Code["Git Push / PR"]</p>
-<p class="text-gray-300 leading-relaxed">    end</p>
-<br />
-<p class="text-gray-300 leading-relaxed">    subgraph Core["AetherCode Analiz Çekirdeği (Rust)"]</p>
-<p class="text-gray-300 leading-relaxed">        Tree["Tree-sitter AST Parser"]</p>
-<p class="text-gray-300 leading-relaxed">        Formal["Formal Verification Engine"]</p>
-<p class="text-gray-300 leading-relaxed">    end</p>
-<br />
-<p class="text-gray-300 leading-relaxed">    subgraph AgenticLoop["Otonom İyileştirme Döngüsü"]</p>
-<p class="text-gray-300 leading-relaxed">        LLM["Domain-Trained Code Agent"]</p>
-<p class="text-gray-300 leading-relaxed">        Sandbox["WASM Sandbox & Replay Runner"]</p>
-<p class="text-gray-300 leading-relaxed">        Tests["Property-Based Auto Tests"]</p>
-<p class="text-gray-300 leading-relaxed">    end</p>
-<br />
-<p class="text-gray-300 leading-relaxed">    subgraph Çıktı["Doğrulanmış Aksiyon"]</p>
-<p class="text-gray-300 leading-relaxed">        PR["Kendi Kendini Doğrulamış PR<br/>(%100 Yeşil Test + Sıfır Regresyon)"]</p>
-<p class="text-gray-300 leading-relaxed">    end</p>
-<br />
-<p class="text-gray-300 leading-relaxed">    Code --> Tree</p>
-<p class="text-gray-300 leading-relaxed">    Tree --> Formal</p>
-<p class="text-gray-300 leading-relaxed">    Formal -- "Kritik Açık / Bug Kanıtı" --> LLM</p>
-<p class="text-gray-300 leading-relaxed">    LLM --> Sandbox</p>
-<p class="text-gray-300 leading-relaxed">    Sandbox --> Tests</p>
-<p class="text-gray-300 leading-relaxed">    Tests -- "Test Başarısız" --> LLM</p>
-<p class="text-gray-300 leading-relaxed">    Tests -- "Test Başarılı & Kanıtlandı" --> PR</p>
-<p class="text-gray-300 leading-relaxed"></div></p>
-<br />
+<h3>Sistem Mimarisi &amp; Otonom İyileştirme Döngüsü</h3>
+<div class="mermaid">
+flowchart LR
+    subgraph Girdi["Geliştirici Ortamı"]
+        Code["Git Push / PR"]
+    end
+
+    subgraph Core["AetherCode Analiz Çekirdeği (Rust)"]
+        Tree["Tree-sitter AST Parser"]
+        Formal["Formal Verification Engine"]
+    end
+
+    subgraph AgenticLoop["Otonom İyileştirme Döngüsü"]
+        LLM["Domain-Trained Code Agent"]
+        Sandbox["WASM Sandbox & Replay Runner"]
+        Tests["Property-Based Auto Tests"]
+    end
+
+    subgraph Çıktı["Doğrulanmış Aksiyon"]
+        PR["Kendi Kendini Doğrulamış PR<br/>(%100 Yeşil Test + Sıfır Regresyon)"]
+    end
+
+    Code --> Tree
+    Tree --> Formal
+    Formal -- "Kritik Açık / Bug Kanıtı" --> LLM
+    LLM --> Sandbox
+    Sandbox --> Tests
+    Tests -- "Test Başarısız" --> LLM
+    Tests -- "Test Başarılı & Kanıtlandı" --> PR
+</div>
     </main>
 
     <footer class="mt-16 pt-6 border-t border-gray-800 text-center text-xs text-gray-500">
-        Frontier Innovator Engine • MIT Open Source • Generated for Autonomous Deep-Tech R&D
+        Frontier Innovator Engine • MIT Open Source • Sanitized & Hardened Export
     </footer>
 </body>
 </html>
