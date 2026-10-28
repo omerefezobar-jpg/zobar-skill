@@ -61,12 +61,14 @@ zobar-skill/
 ├── README.md                         # Dokümantasyon ve kurulum kılavuzu
 ├── LICENSE                           # Açık kaynak lisansı (MIT)
 ├── run_innovator.py                  # Canlı dosya ve HTML dashboard çıkaran CLI
-├── scripts/                          # Sıfır-bağımlılık yerleşik CLI araştırma araçları
+├── scripts/                          # Sıfır-bağımlılık yerleşik CLI araştırma ve sentez araçları
 │   ├── fetch_academic_papers.py      # arXiv API üzerinden canlı akademik makale çekici (HTTPS)
 │   ├── mine_user_sentiment.py        # Hacker News & Reddit kullanıcı acısı & olumsuzlama analizcisi
-│   ├── benchmark_competitors.py      # GitHub API canlı rakip metrikleri (yıldız, issue, aktivite)
+│   ├── benchmark_competitors.py      # Hibrit rakip motoru: Ticari pazar liderleri + GitHub canlı telemetrisi
 │   ├── search_prior_art.py           # Google Patents üzerinden ön patent & prior art tarayıcı
-│   ├── scan_regulations.py           # EU AI Act & KVKK/GDPR regülasyon ve lisans denetleyicisi
+│   ├── scan_regulations.py           # Madde bazlı mevzuat denetleyicisi (EU AI Act Madde 5/6/50, GDPR, SPDX)
+│   ├── synthesize_architecture.py    # Faz 5: Otomatik dil, kütüphane, veri katmanı ve UI bileşen sentezleyicisi
+│   ├── validate_inventions.py        # Faz 6: TRIZ radikal icat üreticisi, TRL/WTP/ICE doğrulama kapısı ve Mermaid mimarı
 │   └── export_html_report.py         # XSS korumalı, CSP uyumlu ('unsafe-eval' içermez) HTML çevirici
 ├── references/
 │   ├── heuristic-frameworks.md       # Zihinsel modeller, First Principles, akademik matris
