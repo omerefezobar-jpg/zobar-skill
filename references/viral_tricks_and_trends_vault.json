@@ -1,9 +1,9 @@
 {
   "version": "2.0.0",
-  "last_updated_utc": "2026-10-28T23:05:15Z",
+  "last_updated_utc": "2026-10-28T23:24:56Z",
   "metadata": {
     "description": "Zobar Trend & Trick Vault: Verified Curated Benchmarks & Live Network Feed Ingestions",
-    "total_tricks": 18
+    "total_tricks": 19
   },
   "tricks": [
     {
@@ -489,6 +489,33 @@
       "verification_methodology": "COMMUNITY_CONSENSUS_VERIFIED",
       "source_url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/",
       "measurement_date_utc": "2026-10-28T22:16:46Z"
+    },
+    {
+      "id": "LIVE-HN-50261998",
+      "data_origin": "LIVE_NETWORK_SCRAPED",
+      "http_status": 200,
+      "platform": "Global Tech News / Hacker News",
+      "creator": "deaux",
+      "title": "Ghostty 1.4",
+      "category": "Global Engineering Wire",
+      "tags": [
+        "hacker-news",
+        "frontpage",
+        "verified-live"
+      ],
+      "problem_solved": "Breakthrough engineering discussion regarding Ghostty 1.4",
+      "trick_snippet": "// Live HN Story: https://ghostty.org/docs/install/release-notes/1-4-0\n// Upvotes: 1286 | Comments: 407\nconst ENGINEERING_BREAKTHROUGH = true;",
+      "raw_metrics": {
+        "raw_points": 1286,
+        "raw_comments": 407,
+        "hn_object_id": "50261998"
+      },
+      "viral_score": 91,
+      "scoring_methodology": "LOG10_HN_POINTS_AND_COMMENTS: 30 + 18*log10(1286 + 2.5*407 + 1) = 91",
+      "verified_impact": "1286 community upvotes and 407 peer comments on Hacker News.",
+      "verification_methodology": "COMMUNITY_CONSENSUS_VERIFIED",
+      "source_url": "https://ghostty.org/docs/install/release-notes/1-4-0",
+      "measurement_date_utc": "2026-10-28T23:22:54Z"
     }
   ]
 }

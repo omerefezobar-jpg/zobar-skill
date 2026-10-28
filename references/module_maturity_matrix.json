@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-28T23:01:49Z",
+  "timestamp": "2026-10-28T23:24:26Z",
   "total_modules_audited": 24,
   "system_maturity_index": "75.0%",
   "average_module_score": 85.79,
@@ -26,7 +26,7 @@
       "score": 94.0,
       "data_source_type": "COMPOSITE_PIPELINE",
       "description": "End-to-end 5-phase pipeline orchestrator with AST and sandbox verification.",
-      "lines_of_code": 413,
+      "lines_of_code": 424,
       "test_file": "test_e2e_mcp_and_cross_tools.py",
       "test_verified": true,
       "operational_mode": "CANLI / DOĞRULANMIŞ: Gerçek API'ler, OS sandbox ve yasal zeminlerle tam çalışır."
@@ -224,7 +224,7 @@
       "score": 94.0,
       "data_source_type": "PROTOCOL_SERVER",
       "description": "JSON-RPC 2.0 FastMCP protocol server with unified tool routing and sandboxing.",
-      "lines_of_code": 751,
+      "lines_of_code": 784,
       "test_file": "test_e2e_mcp_and_cross_tools.py",
       "test_verified": true,
       "operational_mode": "CANLI / DOĞRULANMIŞ: Gerçek API'ler, OS sandbox ve yasal zeminlerle tam çalışır."

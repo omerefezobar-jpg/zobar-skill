@@ -103,10 +103,16 @@ def match_s_tier_patterns(query: str, max_results: int = 4):
                     **cat["sites"][0]
                 })
 
+    total_size = (
+        vault.get("vault_metadata", {}).get("total_products_and_sites")
+        or vault.get("vault_metadata", {}).get("total_sites")
+        or sum(len(c.get("sites", [])) for c in vault.get("categories", []))
+    )
+
     return {
         "query": query,
         "matched_sites": matched_sites[:max_results],
-        "total_vault_size": vault.get("vault_metadata", {}).get("total_sites", 102)
+        "total_vault_size": total_size
     }
 
 def main():

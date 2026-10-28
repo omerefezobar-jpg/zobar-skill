@@ -72,6 +72,14 @@
       "confidence": 0.9,
       "created_at": 1793225806.0519717,
       "last_reinforced": 1793225806.0519717
+    },
+    {
+      "subject": "live_trend_harvester",
+      "predicate": "assimilated_trick",
+      "object": "Ghostty 1.4",
+      "confidence": 0.91,
+      "created_at": 1793229774.7879317,
+      "last_reinforced": 1793229774.7879317
     }
   ],
   "user_profile": {
@@ -82,6 +90,6 @@
     "disliked_patterns": [],
     "last_updated": 1793225150.468043
   },
-  "total_triples_count": 9,
-  "last_saved": 1793225806.0519717
+  "total_triples_count": 10,
+  "last_saved": 1793229774.788754
 }

@@ -363,6 +363,343 @@ UNIVERSITY_CURRICULUM_INDEX = [
                 "url": "https://hci.stanford.edu/"
             }
         ]
+    },
+    {
+        "keywords": ["verification", "coq", "lean", "smt", "formal proof", "hoare", "isabelle", "soundness", "theorem"],
+        "curriculum": [
+            {
+                "institution": "Carnegie Mellon University (CMU)",
+                "course_code": "15-414 / 15-714",
+                "course_title": "Bug Catching: Automated Program Verification",
+                "professors": ["Matt Fredrikson", "André Platzer"],
+                "syllabus_url": "https://www.cs.cmu.edu/~15414/",
+                "seminal_textbook": "Software Foundations: Logical Foundations - Benjamin C. Pierce et al.",
+                "core_mental_models": [
+                    "Hoare üçlüleri (Preconditions, Commands, Postconditions) ve loop invariant türetimi.",
+                    "SMT çözücüler (Z3, CVC5) ile otomatik birinci dereceden mantık kanıtlaması.",
+                    "Coq ve Lean ile makine tarafından denetlenen matematiksel doğruluk ispatları."
+                ]
+            },
+            {
+                "institution": "MIT (Massachusetts Institute of Technology)",
+                "course_code": "6.822",
+                "course_title": "Formal Reasoning About Programs",
+                "professors": ["Adam Chlipala"],
+                "syllabus_url": "http://adam.chlipala.net/frap/",
+                "seminal_textbook": "Certified Programming with Dependent Types - Adam Chlipala",
+                "core_mental_models": [
+                    "Bağımlı tip teorisi (Dependent Type Theory) ve Curry-Howard izomorfizmi.",
+                    "Sıfır hatalı doğrulanmış derleyiciler ve mikroişlemci donanım kanıtları."
+                ]
+            }
+        ],
+        "research_labs": [
+            {
+                "name": "CMU Principles of Programming Group (PoP)",
+                "focus": "Theorem proving, formal semantics, and certified program synthesis.",
+                "url": "https://pop.cs.cmu.edu/"
+            },
+            {
+                "name": "MIT CSAIL Programming Methodology Group",
+                "focus": "Machine-checked proofs of operating systems and cryptographic kernels.",
+                "url": "https://pmg.csail.mit.edu/"
+            }
+        ]
+    },
+    {
+        "keywords": ["graphics", "webgpu", "vulkan", "ray tracing", "shader", "rasterization", "three.js", "glsl", "render"],
+        "curriculum": [
+            {
+                "institution": "UC Berkeley",
+                "course_code": "CS184 / CS284A",
+                "course_title": "Foundations of Computer Graphics",
+                "professors": ["Ren Ng", "Angjoo Kanazawa"],
+                "syllabus_url": "https://cs184.eecs.berkeley.edu/",
+                "seminal_textbook": "Fundamentals of Computer Graphics - Peter Shirley & Steve Marschner",
+                "core_mental_models": [
+                    "Kajiya Render Denklemi ve Monte Carlo yol izleme (Path Tracing) integralleri.",
+                    "BVH (Bounding Volume Hierarchy) uzamsal ivmelendirme yapıları ve ışın-üçgen kesişimleri.",
+                    "Barycentric koordinat enterpolasyonu ve mipmap doku filtreleme matematiği."
+                ]
+            },
+            {
+                "institution": "Stanford University",
+                "course_code": "CS248",
+                "course_title": "Interactive Computer Graphics & WebGPU",
+                "professors": ["Kayvon Fatahalian", "Pat Hanrahan"],
+                "syllabus_url": "https://web.stanford.edu/class/cs248/",
+                "seminal_textbook": "Real-Time Rendering (4th Edition) - Tomas Akenine-Möller et al.",
+                "core_mental_models": [
+                    "Deferred Shading ve G-Buffer mimarileri ile binlerce ışık kaynağının gerçek zamanlı çizimi.",
+                    "WebGPU hesaplama gölgelendiricileri (Compute Shaders) ile paralel GPU parçacık fiziği.",
+                    "Temporal Anti-Aliasing (TAA) ve ekran uzayı yansımaları (Screen-Space Reflections)."
+                ]
+            }
+        ],
+        "research_labs": [
+            {
+                "name": "Stanford Computer Graphics Laboratory",
+                "focus": "Real-time differentiable rendering, neural radiance fields (NeRF), and spatial light fields.",
+                "url": "https://graphics.stanford.edu/"
+            },
+            {
+                "name": "UC Berkeley Visual Computing Lab",
+                "focus": "Physics-based animation, photorealistic global illumination, and spatial computing.",
+                "url": "https://vis.berkeley.edu/"
+            }
+        ]
+    },
+    {
+        "keywords": ["quantum", "qubit", "superposition", "shor", "grover", "vqe", "entanglement", "quantum computing"],
+        "curriculum": [
+            {
+                "institution": "Caltech (California Institute of Technology)",
+                "course_code": "Ph125 / CS125",
+                "course_title": "Quantum Information and Computation",
+                "professors": ["John Preskill"],
+                "syllabus_url": "http://theory.caltech.edu/~preskill/ph229/",
+                "seminal_textbook": "Quantum Computation and Quantum Information - Michael A. Nielsen & Isaac L. Chuang",
+                "core_mental_models": [
+                    "Hilbert uzaylarında üniter dönüşümler ve Bloch küresi üzerinde kuantum durumları.",
+                    "Kuantum hata düzeltme (Surface codes) ve hata toleranslı eşikler (Fault-tolerant thresholds).",
+                    "Shor algoritması (periyot bulma) ve Grover algoritması (kuadratik arama ivmesi)."
+                ]
+            },
+            {
+                "institution": "MIT (Massachusetts Institute of Technology)",
+                "course_code": "8.370 / 6.443",
+                "course_title": "Quantum Information Science",
+                "professors": ["Peter Shor", "Isaac Chuang"],
+                "syllabus_url": "https://ocw.mit.edu/courses/8-370-quantum-information-science-spring-2018/",
+                "seminal_textbook": "Quantum Computer Science: An Introduction - N. David Mermin",
+                "core_mental_models": [
+                    "Klonlanamazlık teoremi (No-cloning theorem) ve kuantum ışınlama (teleportation).",
+                    "NISQ devri varyasyonel algoritmaları (VQE, QAOA) ve moleküler Hamiltonyen simülasyonları."
+                ]
+            }
+        ],
+        "research_labs": [
+            {
+                "name": "Caltech Institute for Quantum Information and Matter (IQIM)",
+                "focus": "Topological quantum computing, quantum error correction, and quantum matter.",
+                "url": "https://iqim.caltech.edu/"
+            },
+            {
+                "name": "MIT Center for Theoretical Physics (Quantum Group)",
+                "focus": "Quantum complexity theory, quantum cryptography, and superconducting qubit design.",
+                "url": "https://ctp.mit.edu/research/quantum-information/"
+            }
+        ]
+    },
+    {
+        "keywords": ["neuro", "bci", "eeg", "neural prosthetics", "brain", "spike", "neuromorphic", "neuroengineering"],
+        "curriculum": [
+            {
+                "institution": "Harvard University",
+                "course_code": "Neurobio 101 / ENG-SCI 115",
+                "course_title": "Neuroengineering & Brain-Machine Interfaces",
+                "professors": ["Frank Guenther", "Maurice Smith"],
+                "syllabus_url": "https://canvas.harvard.edu/",
+                "seminal_textbook": "Principles of Neural Science - Eric Kandel et al.",
+                "core_mental_models": [
+                    "Aksiyon potansiyeli (Spike train) Poisson kodlama ve popülasyon vektör kod çözme.",
+                    "İntrakortikal mikro-elektrot dizileri ve Kalman filtresi ile kol/imleç yörünge kestirimi.",
+                    "Bilişsel gecikmeler ve kapalı döngü nöral geri bildirim (Closed-loop neuro-prosthetics)."
+                ]
+            },
+            {
+                "institution": "Stanford University",
+                "course_code": "BIOE 332",
+                "course_title": "Large-Scale Neural Recording & Neuromodulation",
+                "professors": ["Krishna Shenoy", "Karl Deisseroth"],
+                "syllabus_url": "https://med.stanford.edu/neurosurgery/",
+                "seminal_textbook": "Neural Engineering - Bin He",
+                "core_mental_models": [
+                    "Optogenetik uyarım ve iki fotonlu kalsiyum görüntüleme sinyal analizi.",
+                    "Ultra-düşük gürültülü analog ön uç (AFE) ve biyolojik doku empedans uyumu."
+                ]
+            }
+        ],
+        "research_labs": [
+            {
+                "name": "Stanford Neural Prosthetic Systems Laboratory (NPSL)",
+                "focus": "High-bandwidth cortical brain-computer interfaces for clinical communication.",
+                "url": "https://npsl.stanford.edu/"
+            },
+            {
+                "name": "Harvard Wyss Institute Brain-Targeted Technologies",
+                "focus": "Non-invasive neurostimulation, bio-electronic therapeutics, and brain organoids.",
+                "url": "https://wyss.harvard.edu/"
+            }
+        ]
+    },
+    {
+        "keywords": ["hardware", "fpga", "asic", "microarchitecture", "superscalar", "pipelining", "cpu", "verilog", "risc-v"],
+        "curriculum": [
+            {
+                "institution": "Carnegie Mellon University (CMU)",
+                "course_code": "18-447",
+                "course_title": "Computer Architecture: Principles and Practice",
+                "professors": ["Onur Mutlu"],
+                "syllabus_url": "https://www.ece.cmu.edu/~ece447/",
+                "seminal_textbook": "Computer Architecture: A Quantitative Approach - John L. Hennessy & David A. Patterson",
+                "core_mental_models": [
+                    "Tomasulo algoritması ve sıra dışı (Out-of-Order) yürütme motorları.",
+                    "TAGE dal tahminleyicisi (Branch prediction) ve spekülatif yürütme yan kanal izolasyonu.",
+                    "Bellek denetleyici zamanlaması (FR-FCFS) ve DRAM bank çakışma azaltma teknikleri."
+                ]
+            },
+            {
+                "institution": "Stanford University",
+                "course_code": "EE108 / EE282",
+                "course_title": "Digital System Design & Hardware Accelerators",
+                "professors": ["Mark Horowitz", "Subhasish Mitra"],
+                "syllabus_url": "https://web.stanford.edu/class/ee108/",
+                "seminal_textbook": "Digital Design and Computer Architecture - David Harris & Sarah Harris",
+                "core_mental_models": [
+                    "Boru hattı veri tehlikeleri (Data hazards, Forwarding) ve FPGA kritik yol zamanlama kapanışı.",
+                    "Sistolik diziler (Systolic Arrays) ile tensör çarpım hızlandırma ve donanım sıfır-kopyası."
+                ]
+            }
+        ],
+        "research_labs": [
+            {
+                "name": "CMU SAFARI Architecture Research Group",
+                "focus": "Processing-in-memory (PIM), memory system security, and genomics accelerators.",
+                "url": "https://safari.ethz.ch/"
+            },
+            {
+                "name": "Stanford Center for Integrated Systems (CIS)",
+                "focus": "Energy-efficient AI accelerators, sub-1nm transistor scaling, and custom ASICs.",
+                "url": "https://cis.stanford.edu/"
+            }
+        ]
+    },
+    {
+        "keywords": ["cryptography", "zero knowledge", "zk", "snark", "stark", "lattice", "post-quantum", "cipher", "hash"],
+        "curriculum": [
+            {
+                "institution": "MIT (Massachusetts Institute of Technology)",
+                "course_code": "6.875",
+                "course_title": "Cryptography and Cryptanalysis",
+                "professors": ["Shafi Goldwasser", "Yael Tauman Kalai"],
+                "syllabus_url": "https://stellar.mit.edu/S/course/6/sp18/6.875/",
+                "seminal_textbook": "Introduction to Modern Cryptography - Jonathan Katz & Yehuda Lindell",
+                "core_mental_models": [
+                    "Sıfır bilgi kanıtları (Zero-Knowledge Proofs) ve bilgi sızdırmaz etkileşimli protokoller.",
+                    "İndistinguishability Obfuscation (iO) ve tam homomorfik şifreleme (FHE).",
+                    "Seçilmiş şifreli metin saldırılarına (IND-CCA2) karşı kanıtlanabilir güvenlik indirgemeleri."
+                ]
+            },
+            {
+                "institution": "UC Berkeley",
+                "course_code": "CS276",
+                "course_title": "Cryptography and Computer Security",
+                "professors": ["Sanjam Garg", "Alessandro Chiesa"],
+                "syllabus_url": "https://people.eecs.berkeley.edu/~sanjamg/classes/cs276-fall20/",
+                "seminal_textbook": "A Graduate Course in Applied Cryptography - Dan Boneh & Victor Shoup",
+                "core_mental_models": [
+                    "Eliptik eğri eşleşmeleri (Bilinear Pairings) ve KZG polinom taahhüt şemaları.",
+                    "Kafes tabanlı kriptografi (Learning With Errors - LWE) ile kuantum sonrası şifreleme."
+                ]
+            }
+        ],
+        "research_labs": [
+            {
+                "name": "MIT Cryptography and Information Security Group (CIS)",
+                "focus": "Foundational cryptology, multi-party computation, and secure hardware enclaves.",
+                "url": "https://cis.csail.mit.edu/"
+            },
+            {
+                "name": "UC Berkeley Center for Responsible, Decentralized Intelligence (RDI)",
+                "focus": "ZK-SNARK scalability, zero-knowledge verifiable AI, and decentralization.",
+                "url": "https://rdi.berkeley.edu/"
+            }
+        ]
+    },
+    {
+        "keywords": ["game engine", "voxel", "ecs", "spatial hashing", "greedy meshing", "collision", "physics engine", "modding"],
+        "curriculum": [
+            {
+                "institution": "Carnegie Mellon University (CMU)",
+                "course_code": "15-466",
+                "course_title": "Computer Game Programming & Engine Systems",
+                "professors": ["Jim McCann"],
+                "syllabus_url": "http://graphics.cs.cmu.edu/courses/15-466-f21/",
+                "seminal_textbook": "Game Engine Architecture (3rd Edition) - Jason Gregory",
+                "core_mental_models": [
+                    "Veri Odaklı Tasarım (Data-Oriented Design) ve ardışık CPU önbellek dostu ECS bellek yerleşimi.",
+                    "Uzamsal parçalama (Spatial Hashing, Octree) ve Gilbert-Johnson-Keerthi (GJK) çarpışma tespiti.",
+                    "Ağ determinizmi ve geri sarma (Rollback Netcode) tahmin senkronizasyonu."
+                ]
+            },
+            {
+                "institution": "Stanford University",
+                "course_code": "CS348B",
+                "course_title": "Computer Graphics: Spatial Simulation & Voxel Physics",
+                "professors": ["Pat Hanrahan"],
+                "syllabus_url": "https://graphics.stanford.edu/courses/cs348b/",
+                "seminal_textbook": "Physically Based Rendering: From Theory to Implementation - Matt Pharr et al.",
+                "core_mental_models": [
+                    "Voksel geometrisinde Greedy Meshing algoritması ile poligon sayısını %90 azaltma.",
+                    "Çok çekirdekli deterministik oyun döngüleri (Fixed-timestep 60Hz tick pipelines)."
+                ]
+            }
+        ],
+        "research_labs": [
+            {
+                "name": "CMU Entertainment Technology Center (ETC)",
+                "focus": "Virtual production, real-time spatial engines, and multiplayer interactive media.",
+                "url": "https://www.etc.cmu.edu/"
+            },
+            {
+                "name": "Stanford Graphics Spatial Simulation Lab",
+                "focus": "Large-scale continuous fluid simulation, ragdoll physics, and voxel terrain.",
+                "url": "https://graphics.stanford.edu/"
+            }
+        ]
+    },
+    {
+        "keywords": ["multi-agent", "swarm", "deliberation", "mcp", "autonomous agent", "game theory", "consensus", "senate"],
+        "curriculum": [
+            {
+                "institution": "University of Oxford",
+                "course_code": "CS-MAS",
+                "course_title": "Multi-Agent Systems & Algorithmic Game Theory",
+                "professors": ["Michael Wooldridge"],
+                "syllabus_url": "https://www.cs.ox.ac.uk/teaching/courses/2021-2022/mas/",
+                "seminal_textbook": "An Introduction to MultiAgent Systems - Michael Wooldridge",
+                "core_mental_models": [
+                    "BDI (Belief-Desire-Intention) bilişsel ajan mimarisi ve rasyonel eylem seçimi.",
+                    "Nash dengesi, Shapley değeri ve çoklu ajan kooperatif müzakere protokolleri.",
+                    "Kolektif zekâ karar mekanizmaları (Condorcet jüri teoremi ve çoğunluk oylama sınırları)."
+                ]
+            },
+            {
+                "institution": "Stanford University",
+                "course_code": "CS228",
+                "course_title": "Probabilistic Graphical Models & Autonomous Agents",
+                "professors": ["Stefano Ermon", "Daphne Koller"],
+                "syllabus_url": "https://cs228.stanford.edu/",
+                "seminal_textbook": "Probabilistic Graphical Models: Principles and Techniques - Daphne Koller & Nir Friedman",
+                "core_mental_models": [
+                    "Bayesyen ağlar ve belirsizlik altında çoklu ajan karar matrisleri.",
+                    "Ajanlar arası iletişim protokolleri (Model Context Protocol JSON-RPC standardizasyonu)."
+                ]
+            }
+        ],
+        "research_labs": [
+            {
+                "name": "Oxford Autonomous Intelligent Machines and Systems (AIMS)",
+                "focus": "Autonomous swarm robotics, cooperative multi-agent reinforcement learning.",
+                "url": "https://aims.robots.ox.ac.uk/"
+            },
+            {
+                "name": "Stanford Artificial Intelligence Laboratory (SAIL)",
+                "focus": "Multi-agent interaction, tool-use grounding, and collective deliberative reasoning.",
+                "url": "https://ai.stanford.edu/"
+            }
+        ]
     }
 ]
 
