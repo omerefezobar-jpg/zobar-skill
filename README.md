@@ -3,11 +3,15 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![CI & Quality Gate](https://github.com/omerefezobar-jpg/zobar-skill/actions/workflows/ci.yml/badge.svg)](https://github.com/omerefezobar-jpg/zobar-skill/actions)
 [![Regression Suite](https://img.shields.io/badge/Regression%20Suite-30%2F30%20Passing%20(Zero%20Tolerance)-blue.svg)](./benchmarks/BENCHMARK_REPORT.md)
-[![Unit Tests](https://img.shields.io/badge/Unit%20Tests-80%2F80%20Passing-brightgreen.svg)](https://github.com/omerefezobar-jpg/zobar-skill/actions)
+[![Unit Tests](https://img.shields.io/badge/Unit%20Tests-98%2F98%20Passing-brightgreen.svg)](https://github.com/omerefezobar-jpg/zobar-skill/actions)
+[![Live MCP Engine](https://img.shields.io/badge/Live%20MCP%20Server-15%20Tools%20(Sub--1ms)-blue.svg)](./benchmarks/MCP_BENCHMARK_REPORT.md)
+[![REA Clean-Room Reversing](https://img.shields.io/badge/Reverse%20Engineering-REA%20%7C%20Clean--Room%20%7C%20EU%202009%2F24%2FEC-red.svg)](./scripts/reverse_engineering_analyst.py)
+[![Game Modding & Minecraft](https://img.shields.io/badge/Game%20Modding-Minecraft%20%7C%20Fabric%20%7C%20Harmony%20%7C%20Voxel-blue.svg)](./scripts/game_modding_engine.py)
+[![Multi-Agent Deliberation](https://img.shields.io/badge/Deliberation%20Senate-Academic%20%7C%20Public%20%7C%20Workforce-success.svg)](./scripts/multi_agent_deliberation_council.py)
+[![Evolutionary UI](https://img.shields.io/badge/Evolutionary%20Design-Novelty%20Divergence%20%E2%89%A5%200.75-ff69b4.svg)](./scripts/creative_evolutionary_designer.py)
 [![Systems Math Engine](https://img.shields.io/badge/Systems%20Math-Roofline%20%7C%20Queueing%20%7C%20Amdahl-blueviolet.svg)](./scripts/systems_math_engine.py)
 [![Modern Design Styles](https://img.shields.io/badge/Modern%20Design%20Styles-Glassmorphism%20%7C%20Aurora%20%7C%20Bento-ff69b4.svg)](./references/modern_design_styles_vault.json)
 [![3D & Asset Vault](https://img.shields.io/badge/Ready%20Assets-3D%20%7C%20PBR%20%7C%20SFX%20%7C%20UI-orange.svg)](./references/free_assets_and_3d_vault.json)
-[![Live MCP Engine](https://img.shields.io/badge/Live%20MCP%20Server-JSON--RPC%202.0%20(Sub--1ms)-blue.svg)](./benchmarks/MCP_BENCHMARK_REPORT.md)
 [![Universal Vibe Coding](https://img.shields.io/badge/Vibe%20Coding-Cursor%20%7C%20Claude%20%7C%20Windsurf%20%7C%20Copilot-blueviolet.svg)](./scripts/vibe_coding_bridge.py)
 [![Business School & MCP](https://img.shields.io/badge/Business%20School%20%7C%20MCP-HBS%20%7C%20INSEAD%20%7C%20Wharton-success.svg)](./scripts/business_school_case_engine.py)
 [![Visual AI Synthesizer](https://img.shields.io/badge/Visual%20AI-Midjourney%20v6.1%20%7C%20FLUX.1-orange.svg)](./scripts/image_prompt_synthesizer.py)
@@ -17,7 +21,7 @@
 [![Python: 3.10+](https://img.shields.io/badge/Python-3.10+-3776AB.svg?logo=python&logoColor=white)](https://python.org)
 [![Security: XSS Hardened](https://img.shields.io/badge/Security-XSS%20Hardened%20(No%20Eval)-green.svg)](https://github.com/omerefezobar-jpg/zobar-skill)
 
-**Zobar Skill**, yapay zeka ajanlarını yüzeysel cevaplar veren asistanlardan; bir konuyu **seçkin üniversite müfredatları (MIT, Stanford, ETH Zürich, Oxford)**, **hakemli akademik yayınlar (OpenAlex Scholarly Graph) & arXiv ön baskıları**, **tümce düzeyinde olumsuzlama (negation) ayrıştırmalı kullanıcı sürtünmeleri (HN + Reddit)**, **hibrit pazar analizi (Ticari Liderler + Canlı GitHub & Paket Telemetrisi)**, **madde bazlı 30-senaryolu yasal mevzuat denetimi (EU AI Act, MDR Kural 11 & GDPR)**, **Berkeley Roofline & Little's Law kuyruk teorisi destekli matematiksel sistem mühendisliği**, **Glassmorphism / Aurora / Bento S-Tier hazır tasarım havuzu**, **otomatik teknik mimari sentezi** ve **dinamik TRL/ICE formülleriyle kanıtlanmış radikal icatlarla** sıfırdan kurgulayan **uçtan uca otonom bir Deep-Tech Ar-Ge ve İnovasyon Motorudur**.
+**Zobar Skill**, yapay zeka ajanlarını yüzeysel cevaplar veren asistanlardan; bir konuyu **seçkin üniversite müfredatları (MIT, Stanford, ETH Zürich, Oxford)**, **hakemli akademik yayınlar (OpenAlex Scholarly Graph) & arXiv ön baskıları**, **tümce düzeyinde olumsuzlama (negation) ayrıştırmalı kullanıcı sürtünmeleri (HN + Reddit)**, **hibrit pazar analizi (Ticari Liderler + Canlı GitHub & Paket Telemetrisi)**, **madde bazlı 30-senaryolu yasal mevzuat denetimi (EU AI Act, MDR Kural 11 & GDPR)**, **REA ilhamlı ve Çin Seddi / Temiz Oda protokolüne dayalı yasal tersine mühendislik denetimi**, **Minecraft ve oyun modlama mimarileri (Greedy Meshing %90 draw call tasarrufu, Fabric Mixin & Harmony hooks)**, **Akademisyenler, Halk Meclisi ve Saha Mühendisleri arasında tartışan çoklu-ajan senatosu**, **asla kendini tekrar etmeyen evrimsel yaratıcı tasarım motoru ($D_{novelty} \ge 0.75$)**, **Berkeley Roofline & Little's Law kuyruk teorisi destekli matematiksel sistem mühendisliği**, **Glassmorphism / Aurora / Bento S-Tier hazır tasarım havuzu**, **otomatik teknik mimari sentezi** ve **dinamik TRL/ICE formülleriyle kanıtlanmış radikal icatlarla** sıfırdan kurgulayan **uçtan uca otonom bir Deep-Tech Ar-Ge ve İnovasyon Motorudur**.
 
 ---
 
@@ -118,7 +122,11 @@ zobar-skill/
 │   ├── realtime_audio_voice_engine.py# Discord WebRTC/SFU ses yönlendirici & ElevenLabs streaming TTS
 │   ├── llm_hardware_accelerator.py   # PagedAttention, Speculative Decoding ve AWQ/INT4 hızlandırma motoru
 │   ├── unit_economics_investor_simulator.py # LTV/CAC > 3 ve sıfır sermayeli asimetrik girişim simülatörü
-│   ├── zobar_mcp_server.py           # 11 Araçlı resmi Model Context Protocol (MCP) JSON-RPC 2.0 sunucusu
+│   ├── reverse_engineering_analyst.py # REA & Çin Seddi / Temiz Oda yasal tersine mühendislik motoru
+│   ├── game_modding_engine.py        # Minecraft/Unity/Unreal modlama & Greedy Meshing voxel köprüsü
+│   ├── multi_agent_deliberation_council.py # Akademisyenler, Halk Meclisi & Çalışanlar Senato toplantısı
+│   ├── creative_evolutionary_designer.py # Kendini tekrar etmeyen evrimsel tasarım motoru (D_novelty >= 0.75)
+│   ├── zobar_mcp_server.py           # 15 Araçlı resmi Model Context Protocol (MCP) JSON-RPC 2.0 sunucusu
 │   ├── validate_inventions.py        # Faz 6: TRIZ radikal icat, dinamik TRL/ICE/WTP ve Mermaid mimarı
 │   └── export_html_report.py         # XSS korumalı, CSP uyumlu ('unsafe-eval' içermez) HTML çevirici
 ├── benchmarks/                       # 30 vakalık sıfır toleranslı regresyon denetim sistemi
@@ -126,12 +134,13 @@ zobar-skill/
 │   ├── BENCHMARK_REPORT.md           # Üretilen denetim ve başarı skorkartı
 │   └── benchmark_results.json        # Makine tarafından okunabilir benchmark çıktısı
 ├── references/                       # Zihinsel modeller, First Principles, TRIZ matrisi
+│   ├── evolutionary_design_memory.json # Tekrarsız tasarım oturum hafızası ve kromozom bankası
 │   ├── modern_design_styles_vault.json # Glassmorphism, Aurora, Cyberpunk HUD, Neo-Brutalist token havuzu
 │   ├── free_assets_and_3d_vault.json # 3D, GLTF, PBR texture, ses ve arayüz asset havuzu
 │   ├── s_tier_design_vault.json      # 202 adet doğrulanmış S-Tier site ve bileşen tasarım veri tabanı
 │   ├── heavy_apps_engineering_blueprints.json # Steam, Excel, Premiere vb. 10x mühendislik analizleri
 │   └── supabase_production_schema.sql# Multi-tenant RLS, pgvector HNSW ve Realtime PostgreSQL şeması
-├── tests/                            # 80/80 Çevrimdışı mock'lu deterministik birim test paketi
+├── tests/                            # 98/98 Çevrimdışı mock'lu deterministik birim test paketi
 └── examples/                         # Örnek rapor (Markdown + HTML formatında)
 ```
 

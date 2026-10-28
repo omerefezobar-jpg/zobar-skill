@@ -2,15 +2,22 @@
 Zobar Real-Time MCP (Model Context Protocol) Server
 Production-Grade JSON-RPC 2.0 Live Server over stdio
 
-Provides 8 live, fully-functional tools connected directly to Zobar Skill core engines:
-1. semantic_cache_query   -> scripts.semantic_cache.SemanticCache
-2. smart_route            -> scripts.smart_model_router.SmartModelRouter
-3. audit_supabase_sql     -> scripts.supabase_db_optimizer.SupabaseDBOptimizer
-4. compress_context       -> scripts.context_compressor.ContextCompressor
-5. recall_user_memory     -> scripts.continual_memory_engine.ContinualMemoryEngine
-6. simulate_unit_economics-> scripts.unit_economics_investor_simulator.UnitEconomicsSimulator
-7. generate_image_prompt  -> scripts.image_prompt_synthesizer.ImagePromptSynthesizer
-8. step_ecs_simulation    -> scripts.ecs_game_engine (ECSWorld + GameLoop)
+Provides 15 live, fully-functional tools connected directly to Zobar Skill core engines:
+1. semantic_cache_query         -> scripts.semantic_cache.SemanticCache (<0.05ms inverted index)
+2. smart_route                  -> scripts.smart_model_router.SmartModelRouter
+3. audit_supabase_sql           -> scripts.supabase_db_optimizer.SupabaseDBOptimizer
+4. compress_context             -> scripts.context_compressor.ContextCompressor
+5. recall_user_memory           -> scripts.continual_memory_engine.ContinualMemoryEngine
+6. simulate_unit_economics      -> scripts.unit_economics_investor_simulator.UnitEconomicsSimulator
+7. generate_image_prompt        -> scripts.image_prompt_synthesizer.ImagePromptSynthesizer
+8. step_ecs_simulation          -> scripts.ecs_game_engine (ECSWorld + GameLoop)
+9. search_asset_vault           -> scripts.query_asset_vault.AssetVaultQueryEngine
+10. calculate_systems_math      -> scripts.systems_math_engine.SystemsMathEngine (Roofline, Queueing, Amdahl, Spring, Kelly)
+11. get_design_style            -> scripts.design_system_generator.ModernDesignStylesEngine (Glassmorphism, Aurora, Bento)
+12. analyze_reverse_engineering -> scripts.reverse_engineering_analyst (REA & Clean-Room Safe Harbors)
+13. generate_game_mod_architecture -> scripts.game_modding_engine (Fabric/Harmony & Voxel/Minecraft Greedy Meshing)
+14. deliberate_council          -> scripts.multi_agent_deliberation_council (Academic, Public & Workforce Senate)
+15. generate_evolutionary_design-> scripts.creative_evolutionary_designer (Novelty Divergence >= 0.75 & Genetic UI)
 """
 
 import sys
@@ -35,6 +42,10 @@ from scripts.ecs_game_engine import ECSWorld, DeterministicGameLoop
 from scripts.query_asset_vault import AssetVaultQueryEngine
 from scripts.systems_math_engine import SystemsMathEngine
 from scripts.design_system_generator import ModernDesignStylesEngine
+from scripts.reverse_engineering_analyst import analyze_target_system
+from scripts.game_modding_engine import synthesize_minecraft_in_game_bridge, calculate_greedy_meshing_metrics, generate_mod_code_template
+from scripts.multi_agent_deliberation_council import conduct_executive_board_deliberation
+from scripts.creative_evolutionary_designer import generate_evolutionary_design
 
 
 class ZobarMCPServer:
@@ -197,6 +208,52 @@ class ZobarMCPServer:
                     },
                     "required": ["style_name"]
                 }
+            },
+            {
+                "name": "analyze_reverse_engineering",
+                "description": "REA-inspired reverse engineering analyst and statutory safe-harbor legal auditor. Inspects binary format headers, printable symbols, safe-harbor legality (EU Directive 2009/24/EC Art 6 & US DMCA 1201(f) Interoperability), and generates Clean-Room Functional Specifications (FSD).",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "target_name": {"type": "string", "description": "Target binary or protocol name"},
+                        "intent": {"type": "string", "description": "Goal of reverse engineering (e.g. Interoperability, Security Audit, Protocol Integration)"}
+                    },
+                    "required": ["target_name"]
+                }
+            },
+            {
+                "name": "generate_game_mod_architecture",
+                "description": "Synthesizes production-grade game modding architectures across Minecraft (Fabric Mixin / NeoForge) and Unity (BepInEx Harmony). Computes Greedy Meshing voxel geometry optimizations (90% draw call reduction) and cross-game Minecraft embedding bridges.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "target_game": {"type": "string", "description": "Target game (e.g. Minecraft, Unity, Unreal)"},
+                        "mod_feature": {"type": "string", "description": "Desired mod feature or integration mechanic"}
+                    },
+                    "required": ["target_game"]
+                }
+            },
+            {
+                "name": "deliberate_council",
+                "description": "Multi-agent deliberation council and senatorial consensus engine. Simulates an intense 3-way adversarial debate between Academic Council (algorithms, safety), Public Assembly (UX, privacy, voting), and Workforce Council (toil, maintainability), yielding a binding ratified consensus score and dissenting opinion log.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "topic": {"type": "string", "description": "Architecture proposal or feature under deliberation"}
+                    },
+                    "required": ["topic"]
+                }
+            },
+            {
+                "name": "generate_evolutionary_design",
+                "description": "Evolves non-repetitive, novel, and self-strengthening UI/UX design architectures. Enforces high novelty divergence (D_novelty >= 0.75), rejects cliché bootstrap/shadcn presets, updates persistent aesthetic memory, and produces executable Tailwind v4 classes and React spring-physics components.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "domain_context": {"type": "string", "description": "Product or application domain"}
+                    },
+                    "required": ["domain_context"]
+                }
             }
         ]
 
@@ -323,6 +380,31 @@ class ZobarMCPServer:
                     "style_name": style_name,
                     "tokens": style_data,
                 }
+
+        elif name == "analyze_reverse_engineering":
+            target_name = args.get("target_name", "UnknownBinary")
+            intent = args.get("intent", "Interoperability with third-party software")
+            payload = analyze_target_system(target_name=target_name, intent=intent)
+
+        elif name == "generate_game_mod_architecture":
+            target_game = args.get("target_game", "Minecraft")
+            mod_feature = args.get("mod_feature", "Custom Voxel Mechanics")
+            greedy = calculate_greedy_meshing_metrics()
+            bridge = synthesize_minecraft_in_game_bridge(target_game)
+            mod_code = generate_mod_code_template(target_game, mod_feature)
+            payload = {
+                "greedy_meshing_optimization": greedy,
+                "minecraft_in_game_bridge": bridge,
+                "mod_code_template": mod_code
+            }
+
+        elif name == "deliberate_council":
+            topic = args.get("topic", "General Architecture Proposal")
+            payload = conduct_executive_board_deliberation(topic=topic)
+
+        elif name == "generate_evolutionary_design":
+            domain_context = args.get("domain_context", "Modern Enterprise Application")
+            payload = generate_evolutionary_design(domain_context=domain_context)
 
         else:
             raise ValueError(f"Unknown tool name: {name}")

@@ -1,0 +1,52 @@
+[
+  {
+    "design_id": "EVO-24F9434D",
+    "domain": "Quantum Game Studio",
+    "novelty_score": 1.0,
+    "material_name": "Volcanic Dark Obsidian",
+    "geometry_name": "Asymmetric Bento with Variable Aspect Ratios",
+    "palette_name": "Monochrome Acid Lime",
+    "physics_type": "Viscous Magnetic Damping",
+    "timestamp": 1793222430.8140116
+  },
+  {
+    "design_id": "EVO-A3751E25",
+    "domain": "Autonomous Quantum Operating System",
+    "novelty_score": 0.75,
+    "material_name": "Sub-Atomic Polarized Crystal",
+    "geometry_name": "Asymmetric Bento with Variable Aspect Ratios",
+    "palette_name": "Emerald Bio-Grid",
+    "physics_type": "High-Tension Snap",
+    "timestamp": 1793222526.4128923
+  },
+  {
+    "design_id": "EVO-F524D1BC",
+    "domain": "Deep Space Telemetry Dashboard",
+    "novelty_score": 1.0,
+    "material_name": "Iridescent Vapor-Chromium",
+    "geometry_name": "Monospaced Swiss Data Grid",
+    "palette_name": "Ultra-Violet Cyber Core",
+    "physics_type": "Apple 2nd-Order Spring",
+    "timestamp": 1793222526.4275568
+  },
+  {
+    "design_id": "EVO-482E0D4F",
+    "domain": "Autonomous Quantum Operating System",
+    "novelty_score": 0.75,
+    "material_name": "Iridescent Vapor-Chromium",
+    "geometry_name": "Offset Diagonal Architectural Ribbons",
+    "palette_name": "Solarized Cobalt & Amber",
+    "physics_type": "Viscous Magnetic Damping",
+    "timestamp": 1793222602.5773432
+  },
+  {
+    "design_id": "EVO-4DF7466C",
+    "domain": "Deep Space Telemetry Dashboard",
+    "novelty_score": 0.75,
+    "material_name": "Kinetic Neo-Brutalist Concrete",
+    "geometry_name": "Monospaced Swiss Data Grid",
+    "palette_name": "Emerald Bio-Grid",
+    "physics_type": "Viscous Magnetic Damping",
+    "timestamp": 1793222602.5956242
+  }
+]
