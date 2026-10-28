@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
 """
-Statutory Regulatory & Compliance Screener for Frontier Innovator.
-Maps domain characteristics to specific legal articles in the EU AI Act (2024/1689),
-GDPR (2016/679), and OSI Open Source licensing compatibility guidelines.
-Provides transparent statutory citations and confidence levels.
+Statutory Regulatory & Compliance Screener for Zobar Skill.
+Provides preliminary screening against the official text of Regulation (EU) 2024/1689
+(EU AI Act) and Regulation (EU) 2016/679 (GDPR).
+
+DISCLAIMER:
+This tool provides preliminary automated issue-spotting based on codified statutory criteria.
+It DOES NOT provide legal counsel. Regulatory risk depends on intended purpose, deployment
+context, and technical implementation.
 """
 
 import sys
@@ -15,107 +19,108 @@ if hasattr(sys.stdout, "reconfigure"):
 
 def evaluate_compliance(domain_keywords: str):
     """
-    Evaluates statutory compliance triggers with article-level legal citations.
-    Returns risk classifications, statutory references, and indeterminate/counsel flags.
+    Evaluates statutory compliance triggers against specific EU AI Act articles.
+    Categorizes systems with explicit statutory basis, confidence rating, and counsel requirements.
     """
     lowered = domain_keywords.lower()
-    
-    # 1. EU AI Act (Regulation EU 2024/1689)
-    eu_status = {
-        "tier": "Minimal / Low Risk (Genel Yazılım Kapsamı)",
-        "statutory_basis": "EU AI Act Madde 69 (Genel Amaçlı / Doğrudan Yasaklanmamış Sistemler)",
-        "confidence": "Yüksek (Doğrudan Yüksek Risk Listesinde Değil)",
-        "requires_expert_counsel": False,
-        "articles": ["Regulation (EU) 2024/1689 Recital 34 & Article 69"],
-        "obligations": [
-            "Gönüllü davranış kuralları (Codes of Conduct) ve telif hakları mevzuatına saygı."
-        ]
-    }
 
-    # Prohibited AI Systems (Article 5)
-    if any(k in lowered for k in ["subliminal", "social score", "biometric categorisation", "facial recognition database", "untargeted scraping"]):
-        eu_status["tier"] = "Yasaklanmış Yapay Zeka Uygulaması (Prohibited AI Practice)"
-        eu_status["statutory_basis"] = "EU AI Act Madde 5(1) (Bilinçaltı manipülasyon, sosyal puanlama, izinsiz yüz tanıma veritabanları)"
-        eu_status["confidence"] = "Kritik / Hukuki Danışmanlık Şart"
-        eu_status["requires_expert_counsel"] = True
-        eu_status["articles"] = ["EU AI Act Madde 5(1)(a)-(h)"]
-        eu_status["obligations"] = [
-            "Bu sistemlerin AB pazarında piyasaya sürülmesi, hizmete sunulması veya kullanılması KESİNLİKLE YASAKTIR."
-        ]
-
-    # High-Risk AI Systems (Article 6 & Annex III)
-    elif any(k in lowered for k in ["medical", "health", "credit scoring", "recruitment", "hiring", "critical infrastructure", "aviation", "autonomous drive", "law enforcement"]):
-        eu_status["tier"] = "Yüksek Riskli Sistem (High-Risk AI System)"
-        eu_status["statutory_basis"] = "EU AI Act Madde 6 & Ek III (Kritik altyapı, sağlık, istihdam, finansal erişim sistemleri)"
-        eu_status["confidence"] = "Yüksek (Ek III Kapsamına Giriyor)"
-        eu_status["requires_expert_counsel"] = True
-        eu_status["articles"] = ["EU AI Act Madde 6, Madde 9-15 (Risk Yönetimi, Veri Yönetişimi, İnsan Denetimi) & Ek III"]
-        eu_status["obligations"] = [
-            "Zorunlu Risk Yönetim Sistemi (Madde 9).",
-            "Yüksek kaliteli ve önyargısız eğitim verisi yönetişimi (Madde 10).",
-            "Sürekli otomatik kayıt tutma / Audit logging (Madde 12).",
-            "İnsan denetimi / Human-in-the-loop mimarisi (Madde 14).",
-            "CE İşareti ve AB Uygunluk Beyanı."
-        ]
-
-    # Specific Transparency Obligations (Article 50)
-    elif any(k in lowered for k in ["llm", "generative", "agent", "deepfake", "synthetic", "bot", "assistant", "code generation"]):
-        eu_status["tier"] = "Belirli Şeffaflık Yükümlülüğü (Transparency Obligations)"
-        eu_status["statutory_basis"] = "EU AI Act Madde 50 (İnsanlarla etkileşime giren ve içerik üreten yapay zeka)"
-        eu_status["confidence"] = "Doğrulanmış (Üretken ve Otonom Sistemler)"
-        eu_status["requires_expert_counsel"] = False
-        eu_status["articles"] = ["EU AI Act Madde 50(1) ve 50(2)"]
-        eu_status["obligations"] = [
-            "Kullanıcıya yapay zeka sistemiyle etkileşimde olduğunun açıkça bildirilmesi (Madde 50(1)).",
-            "Yapay zeka tarafından üretilen kod, metin veya medyanın makine tarafından okunabilir formatta etiketlenmesi (Madde 50(2)).",
-            "AB Telif Hakkı Direktifi (2019/790) Madde 4 kapsamındaki Text and Data Mining (TDM) hak sahiplerinin opt-out taleplerine uyum."
-        ]
-
-    # 2. GDPR / KVKK Veri Koruma Yükümlülükleri
-    gdpr_status = []
-    if any(k in lowered for k in ["user data", "personal", "identity", "email", "tracking", "telemetry"]):
-        gdpr_status.append({
-            "topic": "Kişisel Verilerin İşlenmesi",
-            "statutory_basis": "GDPR Madde 5 (İlkeler) & Madde 6 (Hukuki Sebep)",
-            "requirement": "Veri minimizasyonu, açık rıza veya meşru menfaat değerlendirmesi zorunludur."
-        })
-    if any(k in lowered for k in ["code", "repository", "proprietary", "secret", "financial", "confidential"]):
-        gdpr_status.append({
-            "topic": "Ticari Sır & Üçüncü Taraf Veri Güvenliği",
-            "statutory_basis": "GDPR Madde 32 (İşleme Güvenliği) & AB Ticari Sırlar Direktifi (2016/943)",
-            "requirement": "Fikri mülkiyet içeren kodların harici LLM API'lerine sızmasını önleyen Zero Data Retention (ZDR) anlaşmaları veya yerel (on-prem) SLM modelleri zorunludur."
-        })
-    if not gdpr_status:
-        gdpr_status.append({
-            "topic": "Genel Veri Güvenliği",
-            "statutory_basis": "GDPR Madde 25 (Data Protection by Design)",
-            "requirement": "Varsayılan olarak veri koruma ve standart şifreleme önlemleri yeterlidir."
-        })
-
-    # 3. Açık Kaynak Lisans Uyumluluğu
-    licensing_framework = [
-        {
-            "category": "Permissive (MIT, Apache 2.0, BSD-3)",
-            "risk_level": "Düşük Ticari Risk",
-            "legal_rule": "Ticari kapalı kod ürünlerde kullanılabilir; telif ve lisans bildirim metninin korunması şarttır (Apache 2.0 patent koruma şartı içerir)."
-        },
-        {
-            "category": "Copyleft Riski (GPLv3, AGPLv3)",
-            "risk_level": "Kritik Fikri Mülkiyet Riski",
-            "legal_rule": "GPLv3 kodları içeren bileşenler ticari kapalı kaynak projelere statik bağlanırsa, tüm projenin açık kaynak yapılmasını zorunlu kılabilir (Viral etki). AST seviyesinde engellenmelidir."
+    # 1. Prohibited AI Practices (Article 5)
+    # Strictly defined practices: subliminal manipulation, exploitation of vulnerabilities,
+    # social scoring, untargeted scraping of facial images, emotion recognition at workplace/school.
+    if any(k in lowered for k in ["subliminal", "social scor", "untargeted facial", "facial recognition database", "predictive policing on individuals"]):
+        return {
+            "domain": domain_keywords,
+            "eu_ai_act": {
+                "tier": "Yasaklanmış Yapay Zeka Uygulaması (Prohibited AI Practice)",
+                "statutory_basis": "EU AI Act Madde 5(1) (Bilinçaltı teknikler, sosyal puanlama veya izinsiz biyometrik veri kazıma)",
+                "confidence": "Yüksek (Madde 5 Kapsamındaki Yasaklı Alan)",
+                "requires_expert_counsel": True,
+                "articles": ["Regulation (EU) 2024/1689 Article 5(1)"],
+                "obligations": [
+                    "Sistemin AB pazarında piyasaya sürülmesi, hizmete sunulması veya kullanımı kesin olarak yasaktır.",
+                    "Yasal ceza riski: Küresel cironun %7'sine veya 35 milyon Avro'ya kadar idari para cezası (Madde 99)."
+                ]
+            },
+            "data_privacy": ["Kritik Gizlilik Riski: Özel nitelikli biyometrik verilerin işlenmesi (GDPR Madde 9)."],
+            "statutory_disclaimer": "Bu sistem AB mevzuatı gereği yasaklı kategoride değerlendirilmiştir. Hukuki mütalaa alınması zorunludur."
         }
-    ]
 
-    return {
-        "domain": domain_keywords,
-        "eu_ai_act": eu_status,
-        "gdpr_kvkk": gdpr_status,
-        "licensing": licensing_framework,
-        "statutory_disclaimer": "Bu tarama resmi mevzuat maddeleri üzerinden teknik ön inceleme sunar; Baro üyesi bir patent veya bilişim avukatının resmi mütalaası yerine geçmez."
-    }
+    # 2. High-Risk AI Systems (Article 6 & Annex III)
+    # Critical infrastructure, educational assessment, employment/hiring, access to essential services (credit),
+    # law enforcement, migration, justice, and safety components of regulated products (medical devices, aviation).
+    elif any(k in lowered for k in ["medical device", "medical diagnostic", "patient telemetry", "credit score", "creditworthiness", "recruitment", "hiring evaluation", "critical infrastructure safety", "border surveillance"]):
+        return {
+            "domain": domain_keywords,
+            "eu_ai_act": {
+                "tier": "Yüksek Riskli Sistem (High-Risk AI System)",
+                "statutory_basis": "EU AI Act Madde 6(2) ve Ek III (Sağlık, istihdam, finansal erişim ve kritik altyapı)",
+                "confidence": "Yüksek (Ek III Kapsamında Belirtilen Alan)",
+                "requires_expert_counsel": True,
+                "articles": ["Regulation (EU) 2024/1689 Article 6, Annex III, Articles 9-15"],
+                "obligations": [
+                    "Sürekli risk yönetim sisteminin kurulması (Madde 9).",
+                    "Eğitim, geçerleme ve test veri setlerinin yönetişimi ve önyargı denetimi (Madde 10).",
+                    "Teknik dokümantasyon ve AB uygunluk beyanı (Madde 11 & 18).",
+                    "Otomatik kayıt tutma (logging) mimarisi (Madde 12).",
+                    "Kullanıcıya şeffaflık ve kullanım talimatları sağlanması (Madde 13).",
+                    "İnsan denetimi (Human-in-the-loop) arayüzlerinin inşası (Madde 14).",
+                    "Siber güvenlik ve sağlamlık (Madde 15)."
+                ]
+            },
+            "data_privacy": [
+                "GDPR Madde 9: Sağlık ve genetik verilerin işlenmesinde açık rıza veya kamu sağlığı hukuki dayanağı şarttır.",
+                "GDPR Madde 35: Veri Koruma Etki Değerlendirmesi (DPIA) zorunludur."
+            ],
+            "statutory_disclaimer": "Sistem Ek III kapsamında yüksek risklidir; bağımsız bir uygunluk değerlendirme kuruluşu veya CE işaretleme denetimi gerektirir."
+        }
+
+    # 3. Transparency Obligations for Generative & Interactive AI (Article 50)
+    # AI systems intended to interact directly with humans, generative text/code/media, deepfakes.
+    elif any(k in lowered for k in ["llm", "generative", "conversational bot", "chatbot", "synthetic code", "code generation assistant", "deepfake"]):
+        return {
+            "domain": domain_keywords,
+            "eu_ai_act": {
+                "tier": "Belirli Şeffaflık Yükümlülüğü (Transparency Obligations)",
+                "statutory_basis": "EU AI Act Madde 50 (İnsanlarla etkileşime giren ve yapay içerik üreten sistemler)",
+                "confidence": "Doğrulanmış (Etkileşimli / Üretken Model)",
+                "requires_expert_counsel": False,
+                "articles": ["Regulation (EU) 2024/1689 Article 50(1) & 50(2)"],
+                "obligations": [
+                    "İnsan kullanıcıya bir yapay zeka sistemiyle etkileşime girdiğinin açıkça bildirilmesi (Madde 50(1)).",
+                    "Üretilen sentetik çıktıların makine tarafından okunabilir formatta 'yapay zeka üretimi' olarak etiketlenmesi (Madde 50(2)).",
+                    "Telif Hakkı Direktifi (2019/790) Madde 4 kapsamındaki Text & Data Mining (TDM) hak sahiplerinin opt-out haklarına riayet."
+                ]
+            },
+            "data_privacy": [
+                "Kod ve veri tabanı girdilerinde ticari sırların üçüncü taraf LLM sağlayıcılarına sızmasını önleyen ZDR (Zero Data Retention) mimarisi."
+            ],
+            "statutory_disclaimer": "Sistem genel şeffaflık yükümlülüklerine tabidir; yüksek riskli Ek III alanlarına entegre edilmediği sürece CE uygunluk denetimi gerektirmez."
+        }
+
+    # 4. Minimal / General Risk Systems
+    # Standard development tools, compilers, static analyzers, games, internal utilities.
+    else:
+        return {
+            "domain": domain_keywords,
+            "eu_ai_act": {
+                "tier": "Minimal / Düşük Risk (Genel Yazılım Kapsamı)",
+                "statutory_basis": "EU AI Act Resmî Gerekçesi (Recital 34: Ek III ve Madde 5 kapsamı dışındaki genel sistemler)",
+                "confidence": "Yüksek (Özel bir AI Act yükümlülüğü tetiklenmedi)",
+                "requires_expert_counsel": False,
+                "articles": ["Regulation (EU) 2024/1689 Recital 34"],
+                "obligations": [
+                    "AI Act kapsamında özel bir zorunluluk bulunmamaktadır; genel AB tüketici ve ürün güvenliği mevzuatına tabidir.",
+                    "İsteğe bağlı olarak güvenilir yapay zeka davranış kurallarına (Codes of Conduct) uyum teşvik edilir."
+                ]
+            },
+            "data_privacy": [
+                "GDPR Madde 25: Varsayılan olarak veri koruma (Data Protection by Design) ve standart şifreleme önlemleri."
+            ],
+            "statutory_disclaimer": "Sistem doğrudan AI Act risk sınıflarına girmemektedir; genel veri güvenliği kuralları geçerlidir."
+        }
 
 def main():
-    parser = argparse.ArgumentParser(description="Statutory Compliance Screener for Frontier Innovator.")
+    parser = argparse.ArgumentParser(description="Statutory Compliance Screener for Zobar Skill.")
     parser.add_argument("domain", help="Technology or domain description to evaluate")
     args = parser.parse_args()
 
@@ -127,20 +132,17 @@ def main():
     ai = res["eu_ai_act"]
     print(f"🇪🇺 EU AI Act Seviyesi      : {ai['tier']}")
     print(f"   Mevzuat Maddesi         : {ai['statutory_basis']}")
-    print(f"   Güven & Uzmanlık Durumu : {ai['confidence']}")
+    print(f"   Güven Derecesi          : {ai['confidence']}")
+    print(f"   Hukuki Mütalaa Gerekli  : {'Evet (Kritik)' if ai['requires_expert_counsel'] else 'Hayır'}")
     print("   Zorunlu Yasal Yükümlülükler:")
     for ob in ai["obligations"]:
         print(f"     - {ob}")
 
-    print("\n🔒 GDPR / KVKK Veri Egemenliği:")
-    for g in res["gdpr_kvkk"]:
-        print(f"   - [{g['topic']}] ({g['statutory_basis']}): {g['requirement']}")
+    print("\n🔒 Veri Güvenliği (GDPR / KVKK):")
+    for g in res["data_privacy"]:
+        print(f"   - {g}")
 
-    print("\n📜 Açık Kaynak Lisans Çerçevesi:")
-    for lic in res["licensing"]:
-        print(f"   - [{lic['category']}] ({lic['risk_level']}): {lic['legal_rule']}")
-
-    print(f"\n⚠️ Yasal Uyarı: {res['statutory_disclaimer']}")
+    print(f"\n⚠️ Yasal Not: {res['statutory_disclaimer']}")
 
 if __name__ == "__main__":
     main()

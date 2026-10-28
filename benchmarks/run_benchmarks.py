@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """
-Automated Ground-Truth Benchmark & Evaluation Suite for Zobar Skill.
-Measures output accuracy, statutory compliance precision, architectural fit,
-and evidence grounding ratio across diverse real-world domain testbeds.
+Rigorous Ground-Truth Benchmark & Evaluation Suite for Zobar Skill.
+Measures regression accuracy, statutory compliance precision, architectural fit,
+and evidence taxonomy discipline across diverse real-world domain testbeds
+with zero-tolerance scoring.
 """
 
 import sys
@@ -17,28 +18,28 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 from scripts.scan_regulations import evaluate_compliance
 from scripts.synthesize_architecture import synthesize_tech_stack
 from scripts.validate_inventions import generate_validated_inventions
-from scripts.benchmark_competitors import search_commercial_incumbents
 
 # Ensure UTF-8 output across all systems
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
+# Expanded, diverse ground-truth testbed
 BENCHMARK_TESTBEDS = [
     {
         "id": "CASE-01",
-        "name": "Kritik Tıbbi Teşhis ve Otonom Karar Sistemi (Medical Diagnostics)",
+        "name": "Kritik Tıbbi Teşhis ve Hasta Telemetrisi (Medical Diagnostics)",
         "query": "medical diagnostic patient telemetry autonomous AI system",
         "expected_ai_act_tier": "Yüksek Riskli Sistem (High-Risk AI System)",
-        "expected_statutory_article": "Madde 6 & Ek III",
+        "expected_statutory_article": "Madde 6",
         "expected_core_lang": "Rust",
         "expected_expert_counsel_flag": True
     },
     {
         "id": "CASE-02",
-        "name": "Yüksek Başarımlı AST Derleyici & Kod Analiz Motoru (Code Analysis)",
+        "name": "Yüksek Başarımlı AST Derleyici & Statik Kod Analizi (Compiler Engine)",
         "query": "AST parser compiler code analysis static linter",
-        "expected_ai_act_tier": "Minimal / Low Risk (Genel Yazılım Kapsamı)",
-        "expected_statutory_article": "Madde 69",
+        "expected_ai_act_tier": "Minimal / Düşük Risk (Genel Yazılım Kapsamı)",
+        "expected_statutory_article": "Recital 34",
         "expected_core_lang": "Rust",
         "expected_expert_counsel_flag": False
     },
@@ -50,12 +51,39 @@ BENCHMARK_TESTBEDS = [
         "expected_statutory_article": "Madde 50",
         "expected_core_lang": "TypeScript / Rust (Hibrit Mimari)",
         "expected_expert_counsel_flag": False
+    },
+    {
+        "id": "CASE-04",
+        "name": "Sosyal Puanlama & İzinsiz Biyometrik Veri Kazıma (Prohibited System)",
+        "query": "social scoring biometric categorisation untargeted facial recognition database",
+        "expected_ai_act_tier": "Yasaklanmış Yapay Zeka Uygulaması (Prohibited AI Practice)",
+        "expected_statutory_article": "Madde 5(1)",
+        "expected_core_lang": "TypeScript / Rust (Hibrit Mimari)",
+        "expected_expert_counsel_flag": True
+    },
+    {
+        "id": "CASE-05",
+        "name": "Banka Kredi Skoru & Finansal Uygunluk Değerlendirmesi (Credit Scoring)",
+        "query": "credit scoring creditworthiness financial risk evaluation AI",
+        "expected_ai_act_tier": "Yüksek Riskli Sistem (High-Risk AI System)",
+        "expected_statutory_article": "Ek III",
+        "expected_core_lang": "TypeScript / Rust (Hibrit Mimari)",
+        "expected_expert_counsel_flag": True
+    },
+    {
+        "id": "CASE-06",
+        "name": "Dağıtık Mikro-Servis Ağı & API Gateway (Distributed Microservices)",
+        "query": "distributed network microservice gateway orchestrator",
+        "expected_ai_act_tier": "Minimal / Düşük Risk (Genel Yazılım Kapsamı)",
+        "expected_statutory_article": "Recital 34",
+        "expected_core_lang": "Go",
+        "expected_expert_counsel_flag": False
     }
 ]
 
 def run_benchmarks():
     print("========================================================================")
-    print(" 🎯 ZOBAR SKILL — OTOMATİK KALİTE, DOĞRULUK & BENCHMARK TEST SUITE 🎯")
+    print(" 🎯 ZOBAR SKILL — KATI DOĞRULUK & REGRESYON BENCHMARK TEST SUITE 🎯")
     print("========================================================================\n")
 
     start_time = time.time()
@@ -63,41 +91,48 @@ def run_benchmarks():
     total_score = 0
     max_score = len(BENCHMARK_TESTBEDS) * 100
 
+    statutory_matches = 0
+    architecture_matches = 0
+    evidence_matches = 0
+
     for test in BENCHMARK_TESTBEDS:
-        print(f"[*] Test Ediliyor [{test['id']}]: {test['name']}...")
+        print(f"[*] Denetleniyor [{test['id']}]: {test['name']}...")
         test_score = 0
         notes = []
 
-        # 1. Mevzuat Doğruluk Testi
+        # 1. Mevzuat Doğruluk Testi (Sıfır Tolerans: Yanlış sınıflandırma = 0 puan)
         compliance = evaluate_compliance(test["query"])
         eu_res = compliance["eu_ai_act"]
 
         if eu_res["tier"] == test["expected_ai_act_tier"]:
             test_score += 30
-            notes.append("✅ EU AI Act risk sınıflandırması tam isabet.")
+            statutory_matches += 1
+            notes.append(f"✅ Sınıflandırma: Tam İsabet ({eu_res['tier']})")
         else:
-            notes.append(f"❌ EU AI Act sınıflandırma sapması: {eu_res['tier']}")
+            notes.append(f"❌ Sınıflandırma Hatası: Beklenen '{test['expected_ai_act_tier']}', Alınan '{eu_res['tier']}'")
 
         if test["expected_statutory_article"] in eu_res["statutory_basis"]:
             test_score += 20
-            notes.append(f"✅ Kanun maddesi referansı doğru ({test['expected_statutory_article']}).")
+            notes.append(f"✅ Kanun Maddesi: {test['expected_statutory_article']}")
         else:
-            notes.append("❌ Kanun maddesi referansı eşleşmedi.")
+            notes.append(f"❌ Madde Eşleşmedi: {eu_res['statutory_basis']}")
 
         if eu_res["requires_expert_counsel"] == test["expected_expert_counsel_flag"]:
             test_score += 10
-            notes.append("✅ Hukuki uzman incelemesi bayrağı doğru.")
+            notes.append("✅ Hukuki Mütalaa Bayrağı: Doğru")
+        else:
+            notes.append("❌ Hukuki Mütalaa Bayrağı: Uyuşmazlık")
 
-        # 2. Mimari Uyum Testi
+        # 2. Mimari Uyum Testi (Sıfır Tolerans: Eşleşmezse 0 puan)
         arch = synthesize_tech_stack(test["query"])
         if arch["core_language"] == test["expected_core_lang"]:
             test_score += 20
-            notes.append(f"✅ Çekirdek dil seçimi amaca tam uygun ({arch['core_language']}).")
+            architecture_matches += 1
+            notes.append(f"✅ Çekirdek Dil: {arch['core_language']}")
         else:
-            test_score += 10
-            notes.append(f"⚠️ Çekirdek dil kabul edilebilir ama hedef dışı: {arch['core_language']}")
+            notes.append(f"❌ Dil Uyuşmazlığı: Beklenen '{test['expected_core_lang']}', Alınan '{arch['core_language']}'")
 
-        # 3. İcat ve Kanıt Ayrımı Disiplini Testi
+        # 3. İcat ve Kanıt Ayrımı Disiplini Testi (Sıfır Tolerans)
         inventions_data = generate_validated_inventions(test["query"])
         inventions = inventions_data["inventions"]
         evidence_tagged = all("[Model Hipotezi" in inv["trl_evidence_type"] or "[Literatür İspatı" in inv["trl_evidence_type"] for inv in inventions)
@@ -105,9 +140,10 @@ def run_benchmarks():
 
         if evidence_tagged and has_failure_modes:
             test_score += 20
-            notes.append("✅ Tüm icatlar TRL kanıt türü ve 3 hata modu ile zırhlı.")
+            evidence_matches += 1
+            notes.append("✅ Kanıt Taksonomisi: Model hipotezi ve hata modları eksiksiz")
         else:
-            notes.append("❌ İcat kanıt taksonomisinde eksik var.")
+            notes.append("❌ Kanıt Taksonomisi: İspat etiketi veya hata modları eksik")
 
         total_score += test_score
         results.append({
@@ -120,30 +156,37 @@ def run_benchmarks():
         print(f"    -> Başarı Skoru: {test_score}/100\n")
 
     duration = time.time() - start_time
-    final_percentage = (total_score / max_score) * 100
+    pass_rate = (total_score / max_score) * 100
 
     print("========================================================================")
-    print(f" 🏆 GENEL BENCHMARK SONUCU: %{final_percentage:.1f} DOĞRULUK SKORU ({total_score}/{max_score})")
-    print(f" ⏱️ Toplam Test Süresi: {duration:.3f} saniye")
+    print(f" 📊 BENCHMARK SONUCU: %{pass_rate:.1f} REGRESYON GEÇME ORANI ({total_score}/{max_score})")
+    print(f" ⚖️ Mevzuat Madde İsabeti : {statutory_matches}/{len(BENCHMARK_TESTBEDS)}")
+    print(f" 🛠️ Mimari Uyum Oranı     : {architecture_matches}/{len(BENCHMARK_TESTBEDS)}")
+    print(f" 🔍 Kanıt Ayrımı Disiplini: {evidence_matches}/{len(BENCHMARK_TESTBEDS)}")
+    print(f" ⏱️ Toplam Test Süresi   : {duration:.3f} saniye")
     print("========================================================================\n")
 
-    # Markdown Raporu Üret
+    # Dürüst Markdown Raporu
     report_lines = [
-        "# ZOBAR SKILL DOĞRULUK & BENCHMARK SKORKARTI",
+        "# ZOBAR SKILL OTOMATİK REGRESYON & UYUMLULUK SKORKARTI",
         f"**Tarih (UTC):** {datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M UTC')} | **Test Süresi:** {duration:.3f}s\n",
-        f"### 🎯 Genel Doğruluk Oranı: %{final_percentage:.1f} ({total_score}/{max_score})\n",
+        "> ⚠️ **Metodolojik Beyan:** Bu benchmark, Zobar Skill motorunun kodlanmış yasal maddeler (EU AI Act & GDPR), mimari kurallar ve kanıt taksonomisiyle regresyon uyumunu doğrular. Bağımsız avukatlık mütalaası veya empirik pazar başarısı garantisi teşkil etmez.\n",
+        f"### 📊 Regresyon Test Kümesi Başarı Oranı: %{pass_rate:.1f} ({total_score}/{max_score})",
+        f"- **Mevzuat Sınıflandırma İsabeti:** {statutory_matches}/{len(BENCHMARK_TESTBEDS)} (%{(statutory_matches/len(BENCHMARK_TESTBEDS))*100:.1f})",
+        f"- **Teknik Mimari Seçim Uyumu:** {architecture_matches}/{len(BENCHMARK_TESTBEDS)} (%{(architecture_matches/len(BENCHMARK_TESTBEDS))*100:.1f})",
+        f"- **Kanıt ve Hipotez Ayrım Oranı:** {evidence_matches}/{len(BENCHMARK_TESTBEDS)} (%{(evidence_matches/len(BENCHMARK_TESTBEDS))*100:.1f})\n",
         "---",
-        "## 📋 Vaka Bazlı Sonuç Dağılımı\n",
-        "| Test Kodu | Vaka Adı | Puan | Durum |",
+        "## 📋 Vaka Bazlı Denetim Tablosu\n",
+        "| Kod | Test Edilen Senaryo | Puan | Statü |",
         "| :--- | :--- | :--- | :--- |"
     ]
 
     for r in results:
-        status_tag = "🌟 Kusursuz (Production Grade)" if r["score"] >= 90 else "⚠️ Geliştirilebilir"
+        status_tag = "✅ Başarılı" if r["score"] == 100 else ("⚠️ Kısmi" if r["score"] >= 60 else "❌ Başarısız")
         report_lines.append(f"| {r['id']} | {r['name']} | **{r['score']}/100** | {status_tag} |")
 
     report_lines.append("\n---")
-    report_lines.append("## 🔍 Detaylı Denetim Maddeleri\n")
+    report_lines.append("## 🔍 Madde Bazlı Detay Günlüğü\n")
 
     for r in results:
         report_lines.append(f"### {r['id']}: {r['name']}")
@@ -157,16 +200,18 @@ def run_benchmarks():
     with open("benchmarks/benchmark_results.json", "w", encoding="utf-8") as f:
         json.dump({
             "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat(),
-            "final_percentage": final_percentage,
+            "pass_rate_percentage": pass_rate,
             "total_score": total_score,
             "max_score": max_score,
+            "statutory_matches": f"{statutory_matches}/{len(BENCHMARK_TESTBEDS)}",
+            "architecture_matches": f"{architecture_matches}/{len(BENCHMARK_TESTBEDS)}",
             "cases": results
         }, f, indent=2, ensure_ascii=False)
 
-    print("[+] Benchmark raporu kaydedildi: benchmarks/BENCHMARK_REPORT.md")
-    print("[+] Makine tarafından okunabilir JSON kaydedildi: benchmarks/benchmark_results.json")
+    print("[+] Skorkart kaydedildi: benchmarks/BENCHMARK_REPORT.md")
+    print("[+] JSON kaydedildi: benchmarks/benchmark_results.json")
 
-    return final_percentage >= 90
+    return pass_rate >= 90
 
 if __name__ == "__main__":
     success = run_benchmarks()

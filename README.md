@@ -2,8 +2,8 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![CI & Quality Gate](https://github.com/omerefezobar-jpg/zobar-skill/actions/workflows/ci.yml/badge.svg)](https://github.com/omerefezobar-jpg/zobar-skill/actions)
-[![Benchmark Score: 100%](https://img.shields.io/badge/Benchmark-100%25%20Verified-brightgreen.svg)](./benchmarks/BENCHMARK_REPORT.md)
-[![Antigravity Compatible](https://img.shields.io/badge/Antigravity-Agent%20Skill-8A2BE2.svg)](https://github.com/omerefezobar-jpg/zobar-skill)
+[![Regression Suite](https://img.shields.io/badge/Regression%20Suite-6%2F6%20Passing-blue.svg)](./benchmarks/BENCHMARK_REPORT.md)
+[![Unit Tests](https://img.shields.io/badge/Unit%20Tests-12%2F12%20Passing-brightgreen.svg)](https://github.com/omerefezobar-jpg/zobar-skill/actions)
 [![Python: 3.10+](https://img.shields.io/badge/Python-3.10+-3776AB.svg?logo=python&logoColor=white)](https://python.org)
 [![Security: XSS Hardened](https://img.shields.io/badge/Security-XSS%20Hardened%20(No%20Eval)-green.svg)](https://github.com/omerefezobar-jpg/zobar-skill)
 
@@ -33,21 +33,24 @@ python run_innovator.py "Autonomous Code Analysis" --output analiz.md --html pan
 
 ---
 
-## 🏆 Doğruluk & Kalite Benchmark Skorkartı
+## 🧪 Regresyon & Doğruluk Benchmark Skorkartı
 
-Zobar Skill, sektörde bir ilki gerçekleştirerek çıktı doğruluğunu, yasal madde isabetini ve kanıt taksonomisini **otomatik bir test ortamında (`benchmarks/run_benchmarks.py`)** ölçer:
+Zobar Skill, çıktı tutarlılığını, yasal madde isabetini ve kanıt taksonomisini **otomatik bir test ortamında (`benchmarks/run_benchmarks.py`)** denetler:
 
 ```bash
 python benchmarks/run_benchmarks.py
 ```
 
-| Test Kodu | Test Edilen Vaka | Hedeflenen Yasal & Mimari Kriter | Başarı Skoru |
+| Kod | Test Edilen Senaryo | Hedeflenen Yasal & Mimari Kriter | Durum |
 | :--- | :--- | :--- | :--- |
-| **CASE-01** | Kritik Tıbbi Teşhis ve Otonom Karar Sistemi | EU AI Act Madde 6 & Ek III (Yüksek Risk) + Rust | **100/100** |
-| **CASE-02** | Yüksek Başarımlı AST Derleyici & Analiz Motoru | EU AI Act Madde 69 (Genel Yazılım) + Rust AST | **100/100** |
-| **CASE-03** | Üretken Kod Asistanı & Otonom LLM Ajanı | EU AI Act Madde 50 (Şeffaflık) + Hibrit Mimari | **100/100** |
+| **CASE-01** | Kritik Tıbbi Teşhis ve Hasta Telemetrisi | EU AI Act Madde 6 & Ek III (Yüksek Risk) + Rust | **100/100 (Başarılı)** |
+| **CASE-02** | Yüksek Başarımlı AST Derleyici & Analiz Motoru | EU AI Act Recital 34 (Genel Yazılım) + Rust AST | **100/100 (Başarılı)** |
+| **CASE-03** | Üretken Kod Asistanı & Otonom LLM Ajanı | EU AI Act Madde 50 (Şeffaflık) + Hibrit Mimari | **100/100 (Başarılı)** |
+| **CASE-04** | Sosyal Puanlama & İzinsiz Biyometrik Veri | EU AI Act Madde 5(1) (Yasaklı Uygulama) | **100/100 (Başarılı)** |
+| **CASE-05** | Banka Kredi Skoru & Finansal Uygunluk | EU AI Act Ek III (Yüksek Risk) + Danışmanlık Şart | **100/100 (Başarılı)** |
+| **CASE-06** | Dağıtık Mikro-Servis Ağı & API Gateway | Minimal Risk (Recital 34) + Go Dili Seçimi | **100/100 (Başarılı)** |
 
-Detaylı denetim raporu için [BENCHMARK_REPORT.md](./benchmarks/BENCHMARK_REPORT.md) dosyasını inceleyin.
+Detaylı denetim günlüğü için [BENCHMARK_REPORT.md](./benchmarks/BENCHMARK_REPORT.md) dosyasını inceleyin.
 
 ---
 
@@ -68,8 +71,8 @@ zobar-skill/
 │   ├── synthesize_architecture.py    # Faz 5: Otomatik sistem mimarisi ve UI spesifikasyon motoru
 │   ├── validate_inventions.py        # Faz 6: TRIZ radikal icat, TRL/WTP doğrulama ve Mermaid mimarı
 │   └── export_html_report.py         # XSS korumalı, CSP uyumlu ('unsafe-eval' içermez) HTML çevirici
-├── benchmarks/                       # Doğruluk ve kalite ölçüm sistemi
-│   ├── run_benchmarks.py             # Otomatik benchmark çalıştırıcısı
+├── benchmarks/                       # Regresyon ve doğrulama denetim sistemi
+│   ├── run_benchmarks.py             # Sıfır toleranslı otomatik benchmark çalıştırıcısı
 │   ├── BENCHMARK_REPORT.md           # Üretilen denetim ve başarı skorkartı
 │   └── benchmark_results.json        # Makine tarafından okunabilir benchmark çıktısı
 ├── references/                       # Zihinsel modeller, First Principles, TRIZ matrisi
@@ -79,43 +82,10 @@ zobar-skill/
 
 ---
 
-## 🧪 Testler (Unit Testing)
-
-Tüm modüller, güvenlik duvarları ve ayrıştırıcılar sıfır harici ağ bağımlılığıyla mock'lanmış birim testlerle korunur:
-
-```bash
-python -m unittest discover tests
-```
-*(12/12 Test — 0.003s içinde kusursuz başarıyla tamamlanır).*
-
----
-
-## 🚀 Kurulum (Installation)
-
-### Seçenek 1: Antigravity Projenize Eklemek (Önerilen)
-Projenizin kök dizininde `.agents/skills/` altına bu repoyu klonlayın:
-
-```bash
-mkdir -p .agents/skills
-git clone https://github.com/omerefezobar-jpg/zobar-skill.git .agents/skills/zobar-skill
-```
-
-### Seçenek 2: Global Olarak Tüm Projelerinizde Kullanmak
-Tüm bilgisayarınızdaki Antigravity oturumlarında geçerli olması için:
-
-```bash
-# Windows (PowerShell)
-git clone https://github.com/omerefezobar-jpg/zobar-skill.git "$env:USERPROFILE\.gemini\config\skills\zobar-skill"
-
-# macOS / Linux
-git clone https://github.com/omerefezobar-jpg/zobar-skill.git ~/.gemini/config/skills/zobar-skill
-```
-
----
-
-## ⚖️ Yasal ve Bilimsel Sorumluluk Reddi
-1. **Akademik Kanıt Düzeyi:** `fetch_academic_papers.py` betiği, açık erişimli pre-print deposu olan arXiv üzerinden veri çeker. Pre-print'ler en son bilimsel gelişmeleri yansıtmakla birlikte henüz hakemli dergi onayından geçmemiş olabilir.
-2. **Fikri Mülkiyet & Mevzuat:** `search_prior_art.py` ve `scan_regulations.py` araçları yalnızca teknik araştırma ve madde bazlı ön analiz sağlar; Baro üyesi bir avukatın resmi Faaliyet Serbestisi (FTO) veya hukuki mütalaası yerine geçmez.
+## ⚖️ Metodolojik Sınırlar ve Doğruluk Beyanı
+1. **Benchmark Kapsamı:** Benchmark testleri, sistemin kodlanmış yasal mantık kuralları ve mimari seçimlerle **iç regresyon tutarlılığını** doğrular. Bağımsız bir baro avukatının hukuki görüşü veya pazar gelir garantisi yerine geçmez.
+2. **Akademik Kanıt Düzeyi:** `fetch_academic_papers.py` betiği, açık erişimli pre-print deposu olan arXiv üzerinden veri çeker. Pre-print'ler en son bilimsel gelişmeleri yansıtmakla birlikte henüz hakemli dergi onayından geçmemiş olabilir.
+3. **Fikri Mülkiyet & Mevzuat:** `search_prior_art.py` ve `scan_regulations.py` araçları yalnızca teknik araştırma ve madde bazlı ön analiz sağlar; resmi Faaliyet Serbestisi (FTO) incelemesi yerine geçmez.
 
 ---
 
