@@ -21,10 +21,10 @@ if hasattr(sys.stdout, "reconfigure"):
 
 def fetch_arxiv_papers(query: str, max_results: int = 5):
     encoded_query = urllib.parse.quote(f"all:{query}")
-    url = f"http://export.arxiv.org/api/query?search_query={encoded_query}&start=0&max_results={max_results}&sortBy=relevance&sortOrder=descending"
+    url = f"https://export.arxiv.org/api/query?search_query={encoded_query}&start=0&max_results={max_results}&sortBy=relevance&sortOrder=descending"
 
     headers = {
-        "User-Agent": "FrontierInnovatorBot/1.0 (Academic pre-print research tool)"
+        "User-Agent": "FrontierInnovatorBot/2.0 (Academic pre-print research tool)"
     }
 
     req = urllib.request.Request(url, headers=headers)

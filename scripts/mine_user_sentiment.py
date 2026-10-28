@@ -10,6 +10,7 @@ import sys
 import re
 import html
 import json
+import datetime
 import urllib.request
 import urllib.parse
 import argparse
@@ -29,6 +30,9 @@ MODERATE_FRICTION_KEYWORDS = [
     "annoying", "frustrat", "waste", "overkill", "bloat", "clunky", "hard to"
 ]
 
+# Negation words that neutralize adjacent friction words
+NEGATIONS = ["not", "isn't", "aren't", "wasn't", "weren't", "no", "never", "hardly", "barely", "don't", "doesn't"]
+
 def clean_html(raw_html: str) -> str:
     """Strips HTML tags, collapses whitespaces, and unescapes entities."""
     cleanr = re.compile(r'<.*?>')
@@ -36,11 +40,31 @@ def clean_html(raw_html: str) -> str:
     return html.unescape(text).strip()
 
 def calculate_friction_score(text: str) -> int:
-    """Calculates weighted friction score based on severity and keyword density."""
-    lowered = text.lower()
-    high_count = sum(2 for kw in HIGH_FRICTION_KEYWORDS if kw in lowered)
-    mod_count = sum(1 for kw in MODERATE_FRICTION_KEYWORDS if kw in lowered)
-    return high_count + mod_count
+    """
+    Calculates weighted friction score taking contextual negations into account.
+    E.g. 'not slow' or 'no issues' will not be counted as friction.
+    """
+    tokens = re.findall(r"[a-z0-9'-]+", text.lower())
+    score = 0
+
+    for idx, token in enumerate(tokens):
+        # Look behind up to 2 words for negation
+        is_negated = False
+        lookback_start = max(0, idx - 2)
+        for prev in tokens[lookback_start:idx]:
+            if prev in NEGATIONS:
+                is_negated = True
+                break
+
+        if is_negated:
+            continue
+
+        if token in HIGH_FRICTION_KEYWORDS:
+            score += 2
+        elif token in MODERATE_FRICTION_KEYWORDS:
+            score += 1
+
+    return score
 
 def search_hn_sentiment(query: str, max_comments: int = 4):
     """Mines user sentiment and complaints from Hacker News via Algolia API."""
@@ -116,13 +140,20 @@ def search_reddit_sentiment(query: str, max_comments: int = 4):
         permalink = c_data.get("permalink", "")
         url = f"https://reddit.com{permalink}" if permalink else "https://reddit.com"
         subreddit = c_data.get("subreddit_name_prefixed", "r/reddit")
+        
+        # Parse exact UTC post date
+        created_utc = c_data.get("created_utc")
+        if created_utc:
+            date_str = datetime.datetime.fromtimestamp(created_utc, tz=datetime.timezone.utc).strftime("%Y-%m-%d")
+        else:
+            date_str = "Tarih Belirtilmemiş"
 
         score = calculate_friction_score(cleaned)
 
         results.append({
             "source": f"Reddit ({subreddit})",
             "author": author,
-            "date": "Güncel Gönderi",
+            "date": date_str,
             "title": f"{subreddit} Tartışması",
             "url": url,
             "friction_score": score,

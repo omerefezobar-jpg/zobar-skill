@@ -62,10 +62,12 @@ zobar-skill/
 ├── LICENSE                           # Açık kaynak lisansı (MIT)
 ├── run_innovator.py                  # Canlı dosya ve HTML dashboard çıkaran CLI
 ├── scripts/                          # Sıfır-bağımlılık yerleşik CLI araştırma araçları
-│   ├── fetch_academic_papers.py      # arXiv API üzerinden canlı akademik makale çekici
-│   ├── mine_user_sentiment.py        # Hacker News & Reddit kullanıcı acısı madencisi
-│   ├── search_prior_art.py           # Google Patents üzerinden ön patent tarayıcı
-│   └── export_html_report.py         # XSS korumalı, CSP uyumlu HTML dashboard çevirici
+│   ├── fetch_academic_papers.py      # arXiv API üzerinden canlı akademik makale çekici (HTTPS)
+│   ├── mine_user_sentiment.py        # Hacker News & Reddit kullanıcı acısı & olumsuzlama analizcisi
+│   ├── benchmark_competitors.py      # GitHub API canlı rakip metrikleri (yıldız, issue, aktivite)
+│   ├── search_prior_art.py           # Google Patents üzerinden ön patent & prior art tarayıcı
+│   ├── scan_regulations.py           # EU AI Act & KVKK/GDPR regülasyon ve lisans denetleyicisi
+│   └── export_html_report.py         # XSS korumalı, CSP uyumlu ('unsafe-eval' içermez) HTML çevirici
 ├── references/
 │   ├── heuristic-frameworks.md       # Zihinsel modeller, First Principles, akademik matris
 │   └── triz-invention-engine.md      # TRIZ sistematik icat motoru & çelişki çözme matrisi

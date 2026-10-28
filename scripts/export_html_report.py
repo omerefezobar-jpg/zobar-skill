@@ -21,7 +21,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://cdn.tailwindcss.com https://cdn.jsdelivr.net 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; font-src https: data:; img-src https: data:; connect-src 'none';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://cdn.tailwindcss.com https://cdn.jsdelivr.net 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; font-src https: data:; img-src https: data:; connect-src 'none';">
     <title>{{title}}</title>
     <!-- Tailwind CSS (via CDN) -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -109,16 +109,19 @@ def is_safe_url(target_url: str) -> bool:
 
 def sanitize_mermaid_diagram(raw_diagram: str) -> str:
     """
-    Sanitizes Mermaid syntax to prevent DOM breakout or HTML injection.
-    Mermaid v10 parses text inside .mermaid. To prevent injection:
-    - Strips all HTML/XML tags (<...>) from node labels and labels.
-    - Neutralizes closing </div> or </script> tags.
+    Sanitizes Mermaid syntax to prevent DOM breakout or HTML injection,
+    while carefully preserving Mermaid arrow syntax (--> , ==>, <--, <-->).
     """
-    # Remove any HTML tags completely inside the diagram definition
+    # 1. Strip all HTML/XML open and close tags
     stripped = re.sub(r'</?[a-zA-Z][^>]*>', '', raw_diagram)
-    # Neutralize any residual angle brackets
-    neutralized = stripped.replace('<', '&lt;').replace('>', '&gt;')
-    return neutralized.strip()
+    
+    # 2. Neutralize closing div/script injection attempts
+    stripped = stripped.replace('</div>', '').replace('</script>', '')
+    
+    # 3. Strip any lone '<' that are not part of an arrow (<--, <-->)
+    # Mermaid arrows with left-pointing tips: <--, <--o, <--x, <-->
+    sanitized = re.sub(r'<(?![-\.=>])', '&lt;', stripped)
+    return sanitized.strip()
 
 def format_inline_markdown(text: str) -> str:
     """Escapes HTML and applies safe inline formatting (bold, italic, links, code)."""
