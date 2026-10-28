@@ -32,6 +32,7 @@ from scripts.continual_memory_engine import ContinualMemoryEngine
 from scripts.unit_economics_investor_simulator import UnitEconomicsSimulator
 from scripts.image_prompt_synthesizer import ImagePromptSynthesizer
 from scripts.ecs_game_engine import ECSWorld, DeterministicGameLoop
+from scripts.query_asset_vault import AssetVaultQueryEngine
 
 
 class ZobarMCPServer:
@@ -41,6 +42,7 @@ class ZobarMCPServer:
         self.context_compressor = ContextCompressor()
         self.memory_engine = ContinualMemoryEngine()
         self.image_synthesizer = ImagePromptSynthesizer()
+        self.asset_vault = AssetVaultQueryEngine()
 
     def get_tools_manifest(self) -> List[Dict[str, Any]]:
         return [
@@ -147,6 +149,18 @@ class ZobarMCPServer:
                     },
                     "required": ["ticks"]
                 }
+            },
+            {
+                "name": "search_asset_vault",
+                "description": "Searches verified 3D models (glTF/GLB), PBR textures, UI component libraries, icons, and audio SFX.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "query": {"type": "string", "description": "Search term (e.g. 3d, gltf, bento, pbr, sound, character)"},
+                        "category": {"type": "string", "description": "Optional category filter (3d_models_and_meshes, pbr_textures_and_materials, ui_component_and_animation_libraries, icons_and_vector_design_systems, audio_sfx_and_soundtracks)"},
+                        "preferred_format": {"type": "string", "description": "Optional file format (GLTF, FBX, React, PNG, WAV)"}
+                    }
+                }
             }
         ]
 
@@ -212,6 +226,17 @@ class ZobarMCPServer:
                 world.add_collider(e, width=10.0, height=10.0)
             loop = DeterministicGameLoop(world)
             payload = loop.step_fixed_ticks(ticks)
+
+        elif name == "search_asset_vault":
+            query = args.get("query", "")
+            category = args.get("category")
+            fmt = args.get("preferred_format")
+            matches = self.asset_vault.search(query=query, category=category, preferred_format=fmt)
+            payload = {
+                "query": query,
+                "matches_found": len(matches),
+                "results": matches,
+            }
 
         else:
             raise ValueError(f"Unknown tool name: {name}")
