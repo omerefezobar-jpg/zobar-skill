@@ -5,7 +5,10 @@ Simulates an intense, multi-perspective adversarial debate between:
 1. Academic Council (Akademisyenler): Theoretical limits, algorithmic complexity, safety proofs.
 2. Public Assembly (Halk Meclisi): User ergonomics, affordability, privacy, friction.
 3. Workforce & Operations Council (Çalışanlar): On-call burnout, toil, maintainability, tech debt.
-4. Final Executive Board Assembly (Nihai Karar Toplantısı): Multi-round cross-examination,
+4. Chief Engineering Directorate (Başmühendislik Heyeti): Microscopic bug/flaw audit,
+   memory/concurrency inspection, concrete technical innovations added by engineers,
+   and the MANDATORY FINAL CHIEF ENGINEER OVERSIGHT GATE (Başmühendis Nihai Gözetim Mührü).
+5. Final Executive Board Assembly (Nihai Senato & Karar Toplantısı): Multi-round cross-examination,
    dissenting opinion logging (azınlık şerhi), and ratified binding consensus.
 """
 
@@ -116,59 +119,144 @@ def simulate_workforce_council(topic: str) -> Dict[str, Any]:
         "substantive_arguments": feedback
     }
 
+def simulate_systems_engineering_board(topic: str) -> Dict[str, Any]:
+    """
+    Principal Systems Engineering Directorate & Chief Architect Guild.
+    Conducts microscopic analysis of race conditions, memory leaks, cache thrashing,
+    and contributes concrete, production-grade engineering mechanisms to the design.
+    """
+    topic_lower = topic.lower()
+
+    # Deep engineering heuristics
+    has_submillisecond = any(k in topic_lower for k in ["zero-copy", "sub-millisecond", "cache", "simd", "ringbuffer", "lock-free", "voxel", "mcp", "fast"])
+    has_fragile_patterns = any(k in topic_lower for k in ["unbounded", "sleep", "polling", "global lock", "recursion without base", "monolith"])
+
+    base_score = 78
+    if has_submillisecond:
+        base_score += 14
+    if has_fragile_patterns:
+        base_score -= 35
+
+    score = max(20, min(100, base_score))
+
+    # 1. Microscopic Bug & Failure Mode Audit (Mühendis Gözüyle Hata ve Detay Analizi)
+    microscopic_audit = [
+        {
+            "subsystem": "Bellek & Veri Akışı (Memory & Data Layout)",
+            "risk_type": "Cache-Line False Sharing & Heap Frag",
+            "engineer_diagnosis": "Sık erişilen değişkenler aynı 64-baytlık L1/L2 önbellek satırına düşmemelidir; SIMD hizalaması (64-byte padding) zorunludur.",
+            "severity": "Orta" if score >= 70 else "Yüksek"
+        },
+        {
+            "subsystem": "Eşzamanlılık & Kilitler (Concurrency & Locks)",
+            "risk_type": "Deadlock & Lock Contention",
+            "engineer_diagnosis": "Derin mutex kilit hiyerarşileri yerine Lock-Free MPMC RingBuffer ve Atomic Compare-And-Swap (CAS) tercih edilmelidir.",
+            "severity": "Düşük" if score >= 75 else "Yüksek"
+        },
+        {
+            "subsystem": "Kuyruk & Gecikme (Queueing & Tail Latency)",
+            "risk_type": "Backpressure Failure & P99 Spike",
+            "engineer_diagnosis": "Sonsuz kuyruklar ani yük patlamasında OOM üretir. M/M/1 Little's Law prensibiyle sınırlandırılmış Leaky-Bucket backpressure şarttır.",
+            "severity": "Düşük" if has_submillisecond else "Orta"
+        }
+    ]
+
+    # 2. Additions contributed directly by engineers (Mühendislerin Kendinden Kattığı İnovasyonlar)
+    engineer_contributions = [
+        "Lock-Free MPMC RingBuffer: 64-bayt donanım önbellek satırı hizalı (cache-padded), sıfır kilitli mikro-kuyruk yapısı.",
+        "Zero-Copy Memory-Mapped Buffer: JSON/serileştirme yükünü baypas eden doğrudan bellek eşleme ve SIMD vektörizasyonu.",
+        "Adaptive Exponential Jitter Circuit Breaker: Dış servis çökmelerinde kaskad hataları %99.9 oranında izole eden emniyet şalteri.",
+        "Deterministic Telemetry Spans: Nanosaniye hassasiyetli loglama ile üretimde P99.9 gecikme anomalilerini anında yakalayan sayaç."
+    ]
+
+    verdict = "MÜHENDİSLİK MÜHRÜ HAZIR" if score >= 75 else ("REVİZYON ŞART" if score >= 50 else "MİMARİ VETO")
+
+    return {
+        "council_name": "Başmühendislik & Sistem Mimarisi Heyeti (Chief Engineering Directorate)",
+        "lead_delegate": "Başmühendis & Çekirdek Sistem Mimarı (Chief Systems Architect)",
+        "score": score,
+        "verdict": verdict,
+        "engineering_detail_audit": microscopic_audit,
+        "chief_engineer_contributions": engineer_contributions,
+        "substantive_arguments": [
+            f"Mikroskopik mühendislik denetimi: {microscopic_audit[0]['engineer_diagnosis']}",
+            f"Kritik hata önleme: {microscopic_audit[1]['engineer_diagnosis']}",
+            f"Donanım verimliliği katkısı: {engineer_contributions[0]}"
+        ]
+    }
+
 def conduct_executive_board_deliberation(topic: str) -> Dict[str, Any]:
     """
-    Executes a 3-round adversarial debate and calculates the binding synthesized mandate.
-    Consensus Formula: C = (0.35 * Academic) + (0.35 * Public) + (0.30 * Workforce)
+    Executes a 4-way adversarial debate and calculates the binding synthesized mandate,
+    culminating in the MANDATORY FINAL CHIEF ENGINEER OVERSIGHT GATE.
+    Consensus Formula: C = (0.25 * Academic) + (0.25 * Public) + (0.20 * Workforce) + (0.30 * Engineering)
     """
     acad = simulate_academic_council(topic)
     pub = simulate_public_assembly(topic)
     work = simulate_workforce_council(topic)
+    eng = simulate_systems_engineering_board(topic)
 
-    w_acad = 0.35
-    w_pub = 0.35
-    w_work = 0.30
+    w_acad = 0.25
+    w_pub = 0.25
+    w_work = 0.20
+    w_eng = 0.30
 
-    consensus_score = round((acad["score"] * w_acad) + (pub["score"] * w_pub) + (work["score"] * w_work), 2)
+    consensus_score = round(
+        (acad["score"] * w_acad) +
+        (pub["score"] * w_pub) +
+        (work["score"] * w_work) +
+        (eng["score"] * w_eng),
+        2
+    )
 
-    if consensus_score >= 70.0:
-        final_resolution = "ONAYLANDI (RATIFIED BY SENATE)"
-        mandate_action = "Özellik derhal üretim protokolüne dahil edilir; tüm heyetlerin mutabakatı sağlanmıştır."
-    elif consensus_score >= 50.0:
-        final_resolution = "ŞARTLI KABUL (CONDITIONAL WITH AMENDMENTS)"
-        mandate_action = "Özellik kabul edilmiş ancak halk ve mühendislerin belirttiği kısıtlamalarla sınırlanmıştır."
-    else:
-        final_resolution = "REDDEDİLDİ (VETOED BY DELIBERATION COUNCIL)"
-        mandate_action = "Yüksek etik, operasyonel veya teorik risk nedeniyle tasarım rafa kaldırılmış veya tamamen değiştirilmelidir."
-
-    # Structured Debate Rounds
+    # 4-Way Structured Debate Rounds
     debate_transcript = [
         {
             "round": 1,
-            "phase": "Açılış Tezleri ve İlk Değerlendirmeler",
+            "phase": "Açılış Tezleri ve Mühendislik İncelemesi",
             "dialogue": [
                 f"🎓 {acad['lead_delegate']}: 'Konuyu teorik temel ve algoritma sınırları açısından {acad['score']}/100 puanla karşılıyoruz.'",
                 f"👥 {pub['lead_delegate']}: 'Halk Meclisi olarak erişilebilirlik, gizlilik ve kullanım kolaylığına {pub['score']}/100 verdik.'",
-                f"🛠️ {work['lead_delegate']}: 'Saha ekibi olarak bakım maliyeti ve teknik borcu {work['score']}/100 olarak değerlendirdik.'"
+                f"🛠️ {work['lead_delegate']}: 'Saha ekibi olarak bakım maliyeti ve teknik borcu {work['score']}/100 olarak değerlendirdik.'",
+                f"🦾 {eng['lead_delegate']}: 'Başmühendislik olarak mikroskopik hata ve bellek verimliliğini inceledik, puanımız {eng['score']}/100.'"
             ]
         },
         {
             "round": 2,
-            "phase": "Çapraz Sorgu & Karşıt Görüşler (Adversarial Critique)",
+            "phase": "Çapraz Sorgu & Mühendislik Karşıt Görüşleri (Adversarial Critique)",
             "dialogue": [
-                f"⚔️ Akademisyenler -> Saha Ekibine: '{acad['substantive_arguments'][0]}'",
-                f"⚔️ Halk Meclisi -> Akademisyenlere: '{pub['substantive_arguments'][0]}'",
-                f"⚔️ Saha Ekibi -> Herkese: '{work['substantive_arguments'][0]}'"
+                f"⚔️ Başmühendis -> Akademisyenlere: 'Teorik modeliniz güzel ama pratikte L1 önbellek taşması var: {eng['engineering_detail_audit'][0]['engineer_diagnosis']}'",
+                f"⚔️ Başmühendis -> Halk Meclisine: 'Kullanıcı dostu arayüzün arkasında sıfır-kilitli mimariyi garantiye alıyoruz.'",
+                f"⚔️ Saha Ekibi -> Başmühendise: 'Önerdiğiniz zero-copy yapısının testleri çevrimdışı çalışabilmeli.'",
+                f"⚔️ Başmühendis Cevabı: 'Tamamı 100% deterministik standart kütüphane testleriyle donatıldı.'"
             ]
         },
         {
             "round": 3,
-            "phase": "Uzlaşma Maddeleri & Azınlık Şerhi (Compromise & Dissent Log)",
+            "phase": "Mühendislerin Eklemeleri & Nihai Uzlaşma (Chief Engineer Additions)",
             "dialogue": [
-                "🏛️ Senato Başkanı: 'Tüm tarafların çekinceleri tutanağa geçirildi. Nihai ağırlıklı konsensüs hesaplanıyor.'"
+                f"💡 Başmühendisin Mimariye Kattıkları: '{eng['chief_engineer_contributions'][0]} ve {eng['chief_engineer_contributions'][1]} sisteme entegre edildi.'",
+                "🏛️ Senato Başkanı: 'Başmühendisliğin emniyet şalterleri ve optimizasyonları tutanağa işlendi. Nihai gözetim aşamasına geçiliyor.'"
             ]
         }
     ]
+
+    # Chief Engineer Final Oversight Gate (Başmühendis Nihai Gözetim Mührü)
+    if eng["score"] < 50:
+        oversight_status = "BAŞMÜHENDİS VETOSU (CHIEF ENGINEER VETO)"
+        final_resolution = "REDDEDİLDİ (MÜHENDİSLİK GÖZETİMİNDEN GEÇEMEDİ)"
+        mandate_action = "Başmühendislik kritik mimari ve bellek riskleri nedeniyle tasarıma onay vermemiştir; sistem durduruldu."
+        seal_granted = False
+    elif eng["score"] < 75 or consensus_score < 70.0:
+        oversight_status = "ŞARTLI TEKNİK YAMA İLE GEÇTİ (CONDITIONAL ENGINEERING OVERSIGHT)"
+        final_resolution = "ŞARTLI KABUL (MÜHENDİSLİK YAMALARI ZORUNLU)"
+        mandate_action = "Tasarım kabul edildi ancak Başmühendisin sunduğu circuit-breaker ve bellek emniyet şalterleri zorunlu kılındı."
+        seal_granted = True
+    else:
+        oversight_status = "BAŞMÜHENDİS MÜHRÜ İLE ONAYLANDI (CHIEF ENGINEER SEAL OF APPROVAL)"
+        final_resolution = "ONAYLANDI (RATIFIED & CERTIFIED BY CHIEF ENGINEER)"
+        mandate_action = "Tüm heyetlerin mutabakatı sağlandı; Başmühendislik mikroskopik hata ve performans testlerini onayladı."
+        seal_granted = True
 
     # Collect dissenting opinions if any council voted under 65
     dissenting_opinions = []
@@ -177,27 +265,44 @@ def conduct_executive_board_deliberation(topic: str) -> Dict[str, Any]:
     if pub["score"] < 65:
         dissenting_opinions.append(f"Halk Meclisi Azınlık Şerhi: {pub['substantive_arguments'][-1]}")
     if work["score"] < 65:
-        dissenting_opinions.append(f"Mühendislik Azınlık Şerhi: {work['substantive_arguments'][-1]}")
+        dissenting_opinions.append(f"Saha Mühendisliği Azınlık Şerhi: {work['substantive_arguments'][-1]}")
+    if eng["score"] < 65:
+        dissenting_opinions.append(f"Başmühendislik Şerhi: {eng['engineering_detail_audit'][0]['engineer_diagnosis']}")
 
     if not dissenting_opinions:
         dissenting_opinions.append("Tam Mutabakat: Ciddi bir azınlık şerhi bulunmamaktadır.")
+
+    chief_engineer_oversight = {
+        "oversight_status": oversight_status,
+        "seal_granted": seal_granted,
+        "lead_architect_signature": "Dr. Zobar, Principal Systems Architect (PEng / Lead Systems Directorate)",
+        "microscopic_flaw_summary": [
+            f"[{item['severity']}] {item['subsystem']}: {item['engineer_diagnosis']}"
+            for item in eng["engineering_detail_audit"]
+        ],
+        "injected_architectural_contributions": eng["chief_engineer_contributions"],
+        "final_gate_verdict": "GEÇTİ (Tasarım Başmühendis Denetiminden Onay Aldı)" if seal_granted else "KALDI (Veto Edildi)"
+    }
 
     return {
         "deliberation_topic": topic,
         "council_scores": {
             "academic": {"score": acad["score"], "weight": w_acad, "verdict": acad["verdict"]},
             "public": {"score": pub["score"], "weight": w_pub, "verdict": pub["verdict"]},
-            "workforce": {"score": work["score"], "weight": w_work, "verdict": work["verdict"]}
+            "workforce": {"score": work["score"], "weight": w_work, "verdict": work["verdict"]},
+            "chief_engineering": {"score": eng["score"], "weight": w_eng, "verdict": eng["verdict"]}
         },
         "consensus_score": consensus_score,
         "final_resolution": final_resolution,
         "mandate_action": mandate_action,
+        "chief_engineer_final_oversight": chief_engineer_oversight,
         "dissenting_opinions_log": dissenting_opinions,
         "debate_transcript": debate_transcript,
         "councils_detail": {
             "academic": acad,
             "public": pub,
-            "workforce": work
+            "workforce": work,
+            "chief_engineering": eng
         }
     }
 
@@ -214,11 +319,24 @@ def main():
     print(f"🎓 Akademisyenler Puanı : {res['council_scores']['academic']['score']}/100 ({res['council_scores']['academic']['verdict']})")
     print(f"👥 Halk Meclisi Puanı   : {res['council_scores']['public']['score']}/100 ({res['council_scores']['public']['verdict']})")
     print(f"🛠️ Saha Çalışanları     : {res['council_scores']['workforce']['score']}/100 ({res['council_scores']['workforce']['verdict']})")
+    print(f"🦾 Başmühendislik Puanı : {res['council_scores']['chief_engineering']['score']}/100 ({res['council_scores']['chief_engineering']['verdict']})")
     print(f"\n🎯 Ağırlıklı Konsensüs  : {res['consensus_score']}/100")
-    print(f"⚖️ Nihai Karar          : {res['final_resolution']}")
+    print(f"⚖️ Senato Nihai Kararı  : {res['final_resolution']}")
     print(f"📜 Karar Hükmü          : {res['mandate_action']}\n")
 
-    print("📢 Azınlık Şerhleri (Dissenting Opinions):")
+    gate = res["chief_engineer_final_oversight"]
+    print(f"🛡️ BAŞMÜHENDİS NİHAİ GÖZETİMİ:")
+    print(f"   Durum                : {gate['oversight_status']}")
+    print(f"   Gözetim Sonucu       : {gate['final_gate_verdict']}")
+    print(f"   İmza / Yetki         : {gate['lead_architect_signature']}")
+    print("   Mikroskopik Hata Taraması:")
+    for flaw in gate["microscopic_flaw_summary"]:
+        print(f"     - {flaw}")
+    print("   Mühendislerin Kattığı İnovasyonlar:")
+    for contrib in gate["injected_architectural_contributions"]:
+        print(f"     + {contrib}")
+
+    print("\n📢 Azınlık Şerhleri (Dissenting Opinions):")
     for d in res["dissenting_opinions_log"]:
         print(f"   - {d}")
 

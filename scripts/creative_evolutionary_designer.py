@@ -74,25 +74,19 @@ def save_design_memory(history: List[Dict[str, Any]]):
 def calculate_novelty_divergence(candidate: Dict[str, Any], history: List[Dict[str, Any]]) -> float:
     """
     Computes mathematical divergence distance [0.0, 1.0].
-    If candidate matches historical chromosomes closely, divergence drops.
+    Evaluates against the preceding design session to prevent consecutive repetition.
     """
     if not history:
         return 1.0
 
-    min_distance = 1.0
-    c_sig = f"{candidate['material']['name']}|{candidate['geometry']['name']}|{candidate['chroma']['palette']}|{candidate['physics']['type']}"
-
-    for past in history:
-        p_sig = f"{past.get('material_name')}|{past.get('geometry_name')}|{past.get('palette_name')}|{past.get('physics_type')}"
-        # Compute Hamming-style divergence across the 4 chromosomes
-        c_parts = c_sig.split("|")
-        p_parts = p_sig.split("|")
-        matches = sum(1 for cp, pp in zip(c_parts, p_parts) if cp == pp)
-        distance = 1.0 - (matches / 4.0)
-        if distance < min_distance:
-            min_distance = distance
-
-    return round(min_distance, 3)
+    last = history[-1]
+    matches = (
+        (candidate["material"]["name"] == last.get("material_name")) +
+        (candidate["geometry"]["name"] == last.get("geometry_name")) +
+        (candidate["chroma"]["palette"] == last.get("palette_name")) +
+        (candidate["physics"]["type"] == last.get("physics_type"))
+    )
+    return round(1.0 - (matches / 4.0), 3)
 
 def generate_evolutionary_design(domain_context: str, seed: Optional[int] = None) -> Dict[str, Any]:
     """
@@ -108,7 +102,7 @@ def generate_evolutionary_design(domain_context: str, seed: Optional[int] = None
     best_candidate = None
     best_novelty = -1.0
 
-    for attempt in range(8):
+    for attempt in range(48):
         material = rng.choice(MATERIALS)
         geometry = rng.choice(GEOMETRIES)
         chroma = rng.choice(LIGHTING_AND_CHROMA)

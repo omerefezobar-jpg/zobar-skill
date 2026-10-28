@@ -30,23 +30,153 @@
     "timestamp": 1793222526.4275568
   },
   {
-    "design_id": "EVO-482E0D4F",
+    "design_id": "EVO-BD88FD12",
     "domain": "Autonomous Quantum Operating System",
     "novelty_score": 0.75,
     "material_name": "Iridescent Vapor-Chromium",
     "geometry_name": "Offset Diagonal Architectural Ribbons",
     "palette_name": "Solarized Cobalt & Amber",
     "physics_type": "Viscous Magnetic Damping",
-    "timestamp": 1793222602.5773432
+    "timestamp": 1793223220.3878982
   },
   {
-    "design_id": "EVO-4DF7466C",
+    "design_id": "EVO-3A94FD0E",
     "domain": "Deep Space Telemetry Dashboard",
+    "novelty_score": 0.5,
+    "material_name": "Sub-Atomic Polarized Crystal",
+    "geometry_name": "Offset Diagonal Architectural Ribbons",
+    "palette_name": "Monochrome Acid Lime",
+    "physics_type": "High-Tension Snap",
+    "timestamp": 1793223220.40193
+  },
+  {
+    "design_id": "EVO-76732C55",
+    "domain": "Autonomous Quantum Operating System",
+    "novelty_score": 0.75,
+    "material_name": "Volcanic Dark Obsidian",
+    "geometry_name": "Floating Concentric Radial Layers",
+    "palette_name": "Emerald Bio-Grid",
+    "physics_type": "Apple 2nd-Order Spring",
+    "timestamp": 1793223246.890168
+  },
+  {
+    "design_id": "EVO-C50FBE6F",
+    "domain": "Deep Space Telemetry Dashboard",
+    "novelty_score": 0.75,
+    "material_name": "Holographic Zero-Gravity Sheet",
+    "geometry_name": "Asymmetric Bento with Variable Aspect Ratios",
+    "palette_name": "Solarized Cobalt & Amber",
+    "physics_type": "Apple 2nd-Order Spring",
+    "timestamp": 1793223246.9026735
+  },
+  {
+    "design_id": "EVO-E2435A9B",
+    "domain": "Autonomous Quantum Operating System",
     "novelty_score": 0.75,
     "material_name": "Kinetic Neo-Brutalist Concrete",
     "geometry_name": "Monospaced Swiss Data Grid",
+    "palette_name": "Solarized Cobalt & Amber",
+    "physics_type": "High-Tension Snap",
+    "timestamp": 1793223262.054019
+  },
+  {
+    "design_id": "EVO-09D6FBEA",
+    "domain": "Deep Space Telemetry Dashboard",
+    "novelty_score": 0.5,
+    "material_name": "Holographic Zero-Gravity Sheet",
+    "geometry_name": "Floating Concentric Radial Layers",
+    "palette_name": "Solarized Cobalt & Amber",
+    "physics_type": "Viscous Magnetic Damping",
+    "timestamp": 1793223262.0686965
+  },
+  {
+    "design_id": "EVO-B1BDE2C8",
+    "domain": "Test-0",
+    "novelty_score": 0.75,
+    "material_name": "Bioluminescent Organic Glass",
+    "geometry_name": "Floating Concentric Radial Layers",
+    "palette_name": "Ultra-Violet Cyber Core",
+    "physics_type": "High-Tension Snap",
+    "timestamp": 1793223275.6322558
+  },
+  {
+    "design_id": "EVO-3998D2A3",
+    "domain": "Test-1",
+    "novelty_score": 0.5,
+    "material_name": "Bioluminescent Organic Glass",
+    "geometry_name": "Monospaced Swiss Data Grid",
+    "palette_name": "Emerald Bio-Grid",
+    "physics_type": "High-Tension Snap",
+    "timestamp": 1793223275.6492708
+  },
+  {
+    "design_id": "EVO-6DCAC6BB",
+    "domain": "Test-2",
+    "novelty_score": 0.75,
+    "material_name": "Volcanic Dark Obsidian",
+    "geometry_name": "Asymmetric Bento with Variable Aspect Ratios",
+    "palette_name": "Monochrome Acid Lime",
+    "physics_type": "Viscous Magnetic Damping",
+    "timestamp": 1793223275.6654832
+  },
+  {
+    "design_id": "EVO-565FFDFB",
+    "domain": "Test-3",
+    "novelty_score": 0.5,
+    "material_name": "Holographic Zero-Gravity Sheet",
+    "geometry_name": "Offset Diagonal Architectural Ribbons",
+    "palette_name": "Emerald Bio-Grid",
+    "physics_type": "High-Tension Snap",
+    "timestamp": 1793223275.681811
+  },
+  {
+    "design_id": "EVO-920D1568",
+    "domain": "Test-4",
+    "novelty_score": 0.5,
+    "material_name": "Holographic Zero-Gravity Sheet",
+    "geometry_name": "Offset Diagonal Architectural Ribbons",
+    "palette_name": "Monochrome Acid Lime",
+    "physics_type": "Viscous Magnetic Damping",
+    "timestamp": 1793223275.6981618
+  },
+  {
+    "design_id": "EVO-AB9010C2",
+    "domain": "Autonomous Quantum Operating System",
+    "novelty_score": 1.0,
+    "material_name": "Sub-Atomic Polarized Crystal",
+    "geometry_name": "Asymmetric Bento with Variable Aspect Ratios",
+    "palette_name": "Emerald Bio-Grid",
+    "physics_type": "High-Tension Snap",
+    "timestamp": 1793223305.9476035
+  },
+  {
+    "design_id": "EVO-17FBE40B",
+    "domain": "Deep Space Telemetry Dashboard",
+    "novelty_score": 0.75,
+    "material_name": "Holographic Zero-Gravity Sheet",
+    "geometry_name": "Offset Diagonal Architectural Ribbons",
     "palette_name": "Emerald Bio-Grid",
     "physics_type": "Viscous Magnetic Damping",
-    "timestamp": 1793222602.5956242
+    "timestamp": 1793223305.9695628
+  },
+  {
+    "design_id": "EVO-151BDC12",
+    "domain": "Autonomous Quantum Operating System",
+    "novelty_score": 0.75,
+    "material_name": "Sub-Atomic Polarized Crystal",
+    "geometry_name": "Asymmetric Bento with Variable Aspect Ratios",
+    "palette_name": "Emerald Bio-Grid",
+    "physics_type": "High-Tension Snap",
+    "timestamp": 1793223350.751527
+  },
+  {
+    "design_id": "EVO-A10BCEC1",
+    "domain": "Deep Space Telemetry Dashboard",
+    "novelty_score": 0.75,
+    "material_name": "Kinetic Neo-Brutalist Concrete",
+    "geometry_name": "Asymmetric Bento with Variable Aspect Ratios",
+    "palette_name": "Solarized Cobalt & Amber",
+    "physics_type": "Viscous Magnetic Damping",
+    "timestamp": 1793223350.7685654
   }
 ]

@@ -23,7 +23,8 @@ from scripts.game_modding_engine import (
 )
 from scripts.multi_agent_deliberation_council import (
     simulate_academic_council, simulate_public_assembly,
-    simulate_workforce_council, conduct_executive_board_deliberation
+    simulate_workforce_council, simulate_systems_engineering_board,
+    conduct_executive_board_deliberation
 )
 from scripts.creative_evolutionary_designer import (
     calculate_novelty_divergence, generate_evolutionary_design,
@@ -126,7 +127,15 @@ class TestMultiAgentDeliberationCouncil(unittest.TestCase):
         self.assertLess(pub_invasive["score"], 50)
         self.assertEqual(pub_invasive["verdict"], "TOPLUMSAL VETO")
 
-    def test_executive_board_deliberation_consensus(self):
+    def test_chief_engineering_board_audit_and_contributions(self):
+        eng = simulate_systems_engineering_board("Zero-Copy Lock-Free RingBuffer Telemetry Pipeline")
+        self.assertGreaterEqual(eng["score"], 80)
+        self.assertEqual(eng["verdict"], "MÜHENDİSLİK MÜHRÜ HAZIR")
+        self.assertTrue(len(eng["engineering_detail_audit"]) >= 3)
+        self.assertTrue(len(eng["chief_engineer_contributions"]) >= 3)
+        self.assertTrue(any("RingBuffer" in c for c in eng["chief_engineer_contributions"]))
+
+    def test_executive_board_deliberation_consensus_and_chief_oversight(self):
         council = conduct_executive_board_deliberation("Zero-Copy Voxel Rendering Engine with Open Source Protocol")
         self.assertGreaterEqual(council["consensus_score"], 70.0)
         self.assertIn("ONAYLANDI", council["final_resolution"])
@@ -134,6 +143,19 @@ class TestMultiAgentDeliberationCouncil(unittest.TestCase):
         self.assertIn("academic", council["council_scores"])
         self.assertIn("public", council["council_scores"])
         self.assertIn("workforce", council["council_scores"])
+        self.assertIn("chief_engineering", council["council_scores"])
+
+        gate = council["chief_engineer_final_oversight"]
+        self.assertTrue(gate["seal_granted"])
+        self.assertIn("Dr. Zobar", gate["lead_architect_signature"])
+        self.assertTrue(len(gate["microscopic_flaw_summary"]) >= 3)
+        self.assertTrue(len(gate["injected_architectural_contributions"]) >= 3)
+
+    def test_chief_engineer_veto_or_conditional_oversight(self):
+        fragile = conduct_executive_board_deliberation("Monolith with unbounded global lock polling sleep")
+        gate = fragile["chief_engineer_final_oversight"]
+        self.assertTrue("CHIEF ENGINEER" in gate["oversight_status"] or "VETO" in gate["oversight_status"])
+        self.assertLess(fragile["council_scores"]["chief_engineering"]["score"], 60)
 
 class TestCreativeEvolutionaryDesigner(unittest.TestCase):
     def test_novelty_divergence_calculation(self):
