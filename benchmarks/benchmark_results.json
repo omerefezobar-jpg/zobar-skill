@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-28T19:25:59.438485+00:00",
+  "timestamp": "2026-10-28T19:40:33.761241+00:00",
   "policy": "Strict Zero-Tolerance (Any failure fails CI)",
   "pass_rate_percentage": 100.0,
-  "total_cases": 7,
-  "successful_cases": 7,
+  "total_cases": 20,
+  "successful_cases": 20,
   "total_failures": 0,
   "cases": [
     {
@@ -40,11 +40,11 @@
     },
     {
       "id": "CASE-05",
-      "name": "Sosyal Puanlama & İzinsiz Biyometrik Veri Tabanı (Prohibited AI Practice)",
+      "name": "Sosyal Puanlama & İzinsiz Biyometrik Veri Tabanı (Prohibited Practice)",
       "status": "✅ KUSURSUZ (100/100)",
       "score": 100,
       "failures": [],
-      "ground_truth_precedent": "Regulation (EU) 2024/1689 Article 5(1)(a)-(h) (Prohibited AI Practices)"
+      "ground_truth_precedent": "Regulation (EU) 2024/1689 Article 5(1)(c)/(e) (Prohibited AI Practices)"
     },
     {
       "id": "CASE-06",
@@ -61,6 +61,110 @@
       "score": 100,
       "failures": [],
       "ground_truth_precedent": "Regulation (EU) 2024/1689 Recital 34 (General software not listed in Annex III is minimal risk)"
+    },
+    {
+      "id": "CASE-08",
+      "name": "İnsan Kaynakları & Otomatik Özgeçmiş Filtreleme (HR Resume Screening)",
+      "status": "✅ KUSURSUZ (100/100)",
+      "score": 100,
+      "failures": [],
+      "ground_truth_precedent": "Regulation (EU) 2024/1689 Annex III Point 4(a) (Recruitment and selection of natural persons)"
+    },
+    {
+      "id": "CASE-09",
+      "name": "Eğitim Sınav Değerlendirme & Puanlama (Exam Grading Assessment)",
+      "status": "✅ KUSURSUZ (100/100)",
+      "score": 100,
+      "failures": [],
+      "ground_truth_precedent": "Regulation (EU) 2024/1689 Annex III Point 3(a) (Assessment of students in educational institutions)"
+    },
+    {
+      "id": "CASE-10",
+      "name": "Kritik Enerji Şebekesi & Su Yönetimi SCADA (Critical Infrastructure)",
+      "status": "✅ KUSURSUZ (100/100)",
+      "score": 100,
+      "failures": [],
+      "ground_truth_precedent": "Regulation (EU) 2024/1689 Annex III Point 2 (Safety components in the management of critical infrastructure)"
+    },
+    {
+      "id": "CASE-11",
+      "name": "Otonom Araç Gerçek Zamanlı Frenleme & Telemetri (Automotive Safety Component)",
+      "status": "✅ KUSURSUZ (100/100)",
+      "score": 100,
+      "failures": [],
+      "ground_truth_precedent": "Regulation (EU) 2024/1689 Annex I & Machinery Regulation (EU) 2023/1230"
+    },
+    {
+      "id": "CASE-12",
+      "name": "Sentetik Video & Deepfake Medya Üretimi (Synthetic Media Watermarking)",
+      "status": "✅ KUSURSUZ (100/100)",
+      "score": 100,
+      "failures": [],
+      "ground_truth_precedent": "Regulation (EU) 2024/1689 Article 50(2) (Obligation to watermark artificially generated content)"
+    },
+    {
+      "id": "CASE-13",
+      "name": "İşyerinde Çalışan Duygu Analizi (Workplace Emotion Recognition)",
+      "status": "✅ KUSURSUZ (100/100)",
+      "score": 100,
+      "failures": [],
+      "ground_truth_precedent": "Regulation (EU) 2024/1689 Article 5(1)(f) (Prohibition of emotion recognition in the workplace)"
+    },
+    {
+      "id": "CASE-14",
+      "name": "Bireysel Suç Tekerrür Tahmini (Individual Predictive Policing)",
+      "status": "✅ KUSURSUZ (100/100)",
+      "score": 100,
+      "failures": [],
+      "ground_truth_precedent": "Regulation (EU) 2024/1689 Article 5(1)(d) (Prohibition of risk assessment of natural persons for criminal offenses)"
+    },
+    {
+      "id": "CASE-15",
+      "name": "Geliştirici Kod İyileştirme & Git Asistanı (Refactoring Tool)",
+      "status": "✅ KUSURSUZ (100/100)",
+      "score": 100,
+      "failures": [],
+      "ground_truth_precedent": "Regulation (EU) 2024/1689 Article 2(8) (Exemption for developer and engineering tools)"
+    },
+    {
+      "id": "CASE-16",
+      "name": "Bilinçaltı Manipülatif Davranış Çarpıtma (Subliminal Behavior Distortion)",
+      "status": "✅ KUSURSUZ (100/100)",
+      "score": 100,
+      "failures": [],
+      "ground_truth_precedent": "Regulation (EU) 2024/1689 Article 5(1)(a) (Prohibition of subliminal techniques causing harm)"
+    },
+    {
+      "id": "CASE-17",
+      "name": "Radyoloji Görüntüleme Tümör Tespiti (Hospital Radiology Imaging)",
+      "status": "✅ KUSURSUZ (100/100)",
+      "score": 100,
+      "failures": [],
+      "ground_truth_precedent": "MDR (EU) 2017/745 Annex VIII Rule 11 & Regulation (EU) 2024/1689 Article 6(1)"
+    },
+    {
+      "id": "CASE-18",
+      "name": "E-Ticaret Ürün Tavsiye ve Arama Sıralaması (Product Recommendation)",
+      "status": "✅ KUSURSUZ (100/100)",
+      "score": 100,
+      "failures": [],
+      "ground_truth_precedent": "Regulation (EU) 2024/1689 Recital 34 (General consumer search ranking is minimal risk)"
+    },
+    {
+      "id": "CASE-19",
+      "name": "Gerçek Zamanlı Yüksek Frekanslı Algoritmik Ticaret (HFT Algorithmic Trading)",
+      "status": "✅ KUSURSUZ (100/100)",
+      "score": 100,
+      "failures": [],
+      "ground_truth_precedent": "Regulation (EU) 2024/1689 Recital 34 (Financial trading is minimal risk under AI Act, regulated under MiFID II)"
+    },
+    {
+      "id": "CASE-20",
+      "name": "Uç Nokta Akıllı Termostat Firmware'i (Edge IoT Smart Thermostat)",
+      "status": "✅ KUSURSUZ (100/100)",
+      "score": 100,
+      "failures": [],
+      "ground_truth_precedent": "Regulation (EU) 2024/1689 Recital 34 (Home appliance automation firmware is minimal risk)"
     }
   ]
 }

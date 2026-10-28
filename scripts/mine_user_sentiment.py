@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """
-Multi-Source User Sentiment & Friction Miner for Frontier Innovator.
+Multi-Source User Sentiment & Friction Miner for Zobar Skill.
 Extracts real developer complaints, pain points, and friction points across
 Hacker News (Algolia API) and Reddit (Public JSON API) with zero dependencies.
-Includes source health tracking and weighted sentiment scoring.
+Includes clause-level syntax parsing, adversative conjunction handling,
+and negation-aware friction scoring.
 """
 
 import sys
@@ -22,16 +23,28 @@ if hasattr(sys.stdout, "reconfigure"):
 # Weighted friction vocabulary
 HIGH_FRICTION_KEYWORDS = [
     "hate", "broken", "terrible", "worst", "unusable", "horrible",
-    "garbage", "disaster", "painful", "nightmare", "crash", "corrupt"
+    "garbage", "disaster", "painful", "nightmare", "crash", "corrupt",
+    "berbat", "rezalet", "çöküyor", "kullanılamaz"
 ]
 
 MODERATE_FRICTION_KEYWORDS = [
     "slow", "issue", "problem", "bug", "confusing", "fail", "expensive",
-    "annoying", "frustrat", "waste", "overkill", "bloat", "clunky", "hard to"
+    "annoying", "frustrat", "waste", "overkill", "bloat", "clunky", "hard to",
+    "yavaş", "sorun", "pahalı", "karmaşık", "zahmetli"
 ]
 
-# Negation words that neutralize adjacent friction words
-NEGATIONS = ["not", "isn't", "aren't", "wasn't", "weren't", "no", "never", "hardly", "barely", "don't", "doesn't"]
+# Adversative conjunctions that delimit distinct sentiment clauses
+ADVERSATIVE_CONJUNCTIONS = [
+    "but", "however", "although", "though", "yet", "except", "despite",
+    "nevertheless", "whereas", "while", "ama", "fakat", "lakin", "ancak", "oysa", "rağmen"
+]
+
+# Negation words that neutralize adjacent friction words within the same clause
+NEGATIONS = [
+    "not", "isn't", "aren't", "wasn't", "weren't", "don't", "doesn't", "didn't",
+    "won't", "can't", "cannot", "couldn't", "no", "never", "hardly", "barely",
+    "scarcely", "neither", "nor", "değil", "yok", "hiç"
+]
 
 def clean_html(raw_html: str) -> str:
     """Strips HTML tags, collapses whitespaces, and unescapes entities."""
@@ -39,39 +52,104 @@ def clean_html(raw_html: str) -> str:
     text = re.sub(cleanr, ' ', raw_html)
     return html.unescape(text).strip()
 
-def calculate_friction_score(text: str) -> int:
+def split_into_clauses(text: str):
     """
-    Calculates weighted friction score taking contextual negations into account.
-    E.g. 'not slow' or 'no issues' will not be counted as friction.
+    Splits text into sentences and sub-clauses based on punctuation and adversative conjunctions.
+    E.g. 'Performance is great, but the crash rate is terrible.' -> 2 distinct clauses.
     """
-    tokens = re.findall(r"[a-z0-9'-]+", text.lower())
+    # First split by sentence boundaries (. ? ! ;)
+    raw_sentences = re.split(r'[.?!;]\s+', text)
+    clauses = []
+
+    for sentence in raw_sentences:
+        sentence = sentence.strip()
+        if not sentence:
+            continue
+
+        # Split sentence by commas or adversative conjunctions
+        pattern = r'\b(' + '|'.join(ADVERSATIVE_CONJUNCTIONS) + r')\b|,'
+        sub_segments = re.split(pattern, sentence, flags=re.IGNORECASE)
+
+        for seg in sub_segments:
+            if seg and seg.strip() and seg.lower() not in ADVERSATIVE_CONJUNCTIONS:
+                clauses.append(seg.strip())
+
+    return clauses if clauses else [text]
+
+def calculate_clause_friction(clause: str):
+    """
+    Calculates friction score for an individual syntactic clause,
+    strictly localizing negations so they do not bleed across boundaries.
+    """
+    lowered = clause.lower()
+
+    # Handle special multi-word constructions
+    # E.g. 'not only ... but also' shouldn't trigger naive 'not' negation
+    has_not_only = "not only" in lowered
+
+    tokens = re.findall(r"[a-z0-9'-]+", lowered)
     score = 0
+    detected_words = []
 
     for idx, token in enumerate(tokens):
-        # Look behind up to 2 words for negation
+        # Look behind up to 3 words within this clause for negation
         is_negated = False
-        lookback_start = max(0, idx - 2)
+        lookback_start = max(0, idx - 3)
         for prev in tokens[lookback_start:idx]:
-            if prev in NEGATIONS:
+            if prev in NEGATIONS and not has_not_only:
                 is_negated = True
                 break
 
         if is_negated:
             continue
 
-        if token in HIGH_FRICTION_KEYWORDS:
+        if any(token.startswith(kw) or token == kw for kw in HIGH_FRICTION_KEYWORDS):
             score += 2
-        elif token in MODERATE_FRICTION_KEYWORDS:
+            detected_words.append(token)
+        elif any(token.startswith(kw) or token == kw for kw in MODERATE_FRICTION_KEYWORDS):
             score += 1
+            detected_words.append(token)
 
-    return score
+    return score, detected_words
+
+def calculate_friction_score(text: str) -> int:
+    """
+    Calculates aggregate friction score by summing clause-level scores.
+    """
+    clauses = split_into_clauses(text)
+    total_score = 0
+
+    for clause in clauses:
+        score, _ = calculate_clause_friction(clause)
+        total_score += score
+
+    return total_score
+
+def extract_primary_pain_points(text: str, max_points: int = 2):
+    """
+    Extracts the highest friction clauses as concrete quoted pain points.
+    """
+    clauses = split_into_clauses(text)
+    scored_clauses = []
+
+    for c in clauses:
+        score, words = calculate_clause_friction(c)
+        if score > 0:
+            scored_clauses.append({
+                "clause": c,
+                "score": score,
+                "keywords": words
+            })
+
+    scored_clauses.sort(key=lambda x: x["score"], reverse=True)
+    return scored_clauses[:max_points]
 
 def search_hn_sentiment(query: str, max_comments: int = 4):
     """Mines user sentiment and complaints from Hacker News via Algolia API."""
     encoded_query = urllib.parse.quote(query)
     url = f"https://hn.algolia.com/api/v1/search?query={encoded_query}&tags=comment&hitsPerPage={max_comments * 3}"
 
-    headers = {"User-Agent": "FrontierInnovatorBot/2.0 (Developer Sentiment Research)"}
+    headers = {"User-Agent": "ZobarSkillBot/3.0 (Developer Sentiment Research)"}
     req = urllib.request.Request(url, headers=headers)
 
     try:
@@ -98,6 +176,7 @@ def search_hn_sentiment(query: str, max_comments: int = 4):
         url = f"https://news.ycombinator.com/item?id={hit.get('objectID')}"
 
         score = calculate_friction_score(cleaned)
+        pain_points = extract_primary_pain_points(cleaned)
 
         results.append({
             "source": "Hacker News",
@@ -105,121 +184,121 @@ def search_hn_sentiment(query: str, max_comments: int = 4):
             "date": created_at,
             "title": story_title,
             "url": url,
+            "text": cleaned[:420] + "..." if len(cleaned) > 420 else cleaned,
             "friction_score": score,
-            "text": cleaned[:380] + "..." if len(cleaned) > 380 else cleaned
+            "pain_points": [p["clause"] for p in pain_points]
         })
 
     results.sort(key=lambda x: x["friction_score"], reverse=True)
-    return {"status": "success", "comments": results[:max_comments]}
+    return {"status": "ok", "comments": results[:max_comments]}
 
 def search_reddit_sentiment(query: str, max_comments: int = 4):
-    """Mines user complaints and feedback from Reddit public search JSON."""
-    encoded_query = urllib.parse.quote(f"{query} (slow OR hate OR bug OR problem OR terrible OR broken)")
-    url = f"https://www.reddit.com/search.json?q={encoded_query}&type=comment&limit={max_comments * 3}&sort=relevance"
+    """Mines developer feedback and complaints from Reddit via public JSON endpoint."""
+    encoded_query = urllib.parse.quote(query)
+    url = f"https://www.reddit.com/search.json?q={encoded_query}&sort=relevance&limit={max_comments * 2}"
 
-    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) FrontierInnovator/2.0"}
+    headers = {"User-Agent": "ZobarSkillBot/3.0 (Sentiment Miner by /u/zobarskill)"}
     req = urllib.request.Request(url, headers=headers)
 
     try:
         with urllib.request.urlopen(req, timeout=10) as response:
             data = json.loads(response.read().decode('utf-8'))
     except Exception as e:
-        return {"status": "rate-limited/error", "error": str(e), "comments": []}
+        return {"status": "error", "error": str(e), "comments": []}
 
-    items = data.get("data", {}).get("children", [])
+    children = data.get("data", {}).get("children", [])
     results = []
 
-    for item in items:
-        c_data = item.get("data", {})
-        body = c_data.get("body", "")
-        if not body or len(body) < 35:
+    for child in children:
+        post = child.get("data", {})
+        selftext = post.get("selftext", "")
+        title = post.get("title", "")
+        full_text = f"{title}. {selftext}".strip()
+
+        if len(full_text) < 40:
             continue
 
-        cleaned = clean_html(body)
-        author = c_data.get("author", "redditor")
-        permalink = c_data.get("permalink", "")
+        cleaned = clean_html(full_text)
+        author = post.get("author", "redditor")
+        created_utc = post.get("created_utc", 0)
+        date_str = datetime.datetime.fromtimestamp(created_utc, tz=datetime.timezone.utc).strftime("%Y-%m-%d") if created_utc else "Tarih Yok"
+        permalink = post.get("permalink", "")
         url = f"https://reddit.com{permalink}" if permalink else "https://reddit.com"
-        subreddit = c_data.get("subreddit_name_prefixed", "r/reddit")
-        
-        # Parse exact UTC post date
-        created_utc = c_data.get("created_utc")
-        if created_utc:
-            date_str = datetime.datetime.fromtimestamp(created_utc, tz=datetime.timezone.utc).strftime("%Y-%m-%d")
-        else:
-            date_str = "Tarih Belirtilmemiş"
 
         score = calculate_friction_score(cleaned)
+        pain_points = extract_primary_pain_points(cleaned)
 
         results.append({
-            "source": f"Reddit ({subreddit})",
+            "source": "Reddit",
             "author": author,
             "date": date_str,
-            "title": f"{subreddit} Tartışması",
+            "title": title,
             "url": url,
+            "text": cleaned[:420] + "..." if len(cleaned) > 420 else cleaned,
             "friction_score": score,
-            "text": cleaned[:380] + "..." if len(cleaned) > 380 else cleaned
+            "pain_points": [p["clause"] for p in pain_points]
         })
 
     results.sort(key=lambda x: x["friction_score"], reverse=True)
-    return {"status": "success", "comments": results[:max_comments]}
+    return {"status": "ok", "comments": results[:max_comments]}
 
 def search_sentiment(query: str, max_comments: int = 5):
     """
-    Aggregates and ranks user complaints from multiple community channels.
-    Returns structured dict with both comments list and sources summary metadata.
+    Queries both Hacker News and Reddit, reporting per-source health,
+    clause-level friction scores, and primary pain points.
     """
     hn_res = search_hn_sentiment(query, max_comments=max_comments)
     reddit_res = search_reddit_sentiment(query, max_comments=max_comments)
 
-    combined = hn_res.get("comments", []) + reddit_res.get("comments", [])
+    combined = []
+    sources_status = []
+
+    if hn_res["status"] == "ok":
+        combined.extend(hn_res["comments"])
+        sources_status.append(f"Hacker News ({len(hn_res['comments'])} kayıt)")
+    else:
+        sources_status.append(f"Hacker News (Hata: {hn_res.get('error', 'bilinmiyor')[:30]})")
+
+    if reddit_res["status"] == "ok":
+        combined.extend(reddit_res["comments"])
+        sources_status.append(f"Reddit ({len(reddit_res['comments'])} kayıt)")
+    else:
+        sources_status.append(f"Reddit (Hata: {reddit_res.get('error', 'bilinmiyor')[:30]})")
+
     combined.sort(key=lambda x: x["friction_score"], reverse=True)
-    selected = combined[:max_comments]
-
-    active_sources = []
-    if hn_res.get("status") == "success":
-        active_sources.append(f"Hacker News ({len(hn_res.get('comments', []))} veri)")
-    else:
-        active_sources.append(f"Hacker News (Hata: {hn_res.get('error', 'bağlantı')})")
-
-    if reddit_res.get("status") == "success":
-        active_sources.append(f"Reddit ({len(reddit_res.get('comments', []))} veri)")
-    else:
-        active_sources.append("Reddit (Açık API kısıtı/bağlantı)")
-
-    summary = f"Taranan Kanallar: {', '.join(active_sources)}"
 
     return {
-        "comments": selected,
-        "summary": summary,
-        "hn_status": hn_res.get("status"),
-        "reddit_status": reddit_res.get("status")
+        "comments": combined[:max_comments],
+        "summary": " | ".join(sources_status)
     }
 
 def main():
-    parser = argparse.ArgumentParser(description="Multi-source user friction and sentiment miner.")
-    parser.add_argument("query", help="Keyword or product to mine complaints for")
-    parser.add_argument("--max", type=int, default=5, help="Number of comments to return (default: 5)")
+    parser = argparse.ArgumentParser(description="Multi-source user sentiment and friction miner.")
+    parser.add_argument("query", help="Target topic or keyword to search")
+    parser.add_argument("--max", type=int, default=5, help="Maximum number of comments (default: 5)")
     args = parser.parse_args()
 
     print(f"\n=======================================================")
-    print(f" 💬 ÇOK KAYNAKLI KULLANICI ŞİKAYET MADENCİLİĞİ: '{args.query}'")
+    print(f" 💬 ÇOK KAYNAKLI KULLANICI ŞİKAYET & SÜRTÜNME MADENCİLİĞİ: '{args.query}'")
     print(f"=======================================================\n")
 
-    result = search_sentiment(args.query, args.max)
-    comments = result["comments"]
-    print(f"[*] Durum: {result['summary']}\n")
+    res = search_sentiment(args.query, args.max)
+    print(f"📡 Kaynak Durumu: {res['summary']}\n")
 
-    if not comments:
-        print("[-] Uygun kullanıcı yorumu veya eleştiri bulunamadı.")
+    if not res["comments"]:
+        print("[-] Belirtilen arama kriterlerine uyan şikayet verisi bulunamadı.")
         return
 
-    for idx, c in enumerate(comments, 1):
-        friction_tag = "⚠️ YÜKSEK SÜRTÜNME (AĞIR ŞİKAYET)" if c["friction_score"] >= 3 else "📌 KULLANICI SÜRTÜNME/GERİ BİLDİRİMİ"
-        print(f"[{idx}] {friction_tag} [{c['source']}] (Yazar: @{c['author']} | Tarih: {c['date']})")
-        print(f"    📖 Başlık   : {c['title']}")
-        print(f"    🔗 Kaynak   : {c['url']}")
-        print(f"    📊 Skor     : {c['friction_score']}")
-        print(f"    🗣️ Yorum    : {c['text']}")
+    for idx, c in enumerate(res["comments"], 1):
+        friction_tag = "🔴 Yüksek Sürtünme" if c["friction_score"] >= 3 else ("🟡 Orta Sürtünme" if c["friction_score"] >= 1 else "⚪ Nötr / Düşük")
+        print(f"[{idx}] {friction_tag} (Skor: {c['friction_score']}) — {c['source']} (@{c['author']} - {c['date']})")
+        print(f"    Başlık  : {c['title']}")
+        print(f"    Bağlantı: {c['url']}")
+        if c.get("pain_points"):
+            print(f"    🎯 Tespit Edilen Odak Acı Noktaları:")
+            for p in c["pain_points"]:
+                print(f"       • \"{p}\"")
+        print(f"    Görüş   : {c['text']}")
         print("-" * 55)
 
 if __name__ == "__main__":

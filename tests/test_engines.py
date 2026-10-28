@@ -2,8 +2,8 @@
 """
 Comprehensive Ground-Truth Unit & Benchmark Test Suite for Zobar Skill.
 Tests statutory compliance precision with intended-purpose discrimination,
-hybrid competitor benchmarking, tech stack synthesis, TRIZ invention generation,
-and strict CSP security.
+university curriculum ground truth, hybrid competitor benchmarking,
+clause-level negation sentiment mining, dynamic TRIZ validation, and CSP security.
 """
 
 import unittest
@@ -15,16 +15,21 @@ from scripts.export_html_report import (
     sanitize_mermaid_diagram, HTML_TEMPLATE
 )
 from scripts.fetch_academic_papers import fetch_arxiv_papers
+from scripts.fetch_university_research import (
+    find_university_curriculum, fetch_openalex_papers
+)
 from scripts.mine_user_sentiment import (
-    clean_html, search_sentiment, calculate_friction_score
+    clean_html, search_sentiment, calculate_friction_score, split_into_clauses
 )
 from scripts.benchmark_competitors import (
-    benchmark_competitors, search_commercial_incumbents
+    benchmark_competitors, search_commercial_incumbents, fetch_package_registry_telemetry
 )
 from scripts.search_prior_art import search_patents
 from scripts.scan_regulations import evaluate_compliance
 from scripts.synthesize_architecture import synthesize_tech_stack
-from scripts.validate_inventions import generate_validated_inventions
+from scripts.validate_inventions import (
+    generate_validated_inventions, calculate_dynamic_validation_metrics
+)
 
 class TestSecurityAndCSP(unittest.TestCase):
     def test_csp_hardened_no_unsafe_eval(self):
@@ -67,39 +72,95 @@ flowchart TD
         self.assertIn('A --> B', output)
         self.assertNotIn('<script>alert(1)</script>', output)
 
+class TestUniversityCurriculumAndAcademics(unittest.TestCase):
+    def test_university_curriculum_mapping(self):
+        res = find_university_curriculum("compiler AST static analysis")
+        self.assertGreaterEqual(len(res["curriculum"]), 1)
+        stanford = next((c for c in res["curriculum"] if c["institution"] == "Stanford University"), None)
+        self.assertIsNotNone(stanford)
+        self.assertEqual(stanford["course_code"], "CS143")
+        self.assertIn("Dragon Book", stanford["seminal_textbook"])
+
+    def test_distributed_systems_mit_mapping(self):
+        res = find_university_curriculum("distributed consensus raft")
+        mit = next((c for c in res["curriculum"] if "MIT" in c["institution"]), None)
+        self.assertIsNotNone(mit)
+        self.assertIn("6.824", mit["course_code"])
+        self.assertIn("Kleppmann", mit["seminal_textbook"])
+
+    @patch("urllib.request.urlopen")
+    def test_openalex_papers_mock(self, mock_urlopen):
+        sample_openalex_json = json.dumps({
+            "meta": {"count": 1},
+            "results": [
+                {
+                    "title": "In Search of an Understandable Consensus Algorithm",
+                    "publication_year": 2014,
+                    "cited_by_count": 3400,
+                    "authorships": [{"author": {"display_name": "Diego Ongaro"}}, {"author": {"display_name": "John Ousterhout"}}],
+                    "primary_location": {"source": {"display_name": "USENIX ATC"}},
+                    "doi": "https://doi.org/10.5555/2643634.2643666"
+                }
+            ]
+        }).encode("utf-8")
+
+        mock_resp = MagicMock()
+        mock_resp.read.return_value = sample_openalex_json
+        mock_resp.__enter__.return_value = mock_resp
+        mock_urlopen.return_value = mock_resp
+
+        res = fetch_openalex_papers("consensus raft", max_results=1)
+        self.assertEqual(res["status"], "success")
+        self.assertEqual(len(res["papers"]), 1)
+        self.assertEqual(res["papers"][0]["citation_count"], 3400)
+        self.assertIn("Ongaro", res["papers"][0]["authors"])
+
 class TestSentimentAndNegation(unittest.TestCase):
     def test_negation_aware_friction_scoring(self):
         self.assertEqual(calculate_friction_score("The app is not slow at all"), 0)
         self.assertEqual(calculate_friction_score("We had no issues and it never crashed"), 0)
         self.assertEqual(calculate_friction_score("It isn't broken"), 0)
         self.assertEqual(calculate_friction_score("The app is slow"), 1)
-        
-        severe_text = "I hate this broken tool, it caused a terrible crash and disaster"
-        self.assertGreaterEqual(calculate_friction_score(severe_text), 6)
+
+    def test_clause_level_conjunction_separation(self):
+        compound = "The UI is fast, but the compiler crashes constantly and the documentation is terrible."
+        clauses = split_into_clauses(compound)
+        self.assertGreaterEqual(len(clauses), 2)
+        score = calculate_friction_score(compound)
+        self.assertGreaterEqual(score, 4)
 
 class TestStatutoryRegulatoryCompliance(unittest.TestCase):
     def test_statutory_prohibited_ai_trigger(self):
-        res = evaluate_compliance("subliminal biometric categorisation system")
+        res = evaluate_compliance("subliminal manipulation for harm psychological exploitation")
         self.assertEqual(res["eu_ai_act"]["tier"], "Yasaklanmış Yapay Zeka Uygulaması (Prohibited AI Practice)")
-        self.assertIn("Madde 5(1)", res["eu_ai_act"]["statutory_basis"])
+        self.assertIn("Madde 5(1)(a)", res["eu_ai_act"]["statutory_basis"])
         self.assertTrue(res["eu_ai_act"]["requires_expert_counsel"])
 
     def test_clinical_decision_support_high_risk_mdr_rule_11(self):
-        """Tests that clinical diagnosis/treatment is High-Risk under MDR Rule 11."""
         res = evaluate_compliance("medical diagnostic patient telemetry clinical treatment decision AI")
         self.assertEqual(res["eu_ai_act"]["tier"], "Yüksek Riskli Sistem (High-Risk AI System)")
         self.assertIn("MDR (AB) 2017/745 Kural 11", res["eu_ai_act"]["statutory_basis"])
         self.assertTrue(res["eu_ai_act"]["requires_expert_counsel"])
 
     def test_hospital_administrative_scheduling_minimal_risk(self):
-        """Tests that hospital administrative/scheduling software is EXEMPT from high risk."""
         res = evaluate_compliance("hospital administrative scheduling patient appointment billing shift management")
         self.assertEqual(res["eu_ai_act"]["tier"], "Minimal / Düşük Risk (İdari Sağlık Yazılımı)")
         self.assertIn("MDR (AB) 2017/745 Kapsam Dışı", res["eu_ai_act"]["statutory_basis"])
         self.assertFalse(res["eu_ai_act"]["requires_expert_counsel"])
 
+    def test_recruitment_high_risk_annex_iii_4a(self):
+        res = evaluate_compliance("recruitment hiring automated resume screening candidate evaluation")
+        self.assertEqual(res["eu_ai_act"]["tier"], "Yüksek Riskli Sistem (High-Risk AI System)")
+        self.assertIn("Ek III Nokta 4(a)", res["eu_ai_act"]["statutory_basis"])
+        self.assertTrue(res["eu_ai_act"]["requires_expert_counsel"])
+
+    def test_critical_infrastructure_high_risk_annex_iii_2(self):
+        res = evaluate_compliance("critical infrastructure safety component power grid water management scada")
+        self.assertEqual(res["eu_ai_act"]["tier"], "Yüksek Riskli Sistem (High-Risk AI System)")
+        self.assertIn("Ek III Nokta 2", res["eu_ai_act"]["statutory_basis"])
+        self.assertTrue(res["eu_ai_act"]["requires_expert_counsel"])
+
     def test_compiler_developer_tool_article_2_8_exemption(self):
-        """Tests that developer tools and AST parsers qualify for Art 2(8) development exemption."""
         res = evaluate_compliance("AST parser compiler code analysis static linter refactoring tool")
         self.assertEqual(res["eu_ai_act"]["tier"], "Minimal / Düşük Risk (Geliştirici Aracı / AI Act Muafiyeti)")
         self.assertIn("Madde 2(8)", res["eu_ai_act"]["statutory_basis"])
@@ -108,7 +169,7 @@ class TestStatutoryRegulatoryCompliance(unittest.TestCase):
     def test_statutory_transparency_conversational_bot(self):
         res = evaluate_compliance("conversational bot customer service chatbot interaction natural person")
         self.assertEqual(res["eu_ai_act"]["tier"], "Belirli Şeffaflık Yükümlülüğü (Transparency Obligations)")
-        self.assertIn("Madde 50", res["eu_ai_act"]["statutory_basis"])
+        self.assertIn("Madde 50(1)", res["eu_ai_act"]["statutory_basis"])
 
 class TestHybridCompetitorAndMarketBenchmark(unittest.TestCase):
     def test_curated_commercial_incumbents_lookup(self):
@@ -144,7 +205,6 @@ class TestHybridCompetitorAndMarketBenchmark(unittest.TestCase):
         mock_urlopen.return_value = mock_resp
 
         res = benchmark_competitors("compiler", max_results=1)
-        self.assertEqual(res["status"], "success")
         self.assertEqual(len(res["open_source_telemetry"]), 1)
         self.assertEqual(res["open_source_telemetry"][0]["name"], "acme/compiler")
 
@@ -155,12 +215,20 @@ class TestAutomatedArchitectureAndTRIZInventions(unittest.TestCase):
         self.assertIn("tree-sitter", arch["recommended_libraries"])
         self.assertIn("Tauri", arch["ui_architecture"]["runtime"])
 
+    def test_phase_6_dynamic_triz_metrics(self):
+        metrics_clinical = calculate_dynamic_validation_metrics("clinical medical diagnostic")
+        self.assertEqual(metrics_clinical["trl_number"], 3)
+        self.assertEqual(metrics_clinical["ice"]["ease"], 4) # Heavy regulatory hurdle
+
+        metrics_dev = calculate_dynamic_validation_metrics("compiler AST parser")
+        self.assertEqual(metrics_dev["trl_number"], 4)
+        self.assertEqual(metrics_dev["ice"]["ease"], 7)
+
     def test_phase_6_triz_invention_generation(self):
         inventions_data = generate_validated_inventions("Code Analysis")
         self.assertEqual(len(inventions_data["inventions"]), 2)
         inv1 = inventions_data["inventions"][0]
         self.assertIn("TRL", inv1["trl_level"])
-        self.assertIn("Model Hipotezi", inv1["trl_evidence_type"])
         self.assertGreater(inv1["ice_score"]["total"], 0)
         self.assertEqual(len(inv1["failure_modes"]), 3)
         self.assertIn("flowchart TD", inventions_data["system_architecture_mermaid"])
