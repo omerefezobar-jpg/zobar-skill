@@ -1,5 +1,5 @@
 # ZOBAR SKILL 30-VAKALIK SIFIR TOLERANSLI DOĞRULUK & EMSAL SKORKARTI
-**Rapor Tarihi (UTC):** 2026-10-29 11:55 UTC | **Test Süresi:** 0.036s
+**Rapor Tarihi (UTC):** 2026-10-29 12:23 UTC | **Test Süresi:** 0.029s
 
 > 🏛️ **Resmî Mevzuat Emsalleri:** Bu test kümesindeki tüm referans değerler resmî AB mevzuatlarına (Regulation (EU) 2024/1689 AI Act, MDR (EU) 2017/745 Annex VIII Rule 11, EDPB Guidelines WP251) dayandırılmıştır.
 

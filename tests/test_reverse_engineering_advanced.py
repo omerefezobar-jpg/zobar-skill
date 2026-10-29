@@ -238,5 +238,49 @@ class TestAdvancedReverseEngineering(unittest.TestCase):
             server.shutdown()
             server.server_close()
 
+    def test_firmware_state_snapshot_and_mmio(self):
+        from scripts.firmware_fuzzing_harness import SimulatedFirmwareState
+        state = SimulatedFirmwareState()
+        state.registers["R0"] = 0x1234
+        snap = state.take_snapshot()
+
+        state.registers["R0"] = 0x9999
+        state.mmio_write(0x4000C000, 0xAA)
+        status_val = state.mmio_read(0x4000C018)
+
+        self.assertEqual(status_val, 0x01)
+        self.assertEqual(len(state.mmio_log), 2)
+
+        # Restore
+        state.restore_snapshot(snap)
+        self.assertEqual(state.registers["R0"], 0x1234)
+
+    def test_snapshot_mutation_fuzzing_campaign(self):
+        from scripts.firmware_fuzzing_harness import SnapshotMutationFuzzer, sample_vulnerable_protocol_parser
+        fuzzer = SnapshotMutationFuzzer(seed=999)
+        seed = b"\x01\x04TEST\x02\x05HELLO"
+        res = fuzzer.run_fuzz_campaign(seed, sample_vulnerable_protocol_parser, iteration_count=150)
+        self.assertEqual(res["campaign_status"], "COMPLETED")
+        self.assertEqual(res["iterations_executed"], 150)
+        self.assertGreater(res["throughput_executions_per_sec"], 500)
+        self.assertTrue(res["memory_map_verified"])
+
+    def test_clean_room_package_export(self):
+        import tempfile
+        import os
+        from scripts.clean_room_export_engine import export_clean_room_package
+
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            res = export_clean_room_package("TestECUModule", tmp_dir, author_name="Auditor")
+            self.assertTrue(os.path.exists(res["fsd_json"]))
+            self.assertTrue(os.path.exists(res["fsd_md"]))
+            self.assertTrue(os.path.exists(res["affidavit_md"]))
+            self.assertTrue(os.path.exists(res["manifest"]))
+
+            with open(res["manifest"], "r", encoding="utf-8") as f:
+                manifest_data = json.load(f)
+                self.assertIn("FSD_SPECIFICATION.md", manifest_data["file_hashes"])
+                self.assertEqual(manifest_data["target_module"], "TestECUModule")
+
 if __name__ == "__main__":
     unittest.main()

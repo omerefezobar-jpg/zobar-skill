@@ -822,11 +822,50 @@ Integrity SHA-256: e8b94101eef234d88e4099b244d010fa143
     }
     function copyAffidavit() {
       const text = document.getElementById('affidavitText').innerText;
-      navigator.clipboard.writeText(text);
-      alert('Affidavit text copied to clipboard.');
+      navigator.clipboard.writeText(text).then(() => {
+        alert('Affidavit text copied to clipboard successfully.');
+      }).catch(() => {
+        alert('Affidavit text ready. You can manually copy it from the modal.');
+      });
     }
     function exportSpecification() {
-      alert('Functional Specification Document (FSD) exported successfully as JSON/Markdown.');
+      const fsdData = {
+        protocol: "Clean-Room Engineering Protocol (Chinese Wall)",
+        target_module: "SpectraBinary_Interoperability_Module",
+        dirty_room_role: "Black-Box Binary Specification & Telemetry Sniffing",
+        clean_room_role: "Zero-Infringement Clean-Room Development",
+        statutory_safe_harbors: [
+          "US DMCA 17 U.S.C. § 1201(f)",
+          "EU Software Directive 2009/24/EC Article 6"
+        ],
+        functional_specifications: [
+          {
+            specification_id: "FSD-REQ-001",
+            endpoint_or_symbol: "packet_handshake",
+            category: "Network Protocol Endpoint",
+            functional_behavior: "Accepts 32-byte authentication challenge and returns verified session token.",
+            clean_room_rule: "Developers must never inspect proprietary assembly or decompiled source."
+          },
+          {
+            specification_id: "FSD-REQ-002",
+            endpoint_or_symbol: "telemetry_dispatch",
+            category: "CAN Bus / Telemetry Frame",
+            functional_behavior: "Streams 64-bit Little/Big Endian sensor words at 50Hz interval.",
+            clean_room_rule: "Implemented exclusively from interface schemas."
+          }
+        ],
+        exported_at: new Date().toISOString()
+      };
+
+      const blob = new Blob([JSON.stringify(fsdData, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'CLEAN_ROOM_FSD_SPECIFICATION.json';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
     }
   </script>
 </body>
