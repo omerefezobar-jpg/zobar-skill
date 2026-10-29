@@ -56,6 +56,15 @@
         <p style="color: var(--muted); font-size: 0.85rem;">Sub-50ms render latency driving +38% client engagement uplift.</p>
       </div>
     </div>
+  
+      <!-- Injected: 3D Topology Geometry Switcher -->
+      <div id="injectedGeometrySwitcher" style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 1rem;">
+        <span style="font-size: 0.8rem; font-weight: 600; color: var(--muted);">Topology:</span>
+        <button onclick="switchGeometry('hypercube')" style="background: rgba(168, 85, 247, 0.15); border: 1px solid var(--accent); color: #fff; padding: 0.35rem 0.85rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 700; cursor: pointer;">Hypercube</button>
+        <button onclick="switchGeometry('torus')" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); color: #fff; padding: 0.35rem 0.85rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 700; cursor: pointer;">Torus Ring</button>
+        <button onclick="switchGeometry('helix')" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); color: #fff; padding: 0.35rem 0.85rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 700; cursor: pointer;">Double Helix</button>
+      </div>
+
   </main>
 
   <script>
@@ -68,15 +77,52 @@
       const h = canvas.height = canvas.parentElement.clientHeight;
       ctx.clearRect(0, 0, w, h);
 
-      // Render 3D Rotating Cube Wireframe using pure trigonometric projection
-      const size = 65;
-      const nodes = [
-        [-size, -size, -size], [size, -size, -size], [size, size, -size], [-size, size, -size],
-        [-size, -size, size], [size, -size, size], [size, size, size], [-size, size, size]
-      ];
-      const edges = [
-        [0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],[0,4],[1,5],[2,6],[3,7]
-      ];
+      let nodes = [];
+      let edges = [];
+
+      if (typeof activeTopology === 'undefined' || activeTopology === 'hypercube') {
+        const size = 65;
+        nodes = [
+          [-size, -size, -size], [size, -size, -size], [size, size, -size], [-size, size, -size],
+          [-size, -size, size], [size, -size, size], [size, size, size], [-size, size, size]
+        ];
+        edges = [
+          [0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],[0,4],[1,5],[2,6],[3,7]
+        ];
+      } else if (activeTopology === 'torus') {
+        const R = 70, r = 28;
+        const segs = 12, rings = 6;
+        for (let i = 0; i < segs; i++) {
+          const u = (i / segs) * Math.PI * 2;
+          for (let j = 0; j < rings; j++) {
+            const v = (j / rings) * Math.PI * 2;
+            const x = (R + r * Math.cos(v)) * Math.cos(u);
+            const z = (R + r * Math.cos(v)) * Math.sin(u);
+            const y = r * Math.sin(v);
+            nodes.push([x, y, z]);
+            const curr = i * rings + j;
+            const nextU = ((i + 1) % segs) * rings + j;
+            const nextV = i * rings + ((j + 1) % rings);
+            edges.push([curr, nextU], [curr, nextV]);
+          }
+        }
+      } else if (activeTopology === 'helix') {
+        const steps = 18;
+        for (let i = 0; i < steps; i++) {
+          const t = i * 0.45;
+          const y = (i - steps / 2) * 9;
+          const x1 = Math.cos(t) * 45, z1 = Math.sin(t) * 45;
+          const x2 = Math.cos(t + Math.PI) * 45, z2 = Math.sin(t + Math.PI) * 45;
+          nodes.push([x1, y, z1]);
+          nodes.push([x2, y, z2]);
+          const idx = i * 2;
+          edges.push([idx, idx + 1]);
+          if (i < steps - 1) {
+            edges.push([idx, idx + 2]);
+            edges.push([idx + 1, idx + 3]);
+          }
+        }
+      }
 
       angle += 0.015;
       const projected = nodes.map(n => {
@@ -101,6 +147,19 @@
       requestAnimationFrame(render3D);
     }
     window.addEventListener('DOMContentLoaded', render3D);
+  
+    // Injected: Parametric 3D Topology Switcher
+    let activeTopology = 'hypercube';
+    function switchGeometry(mode) {
+      activeTopology = mode;
+      const btns = document.querySelectorAll('#injectedGeometrySwitcher button');
+      btns.forEach(b => {
+        const isActive = b.innerText.toLowerCase().includes(mode.substring(0, 4));
+        b.style.background = isActive ? 'rgba(168, 85, 247, 0.25)' : 'rgba(255, 255, 255, 0.05)';
+        b.style.borderColor = isActive ? 'var(--accent)' : 'rgba(255, 255, 255, 0.15)';
+      });
+    }
+
   </script>
 </body>
 </html>

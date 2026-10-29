@@ -75,7 +75,21 @@
 
       <div class="card col-12">
         <h3 style="font-size: 1rem; margin-bottom: 0.5rem;">Emergency & ICU Patient Registry</h3>
-        <table class="table">
+        
+      <!-- Injected: Clinical Arrhythmia Audio & Threshold Panel -->
+      <div id="injectedEcgAlarm" style="background: rgba(244, 63, 94, 0.08); border: 1px solid rgba(244, 63, 94, 0.3); border-radius: 8px; padding: 0.75rem 1.25rem; margin-bottom: 1rem; display: flex; align-items: center; justify-content: space-between;">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <span id="alarmLed" style="width: 10px; height: 10px; border-radius: 50%; background: #10b981; display: inline-block;"></span>
+          <span style="font-size: 0.85rem; font-weight: 700; color: #fff;">Clinical Audio Monitor:</span>
+          <button id="audioMuteBtn" onclick="toggleAudioTelemetry()" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: #fff; padding: 0.25rem 0.65rem; border-radius: 6px; font-size: 0.75rem; cursor: pointer;">🔊 Audio: OFF</button>
+        </div>
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <span style="font-size: 0.75rem; color: var(--text-muted);">Threshold: 100 BPM</span>
+          <button onclick="triggerArrhythmiaSpike()" style="background: rgba(244, 63, 94, 0.2); border: 1px solid #f43f5e; color: #f43f5e; font-weight: 700; font-size: 0.75rem; padding: 0.3rem 0.65rem; border-radius: 6px; cursor: pointer;">⚠️ Simulate Arrhythmia</button>
+        </div>
+      </div>
+
+          <table class="table">
           <thead>
             <tr><th>Patient ID</th><th>Name</th><th>Triage Priority</th><th>Vitals Status</th><th>Assigned Physician</th></tr>
           </thead>
@@ -110,7 +124,10 @@
         const cycle = x % 120;
         if (cycle > 50 && cycle < 55) y = 70; // P wave
         else if (cycle === 60) y = 90;        // Q wave
-        else if (cycle === 64) y = 20;        // R wave peak
+        else if (cycle === 64) {
+          y = 20;        // R wave peak
+          if (typeof playHeartbeatBeep === 'function') playHeartbeatBeep();
+        }
         else if (cycle === 68) y = 110;       // S wave
         else if (cycle > 80 && cycle < 95) y = 68; // T wave
 
@@ -127,6 +144,37 @@
       step();
     }
     window.addEventListener('DOMContentLoaded', drawECG);
+  
+    // Injected: Web Audio Telemetry Pulse Synthesizer
+    let audioCtx = null;
+    let audioEnabled = false;
+    function toggleAudioTelemetry() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      audioEnabled = !audioEnabled;
+      document.getElementById('audioMuteBtn').innerText = audioEnabled ? '🔊 Audio: ON' : '🔇 Audio: OFF';
+    }
+    function playHeartbeatBeep(freq = 660, dur = 0.08) {
+      if (!audioEnabled || !audioCtx) return;
+      try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + dur);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + dur);
+      } catch(e) {}
+    }
+    function triggerArrhythmiaSpike() {
+      const led = document.getElementById('alarmLed');
+      if (led) led.style.background = '#f43f5e';
+      playHeartbeatBeep(880, 0.2);
+      alert('⚠️ CLINICAL ALERT: Ventricular Tachycardia spike detected on Lead II!');
+      setTimeout(() => { if (led) led.style.background = '#10b981'; }, 3000);
+    }
+
   </script>
 </body>
 </html>

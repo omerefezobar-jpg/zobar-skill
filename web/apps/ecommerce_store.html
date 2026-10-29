@@ -189,7 +189,20 @@
       <p style="color: var(--text-muted); font-size: 0.95rem;">Exclusively crafted limited edition horological instruments and bespoke leather assets.</p>
     </div>
 
+    <!-- Injected: Global Currency Selector -->
+      <div id="injectedGeoCurrency" style="display: flex; align-items: center; gap: 0.5rem; background: rgba(212, 175, 55, 0.08); border: 1px solid rgba(212, 175, 55, 0.3); padding: 0.4rem 0.85rem; border-radius: 9999px; margin-bottom: 1rem;">
+        <span style="font-size: 0.75rem; color: var(--primary); font-weight: 700;">🌐 Region / FX:</span>
+        <select id="currencySelector" onchange="switchCurrency(this.value)" style="background: transparent; border: none; color: #fff; font-size: 0.8rem; font-weight: 600; cursor: pointer; outline: none;">
+          <option value="USD" style="background: #13141a; color: #fff;">USD ($)</option>
+          <option value="EUR" style="background: #13141a; color: #fff;">EUR (€)</option>
+          <option value="GBP" style="background: #13141a; color: #fff;">GBP (£)</option>
+          <option value="JPY" style="background: #13141a; color: #fff;">JPY (¥)</option>
+        </select>
+      </div>
     <div class="product-grid" id="productGrid"></div>
+  
+      
+
   </main>
 
   <!-- Cart Drawer -->
@@ -220,19 +233,22 @@
 
     function renderProducts() {
       const grid = document.getElementById('productGrid');
-      grid.innerHTML = PRODUCTS.map(p => `
+      const conf = (typeof FX_RATES !== 'undefined' && FX_RATES[activeCurrency]) ? FX_RATES[activeCurrency] : { symbol: '$', rate: 1.0 };
+      grid.innerHTML = PRODUCTS.map(p => {
+        const converted = Math.round(p.price * conf.rate);
+        return `
         <div class="product-card">
           <div class="product-img">${p.icon}</div>
           <div class="product-info">
             <div class="product-title">${p.name}</div>
             <div class="product-desc">${p.desc}</div>
             <div class="product-bottom">
-              <span class="product-price">$${p.price.toLocaleString()}</span>
+              <span class="product-price">${conf.symbol}${converted.toLocaleString()}</span>
               <button class="btn-buy" onclick="addToCart(${p.id})">+ Add to Bag</button>
             </div>
           </div>
         </div>
-      `).join('');
+      `}).join('');
     }
 
     function renderCart() {
@@ -248,20 +264,21 @@
       }
 
       let sum = 0;
+      const conf = (typeof FX_RATES !== 'undefined' && FX_RATES[activeCurrency]) ? FX_RATES[activeCurrency] : { symbol: '$', rate: 1.0 };
       list.innerHTML = cart.map((item, idx) => {
         sum += item.price;
         return `
           <li class="cart-item">
             <div>
               <div style="font-weight: 600; font-size: 0.85rem;">${item.name}</div>
-              <div style="color: var(--primary); font-size: 0.8rem;">$${item.price.toLocaleString()}</div>
+              <div style="color: var(--primary); font-size: 0.8rem;">${conf.symbol}${Math.round(item.price * conf.rate).toLocaleString()}</div>
             </div>
             <button style="background: transparent; border: none; color: #f43f5e; cursor: pointer;" onclick="removeFromCart(${idx})">✕</button>
           </li>
         `;
       }).join('');
 
-      subtotal.innerText = '$' + sum.toLocaleString();
+      subtotal.innerText = conf.symbol + Math.round(sum * conf.rate).toLocaleString();
       localStorage.setItem('lumina_cart', JSON.stringify(cart));
     }
 
@@ -301,6 +318,29 @@
 
     renderProducts();
     renderCart();
+  
+    // Injected: Currency Conversion Engine
+    const FX_RATES = { USD: { symbol: '$', rate: 1.0 }, EUR: { symbol: '€', rate: 0.92 }, GBP: { symbol: '£', rate: 0.79 }, JPY: { symbol: '¥', rate: 155.0 } };
+    let activeCurrency = localStorage.getItem('lumina_curr') || 'USD';
+    function switchCurrency(code) {
+      activeCurrency = code;
+      localStorage.setItem('lumina_curr', code);
+      const conf = FX_RATES[code];
+      const prices = document.querySelectorAll('.product-price');
+      PRODUCTS.forEach((p, idx) => {
+        if (prices[idx]) {
+          const converted = Math.round(p.price * conf.rate);
+          prices[idx].innerText = conf.symbol + converted.toLocaleString();
+        }
+      });
+      renderCart();
+      if (typeof showToast === 'function') showToast('Switched currency to ' + code);
+    }
+    window.addEventListener('DOMContentLoaded', () => {
+      const el = document.getElementById('currencySelector');
+      if (el) el.value = activeCurrency;
+    });
+
   </script>
 </body>
 </html>
