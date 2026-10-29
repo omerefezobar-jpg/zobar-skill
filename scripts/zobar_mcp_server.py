@@ -521,6 +521,32 @@ class ZobarMCPServer:
                     },
                     "required": ["domain"]
                 }
+            },
+            {
+                "name": "synthesize_master_logo_and_icons",
+                "description": "Synthesizes world-class brandmarks, icons, and anti-cliché visual prompts grounded in Paul Rand's 7-Step Logo Test, Josef Müller-Brockmann grid systems, Dieter Rams functionalism, and Gestalt negative space closure.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "concept": {"type": "string", "description": "Brand or iconography concept to design"},
+                        "archetype": {
+                            "type": "string",
+                            "enum": ["negative_space_monolith", "swiss_ribbon", "golden_spiral_vortex", "brutalist_monogram", "precision_reticle"],
+                            "description": "Graphic design archetype"
+                        },
+                        "medium": {
+                            "type": "string",
+                            "enum": ["vector_silkscreen", "titanium_etched", "letterpress_stamp"],
+                            "description": "Material execution medium"
+                        },
+                        "engine": {
+                            "type": "string",
+                            "enum": ["midjourney", "flux", "dalle3"],
+                            "description": "Target generative AI engine"
+                        }
+                    },
+                    "required": ["concept"]
+                }
             }
         ]
 
@@ -890,6 +916,24 @@ class ZobarMCPServer:
             from scripts.academic_foundations_engine import AcademicFoundationsEngine
             engine = AcademicFoundationsEngine()
             payload = engine.ground_domain(domain, problem)
+
+        elif name == "synthesize_master_logo_and_icons":
+            concept = args.get("concept", "Apex System")
+            archetype = args.get("archetype", "negative_space_monolith")
+            medium = args.get("medium", "vector_silkscreen")
+            engine_name = args.get("engine", "midjourney")
+            from scripts.graphic_design_mastery_engine import GraphicDesignMasteryEngine
+            gd_engine = GraphicDesignMasteryEngine()
+            eval_res = gd_engine.evaluate_paul_rand_test(concept, f"Master brandmark for {concept}", archetype)
+            prompt_res = gd_engine.synthesize_master_prompt(concept, archetype, medium, engine_name)
+            svg_res = gd_engine.generate_parametric_svg(concept, archetype)
+            payload = {
+                "concept": concept,
+                "archetype": archetype,
+                "paul_rand_evaluation": eval_res,
+                "master_prompts": prompt_res,
+                "parametric_svg": svg_res
+            }
 
         else:
             raise ValueError(f"Unknown tool name: {name}")

@@ -1,0 +1,111 @@
+{
+  "vault_metadata": {
+    "version": "1.0.0",
+    "name": "Master Graphic Design, Semiotics & Anti-Cliché Iconography Vault",
+    "description": "Ground truth graphic design principles from Paul Rand, Josef Müller-Brockmann, Dieter Rams, Adrian Frutiger, Otl Aicher, and Susan Kare for world-class logos and pictograms.",
+    "core_treatises": [
+      "Paul Rand: Thoughts on Design (1947) & Design, Form, and Chaos (1993)",
+      "Josef Müller-Brockmann: Grid Systems in Graphic Design (1981)",
+      "Dieter Rams: Ten Principles for Good Design (1976)",
+      "Adrian Frutiger: Signs and Symbols: Their Design and Meaning (1978)",
+      "Otl Aicher: The World as Design & 1972 Munich Olympic Pictogram Grid",
+      "Massimo Vignelli: The Vignelli Canon (2010)",
+      "Susan Kare: Macintosh 32x32 Bitmap Iconography & High-Contrast Affordance"
+    ]
+  },
+  "paul_rand_rubric": {
+    "dimensions": [
+      {
+        "id": "distinctiveness",
+        "weight": 0.20,
+        "criteria": "Unique silhouette recognizable by outline alone; completely avoids generic AI floating shapes."
+      },
+      {
+        "id": "visibility",
+        "weight": 0.15,
+        "criteria": "High contrast ratio between figure and ground; legible across both 100% black (#000000) and pure white (#ffffff)."
+      },
+      {
+        "id": "adaptability",
+        "weight": 0.15,
+        "criteria": "Flawless scaling from 16x16 favicon to 24px nav icon, 64px dock tile, and multi-meter billboard."
+      },
+      {
+        "id": "memorability",
+        "weight": 0.20,
+        "criteria": "Viewer can mentally reconstruct or sketch the core geometry after 5 seconds of exposure."
+      },
+      {
+        "id": "universality",
+        "weight": 0.10,
+        "criteria": "Transcends language and cultural barriers through primal geometric archetypes."
+      },
+      {
+        "id": "timelessness",
+        "weight": 0.10,
+        "criteria": "Zero ephemeral tech gimmicks (no glossy bevels, no rainbow neon trails, no trendy clay textures)."
+      },
+      {
+        "id": "simplicity",
+        "weight": 0.10,
+        "criteria": "Maximum semantic density per stroke; every superfluous Bezier anchor is eliminated."
+      }
+    ]
+  },
+  "anti_ai_icon_manifesto": {
+    "banned_ai_tropes": [
+      "Glossy plastic 3D clay or pillowy bubble shapes",
+      "Spurious rainbow / neon chromatic gradients with no semantic meaning",
+      "Melted or asymmetrical bezier curves lacking grid alignment",
+      "Microscopic internal detail (circuit traces, gear teeth, floating sparkles) that dissolve at 24px",
+      "Generic floating hexagons with brain silhouettes or generic planetary orbits",
+      "Unmotivated glowing lens flares or ambient outer blurs pretending to be 'modern'",
+      "Pseudo-photorealistic shadows that break flat vector legibility"
+    ],
+    "master_craft_enforcements": [
+      "Strict geometric grid construction (orthogonals, 45-degree diagonals, Golden Ratio arcs)",
+      "Negative space Gestalt closure (hidden optical resonance like FedEx or WWF)",
+      "Consistent stroke width and optical terminal caps (flush butt or exact rounded corners)",
+      "Sub-pixel curve overshoot (+2% to +3% on round shapes to match square optical mass)",
+      "Material honesty: Crisp laser-cut vector, matte anodized titanium, or deep black archival ink",
+      "Single-weight monolithic glyphs that invert cleanly without losing structural integrity"
+    ]
+  },
+  "iconic_archetypes": [
+    {
+      "id": "ARCH-01",
+      "name": "Negative Space Gestalt Monolith",
+      "description": "Counter-shapes cut from a solid geometric mass reveal a second conceptual silhouette through visual closure.",
+      "ideal_for": ["Security", "Fintech", "Developer Infrastructure", "AI Research Labs"],
+      "gestalt_principle": "Figure-Ground & Closure"
+    },
+    {
+      "id": "ARCH-02",
+      "name": "Swiss Continuous Ribbon & Moebius Geometry",
+      "description": "A single continuous stroke of uniform optical width weaving in isometric space, embodying infinite throughput.",
+      "ideal_for": ["Data Pipelines", "Cloud Networks", "Distributed Systems"],
+      "gestalt_principle": "Good Continuation & Symmetry"
+    },
+    {
+      "id": "ARCH-03",
+      "name": "Golden Spiral Logarithmic Vortex",
+      "description": "Concentric arcs derived from Fibonacci proportions (1, 1, 2, 3, 5, 8, 13) producing organic mathematical harmony.",
+      "ideal_for": ["Quantum Computing", "Deep Tech", "Scientific Instruments"],
+      "gestalt_principle": "Proportion & Focal Convergence"
+    },
+    {
+      "id": "ARCH-04",
+      "name": "Brutalist Monogram Monolith",
+      "description": "Heavy typographical glyph constructed from pure rectangular and triangular modules, inspired by Otl Aicher and Wim Crouwel.",
+      "ideal_for": ["High-Performance Tools", "Native Editors", "Developer Terminals"],
+      "gestalt_principle": "Proximity & High Contrast"
+    },
+    {
+      "id": "ARCH-05",
+      "name": "Precision Hairline Optical Reticle",
+      "description": "Surgical 1.5px vector strokes with precision tick marks and orthogonal crosshairs, echoing aerospace and Leica engineering.",
+      "ideal_for": ["MedTech", "Precision Observability", "Autonomous Hardware"],
+      "gestalt_principle": "Symmetry & Precision Alignment"
+    }
+  ]
+}

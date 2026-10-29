@@ -39,11 +39,24 @@ class ImagePromptSynthesizer:
             "texture": "Raw board-formed concrete, warm Scandinavian timber accents, clear water pool reflections",
             "grading": "Architectural Digest editorial look, neutral white balance, sharp clean geometry",
         },
+        "master_brandmark_logo": {
+            "camera": "Paul Rand and Otl Aicher minimalist Swiss graphic design, flat 2D vector composition",
+            "lighting": "Pure monolithic silhouette, high-contrast figure-ground Gestalt closure, zero gradients",
+            "texture": "Clean mathematical vector lines, 24x24 grid alignment, uniform stroke weight",
+            "grading": "Monochrome archival black ink on white cotton card, razor-sharp edges",
+        },
+        "anti_ai_pictogram_icon": {
+            "camera": "Dieter Rams functionalist iconography, Otl Aicher 1972 Munich Olympic grid system",
+            "lighting": "Zero glossy clay, zero neon glows, zero 3D reflections, flat vector silhouette",
+            "texture": "Crisp geometric cuts, precision optical balance, sub-pixel curve overshoot",
+            "grading": "Museum-grade brandmark, Helvetica Swiss typography harmony",
+        },
     }
 
     NEGATIVE_PROMPT_UNIVERSAL = (
-        "deformed, bad anatomy, bad hands, missing limbs, extra fingers, blurry, low quality, "
-        "cartoonish, oversaturated, watermark, signature, jpeg artifacts, cloned faces"
+        "glossy 3d clay, bubble plastic, colorful rainbow gradient, photorealistic background, blurry edges, "
+        "melted lines, complex internal circuits, floating sparkles, neon lens flare, skeuomorphic reflections, "
+        "asymmetrical curves, cartoonish render, low-res artifacts, deformed, bad anatomy, blurry, watermark"
     )
 
     def synthesize(
@@ -110,6 +123,33 @@ class ImagePromptSynthesizer:
             aspect_ratio="16:9",
             engine="midjourney",
         )
+
+    def generate_master_logo_or_icon(
+        self,
+        brand_name: str,
+        concept: str,
+        archetype: str = "negative_space_monolith",
+        medium: str = "vector_silkscreen",
+        engine: str = "midjourney"
+    ) -> Dict[str, Any]:
+        """
+        Generates master graphic design brandmarks and anti-cliché pictograms
+        grounded in Paul Rand, Josef Müller-Brockmann, and Dieter Rams principles.
+        """
+        from scripts.graphic_design_mastery_engine import GraphicDesignMasteryEngine
+        gd_engine = GraphicDesignMasteryEngine()
+        eval_result = gd_engine.evaluate_paul_rand_test(brand_name, concept, archetype)
+        prompt_result = gd_engine.synthesize_master_prompt(f"{brand_name} - {concept}", archetype, medium, engine)
+        svg_result = gd_engine.generate_parametric_svg(brand_name, archetype)
+
+        return {
+            "brand_name": brand_name,
+            "concept": concept,
+            "archetype": archetype,
+            "paul_rand_evaluation": eval_result,
+            "image_prompts": prompt_result,
+            "parametric_svg": svg_result
+        }
 
 
 if __name__ == "__main__":

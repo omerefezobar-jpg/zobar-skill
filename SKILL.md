@@ -50,6 +50,11 @@ description: >-
    - Mimari kararlar, sistem sınırları ve algoritmik tercihler dünyanın en seçkin üniversite kürsüleri (MIT 6.824, Stanford CS143/CS224N, ETH Zürich ASL, Oxford, CMU) ve temel başucu eserleri (Donald Knuth - TAOCP, Leslie Lamport, Martin Kleppmann - DDIA, Sutton & Barto - RL, Nielsen & Chuang - Quantum Computation, Hennessy & Patterson) ile temellendirilir (`scripts/academic_foundations_engine.py`).
    - Bu teorik derinlik ve ispatlar, sistemin arka planında mutlak mühendislik sağlamlığını garanti eder; ancak 'Görünmez Derinlik' ilkesi uyarınca nihai kullanıcı koduna veya teslimatlara gereksiz akademik monologlar yansıtılmaz.
 
+10. **Usta Grafik Tasarım, Semiyotik & Anti-Klişe İkonografi Standardı (Master Graphic Design & Anti-Cliché Iconography Mandate):**
+   - **Tasarım Literatürü Temeli:** İkon, logo, brandmark ve sembol tasarımları Paul Rand'ın 7 Aşamalı Logo Testi (Belirginlik, Görünürlük, Uyarlanabilirlik, Akılda Kalıcılık, Evrensellik, Zamansızlık, Sadelik), Josef Müller-Brockmann modüler ızgara sistemleri, Dieter Rams'ın 'İyi Tasarımın 10 İlkesi' (Weniger, aber besser), Adrian Frutiger semiyotik morfolojisi ve Otl Aicher piktogram geometrisi ile temellendirilir (`scripts/graphic_design_mastery_engine.py`).
+   - **Klasik AI Klişelerinden Arınma (Kendini Aş):** Yapay zekanın ürettiği tipik ucuz/klişe çıktılar (parlak 3D plastik/kil balonlar, rastgele gökkuşağı neon degradeleri, 24px'te çamura dönüşen karmaşık devre çizgileri, yamuk erimiş bezier eğrileri) negatif filtrelerle KESİNLİKLE yasaklanır.
+   - **Müze Standardında Vektör & Malzeme Dürüstlüğü:** Yalnızca monolitik negatif boşluk (Gestalt figure-ground closure), optik kavis aşımı (+2-3% curve overshoot), altın oran yayları, mat anotlanmış titanyum gravür ve saf monokrom arşiv mürekkebi disiplininde çalışan parametrik SVG ve üst düzey görsel prompt mimarisi üretilir.
+
 ---
 ## 2. Dört Ana İcra Motoru (The 4 Core Engines)
 
