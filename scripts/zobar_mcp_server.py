@@ -564,6 +564,52 @@ class ZobarMCPServer:
                     },
                     "required": ["domain"]
                 }
+            },
+            {
+                "name": "benchmark_and_close_skill_gaps",
+                "description": "Performs exhaustive competitive benchmark against top agent ecosystems (Google Antigravity, Devin/SWE-bench, DSPy, Reflexion), detects operational blind spots, and executes remediation.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {}
+                }
+            },
+            {
+                "name": "execute_self_healing_verification",
+                "description": "SWE-bench/Devin standard self-healing loop: Runs tests in an isolated sandbox, captures exact stack traces, diagnoses root causes, generates targeted AST patches, and iterates until 100% green.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "test_command": {"type": "string", "description": "Verification test command to execute"},
+                        "max_attempts": {"type": "integer", "description": "Maximum self-healing attempts (default: 3)"}
+                    }
+                }
+            },
+            {
+                "name": "amplify_model_test_time_compute",
+                "description": "DSPy / Reflexion / o1-o3 standard: Multiplies base AI reasoning by exploring Best-of-N branches, scoring via Process Reward Model (PRM), and executing verbal Reflexion self-critique.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "problem": {"type": "string", "description": "Complex engineering problem or architecture to solve"},
+                        "domain": {"type": "string", "description": "Target technical domain"}
+                    },
+                    "required": ["problem"]
+                }
+            },
+            {
+                "name": "synthesize_generative_ui_widget",
+                "description": "Google Antigravity Generative UI standard: Synthesizes self-contained interactive chat widgets using allowlisted gstatic Tailwind CDN and host semantic design-system tokens.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "widget_type": {
+                            "type": "string",
+                            "enum": ["telemetry_pulse", "interactive_calculator"],
+                            "description": "Type of interactive widget"
+                        },
+                        "title": {"type": "string", "description": "Widget header title"}
+                    }
+                }
             }
         ]
 
@@ -967,6 +1013,35 @@ class ZobarMCPServer:
                 "ten_x_elevation": ten_x,
                 "hundred_x_frontier_breakthrough": hundred_x
             }
+
+        elif name == "benchmark_and_close_skill_gaps":
+            from scripts.skill_benchmark_and_gap_closer import SkillBenchmarkAndGapCloser
+            engine = SkillBenchmarkAndGapCloser()
+            payload = engine.execute_competitive_teardown()
+
+        elif name == "execute_self_healing_verification":
+            cmd = args.get("test_command", "python -m unittest discover tests")
+            attempts = int(args.get("max_attempts", 3))
+            from scripts.self_healing_code_engine import SelfHealingCodeEngine
+            engine = SelfHealingCodeEngine()
+            payload = engine.execute_self_healing_loop(cmd, attempts)
+
+        elif name == "amplify_model_test_time_compute":
+            problem = args.get("problem", "High-concurrency state synchronization")
+            domain = args.get("domain", "Distributed Systems")
+            from scripts.test_time_compute_engine import TestTimeComputeEngine
+            engine = TestTimeComputeEngine()
+            payload = engine.amplify_model_reasoning(problem, domain)
+
+        elif name == "synthesize_generative_ui_widget":
+            wtype = args.get("widget_type", "telemetry_pulse")
+            title = args.get("title", "Live Telemetry Pulse")
+            from scripts.generative_ui_widget_synthesizer import GenerativeUIWidgetSynthesizer
+            engine = GenerativeUIWidgetSynthesizer()
+            if wtype == "interactive_calculator":
+                payload = engine.synthesize_slider_calculator_widget(title=title)
+            else:
+                payload = engine.synthesize_telemetry_widget(title=title)
 
         else:
             raise ValueError(f"Unknown tool name: {name}")

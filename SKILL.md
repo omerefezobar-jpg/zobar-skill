@@ -64,6 +64,11 @@ description: >-
      3. *Deterministik Kaos Çekicileri (Hénon / Lorenz):* Bot ağlarının taklit edemeyeceği matematiksel Proof-of-Work anti-bot kalkanı oluşturur.
      4. *Kelime Hizalı Bit Düzeyi SIMD (Roaring Bitmaps):* Milyonluk SaaS filtrelemelerini 0.08ms'de tamamlar.
 
+12. **Rakip Beceri Kıyaslaması & Otonom Hata İyileştirme Döngüsü (Benchmark & Gap-Closer Mandate):**
+   - **Google Antigravity Standartları:** Görsel arayüzler `generative_ui` standardına tam uyumlu olarak `<agent-embed>` etiketi, izinli gstatic Tailwind CSS CDN'i ve ana sistem semantik tema değişkenleri (`--card`, `--foreground`, `--border`) ile doğrudan sohbet içinde çalıştırılabilir bileşenler olarak sunulur (`scripts/generative_ui_widget_synthesizer.py`).
+   - **Cognition Devin / SWE-bench Standartları:** Kod değişiklikleri izole sandbox ortamında otomatik test edilir; hata anında tam çağrı yığını taranarak hedef AST yaması üretilir ve %100 yeşil doğrulanana kadar kendi kendini onaran döngüde ($T \le 3$) yürütülür (`scripts/self_healing_code_engine.py`).
+   - **DSPy & MIT Reflexion Standartları:** Tek seferlik (single-pass) üretim yerine, Best-of-N aday dalları Adım Ödül Modeli (Process Reward Model - PRM) ile puanlanır; sözel özeleştiri (Verbal Reflexion) ile mimari açıklar yamalanarak modelin problem çözme gücü $10	imes - 100	imes$ çarpanla katlanır (`scripts/test_time_compute_engine.py`).
+
 ---
 ## 2. Dört Ana İcra Motoru (The 4 Core Engines)
 
