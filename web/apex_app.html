@@ -449,6 +449,33 @@
             <span>Live Resource Registry</span>
             <button class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.35rem 0.65rem;" onclick="refreshRegistry()">⟳ Reload</button>
           </div>
+          
+      <!-- Injected: Inline Split-View Telemetry Filter -->
+      <div id="injectedSplitFilter" style="background: rgba(99, 102, 241, 0.08); border: 1px dashed rgba(99, 102, 241, 0.4); border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 1rem; display: flex; align-items: center; justify-content: space-between;">
+        <div style="font-size: 0.85rem; font-weight: 600; color: #fff;">⚡ Active Split Filter: Sub-Millisecond Nodes</div>
+        <div style="display: flex; gap: 0.5rem;">
+          <input type="text" id="splitFilterInput" placeholder="Filter rows live..." style="background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; padding: 0.35rem 0.65rem; color: #fff; font-size: 0.8rem;" oninput="applyInjectedFilter()">
+          <button style="background: #6366f1; border: none; color: #fff; padding: 0.35rem 0.75rem; border-radius: 6px; font-size: 0.75rem; font-weight: 700; cursor: pointer;" onclick="clearInjectedFilter()">Reset</button>
+        </div>
+      </div>
+
+          
+      <!-- Injected: Offline Mutation Queue Banner -->
+      <div id="injectedOfflineQueue" style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 8px; padding: 0.75rem 1.25rem; margin-bottom: 1rem; display: flex; align-items: center; justify-content: space-between;">
+        <div style="font-size: 0.85rem; color: #10b981; font-weight: 700;">● Local-First Resilience: 0 Pending Offline Syncs</div>
+        <button style="background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; color: #10b981; font-weight: 700; font-size: 0.75rem; padding: 0.3rem 0.65rem; border-radius: 6px; cursor: pointer;" onclick="simulateOfflineSync()">Simulate Local Sync</button>
+      </div>
+
+          
+      <!-- Injected: Dynamic Theme Accent Tuner -->
+      <div id="injectedThemeTuner" style="display: flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: 0.4rem 0.75rem; border-radius: 9999px;">
+        <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600;">Accent:</span>
+        <button onclick="setThemeAccent('#6366f1')" style="width: 14px; height: 14px; border-radius: 50%; background: #6366f1; border: none; cursor: pointer;"></button>
+        <button onclick="setThemeAccent('#10b981')" style="width: 14px; height: 14px; border-radius: 50%; background: #10b981; border: none; cursor: pointer;"></button>
+        <button onclick="setThemeAccent('#f59e0b')" style="width: 14px; height: 14px; border-radius: 50%; background: #f59e0b; border: none; cursor: pointer;"></button>
+        <button onclick="setThemeAccent('#06b6d4')" style="width: 14px; height: 14px; border-radius: 50%; background: #06b6d4; border: none; cursor: pointer;"></button>
+      </div>
+
           <table class="data-table" id="resourceTable">
             <thead>
               <tr>
@@ -703,6 +730,34 @@
         triggerQuickAction('sync');
       }
     }
+  
+    // Injected: Live Split Filter Handler
+    function applyInjectedFilter() {
+      const q = document.getElementById('splitFilterInput').value.toLowerCase();
+      const rows = document.querySelectorAll('.data-table tbody tr');
+      rows.forEach(r => {
+        r.style.display = r.innerText.toLowerCase().includes(q) ? '' : 'none';
+      });
+    }
+    function clearInjectedFilter() {
+      document.getElementById('splitFilterInput').value = '';
+      applyInjectedFilter();
+      showToast('Split filter reset.');
+    }
+
+  
+    // Injected: Offline Mutation Queue Logic
+    function simulateOfflineSync() {
+      showToast('Local queue synced with edge database (0ms latency).');
+    }
+
+  
+    // Injected: Theme Accent Tuner
+    function setThemeAccent(colorHex) {
+      document.documentElement.style.setProperty('--primary', colorHex);
+      showToast('Theme accent token updated to ' + colorHex);
+    }
+
   </script>
 </body>
 </html>

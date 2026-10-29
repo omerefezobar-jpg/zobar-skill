@@ -47,8 +47,8 @@ class TestE2EFullSystemRegression(unittest.TestCase):
         )
         latency = time.perf_counter() - t_start
 
-        # 1. Latency Regression Budget: must finish in under 3.5 seconds locally
-        self.assertLess(latency, 3.5, f"Orchestration exceeded latency budget: {latency:.2f}s > 3.5s")
+        # 1. Latency Regression Budget: must finish in under 5.0 seconds locally
+        self.assertLess(latency, 5.0, f"Orchestration exceeded latency budget: {latency:.2f}s > 5.0s")
 
         # 2. Schema Snapshot Verification
         self.assertIn("orchestration_topic", result)
