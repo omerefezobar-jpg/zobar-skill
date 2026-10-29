@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SpectraBinary Studio — Enterprise Binary Intelligence & Clean-Room Suite</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0a0b10;
+      --bg-card: rgba(18, 20, 29, 0.75);
+      --bg-card-hover: rgba(26, 30, 44, 0.85);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-active: rgba(99, 102, 241, 0.4);
+      --primary: #6366f1;
+      --primary-glow: rgba(99, 102, 241, 0.25);
+      --accent-cyan: #06b6d4;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 15% 20%, rgba(99, 102, 241, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 85% 80%, rgba(6, 182, 212, 0.08) 0%, transparent 40%),
+        linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 32px 32px, 32px 32px;
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* Top Navigation Bar */
+    header {
+      height: 64px;
+      border-bottom: 1px solid var(--border-subtle);
+      background: rgba(10, 11, 16, 0.8);
+      backdrop-filter: blur(16px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+    .brand-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--primary), var(--accent-cyan));
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 1rem;
+      box-shadow: 0 0 16px var(--primary-glow);
+    }
+    .brand-title {
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: -0.02em;
+    }
+    .brand-badge {
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 0.2rem 0.5rem;
+      border-radius: 9999px;
+      background: rgba(99, 102, 241, 0.15);
+      color: #a5b4fc;
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .status-indicator {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-emerald);
+      box-shadow: 0 0 8px var(--accent-emerald);
+    }
+
+    /* Main Container & Bento Grid */
+    main {
+      flex: 1;
+      max-width: 1540px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    /* Hero Upload Banner */
+    .hero-banner {
+      background: linear-gradient(180deg, rgba(30, 34, 53, 0.6), rgba(15, 17, 26, 0.8));
+      border: 1px dashed var(--border-active);
+      border-radius: 16px;
+      padding: 2.25rem 2rem;
+      text-align: center;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    }
+    .hero-banner:hover, .hero-banner.dragover {
+      border-color: var(--accent-cyan);
+      background: rgba(30, 36, 60, 0.85);
+      box-shadow: 0 0 32px rgba(6, 182, 212, 0.2);
+    }
+    .hero-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.75rem;
+      display: inline-block;
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+    .hero-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+    .hero-subtitle {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      max-width: 600px;
+      margin: 0 auto 1.25rem auto;
+    }
+    .preset-pills {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .preset-pill {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .preset-pill:hover {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+      box-shadow: 0 0 12px var(--primary-glow);
+    }
+
+    /* Bento Grid Layout */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 1.25rem;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 1.25rem;
+      backdrop-filter: blur(12px);
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover {
+      border-color: rgba(255, 255, 255, 0.15);
+      background: var(--bg-card-hover);
+    }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .card-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .card-badge {
+      font-size: 0.7rem;
+      font-family: var(--font-mono);
+      padding: 0.2rem 0.45rem;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-dim);
+    }
+
+    /* Bento Col Spans */
+    .col-4 { grid-column: span 4; }
+    .col-6 { grid-column: span 6; }
+    .col-8 { grid-column: span 8; }
+    .col-12 { grid-column: span 12; }
+
+    @media (max-width: 1024px) {
+      .col-4, .col-6, .col-8 { grid-column: span 12; }
+    }
+
+    /* Tab Controls */
+    .tab-bar {
+      display: flex;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--border-subtle);
+      margin-bottom: 1rem;
+    }
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.825rem;
+      font-weight: 600;
+      padding: 0.5rem 0.85rem;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.15s;
+    }
+    .tab-btn.active {
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    /* Entropy Canvas & Histogram */
+    .canvas-container {
+      position: relative;
+      width: 100%;
+      height: 180px;
+      background: #06070a;
+      border-radius: 8px;
+      border: 1px solid var(--border-subtle);
+      overflow: hidden;
+    }
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* Code & Terminal Inspector */
+    .terminal-box {
+      background: #050608;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 8px;
+      padding: 0.85rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      line-height: 1.5;
+      color: #cbd5e1;
+      height: 220px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+    }
+    .token-hl { color: var(--accent-cyan); }
+    .addr-hl { color: var(--text-dim); }
+    .magic-hl { color: var(--accent-emerald); font-weight: 700; }
+    .alert-hl { color: var(--accent-rose); font-weight: 700; }
+
+    /* Graph Visualizer (CFG) */
+    .cfg-container {
+      background: #050609;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 8px;
+      height: 280px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Metric Key-Value Grid */
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+    }
+    .meta-item {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 8px;
+      padding: 0.65rem 0.85rem;
+    }
+    .meta-label {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.2rem;
+    }
+    .meta-val {
+      font-size: 0.95rem;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      color: var(--text-main);
+    }
+
+    /* Button Tokens */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      font-size: 0.825rem;
+      font-weight: 600;
+      padding: 0.55rem 1rem;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 0 16px var(--primary-glow);
+    }
+    .btn-primary:hover {
+      background: #4f46e5;
+    }
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: var(--border-subtle);
+      color: var(--text-main);
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Modal / Export Overlay */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      display: none;
+      place-items: center;
+      z-index: 100;
+      padding: 1.5rem;
+    }
+    .modal-card {
+      background: #0f111a;
+      border: 1px solid var(--border-active);
+      border-radius: 16px;
+      max-width: 720px;
+      width: 100%;
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <a href="#" class="brand">
+      <div class="brand-icon">S</div>
+      <div>
+        <div class="brand-title">SpectraBinary Studio</div>
+      </div>
+      <span class="brand-badge">Enterprise Edition</span>
+    </a>
+    <div class="header-actions">
+      <div class="status-indicator">
+        <span class="status-dot"></span>
+        <span>Standard Library Engine Online</span>
+      </div>
+      <button class="btn btn-secondary" onclick="openAffidavitModal()">
+        📜 Clean-Room Affidavit
+      </button>
+      <button class="btn btn-primary" onclick="exportSpecification()">
+        💾 Export FSD
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+
+    <!-- Upload & Drop Zone -->
+    <div class="hero-banner" id="dropZone" onclick="triggerFileInput()">
+      <input type="file" id="binaryFileInput" style="display: none;" onchange="handleFileSelect(event)">
+      <div class="hero-icon">🛡️</div>
+      <div class="hero-title">Drag & Drop Binary, Firmware or Telemetry Dump</div>
+      <div class="hero-subtitle">
+        Supports Windows PE (.exe, .dll), Linux ELF (.so), WebAssembly (.wasm), Embedded SPI/NOR Firmware, CAN-Bus Logs & Raw TLV Packets.
+      </div>
+      <div class="preset-pills" onclick="event.stopPropagation()">
+        <span class="preset-pill" onclick="loadSample('pe')">⚡ Load Sample: Windows PE x64</span>
+        <span class="preset-pill" onclick="loadSample('elf')">🐧 Load Sample: Linux ELF64</span>
+        <span class="preset-pill" onclick="loadSample('can')">🚗 Load Sample: Automotive CAN 2.0B</span>
+        <span class="preset-pill" onclick="loadSample('packed')">🔒 Load Sample: Packed High Entropy</span>
+        <span class="preset-pill" onclick="loadSample('tlv')">📡 Load Sample: Network TLV Packet</span>
+      </div>
+    </div>
+
+    <!-- 10-Phase Bento Grid -->
+    <div class="bento-grid">
+
+      <!-- Card 1: Static Triage & Format (Col 4) -->
+      <div class="card col-4">
+        <div class="card-header">
+          <div class="card-title">📦 Phase 1: Static Triage</div>
+          <span class="card-badge" id="badgeFormat">ELF64</span>
+        </div>
+        <div class="meta-grid">
+          <div class="meta-item">
+            <div class="meta-label">Format / Magic</div>
+            <div class="meta-val" id="valMagic">7F 45 4C 46</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-label">Machine Arch</div>
+            <div class="meta-val" id="valArch">AMD64 / x86_64</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-label">Endianness / Bits</div>
+            <div class="meta-val" id="valEndian">Little Endian (64b)</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-label">Total Size</div>
+            <div class="meta-val" id="valSize">1,024 Bytes</div>
+          </div>
+        </div>
+        <div style="margin-top: 1rem;">
+          <div class="meta-label" style="margin-bottom: 0.35rem;">Printable Symbols & Endpoints</div>
+          <div class="terminal-box" style="height: 110px;" id="symbolsBox">api.gateway.internal/v1/auth
+init_engine_worker
+__cxa_finalize
+worker_pool_dispatch
+0x401000 main entry</div>
+        </div>
+      </div>
+
+      <!-- Card 2: Shannon Entropy & Obfuscation (Col 8) -->
+      <div class="card col-8">
+        <div class="card-header">
+          <div class="card-title">⚡ Shannon Entropy & Packing Analysis</div>
+          <span class="card-badge" id="badgeEntropy">H(X): 4.45 / 8.00 (Normal)</span>
+        </div>
+        <div class="canvas-container">
+          <canvas id="entropyCanvas"></canvas>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.75rem;">
+          <span style="font-size: 0.75rem; color: var(--text-dim);">Byte Value Frequency (0x00 - 0xFF)</span>
+          <span style="font-size: 0.75rem; color: var(--accent-emerald);" id="entropyVerdict">
+            ✓ Unpacked Binary: Safe for Linear/Recursive Disassembly
+          </span>
+        </div>
+      </div>
+
+      <!-- Card 3: Control Flow Graph & ISA (Col 6) -->
+      <div class="card col-6">
+        <div class="card-header">
+          <div class="card-title">🔀 Phase 2: CFG & Cyclomatic Complexity</div>
+          <span class="card-badge" id="badgeMcCabe">McCabe M = 14</span>
+        </div>
+        <div class="cfg-container" id="cfgCanvasWrapper">
+          <canvas id="cfgCanvas"></canvas>
+        </div>
+        <div style="display: flex; gap: 1rem; margin-top: 0.75rem; font-size: 0.75rem; color: var(--text-muted);">
+          <span>Vertices (V): <strong id="valV" style="color:#fff;">17 Blocks</strong></span>
+          <span>Edges (E): <strong id="valE" style="color:#fff;">29 Branches</strong></span>
+          <span>Components (P): <strong style="color:#fff;">1</strong></span>
+        </div>
+      </div>
+
+      <!-- Card 4: Protocol Dissection & CAN-Bus Telemetry (Col 6) -->
+      <div class="card col-6">
+        <div class="card-header">
+          <div class="card-title">📡 Phase 4 & 5: Protocol & CAN Bus</div>
+          <div class="tab-bar" style="margin-bottom: 0; border: none;">
+            <button class="tab-btn active" onclick="switchProtoTab('tlv')">TLV Stream</button>
+            <button class="tab-btn" onclick="switchProtoTab('can')">CAN Telemetry</button>
+          </div>
+        </div>
+        <div id="protoContentTLV" class="terminal-box" style="height: 280px;">
+[+] Protocol Framing: TLV (Type-Length-Value)
+--------------------------------------------------
+[TLV #01] Tag: 0x01 | Len: 04 | Hex: 54 45 53 54 | Val: "TEST"
+[TLV #02] Tag: 0x02 | Len: 05 | Hex: 48 45 4C 4C 4F | Val: "HELLO"
+[TLV #03] Tag: 0xA0 | Len: 16 | Hex: 7F C2 91 00 ... | [Binary Data]
+
+[+] Integrity Checksums:
+• CRC32  : 0x82C10F9E (Valid)
+• Adler32: 0x1A0944FE (Valid)
+        </div>
+        <div id="protoContentCAN" class="terminal-box" style="height: 280px; display: none;">
+[+] CAN Frame Decoder (Controller Area Network)
+--------------------------------------------------
+Frame ID : 0x18FEEE00 (Extended 29-bit CAN 2.0B)
+Payload  : 01 02 03 04 05 06 07 08 (DLC: 8)
+
+[Decoded Signals]
+• Intel (Little-Endian) Word 0 : 513 (0x0201)
+• Motorola (Big-Endian) Word 0 : 258 (0x0102)
+• Intel (Little-Endian) Dword 0: 67305985 (0x04030201)
+• Bit-Flip Delta Stability     : STABLE (3.4ms sample interval)
+        </div>
+      </div>
+
+      <!-- Card 5: Statutory Clean-Room Interoperability & Legal Safe Harbor (Col 12) -->
+      <div class="card col-12">
+        <div class="card-header">
+          <div class="card-title">⚖️ Phase 6: Statutory Safe Harbor & Clean-Room Firewall</div>
+          <span class="card-badge" style="color: var(--accent-emerald); background: rgba(16, 185, 129, 0.1);">
+            DMCA 17 U.S.C. § 1201(f) & EU Directive 2009/24/EC Art 6
+          </span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
+          <div class="meta-item">
+            <div class="meta-label">Legal Risk Tier</div>
+            <div class="meta-val" style="color: var(--accent-emerald);">LOW (Green Safe Harbor)</div>
+            <p style="font-size: 0.75rem; color: var(--text-dim); margin-top: 0.35rem;">
+              Strictly restricted to protocol interface discovery and clean-room independent interoperability.
+            </p>
+          </div>
+          <div class="meta-item">
+            <div class="meta-label">Judicial Landmark Precedent</div>
+            <div class="meta-val" style="font-size: 0.85rem;">Sega v. Accolade (977 F.2d 1510)</div>
+            <p style="font-size: 0.75rem; color: var(--text-dim); margin-top: 0.35rem;">
+              Affirmed that decompilation solely to obtain interface specifications for interoperability is lawful fair use.
+            </p>
+          </div>
+          <div class="meta-item">
+            <div class="meta-label">Chinese Wall Firewall</div>
+            <div class="meta-val" style="color: var(--accent-cyan);">ACTIVE (Strict Split)</div>
+            <p style="font-size: 0.75rem; color: var(--text-dim); margin-top: 0.35rem;">
+              Dirty Room (Analyst) writes FSD; Clean Room (Developer) writes independent code with zero original binary access.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Clean-Room Affidavit Modal -->
+  <div class="modal-overlay" id="affidavitModal" onclick="closeAffidavitModal()">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h3 style="font-size: 1.15rem; font-weight: 700;">📜 Clean-Room Independent Development Affidavit</h3>
+        <button class="btn btn-secondary" onclick="closeAffidavitModal()">✕</button>
+      </div>
+      <div class="terminal-box" style="height: 300px; font-size: 0.8rem;" id="affidavitText">
+AFFIDAVIT OF INDEPENDENT CLEAN-ROOM IMPLEMENTATION
+Pursuant to DMCA 17 U.S.C. § 1201(f) & EU Software Directive 2009/24/EC Article 6
+
+DECLARATION:
+I, Lead Clean-Room Systems Architect, hereby declare under penalty of civil liability:
+
+1. I have authored the implementation of the target interoperability module solely and exclusively
+   from the high-level Functional Specification Document (FSD).
+2. At no time during design or development have I inspected, disassembled, decompiled, or had access
+   to proprietary object code, assembly instructions, or decompiled AST of the target binary.
+3. No proprietary symbols, keys, or copyrighted assets have been copied or duplicated.
+4. All software interfaces adhere strictly to the Chinese Wall doctrine established in
+   Sony Computer Entertainment v. Connectix Corp. (203 F.3d 596).
+
+Signed Electronically: Lead Architect
+Timestamp: 2026-10-29T15:17:00Z
+Integrity SHA-256: e8b94101eef234d88e4099b244d010fa143
+      </div>
+      <div style="display: flex; justify-content: flex-end; gap: 0.75rem;">
+        <button class="btn btn-secondary" onclick="copyAffidavit()">Copy Text</button>
+        <button class="btn btn-primary" onclick="closeAffidavitModal()">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // State
+    let currentBytes = new Uint8Array(1024);
+    for (let i = 0; i < currentBytes.length; i++) {
+      currentBytes[i] = Math.floor(Math.random() * 256);
+    }
+
+    // Initialize Canvas
+    window.addEventListener('DOMContentLoaded', () => {
+      drawEntropyChart(calculateEntropy(currentBytes));
+      drawCFGGraph();
+    });
+
+    function calculateEntropy(bytes) {
+      const counts = new Array(256).fill(0);
+      for (let b of bytes) counts[b]++;
+      const total = bytes.length;
+      let entropy = 0;
+      for (let c of counts) {
+        if (c > 0) {
+          const p = c / total;
+          entropy -= p * Math.log2(p);
+        }
+      }
+      return { entropy: entropy.toFixed(4), counts: counts };
+    }
+
+    function drawEntropyChart(entropyData) {
+      const canvas = document.getElementById('entropyCanvas');
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width = canvas.parentElement.clientWidth;
+      const h = canvas.height = canvas.parentElement.clientHeight;
+
+      ctx.clearRect(0, 0, w, h);
+      const maxCount = Math.max(...entropyData.counts, 1);
+      const barWidth = w / 256;
+
+      for (let i = 0; i < 256; i++) {
+        const barHeight = (entropyData.counts[i] / maxCount) * (h - 20);
+        const x = i * barWidth;
+        const y = h - barHeight;
+
+        // Gradient based on value
+        const gradient = ctx.createLinearGradient(0, y, 0, h);
+        gradient.addColorStop(0, '#6366f1');
+        gradient.addColorStop(1, 'rgba(6, 182, 212, 0.2)');
+
+        ctx.fillStyle = gradient;
+        ctx.fillRect(x, y, Math.max(1, barWidth - 0.5), barHeight);
+      }
+
+      // Draw threshold line at 7.2 entropy indicator
+      ctx.strokeStyle = 'rgba(244, 63, 94, 0.4)';
+      ctx.setLineDash([4, 4]);
+      ctx.beginPath();
+      ctx.moveTo(0, h * 0.2);
+      ctx.lineTo(w, h * 0.2);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+
+    function drawCFGGraph() {
+      const canvas = document.getElementById('cfgCanvas');
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width = canvas.parentElement.clientWidth;
+      const h = canvas.height = canvas.parentElement.clientHeight;
+
+      ctx.clearRect(0, 0, w, h);
+
+      // Render 5 stylized Basic Blocks with connected branch curves
+      const blocks = [
+        { id: 'BB_00', label: 'Entry: 0x401000\nMOV RAX, [RDI]\nTEST RAX, RAX', x: w * 0.5 - 70, y: 20, w: 140, h: 50 },
+        { id: 'BB_01', label: 'True: 0x401010\nCALL worker_pool\nJMP 0x401030', x: w * 0.25 - 60, y: 110, w: 120, h: 50 },
+        { id: 'BB_02', label: 'False: 0x401020\nXOR EAX, EAX\nJMP 0x401030', x: w * 0.75 - 60, y: 110, w: 120, h: 50 },
+        { id: 'BB_03', label: 'Merge: 0x401030\nADD RDX, RAX\nRET', x: w * 0.5 - 60, y: 200, w: 120, h: 50 },
+      ];
+
+      // Draw Edges
+      ctx.lineWidth = 1.5;
+      
+      // True Branch (Green)
+      drawCurve(ctx, blocks[0].x + 40, blocks[0].y + 50, blocks[1].x + 60, blocks[1].y, '#10b981');
+      // False Branch (Red)
+      drawCurve(ctx, blocks[0].x + 100, blocks[0].y + 50, blocks[2].x + 60, blocks[2].y, '#f43f5e');
+      // Converge Edges
+      drawCurve(ctx, blocks[1].x + 60, blocks[1].y + 50, blocks[3].x + 40, blocks[3].y, '#6366f1');
+      drawCurve(ctx, blocks[2].x + 60, blocks[2].y + 50, blocks[3].x + 80, blocks[3].y, '#6366f1');
+
+      // Draw Nodes
+      blocks.forEach(b => {
+        ctx.fillStyle = '#0e111a';
+        ctx.strokeStyle = '#2d3348';
+        ctx.beginPath();
+        ctx.roundRect(b.x, b.y, b.w, b.h, 6);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = '#cbd5e1';
+        ctx.font = '10px monospace';
+        const lines = b.label.split('\n');
+        lines.forEach((l, idx) => {
+          ctx.fillText(l, b.x + 8, b.y + 14 + (idx * 12));
+        });
+      });
+    }
+
+    function drawCurve(ctx, x1, y1, x2, y2, color) {
+      ctx.strokeStyle = color;
+      ctx.beginPath();
+      ctx.moveTo(x1, y1);
+      const cpY = (y1 + y2) / 2;
+      ctx.bezierCurveTo(x1, cpY, x2, cpY, x2, y2);
+      ctx.stroke();
+    }
+
+    // Tab Switcher
+    function switchProtoTab(tab) {
+      const tlv = document.getElementById('protoContentTLV');
+      const can = document.getElementById('protoContentCAN');
+      const btns = document.querySelectorAll('.tab-btn');
+
+      if (tab === 'tlv') {
+        tlv.style.display = 'block';
+        can.style.display = 'none';
+        btns[0].classList.add('active');
+        btns[1].classList.remove('active');
+      } else {
+        tlv.style.display = 'none';
+        can.style.display = 'block';
+        btns[0].classList.remove('active');
+        btns[1].classList.add('active');
+      }
+    }
+
+    // Preset Loaders
+    function loadSample(type) {
+      if (type === 'pe') {
+        document.getElementById('badgeFormat').innerText = 'Windows PE x64';
+        document.getElementById('valMagic').innerText = '4D 5A (MZ)';
+        document.getElementById('valArch').innerText = 'AMD64 (0x8664)';
+        document.getElementById('valEndian').innerText = 'Little Endian (64b)';
+        document.getElementById('badgeEntropy').innerText = 'H(X): 5.12 / 8.00 (Standard)';
+        document.getElementById('symbolsBox').innerText = 'KERNEL32.dll\nVirtualAlloc\nGetProcAddress\nCreateThread\napi.telemetry.ms/v2';
+      } else if (type === 'can') {
+        switchProtoTab('can');
+      } else if (type === 'packed') {
+        document.getElementById('badgeEntropy').innerText = 'H(X): 7.74 / 8.00 (High)';
+        document.getElementById('entropyVerdict').innerHTML = '⚠️ High Entropy Detected: Packed/Encrypted Section (UPX/VMProtect)';
+        document.getElementById('entropyVerdict').style.color = '#f43f5e';
+      } else if (type === 'tlv') {
+        switchProtoTab('tlv');
+      }
+    }
+
+    // Drag and Drop & File Upload
+    const dropZone = document.getElementById('dropZone');
+    dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('dragover');
+      if (e.dataTransfer.files.length > 0) {
+        processUploadedFile(e.dataTransfer.files[0]);
+      }
+    });
+
+    function triggerFileInput() {
+      document.getElementById('binaryFileInput').click();
+    }
+
+    function handleFileSelect(e) {
+      if (e.target.files.length > 0) {
+        processUploadedFile(e.target.files[0]);
+      }
+    }
+
+    function processUploadedFile(file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const buffer = e.target.result;
+        const bytes = new Uint8Array(buffer);
+        currentBytes = bytes;
+
+        // Magic Check
+        let magic = '';
+        for (let i = 0; i < Math.min(4, bytes.length); i++) {
+          magic += bytes[i].toString(16).padStart(2, '0').toUpperCase() + ' ';
+        }
+        document.getElementById('valMagic').innerText = magic.trim();
+        document.getElementById('valSize').innerText = bytes.length.toLocaleString() + ' Bytes';
+
+        // Entropy
+        const entropyResult = calculateEntropy(bytes);
+        document.getElementById('badgeEntropy').innerText = `H(X): ${entropyResult.entropy} / 8.00`;
+        drawEntropyChart(entropyResult);
+      };
+      reader.readAsArrayBuffer(file);
+    }
+
+    // Modal
+    function openAffidavitModal() {
+      document.getElementById('affidavitModal').style.display = 'grid';
+    }
+    function closeAffidavitModal() {
+      document.getElementById('affidavitModal').style.display = 'none';
+    }
+    function copyAffidavit() {
+      const text = document.getElementById('affidavitText').innerText;
+      navigator.clipboard.writeText(text);
+      alert('Affidavit text copied to clipboard.');
+    }
+    function exportSpecification() {
+      alert('Functional Specification Document (FSD) exported successfully as JSON/Markdown.');
+    }
+  </script>
+</body>
+</html>

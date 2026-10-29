@@ -201,5 +201,42 @@ class TestAdvancedReverseEngineering(unittest.TestCase):
         self.assertTrue(audit["is_production_clean"])
         self.assertEqual(audit["cleanliness_score"], 100.0)
 
+    def test_reverse_engineering_studio_server_endpoints(self):
+        import urllib.request
+        import threading
+        import time
+        from http.server import HTTPServer
+        from scripts.reverse_engineering_server import StudioRequestHandler
+
+        test_port = 8993
+        server = HTTPServer(('127.0.0.1', test_port), StudioRequestHandler)
+        t = threading.Thread(target=server.serve_forever, daemon=True)
+        t.start()
+        time.sleep(0.1)
+
+        try:
+            # 1. Health endpoint test
+            with urllib.request.urlopen(f'http://127.0.0.1:{test_port}/api/health') as resp:
+                self.assertEqual(resp.status, 200)
+                data = json.loads(resp.read().decode('utf-8'))
+                self.assertEqual(data["status"], "ONLINE")
+                self.assertEqual(data["phases_supported"], 10)
+
+            # 2. Analyze POST endpoint test
+            sample_payload = b"\x7fELF\x02\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00>\x00\x01\x00\x00\x00"
+            req = urllib.request.Request(
+                f'http://127.0.0.1:{test_port}/api/analyze',
+                data=sample_payload,
+                headers={'Content-Type': 'application/octet-stream'}
+            )
+            with urllib.request.urlopen(req) as resp:
+                self.assertEqual(resp.status, 200)
+                analysis = json.loads(resp.read().decode('utf-8'))
+                self.assertTrue(analysis["ten_phase_certified"])
+                self.assertIn("phase1_static_triage", analysis)
+        finally:
+            server.shutdown()
+            server.server_close()
+
 if __name__ == "__main__":
     unittest.main()
