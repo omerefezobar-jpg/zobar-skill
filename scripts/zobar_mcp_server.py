@@ -773,6 +773,25 @@ class ZobarMCPServer:
                         "theme": {"type": "string", "description": "Visual theme preset (cyberpunk_midnight, minimalist_monochrome, etc.)"}
                     }
                 }
+            },
+            {
+                "name": "benchmark_gemini_vs_claude",
+                "description": "Provides empirical comparative benchmark analysis between Google Gemini and Anthropic Claude across coding, SWE-bench bug resolution, reasoning, and latency, diagnosing why raw Gemini underperforms and how this skill transcends Claude.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {}
+                }
+            },
+            {
+                "name": "synthesize_claude_beating_guardrails",
+                "description": "Generates surgical zero-fluff guardrails and test-time verification scaffolding that forces Gemini to outperform single-pass Claude on complex coding tasks.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "target_task": {"type": "string", "description": "Specific coding, architecture, or refactoring task to scaffold"}
+                    },
+                    "required": ["target_task"]
+                }
             }
         ]
 
@@ -1321,6 +1340,17 @@ class ZobarMCPServer:
             engine = GeospatialMapArtistEngine()
             html_widget = engine.render_artistic_globe_widget(center_label=center_label, theme=theme)
             payload = {"widget_html": html_widget, "theme": theme}
+
+        elif name == "benchmark_gemini_vs_claude":
+            from scripts.gemini_claude_amplifier_engine import GeminiClaudeAmplifierEngine
+            engine = GeminiClaudeAmplifierEngine()
+            payload = engine.get_comparative_benchmark()
+
+        elif name == "synthesize_claude_beating_guardrails":
+            target_task = args.get("target_task", "Refactor repository for zero-copy concurrency")
+            from scripts.gemini_claude_amplifier_engine import GeminiClaudeAmplifierEngine
+            engine = GeminiClaudeAmplifierEngine()
+            payload = engine.synthesize_claude_beating_guardrails(target_task=target_task)
 
         else:
             raise ValueError(f"Unknown tool name: {name}")

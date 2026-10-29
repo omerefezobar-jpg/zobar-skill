@@ -215,3 +215,28 @@
 [2026-10-30 01:19:28] INGEST_VIDEO | id=kCc8FmEb1nY | platform=youtube | domain=FRONTIER_AI_AND_ML | relevance=9.39%
 [2026-10-30 01:19:28] INGEST_VIDEO | id=C9xK4mLP10a | platform=instagram | domain=SYSTEMS_ARCHITECTURE | relevance=14.94%
 [2026-10-30 01:19:28] INGEST_VIDEO | id=custom_video_101 | platform=generic_media | domain=SYSTEMS_ARCHITECTURE | relevance=6.83%
+[2026-10-30 01:22:02] SYNTHESIZE_GUARDRAILS | task=Build real-time distributed ring-buffer in Rust
+[2026-10-30 01:22:37] SYNTHESIZE_GUARDRAILS | task=Port PostgreSQL extension to Rust
+[2026-10-30 01:22:37] SYNTHESIZE_GUARDRAILS | task=Fix race condition in Tokio ring buffer
+[2026-10-30 01:22:43] AGENCY_DELIBERATION | sector=medtech | specialists=100 | alignment=93.3%
+[2026-10-30 01:22:43] AGENCY_DELIBERATION | sector=cyber_defense | specialists=100 | alignment=93.3%
+[2026-10-30 01:22:43] AGENCY_DELIBERATION | sector=robotics_iot | specialists=100 | alignment=93.3%
+[2026-10-30 01:22:43] AGENCY_DELIBERATION | sector=saas | specialists=100 | alignment=93.3%
+[2026-10-30 01:22:43] AGENCY_DELIBERATION | sector=fintech_hft | specialists=100 | alignment=93.3%
+[2026-10-30 01:22:46] SYNTHESIZE_GUARDRAILS | task=Port PostgreSQL extension to Rust
+[2026-10-30 01:22:46] SYNTHESIZE_GUARDRAILS | task=Fix race condition in Tokio ring buffer
+[2026-10-30 01:22:46] EXPORT_KML_TOUR | name=San Francisco Cinematic Orbit | keyframes=8
+[2026-10-30 01:22:46] EXPORT_KML_TOUR | name=Bosphorus Cinematic Flyover | keyframes=8
+{"tick": 140, "timestamp_utc": "2026-10-29T22:22:48Z", "duration_ms": 1199.37, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
+{"tick": 141, "timestamp_utc": "2026-10-29T22:22:50Z", "duration_ms": 727.42, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
+{"tick": 142, "timestamp_utc": "2026-10-29T22:22:52Z", "duration_ms": 710.9, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": false}
+[2026-10-30 01:22:53] CURRICULUM_EVOLUTION_ANALYZED | topic=Transformers and MCTS Reasoning | category=ARTIFICIAL_INTELLIGENCE_AND_ML
+[2026-10-30 01:22:53] CURRICULUM_EVOLUTION_ANALYZED | topic=PostgreSQL vector index and RLS | category=DATABASES_AND_DATA_SYSTEMS
+[2026-10-30 01:22:53] CURRICULUM_EVOLUTION_ANALYZED | topic=S-Tier UI spring physics and command palettes | category=USER_INTERFACE_AND_HUMAN_COMPUTER_INTERACTION
+[2026-10-30 01:22:53] CURRICULUM_EVOLUTION_ANALYZED | topic=compilers, AST and program synthesis | category=PROGRAMMING_LANGUAGES_AND_COMPILERS
+[2026-10-30 01:22:53] CURRICULUM_EVOLUTION_ANALYZED | topic=systems performance and concurrency | category=SYSTEMS_AND_CONCURRENCY
+[2026-10-30 01:22:53] INGEST_VIDEO | id=dQw4w9WgXcQ | platform=youtube | domain=FRONTEND_AND_DESIGN | relevance=16.74%
+[2026-10-30 01:22:53] INGEST_VIDEO | id=dQw4w9WgXcQ | platform=youtube | domain=FRONTEND_AND_DESIGN | relevance=16.74%
+[2026-10-30 01:22:53] INGEST_VIDEO | id=kCc8FmEb1nY | platform=youtube | domain=FRONTIER_AI_AND_ML | relevance=9.39%
+[2026-10-30 01:22:53] INGEST_VIDEO | id=C9xK4mLP10a | platform=instagram | domain=SYSTEMS_ARCHITECTURE | relevance=14.94%
+[2026-10-30 01:22:53] INGEST_VIDEO | id=custom_video_101 | platform=generic_media | domain=SYSTEMS_ARCHITECTURE | relevance=6.83%

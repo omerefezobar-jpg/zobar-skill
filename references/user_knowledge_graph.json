@@ -141,17 +141,17 @@
       "subject": "Systems Architecture",
       "predicate": "uses_vector_index",
       "object": "HNSW (vector_cosine_ops)",
-      "confidence": 1.6000000000000005,
+      "confidence": 1.7000000000000006,
       "created_at": 1793311429.393727,
-      "last_reinforced": 1793312368.7285833
+      "last_reinforced": 1793312573.6767385
     },
     {
       "subject": "Video_Andrej Karpathy",
       "predicate": "recommends_architecture",
       "object": "We start with self-attention. The core intuition of the transformer attention me",
-      "confidence": 1.5000000000000004,
+      "confidence": 1.6000000000000005,
       "created_at": 1793311438.4170368,
-      "last_reinforced": 1793312368.725584
+      "last_reinforced": 1793312573.6746056
     },
     {
       "subject": "Video_Fireship",
@@ -159,7 +159,7 @@
       "object": "Boring static buttons are dead. Modern command palettes and floating bento docks",
       "confidence": 2.0,
       "created_at": 1793311438.4200366,
-      "last_reinforced": 1793312368.6862712
+      "last_reinforced": 1793312573.6342993
     },
     {
       "subject": "Frontend And Design",
@@ -167,23 +167,23 @@
       "object": "{'stiffness': 170, 'damping': 26}",
       "confidence": 2.0,
       "created_at": 1793311438.4200366,
-      "last_reinforced": 1793312368.6862712
+      "last_reinforced": 1793312573.6342993
     },
     {
       "subject": "Video_ArchitectReels",
       "predicate": "recommends_architecture",
       "object": "Always combine where tenant_id = current_setting('app.",
-      "confidence": 1.4000000000000004,
+      "confidence": 1.5000000000000004,
       "created_at": 1793311494.9136193,
-      "last_reinforced": 1793312368.7285833
+      "last_reinforced": 1793312573.6767385
     },
     {
       "subject": "Video_SecurityTeam",
       "predicate": "recommends_architecture",
       "object": "Always enforce postgresql row-level security for multi-tenant isolation.",
-      "confidence": 1.4000000000000004,
+      "confidence": 1.5000000000000004,
       "created_at": 1793311494.914618,
-      "last_reinforced": 1793312368.7305858
+      "last_reinforced": 1793312573.67874
     }
   ],
   "user_profile": {
@@ -195,5 +195,5 @@
     "last_updated": 1793225150.468043
   },
   "total_triples_count": 23,
-  "last_saved": 1793312368.7315836
+  "last_saved": 1793312573.67874
 }

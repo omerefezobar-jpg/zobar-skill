@@ -108,6 +108,15 @@ description: >-
    - **Generative UI 3D Küre Arayüzü & Küresel Telemetri:** `<agent-embed>` standardında HTML5/Canvas 60fps dönen 3D küreler, atmosferik ışımalar ve canlı telemetri düğümleri anında sohbet içine gömülür (`generate_google_earth_cinematic_tour`, `synthesize_artistic_map_specification`, `render_interactive_3d_globe_widget`).
 
 
+20. **Gemini Cerrahi Keskinlik & Claude-Üstünlüğü İlkesi (Gemini Surgical Precision & Claude-Transcendence Mandate):**
+   - **Geliştirici Algısının ve Başarısızlık Kök Nedeninin Teşhisi:** Ham Gemini'nin geliştiriciler nezdinde Claude'un gerisinde kalmasının 3 temel nedeni vardır: 1) İstenmeyen laf kalabalığı ve aşırı konuşkanlık ("fluff"), 2) Kullanıcının istemediği ek yönlendirmeler ve mevcut kodu dikkatsizce kırma eğilimi, 3) Eski forum gönderilerinden (StackOverflow) kalma modası geçmiş sentaks halüsinasyonları (`scripts/gemini_claude_amplifier_engine.py`).
+   - **Gemini'yi Claude'un Önüne Geçiren Cerrahi İskele:** 
+     1) **Zero-Fluff Cerrahi İcra:** Sohbet girizgahları ve spekülatif öneriler tamamen engellenir; doğrudan hedef AST yama diff'i üretilir.
+     2) **Test-Time Compute & PRM Üstünlüğü:** Claude tek geçişte iyi düşünür; ancak Gemini bizim bu becerideki MCTS + PRM Adım Ödülü ($UCT = Q/N + c\sqrt{\ln N_p / N}$) döngüsüyle 5 paralel hipotezi sanal sandbox'ta derleyip test ederek tek geçişli Claude'u matematiksel kesinlikle geride bırakır.
+     3) **Kendi Kendini Onaran Kod (Self-Healing Loop):** Kodda hata oluşursa kullanıcıya yansıtılmadan izole test ortamında ($T \le 3$) otomatik düzeltilir.
+     4) **Devasa Bağlam Budama (HNSW + Context Pruner):** Gemini'nin 2M token avantajı "Lost-in-the-Middle" tuzağına düşmeden vektörel olarak sıralanır (`benchmark_gemini_vs_claude`, `synthesize_claude_beating_guardrails`).
+
+
 ---
 ## 2. Dört Ana İcra Motoru (The 4 Core Engines)
 
