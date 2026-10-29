@@ -47,6 +47,7 @@ from scripts.query_asset_vault import AssetVaultQueryEngine
 from scripts.systems_math_engine import SystemsMathEngine
 from scripts.design_system_generator import ModernDesignStylesEngine
 from scripts.reverse_engineering_analyst import analyze_target_system, execute_7phase_re_pipeline, execute_10phase_re_pipeline
+from scripts.end_to_end_app_architect import synthesize_complete_application, evaluate_feature_internally, generate_concise_co_creation_dialogue
 from scripts.game_modding_engine import synthesize_minecraft_in_game_bridge, calculate_greedy_meshing_metrics, generate_mod_code_template
 from scripts.multi_agent_deliberation_council import conduct_executive_board_deliberation
 from scripts.creative_evolutionary_designer import generate_evolutionary_design
@@ -411,6 +412,31 @@ class ZobarMCPServer:
                     },
                     "required": ["product_vision"]
                 }
+            },
+            {
+                "name": "synthesize_complete_application",
+                "description": "Synthesizes an end-to-end complete, non-generic application spanning Core Dashboard, Product Catalog, User Profile, Workspace Settings, and working Command Palette (Cmd+K) with zero dead buttons.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "app_name": {"type": "string", "description": "Brand name of the application (e.g. Apex Studio)"},
+                        "domain_type": {"type": "string", "description": "Application industry domain"},
+                        "custom_inventions": {"type": "array", "items": {"type": "string"}, "description": "Optional domain inventions to embed"}
+                    },
+                    "required": ["app_name"]
+                }
+            },
+            {
+                "name": "evaluate_feature_co_creation",
+                "description": "Autonomous internal pre-evaluation of a proposed feature followed by ultra-concise, high-signal conversational co-creation options for the user.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "feature_name": {"type": "string", "description": "Proposed feature name or micro-mechanic"},
+                        "domain_context": {"type": "string", "description": "Target domain or application context"}
+                    },
+                    "required": ["feature_name"]
+                }
             }
         ]
 
@@ -712,6 +738,22 @@ class ZobarMCPServer:
             vision = args.get("product_vision", "")
             mood = args.get("target_mood")
             payload = CinematicLiteraryCriticismEngine.critique_and_synthesize_art_direction(vision, target_mood=mood)
+
+        elif name == "synthesize_complete_application":
+            app_name = args.get("app_name", "Enterprise Platform")
+            domain_type = args.get("domain_type", "High-Performance SaaS")
+            custom_inventions = args.get("custom_inventions")
+            payload = synthesize_complete_application(app_name=app_name, domain_type=domain_type, custom_inventions=custom_inventions)
+
+        elif name == "evaluate_feature_co_creation":
+            feature_name = args.get("feature_name", "Interactive Filter")
+            domain_context = args.get("domain_context", "Enterprise SaaS")
+            critique = evaluate_feature_internally(feature_name=feature_name, domain_context=domain_context)
+            dialogue = generate_concise_co_creation_dialogue([critique])
+            payload = {
+                "internal_evaluation": critique,
+                "concise_co_creation_dialogue": dialogue
+            }
 
         else:
             raise ValueError(f"Unknown tool name: {name}")
