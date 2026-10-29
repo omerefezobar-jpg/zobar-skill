@@ -90,6 +90,12 @@ description: >-
    - **Mühendislik İlgililik Filtresi & Yoğunluk Puanı:** Video içeriği 5 temel sütunda (`SYSTEMS_ARCHITECTURE`, `FRONTEND_AND_DESIGN`, `FRONTIER_AI_AND_ML`, `REVERSE_ENGINEERING_AND_SECURITY`, `PRODUCT_GROWTH_AND_FINOPS`) taranır; popüler kültür gürültüsü ve tıklama tuzakları (clickbait) elenir, teknik yoğunluk puanı hesaplanır.
    - **Oturum Zekası & Hafıza Yükseltme:** Transkriptten somut mimari planlar, CSS yay fizikleri (stiffness/damping), PostgreSQL indeks direktifleri, KV-cache optimizasyonları ve anti-pattern'ler süzülür; `user_knowledge_graph.json` hafızasına bilgi üçlüleri (`[Özne, İlişki, Nesne]`) olarak kaydedilir ve aktif oturum bağlamına dinamik markdown blokları olarak enjekte edilir (`transcribe_and_ingest_video`, `query_video_session_insights`, `synthesize_session_video_context`).
 
+17. **Tam Teşekküllü Kurumsal Ajans & 100 Uzmanlı Karar Senatosu İlkesi (Full-Fledged Agency Swarm & 100-Specialist Deliberation Mandate):**
+   - **10 Departman & 100 Sanal Alan Uzmanı:** Her ürün ve özellik; C-Suite Yönetim Kurulu, Sistem & Yazılım Mimarisi, S-Tier Tasarım Stüdyosu, Hukuk & Fikri Mülkiyet Kalkanı, Büyüme & Sosyal Medya Ajansı, Siber Güvenlik Kırmızı Takımı, Frontier Yapay Zeka Laboratuvarı, Finans & FinOps, Kalite Güvence & Kaos Mühendisliği ve Ürün Operasyonları olmak üzere 10 uzman departmanın (toplam 100 sanal uzman) sürekli karşılıklı müzakeresi ve tartışması ile olgunlaştırılır (`scripts/agency_swarm_enterprise_engine.py`).
+   - **Çapraz Departman Çatışma Çözümü (Adversarial Deliberation):** Mühendislik ile Tasarım (Gecikme vs. Animasyon Derinliği), Büyüme ile Hukuk (Viral Takip vs. GDPR/AB Yapay Zeka Yasası) ve Finans ile Yapay Zeka (API Maliyeti vs. Frontier Akıl Yürütme) arasındaki gerilimler önceden simüle edilir; Pareto-optimal ve kusursuz kurumsal karara bağlanır.
+   - **Firma Düzeyinde Nihai İcra:** Ürünler tek bir geliştiricinin dar bakış açısıyla değil; hukuken korunaklı, alt-milisaniye mimarili, S-Tier yay fiziklerine sahip, viral büyüme döngüleri ve birim ekonomisi kurgulanmış tam teşekküllü bir kurumsal firma standardında teslim edilir (`execute_agency_deliberation`, `synthesize_agency_executive_prompt`).
+
+
 ---
 ## 2. Dört Ana İcra Motoru (The 4 Core Engines)
 

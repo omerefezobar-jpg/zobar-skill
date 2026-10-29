@@ -688,6 +688,30 @@ class ZobarMCPServer:
                     },
                     "required": ["current_topic"]
                 }
+            },
+            {
+                "name": "execute_agency_deliberation",
+                "description": "Executes a full-scale 100-specialist enterprise agency deliberation across 10 specialized divisions (C-Suite, Systems Engineering, S-Tier Design, Legal & IP Counsel, Growth & Social Media, Cyber Red Team, AI Research, FinOps, QA, and Product Operations) to stress-test, debate, and synthesize a commercial-grade product masterplan.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "product_brief": {"type": "string", "description": "Product idea, system architecture, or commercial feature brief"},
+                        "target_sector": {"type": "string", "description": "Target enterprise sector (saas, ecommerce, medtech, fintech_hft, robotics_iot, cyber_defense, neuro_tech)"}
+                    },
+                    "required": ["product_brief"]
+                }
+            },
+            {
+                "name": "synthesize_agency_executive_prompt",
+                "description": "Synthesizes an actionable 100-specialist enterprise agency prompt containing cross-departmental debate resolutions and directives for the active session.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "product_brief": {"type": "string", "description": "Product idea, system architecture, or commercial feature brief"},
+                        "target_sector": {"type": "string", "description": "Target enterprise sector"}
+                    },
+                    "required": ["product_brief"]
+                }
             }
         ]
 
@@ -1170,6 +1194,21 @@ class ZobarMCPServer:
             engine = VideoSessionIntelligenceEngine()
             context_str = engine.synthesize_session_enhancement_context(current_topic=current_topic)
             payload = {"context_markdown": context_str, "current_topic": current_topic}
+
+        elif name == "execute_agency_deliberation":
+            product_brief = args.get("product_brief", "Autonomous enterprise application")
+            target_sector = args.get("target_sector", "saas")
+            from scripts.agency_swarm_enterprise_engine import AgencySwarmEnterpriseEngine
+            engine = AgencySwarmEnterpriseEngine()
+            payload = engine.conduct_departmental_deliberation(product_brief=product_brief, target_sector=target_sector)
+
+        elif name == "synthesize_agency_executive_prompt":
+            product_brief = args.get("product_brief", "Autonomous enterprise application")
+            target_sector = args.get("target_sector", "saas")
+            from scripts.agency_swarm_enterprise_engine import AgencySwarmEnterpriseEngine
+            engine = AgencySwarmEnterpriseEngine()
+            prompt_str = engine.synthesize_agency_session_prompt(product_brief=product_brief, target_sector=target_sector)
+            payload = {"agency_prompt": prompt_str, "product_brief": product_brief}
 
         else:
             raise ValueError(f"Unknown tool name: {name}")
