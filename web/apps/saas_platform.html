@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apex Cloud Platform — High-Performance Cloud Operations</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base: #090a0f;
+      --bg-surface: #11131c;
+      --bg-surface-elevated: #181b28;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-focus: rgba(99, 102, 241, 0.5);
+      --primary: #6366f1;
+      --primary-hover: #4f46e5;
+      --accent-cyan: #06b6d4;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg-base);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+      overflow-x: hidden;
+    }
+    aside {
+      width: 260px;
+      background: var(--bg-surface);
+      border-right: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 1.5rem 1rem;
+      z-index: 40;
+    }
+    .sidebar-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0 0.5rem 1.5rem 0.5rem;
+      border-bottom: 1px solid var(--border-subtle);
+      font-weight: 800;
+      font-size: 1.1rem;
+    }
+    .brand-mark {
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, var(--primary), var(--accent-cyan));
+      border-radius: 8px; display: grid; place-items: center; font-weight: 800;
+    }
+    .nav-list { list-style: none; margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.35rem; flex: 1; }
+    .nav-item button {
+      width: 100%; text-align: left; background: transparent; border: 1px solid transparent;
+      color: var(--text-muted); font-size: 0.875rem; font-weight: 600; padding: 0.65rem 0.85rem;
+      border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 0.5rem;
+    }
+    .nav-item button:hover { background: var(--bg-surface-elevated); color: #fff; }
+    .nav-item button.active { background: rgba(99, 102, 241, 0.15); border-color: rgba(99, 102, 241, 0.35); color: #fff; }
+    main { flex: 1; display: flex; flex-direction: column; height: 100vh; overflow-y: auto; }
+    .topbar {
+      height: 64px; border-bottom: 1px solid var(--border-subtle); background: rgba(9, 10, 15, 0.75);
+      backdrop-filter: blur(12px); display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem; position: sticky; top: 0; z-index: 30;
+    }
+    .view-container { padding: 2rem; max-width: 1400px; width: 100%; margin: 0 auto; display: none; }
+    .view-container.active { display: block; }
+    .bento-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.25rem; margin-top: 1.5rem; }
+    .card { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 1.5rem; display: flex; flex-direction: column; }
+    .col-12 { grid-column: span 12; }
+    .col-4 { grid-column: span 4; }
+    .col-6 { grid-column: span 6; }
+    .btn { padding: 0.55rem 1rem; border-radius: 8px; font-weight: 600; font-size: 0.85rem; border: none; cursor: pointer; }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-secondary { background: rgba(255, 255, 255, 0.08); color: #fff; }
+    .data-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-top: 1rem; }
+    .data-table th, .data-table td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid var(--border-subtle); }
+    .toast { position: fixed; bottom: 2rem; right: 2rem; background: #1e2235; border: 1px solid var(--border-focus); padding: 0.75rem 1.25rem; border-radius: 8px; color: #fff; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+  <aside>
+    <div class="sidebar-brand"><div class="brand-mark">A</div><span>Apex Cloud Platform</span></div>
+    <ul class="nav-list">
+      <li class="nav-item"><button class="active" onclick="switchView('dashboard')">📊 Core Operations</button></li>
+      <li class="nav-item"><button onclick="switchView('profile')">👤 Profile & Auth</button></li>
+      <li class="nav-item"><button onclick="switchView('settings')">⚙️ Workspace Settings</button></li>
+    </ul>
+  </aside>
+  <main>
+    <div class="topbar">
+      <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 0.4rem 0.8rem; font-size: 0.8rem; color: var(--text-muted); cursor: pointer;" onclick="showToast('Command Palette ready (Ctrl+K)')">
+        <span>🔍 Jump to resource...</span> <span style="font-family: var(--font-mono); font-size: 0.7rem; background: rgba(255,255,255,0.08); padding: 0.1rem 0.3rem; border-radius: 4px;">Ctrl+K</span>
+      </div>
+      <div style="font-size: 0.85rem; color: var(--text-muted);">P99 Latency: <strong style="color: var(--accent-emerald);">0.38ms</strong> (Zero-Copy Buffer Active)</div>
+      <button class="btn btn-primary" onclick="showToast('State persisted to LocalStorage.')">⚡ Trigger Optimistic Sync</button>
+    </div>
+    <div id="viewDashboard" class="view-container active">
+      <h2>Platform Operations Core</h2>
+      <div class="bento-grid">
+        <div class="card col-4">
+          <div>Throughput</div>
+          <div style="font-size: 2rem; font-family: var(--font-mono); font-weight: 800; margin: 0.5rem 0;">5,120 req/s</div>
+          <div style="font-size: 0.8rem; color: var(--accent-emerald);">● Sub-millisecond P99 Execution</div>
+        </div>
+        <div class="card col-4">
+          <div>Memory Pooling</div>
+          <div style="font-size: 2rem; font-family: var(--font-mono); font-weight: 800; margin: 0.5rem 0;">142 MB / 512 MB</div>
+          <div style="font-size: 0.8rem; color: var(--text-muted);">Contiguous ECS memory map</div>
+        </div>
+        <div class="card col-4">
+          <div>FinOps Cost Target</div>
+          <div style="font-size: 2rem; font-family: var(--font-mono); font-weight: 800; margin: 0.5rem 0;">$0.00003</div>
+          <div style="font-size: 0.8rem; color: var(--text-muted);">Per 1K compute transactions</div>
+        </div>
+        <div class="card col-12">
+          <h3>Active Shard Clusters</h3>
+          <table class="data-table">
+            <thead><tr><th>Cluster ID</th><th>Region</th><th>Status</th><th>Latency</th><th>Actions</th></tr></thead>
+            <tbody>
+              <tr><td>US-East-Primary</td><td>N. Virginia</td><td><span style="color: var(--accent-emerald);">Healthy</span></td><td>0.31 ms</td><td><button class="btn btn-secondary" onclick="showToast('Cluster ping: 0.31ms')">Ping</button></td></tr>
+              <tr><td>EU-Central-Primary</td><td>Frankfurt</td><td><span style="color: var(--accent-emerald);">Healthy</span></td><td>0.45 ms</td><td><button class="btn btn-secondary" onclick="showToast('Cluster ping: 0.45ms')">Ping</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div id="viewProfile" class="view-container">
+      <h2>Profile & Cryptographic Keys</h2>
+      <div class="bento-grid">
+        <div class="card col-6">
+          <label style="font-size: 0.8rem; color: var(--text-muted);">Admin Name</label>
+          <input id="inputName" style="background: var(--bg-base); border: 1px solid var(--border-subtle); padding: 0.6rem; color: #fff; border-radius: 6px; margin: 0.5rem 0 1rem 0;" value="Systems Architect">
+          <button class="btn btn-primary" onclick="saveName()">Save Profile</button>
+        </div>
+        <div class="card col-6">
+          <label style="font-size: 0.8rem; color: var(--text-muted);">Active API Token</label>
+          <div style="background: var(--bg-base); padding: 0.6rem; font-family: var(--font-mono); font-size: 0.85rem; border-radius: 6px; margin: 0.5rem 0 1rem 0;">sk_live_99f1...84c1</div>
+          <button class="btn btn-secondary" onclick="showToast('New token rolled & stored.')">Roll Token</button>
+        </div>
+      </div>
+    </div>
+    <div id="viewSettings" class="view-container">
+      <h2>Workspace Governance Settings</h2>
+      <div class="bento-grid">
+        <div class="card col-12">
+          <p style="color: var(--text-muted);">Multi-tenant data isolation enforced via PostgreSQL RLS and sub-millisecond edge routes.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+  <div id="toastBox"></div>
+  <script>
+    let state = JSON.parse(localStorage.getItem('apex_saas_state') || '{ "name": "Systems Architect" }');
+    document.getElementById('inputName').value = state.name;
+
+    function saveName() {
+      state.name = document.getElementById('inputName').value;
+      localStorage.setItem('apex_saas_state', JSON.stringify(state));
+      showToast('Profile name persisted to storage.');
+    }
+
+    function switchView(id) {
+      ['dashboard', 'profile', 'settings'].forEach(v => {
+        document.getElementById('view' + v.charAt(0).toUpperCase() + v.slice(1)).classList.toggle('active', v === id);
+      });
+      showToast('View switched to ' + id);
+    }
+
+    function showToast(msg) {
+      const b = document.getElementById('toastBox');
+      const t = document.createElement('div');
+      t.className = 'toast';
+      t.innerText = msg;
+      b.appendChild(t);
+      setTimeout(() => b.removeChild(t), 2000);
+    }
+  </script>
+</body>
+</html>

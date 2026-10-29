@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PulseCare Clinical Portal — Clinical Telemetry & Triage</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base: #06080e;
+      --bg-card: #0e121d;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --accent-cyan: #06b6d4;
+      --accent-emerald: #10b981;
+      --accent-rose: #f43f5e;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg-base);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      height: 64px;
+      border-bottom: 1px solid var(--border-subtle);
+      background: rgba(6, 8, 14, 0.85);
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+    }
+    .brand { font-weight: 800; font-size: 1.1rem; color: var(--accent-cyan); display: flex; align-items: center; gap: 0.5rem; }
+    main { flex: 1; max-width: 1400px; width: 100%; margin: 0 auto; padding: 2rem; display: flex; flex-direction: column; gap: 1.5rem; }
+    .bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.25rem; }
+    .card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 1.5rem; }
+    .col-8 { grid-column: span 8; }
+    .col-4 { grid-column: span 4; }
+    .col-12 { grid-column: span 12; }
+    canvas { width: 100%; height: 160px; background: #030407; border-radius: 8px; border: 1px solid var(--border-subtle); }
+    .table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-top: 1rem; }
+    .table th { text-align: left; padding: 0.75rem; border-bottom: 1px solid var(--border-subtle); color: var(--text-muted); font-size: 0.75rem; }
+    .table td { padding: 0.85rem 0.75rem; border-bottom: 1px solid var(--border-subtle); }
+    .tag { padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 700; }
+    .tag-normal { background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald); }
+    .tag-elevated { background: rgba(244, 63, 94, 0.15); color: var(--accent-rose); }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand"><span>🩺</span> PulseCare Clinical Portal</div>
+    <div style="font-size: 0.8rem; color: var(--accent-emerald);">● High-Resolution ECG Stream Online (500Hz)</div>
+  </header>
+
+  <main>
+    <div class="bento">
+      <div class="card col-8">
+        <h3 style="font-size: 1rem; margin-bottom: 0.5rem;">Live Bedside ECG Telemetry (Lead II)</h3>
+        <canvas id="ecgCanvas"></canvas>
+      </div>
+      <div class="card col-4">
+        <h3 style="font-size: 1rem; margin-bottom: 0.5rem;">Vitals Overview</h3>
+        <div style="font-size: 2rem; font-family: var(--font-mono); font-weight: 800; color: var(--accent-cyan); margin: 0.5rem 0;">72 BPM</div>
+        <div style="font-size: 0.85rem; color: var(--text-muted);">SpO2: 98% | BP: 120/80 mmHg | HRV: 64ms</div>
+        <button style="margin-top: 1.5rem; width: 100%; background: var(--accent-cyan); border: none; padding: 0.65rem; border-radius: 8px; font-weight: 700; cursor: pointer;" onclick="alert('Clinical alert logged to electronic health record (EHR).')">Acknowledge Telemetry</button>
+      </div>
+
+      <div class="card col-12">
+        <h3 style="font-size: 1rem; margin-bottom: 0.5rem;">Emergency & ICU Patient Registry</h3>
+        <table class="table">
+          <thead>
+            <tr><th>Patient ID</th><th>Name</th><th>Triage Priority</th><th>Vitals Status</th><th>Assigned Physician</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-family: var(--font-mono);">PT-8941</td><td>Eleanor Vance (64y)</td><td><span class="tag tag-normal">Normal / Stable</span></td><td>Sinus Rhythm (68 bpm)</td><td>Dr. Marcus Sterling, MD</td></tr>
+            <tr><td style="font-family: var(--font-mono);">PT-9012</td><td>Julian Hayes (48y)</td><td><span class="tag tag-elevated">Elevated Triage</span></td><td>Ventricular Ectopy Detected</td><td>Dr. Alistair Finch, MD</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const canvas = document.getElementById('ecgCanvas');
+    const ctx = canvas.getContext('2d');
+    let x = 0;
+    let prevY = 80;
+
+    function drawECG() {
+      const w = canvas.width = canvas.parentElement.clientWidth;
+      const h = canvas.height = 160;
+
+      function step() {
+        x += 2;
+        if (x > w) {
+          x = 0;
+          ctx.clearRect(0, 0, w, h);
+        }
+
+        // Simulate QRS complex pattern
+        let y = 80;
+        const cycle = x % 120;
+        if (cycle > 50 && cycle < 55) y = 70; // P wave
+        else if (cycle === 60) y = 90;        // Q wave
+        else if (cycle === 64) y = 20;        // R wave peak
+        else if (cycle === 68) y = 110;       // S wave
+        else if (cycle > 80 && cycle < 95) y = 68; // T wave
+
+        ctx.strokeStyle = '#06b6d4';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(x - 2, prevY);
+        ctx.lineTo(x, y);
+        ctx.stroke();
+
+        prevY = y;
+        requestAnimationFrame(step);
+      }
+      step();
+    }
+    window.addEventListener('DOMContentLoaded', drawECG);
+  </script>
+</body>
+</html>

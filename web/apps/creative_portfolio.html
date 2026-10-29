@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kroma Spatial Studio — 3D Spatial Systems & Design</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07070a;
+      --card: #101015;
+      --accent: #a855f7;
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #f8fafc;
+      --muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: 'Plus Jakarta Sans', sans-serif; }
+    header { height: 64px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; }
+    .brand { font-weight: 800; font-size: 1.1rem; color: #fff; }
+    main { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem; }
+    .hero { text-align: center; margin-bottom: 2rem; }
+    .viewport-box { height: 320px; background: #030305; border: 1px solid var(--border); border-radius: 12px; position: relative; overflow: hidden; margin-bottom: 2.5rem; }
+    canvas { width: 100%; height: 100%; display: block; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .box { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; transition: transform 0.2s; }
+    .box:hover { transform: translateY(-4px); border-color: var(--accent); }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">▲ Kroma Spatial Studio</div>
+    <button style="background: var(--accent); border: none; color: #fff; padding: 0.5rem 1rem; border-radius: 6px; font-weight: 700; cursor: pointer;" onclick="alert('Booking inquiry sent to design director.')">Book Sprint</button>
+  </header>
+  <main>
+    <div class="hero">
+      <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem;">Spatial & Digital Product Craft</h1>
+      <p style="color: var(--muted);">Zero-dependency real-time canvas geometry with spring physics interactions.</p>
+    </div>
+    <div class="viewport-box">
+      <canvas id="viewCanvas"></canvas>
+    </div>
+    <div class="grid">
+      <div class="box">
+        <h3 style="font-size: 1.1rem; margin-bottom: 0.4rem;">Spatial UI Architecture</h3>
+        <p style="color: var(--muted); font-size: 0.85rem;">Hardware-accelerated viewport rendering with dynamic camera orbits.</p>
+      </div>
+      <div class="box">
+        <h3 style="font-size: 1.1rem; margin-bottom: 0.4rem;">Micro-Interaction Physics</h3>
+        <p style="color: var(--muted); font-size: 0.85rem;">RK4 numerical spring dampers for natural tactile UI feedback.</p>
+      </div>
+      <div class="box">
+        <h3 style="font-size: 1.1rem; margin-bottom: 0.4rem;">High-Conversion Funnels</h3>
+        <p style="color: var(--muted); font-size: 0.85rem;">Sub-50ms render latency driving +38% client engagement uplift.</p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const canvas = document.getElementById('viewCanvas');
+    const ctx = canvas.getContext('2d');
+    let angle = 0;
+
+    function render3D() {
+      const w = canvas.width = canvas.parentElement.clientWidth;
+      const h = canvas.height = canvas.parentElement.clientHeight;
+      ctx.clearRect(0, 0, w, h);
+
+      // Render 3D Rotating Cube Wireframe using pure trigonometric projection
+      const size = 65;
+      const nodes = [
+        [-size, -size, -size], [size, -size, -size], [size, size, -size], [-size, size, -size],
+        [-size, -size, size], [size, -size, size], [size, size, size], [-size, size, size]
+      ];
+      const edges = [
+        [0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],[0,4],[1,5],[2,6],[3,7]
+      ];
+
+      angle += 0.015;
+      const projected = nodes.map(n => {
+        // Rotate around Y and X
+        let x = n[0] * Math.cos(angle) - n[2] * Math.sin(angle);
+        let z = n[0] * Math.sin(angle) + n[2] * Math.cos(angle);
+        let y = n[1] * Math.cos(angle * 0.7) - z * Math.sin(angle * 0.7);
+        const fov = 300;
+        const scale = fov / (fov + z + 150);
+        return [x * scale + w / 2, y * scale + h / 2];
+      });
+
+      ctx.strokeStyle = '#a855f7';
+      ctx.lineWidth = 1.5;
+      edges.forEach(e => {
+        ctx.beginPath();
+        ctx.moveTo(projected[e[0]][0], projected[e[0]][1]);
+        ctx.lineTo(projected[e[1]][0], projected[e[1]][1]);
+        ctx.stroke();
+      });
+
+      requestAnimationFrame(render3D);
+    }
+    window.addEventListener('DOMContentLoaded', render3D);
+  </script>
+</body>
+</html>

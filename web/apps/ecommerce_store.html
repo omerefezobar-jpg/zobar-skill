@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lumina Luxury Atelier — Curated Luxury Commerce</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0b0c10;
+      --bg-card: #13141a;
+      --border-gold: rgba(212, 175, 55, 0.25);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --primary: #d4af37;
+      --primary-hover: #b8972e;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --font-serif: 'Playfair Display', serif;
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      height: 72px;
+      border-bottom: 1px solid var(--border-subtle);
+      background: rgba(11, 12, 16, 0.85);
+      backdrop-filter: blur(16px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 3rem;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .brand {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: #fff;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--primary); }
+    .cart-trigger {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 9999px;
+      padding: 0.45rem 1rem;
+      font-size: 0.825rem;
+      font-weight: 600;
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .cart-badge {
+      background: var(--primary);
+      color: #000;
+      font-weight: 800;
+      font-size: 0.7rem;
+      padding: 0.15rem 0.45rem;
+      border-radius: 9999px;
+    }
+    main { flex: 1; max-width: 1400px; width: 100%; margin: 0 auto; padding: 3rem 2rem; }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .product-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.25s;
+    }
+    .product-card:hover {
+      border-color: var(--border-gold);
+      transform: translateY(-4px);
+    }
+    .product-img {
+      height: 220px;
+      background: linear-gradient(135deg, #1e2029, #111217);
+      display: grid;
+      place-items: center;
+      font-size: 3rem;
+    }
+    .product-info { padding: 1.5rem; display: flex; flex-direction: column; flex: 1; }
+    .product-title { font-family: var(--font-serif); font-size: 1.15rem; margin-bottom: 0.35rem; }
+    .product-desc { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem; flex: 1; }
+    .product-bottom { display: flex; justify-content: space-between; align-items: center; }
+    .product-price { font-size: 1.1rem; font-weight: 700; color: var(--primary); }
+    .btn-buy {
+      background: var(--primary);
+      color: #000;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .btn-buy:hover { background: var(--primary-hover); }
+
+    /* Cart Drawer */
+    .cart-drawer {
+      position: fixed;
+      top: 0; right: -420px;
+      width: 400px; height: 100vh;
+      background: #111218;
+      border-left: 1px solid var(--border-subtle);
+      z-index: 100;
+      box-shadow: -16px 0 48px rgba(0, 0, 0, 0.7);
+      transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      padding: 2rem;
+    }
+    .cart-drawer.open { right: 0; }
+    .cart-list { flex: 1; overflow-y: auto; list-style: none; margin: 1.5rem 0; display: flex; flex-direction: column; gap: 1rem; }
+    .cart-item {
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-subtle);
+      padding: 0.85rem; border-radius: 8px;
+    }
+    .cart-total { font-size: 1.25rem; font-weight: 800; color: var(--primary); display: flex; justify-content: space-between; margin-bottom: 1.5rem; }
+    .btn-checkout {
+      width: 100%;
+      background: var(--primary);
+      color: #000;
+      border: none;
+      padding: 0.85rem;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+    .toast {
+      position: fixed; bottom: 2rem; right: 2rem;
+      background: #1a1c24; border: 1px solid var(--border-gold);
+      padding: 0.75rem 1.25rem; border-radius: 8px; font-size: 0.85rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5); z-index: 150;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">Lumina Luxury Atelier</div>
+    <ul class="nav-links">
+      <li><a class="active">Collection</a></li>
+      <li><a>Bespeak</a></li>
+      <li><a>Atelier</a></li>
+      <li><a>Orders</a></li>
+    </ul>
+    <div class="cart-trigger" onclick="toggleCart()">
+      <span>🛍️ Cart</span>
+      <span class="cart-badge" id="cartCountBadge">0</span>
+    </div>
+  </header>
+
+  <main>
+    <div style="text-align: center; max-width: 650px; margin: 0 auto 2.5rem auto;">
+      <h1 style="font-family: var(--font-serif); font-size: 2.5rem; margin-bottom: 0.5rem;">Autumn / Winter Fine Collection</h1>
+      <p style="color: var(--text-muted); font-size: 0.95rem;">Exclusively crafted limited edition horological instruments and bespoke leather assets.</p>
+    </div>
+
+    <div class="product-grid" id="productGrid"></div>
+  </main>
+
+  <!-- Cart Drawer -->
+  <div class="cart-drawer" id="cartDrawer">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <h3 style="font-family: var(--font-serif); font-size: 1.25rem;">Shopping Bag</h3>
+      <button style="background: transparent; border: none; color: #fff; font-size: 1.2rem; cursor: pointer;" onclick="toggleCart()">✕</button>
+    </div>
+    <ul class="cart-list" id="cartList"></ul>
+    <div class="cart-total">
+      <span>Subtotal</span>
+      <span id="cartSubtotal">$0.00</span>
+    </div>
+    <button class="btn-checkout" onclick="checkout()">Proceed to Secure Checkout</button>
+  </div>
+
+  <div id="toastBox"></div>
+
+  <script>
+    const PRODUCTS = [
+      { id: 1, name: "Chronos Perpetual Tourbillon", price: 4200, icon: "⌚", desc: "Grade 5 titanium casing with 72-hour power reserve." },
+      { id: 2, name: "Monaco Saddle Leather Holdall", price: 1850, icon: "💼", desc: "Hand-stitched Tuscan vegetable-tanned full-grain leather." },
+      { id: 3, name: "Solstice Obsidian Sunglasses", price: 620, icon: "🕶️", desc: "Japanese titanium wireframe with polarized sapphire lenses." },
+      { id: 4, name: "Kyoto Cashmere Overcoat", price: 2900, icon: "🧥", desc: "Pure 100% Mongolian combed cashmere, double-faced tailor." }
+    ];
+
+    let cart = JSON.parse(localStorage.getItem('lumina_cart') || '[]');
+
+    function renderProducts() {
+      const grid = document.getElementById('productGrid');
+      grid.innerHTML = PRODUCTS.map(p => `
+        <div class="product-card">
+          <div class="product-img">${p.icon}</div>
+          <div class="product-info">
+            <div class="product-title">${p.name}</div>
+            <div class="product-desc">${p.desc}</div>
+            <div class="product-bottom">
+              <span class="product-price">$${p.price.toLocaleString()}</span>
+              <button class="btn-buy" onclick="addToCart(${p.id})">+ Add to Bag</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderCart() {
+      const list = document.getElementById('cartList');
+      const badge = document.getElementById('cartCountBadge');
+      const subtotal = document.getElementById('cartSubtotal');
+
+      badge.innerText = cart.length;
+      if (cart.length === 0) {
+        list.innerHTML = '<li style="color: var(--text-dim); text-align: center; margin-top: 3rem;">Your bag is currently empty.</li>';
+        subtotal.innerText = '$0.00';
+        return;
+      }
+
+      let sum = 0;
+      list.innerHTML = cart.map((item, idx) => {
+        sum += item.price;
+        return `
+          <li class="cart-item">
+            <div>
+              <div style="font-weight: 600; font-size: 0.85rem;">${item.name}</div>
+              <div style="color: var(--primary); font-size: 0.8rem;">$${item.price.toLocaleString()}</div>
+            </div>
+            <button style="background: transparent; border: none; color: #f43f5e; cursor: pointer;" onclick="removeFromCart(${idx})">✕</button>
+          </li>
+        `;
+      }).join('');
+
+      subtotal.innerText = '$' + sum.toLocaleString();
+      localStorage.setItem('lumina_cart', JSON.stringify(cart));
+    }
+
+    function addToCart(id) {
+      const prod = PRODUCTS.find(p => p.id === id);
+      cart.push(prod);
+      renderCart();
+      showToast(`${prod.name} added to bag.`);
+    }
+
+    function removeFromCart(idx) {
+      cart.splice(idx, 1);
+      renderCart();
+      showToast('Item removed.');
+    }
+
+    function toggleCart() {
+      document.getElementById('cartDrawer').classList.toggle('open');
+    }
+
+    function checkout() {
+      if (cart.length === 0) return alert('Bag is empty.');
+      alert('Secure stripe checkout session simulated successfully.');
+      cart = [];
+      renderCart();
+      toggleCart();
+    }
+
+    function showToast(msg) {
+      const box = document.getElementById('toastBox');
+      const t = document.createElement('div');
+      t.className = 'toast';
+      t.innerText = msg;
+      box.appendChild(t);
+      setTimeout(() => box.removeChild(t), 2000);
+    }
+
+    renderProducts();
+    renderCart();
+  </script>
+</body>
+</html>

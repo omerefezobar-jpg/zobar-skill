@@ -95,5 +95,36 @@ class TestEndToEndAppArchitect(unittest.TestCase):
         self.assertIn("internal_evaluation", result)
         self.assertIn("concise_co_creation_dialogue", result)
 
+    def test_multi_sector_synthesis_and_persistence(self):
+        from scripts.end_to_end_app_architect import synthesize_domain_application, synthesize_all_domain_apps
+
+        # Test Ecommerce
+        ecom = synthesize_domain_application("ecommerce", "Lumina Store")
+        self.assertIn("Shopping Bag", ecom["generated_html_code"])
+        self.assertIn("lumina_cart", ecom["generated_html_code"])
+        self.assertIn("addToCart", ecom["generated_html_code"])
+
+        # Test MedTech
+        med = synthesize_domain_application("medtech", "PulseCare Portal")
+        self.assertIn("Lead II", med["generated_html_code"])
+        self.assertIn("ecgCanvas", med["generated_html_code"])
+
+        # Test Creative Agency
+        cre = synthesize_domain_application("creative_agency", "Kroma 3D")
+        self.assertIn("render3D", cre["generated_html_code"])
+        self.assertIn("viewCanvas", cre["generated_html_code"])
+
+        # Test Batch Synthesis
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            out_apps = os.path.join(tmp_dir, "apps")
+            paths = synthesize_all_domain_apps(out_apps)
+            self.assertIn("saas", paths)
+            self.assertIn("ecommerce", paths)
+            self.assertIn("medtech", paths)
+            self.assertIn("creative_agency", paths)
+            self.assertIn("master_hub", paths)
+            for p in paths.values():
+                self.assertTrue(os.path.exists(p))
+
 if __name__ == "__main__":
     unittest.main()

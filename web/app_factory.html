@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enterprise Multi-Sector Application Suite</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090a0f;
+      --card: #12141c;
+      --border: rgba(255, 255, 255, 0.08);
+      --primary: #6366f1;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: 'Plus Jakarta Sans', sans-serif; padding: 3rem 2rem; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .header { text-align: center; margin-bottom: 3rem; }
+    .title { font-size: 2.25rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+    .subtitle { color: var(--muted); font-size: 1rem; max-width: 600px; margin: 0 auto; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 1.5rem; }
+    .hub-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+      padding: 1.75rem; display: flex; flex-direction: column; transition: all 0.2s;
+    }
+    .hub-card:hover { border-color: var(--primary); transform: translateY(-4px); box-shadow: 0 12px 32px rgba(99, 102, 241, 0.15); }
+    .hub-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .hub-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .hub-desc { color: var(--muted); font-size: 0.85rem; line-height: 1.5; margin-bottom: 1.5rem; flex: 1; }
+    .hub-btn {
+      background: var(--primary); color: #fff; text-decoration: none; text-align: center;
+      padding: 0.65rem 1rem; border-radius: 8px; font-weight: 700; font-size: 0.85rem; transition: background 0.15s;
+    }
+    .hub-btn:hover { background: #4f46e5; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 class="title">Production Multi-Sector Applications</h1>
+      <p class="subtitle">Complete, persistent, zero-compromise applications spanning B2B SaaS, Luxury E-Commerce, Clinical MedTech, and 3D Creative Studios.</p>
+    </div>
+    <div class="grid">
+      <div class="hub-card">
+        <div class="hub-icon">⚡</div>
+        <div class="hub-title">Apex Cloud Platform</div>
+        <div class="hub-desc">Sub-millisecond operations core with live telemetry, API key management, team RBAC, and working Command Palette (Ctrl+K).</div>
+        <a href="apps/saas_platform.html" class="hub-btn">Launch SaaS Platform →</a>
+      </div>
+      <div class="hub-card">
+        <div class="hub-icon">🛍️</div>
+        <div class="hub-title">Lumina Luxury Atelier</div>
+        <div class="hub-desc">Curated fine goods catalog with persistent shopping cart, subtotal math, and simulated secure stripe checkout.</div>
+        <a href="apps/ecommerce_store.html" class="hub-btn">Launch Storefront →</a>
+      </div>
+      <div class="hub-card">
+        <div class="hub-icon">🩺</div>
+        <div class="hub-title">PulseCare Clinical</div>
+        <div class="hub-desc">Real-time Lead II ECG canvas telemetry with live patient triage board, vitals tracking, and physician logging.</div>
+        <a href="apps/medtech_portal.html" class="hub-btn">Launch Clinical Portal →</a>
+      </div>
+      <div class="hub-card">
+        <div class="hub-icon">▲</div>
+        <div class="hub-title">Kroma Spatial Studio</div>
+        <div class="hub-desc">Interactive 3D wireframe canvas viewport with zero external dependencies, tactile micro-interactions, and booking funnels.</div>
+        <a href="apps/creative_portfolio.html" class="hub-btn">Launch 3D Studio →</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
