@@ -31,7 +31,8 @@ class TestFullStackTriadEngine(unittest.TestCase):
         self.assertIn("systems_mathematics", analysis)
         self.assertIn("queueing_latency", analysis["systems_mathematics"])
         self.assertIn("roofline_analysis", analysis["systems_mathematics"])
-        self.assertEqual(analysis["analysis_quality_gate"], "PASSED (TRL >= 5, Compliance Verified, Capacity Modeled)")
+        self.assertIn("academic_foundations", analysis)
+        self.assertEqual(analysis["analysis_quality_gate"], "PASSED (TRL >= 5, Compliance Verified, Capacity Modeled, Academically Grounded)")
 
     def test_frontend_pillar_execution(self):
         frontend = self.engine.execute_frontend_pillar(self.vision, self.sector, brand_name="Apex IoT Core")

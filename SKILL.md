@@ -46,8 +46,11 @@ description: >-
    - **Sıkıcı Şeyleri Koda Yansıtma (Görünmez Derinlik):** Arka plandaki ağır akademik teorileri, kuantum hesaplamalarını, Little's Law ve TRIZ formüllerini yalnızca düşünce süzgecinde ve optimizasyon motorunda işlet; ANCAK üretilen koda, arayüzlere ve nihai teslimatlara bu sıkıcı iç formül monologlarını, robotik açıklamaları veya kuru meta-yorumları ASLA yansıtma.
    - **500+ Ödüllü Site & UI Havuzu:** Kod ve UI üretirken; 504'ten fazla ödüllü dünya devi siteden (Awwwards Yılın Siteleri, Apple Design Award, Stripe, Linear, Teenage Engineering, Vercel, Raycast) süzülmüş hazır UI bileşenleri (`references/s_tier_design_vault.json` ve `references/award_winning_patterns_vault.json`) kullanılarak doğrudan çalışan, nefes kesici ve yaşayan sistemler teslim edilmelidir.
 
----
+9. **Akademik Literatür, Üniversite Müfredatları & Temel Kitaplar İlkesi (Academic Foundations & University Literature Grounding):**
+   - Mimari kararlar, sistem sınırları ve algoritmik tercihler dünyanın en seçkin üniversite kürsüleri (MIT 6.824, Stanford CS143/CS224N, ETH Zürich ASL, Oxford, CMU) ve temel başucu eserleri (Donald Knuth - TAOCP, Leslie Lamport, Martin Kleppmann - DDIA, Sutton & Barto - RL, Nielsen & Chuang - Quantum Computation, Hennessy & Patterson) ile temellendirilir (`scripts/academic_foundations_engine.py`).
+   - Bu teorik derinlik ve ispatlar, sistemin arka planında mutlak mühendislik sağlamlığını garanti eder; ancak 'Görünmez Derinlik' ilkesi uyarınca nihai kullanıcı koduna veya teslimatlara gereksiz akademik monologlar yansıtılmaz.
 
+---
 ## 2. Dört Ana İcra Motoru (The 4 Core Engines)
 
 ```mermaid

@@ -115,6 +115,32 @@ class TestQuantumDesignOptimizer(unittest.TestCase):
         # Sub-millisecond execution mandate: average execution should be well under 10ms
         self.assertLess(elapsed * 1000.0, 10.0, f"Quantum design selection too slow: {elapsed * 1000.0:.2f}ms > 10ms")
 
+    def test_simulated_quantum_annealing_and_trace(self):
+        H, _ = self.optimizer.compute_aesthetic_hamiltonian(self.candidates)
+        ground_state, ground_energy, trace = self.optimizer.simulate_quantum_annealing(H, steps=5)
+        self.assertEqual(len(trace), 6)
+        self.assertEqual(len(ground_state), len(self.candidates))
+        self.assertIsInstance(ground_energy, float)
+
+    def test_density_matrix_and_purity(self):
+        state = [1.0 / (3.0 ** 0.5)] * 3
+        rho = self.optimizer.compute_density_matrix(state)
+        self.assertEqual(len(rho), 3)
+        self.assertEqual(len(rho[0]), 3)
+
+        purity = self.optimizer.compute_purity(rho)
+        self.assertGreaterEqual(purity, 1.0 / 3.0)
+        self.assertLessEqual(purity, 1.0)
+
+    def test_multi_viewport_quantum_fidelity(self):
+        desktop = self.candidates[0]
+        mobile = dict(self.candidates[0])
+        mobile["visual_density"] = 0.46
+        res = self.optimizer.evaluate_multi_viewport_fidelity(desktop, mobile)
+        self.assertIn("responsive_quantum_fidelity", res)
+        self.assertGreaterEqual(res["responsive_quantum_fidelity"], 50.0)
+        self.assertIn("harmonic_status", res)
+
     def test_mcp_tool_quantum_optimize_design(self):
         server = ZobarMCPServer()
         res = server.execute_tool("quantum_optimize_design", {"candidates": self.candidates})

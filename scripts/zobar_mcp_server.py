@@ -509,6 +509,18 @@ class ZobarMCPServer:
                     },
                     "required": ["vision"]
                 }
+            },
+            {
+                "name": "ground_academic_foundations",
+                "description": "Grounds architectural, algorithmic, and UX designs in top university curricula (MIT, Stanford, ETH Zürich, Oxford), seminal textbooks (Knuth, Lamport, Sutton & Barto, Kleppmann), and mathematical theorems (Little's Law, Roofline, PACELC, Von Neumann Entropy).",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "domain": {"type": "string", "description": "The problem domain or software category"},
+                        "problem_statement": {"type": "string", "description": "Specific engineering problem or design challenge"}
+                    },
+                    "required": ["domain"]
+                }
             }
         ]
 
@@ -871,6 +883,13 @@ class ZobarMCPServer:
                     f.write(result["pillars"]["pillar_3_backend_systems"]["database_sql_schema"])
                 result["written_output_dir"] = os.path.abspath(output_dir)
             payload = result
+
+        elif name == "ground_academic_foundations":
+            domain = args.get("domain", "systems architecture")
+            problem = args.get("problem_statement", "")
+            from scripts.academic_foundations_engine import AcademicFoundationsEngine
+            engine = AcademicFoundationsEngine()
+            payload = engine.ground_domain(domain, problem)
 
         else:
             raise ValueError(f"Unknown tool name: {name}")
