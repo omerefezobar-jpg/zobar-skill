@@ -141,49 +141,49 @@
       "subject": "Systems Architecture",
       "predicate": "uses_vector_index",
       "object": "HNSW (vector_cosine_ops)",
-      "confidence": 1.5000000000000004,
+      "confidence": 1.6000000000000005,
       "created_at": 1793311429.393727,
-      "last_reinforced": 1793312134.009108
+      "last_reinforced": 1793312368.7285833
     },
     {
       "subject": "Video_Andrej Karpathy",
       "predicate": "recommends_architecture",
       "object": "We start with self-attention. The core intuition of the transformer attention me",
-      "confidence": 1.4000000000000004,
+      "confidence": 1.5000000000000004,
       "created_at": 1793311438.4170368,
-      "last_reinforced": 1793312134.0058467
+      "last_reinforced": 1793312368.725584
     },
     {
       "subject": "Video_Fireship",
       "predicate": "recommends_architecture",
       "object": "Boring static buttons are dead. Modern command palettes and floating bento docks",
-      "confidence": 1.8000000000000007,
+      "confidence": 2.0,
       "created_at": 1793311438.4200366,
-      "last_reinforced": 1793312133.947507
+      "last_reinforced": 1793312368.6862712
     },
     {
       "subject": "Frontend And Design",
       "predicate": "uses_spring_physics",
       "object": "{'stiffness': 170, 'damping': 26}",
-      "confidence": 1.8000000000000007,
+      "confidence": 2.0,
       "created_at": 1793311438.4200366,
-      "last_reinforced": 1793312133.9481578
+      "last_reinforced": 1793312368.6862712
     },
     {
       "subject": "Video_ArchitectReels",
       "predicate": "recommends_architecture",
       "object": "Always combine where tenant_id = current_setting('app.",
-      "confidence": 1.3000000000000003,
+      "confidence": 1.4000000000000004,
       "created_at": 1793311494.9136193,
-      "last_reinforced": 1793312134.008578
+      "last_reinforced": 1793312368.7285833
     },
     {
       "subject": "Video_SecurityTeam",
       "predicate": "recommends_architecture",
       "object": "Always enforce postgresql row-level security for multi-tenant isolation.",
-      "confidence": 1.3000000000000003,
+      "confidence": 1.4000000000000004,
       "created_at": 1793311494.914618,
-      "last_reinforced": 1793312134.0113008
+      "last_reinforced": 1793312368.7305858
     }
   ],
   "user_profile": {
@@ -195,5 +195,5 @@
     "last_updated": 1793225150.468043
   },
   "total_triples_count": 23,
-  "last_saved": 1793312134.0113008
+  "last_saved": 1793312368.7315836
 }

@@ -734,6 +734,45 @@ class ZobarMCPServer:
                     },
                     "required": ["topic"]
                 }
+            },
+            {
+                "name": "generate_google_earth_cinematic_tour",
+                "description": "Generates production-ready Google Earth 3D Cinematic Tour XML (KML 2.2 with gx:Tour and gx:FlyTo extensions) for orbital or flyover camera paths around any target GPS coordinates.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "center_lat": {"type": "number", "description": "Focal center latitude (e.g. 41.0082)"},
+                        "center_lon": {"type": "number", "description": "Focal center longitude (e.g. 28.9784)"},
+                        "tour_name": {"type": "string", "description": "Tour name (default 'Cinematic 3D Orbit')"},
+                        "radius_meters": {"type": "number", "description": "Orbit radius in meters (default 1200.0)"},
+                        "altitude_meters": {"type": "number", "description": "Camera altitude in meters (default 800.0)"},
+                        "tilt_degrees": {"type": "number", "description": "Camera tilt angle (default 65.0)"},
+                        "points_count": {"type": "integer", "description": "Number of keyframes (default 24)"}
+                    },
+                    "required": ["center_lat", "center_lon"]
+                }
+            },
+            {
+                "name": "synthesize_artistic_map_specification",
+                "description": "Synthesizes an artistic cartographic specification with free high-speed tile layers (CartoDB Dark Matter, Positron, Voyager, OpenStreetMap), hardware-accelerated CSS filters, and Leaflet/MapLibre code snippets for styles like Cyberpunk Midnight, Minimalist Monochrome, Vintage Topography, Infrared Thermal, and Swiss Alpine Clean.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "style_preset": {"type": "string", "description": "Style preset: cyberpunk_midnight, minimalist_monochrome, vintage_topography, infrared_thermal, swiss_alpine_clean"},
+                        "custom_accent": {"type": "string", "description": "Optional hex color accent override"}
+                    }
+                }
+            },
+            {
+                "name": "render_interactive_3d_globe_widget",
+                "description": "Generates an inline HTML5/Canvas 60fps 3D wireframe globe widget with rotating coordinates and telemetry nodes conforming to the Antigravity generative_ui <agent-embed> spec.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "center_label": {"type": "string", "description": "Widget header title"},
+                        "theme": {"type": "string", "description": "Visual theme preset (cyberpunk_midnight, minimalist_monochrome, etc.)"}
+                    }
+                }
             }
         ]
 
@@ -1244,6 +1283,44 @@ class ZobarMCPServer:
             engine = UniversityCurriculumEvolutionEngine()
             context_str = engine.synthesize_curriculum_grounding_context(active_topic=topic)
             payload = {"grounding_markdown": context_str, "topic": topic}
+
+        elif name == "generate_google_earth_cinematic_tour":
+            center_lat = float(args.get("center_lat", 41.0082))
+            center_lon = float(args.get("center_lon", 28.9784))
+            tour_name = args.get("tour_name", "Cinematic 3D Orbit")
+            radius = float(args.get("radius_meters", 1200.0))
+            altitude = float(args.get("altitude_meters", 800.0))
+            tilt = float(args.get("tilt_degrees", 65.0))
+            points_count = int(args.get("points_count", 24))
+            from scripts.geospatial_map_artist_engine import GeospatialMapArtistEngine
+            engine = GeospatialMapArtistEngine()
+            keyframes = engine.generate_orbit_trajectory(
+                center_lat=center_lat, center_lon=center_lon,
+                radius_meters=radius, altitude_meters=altitude,
+                tilt_degrees=tilt, points_count=points_count
+            )
+            kml_xml = engine.export_google_earth_kml_tour(tour_name=tour_name, keyframes=keyframes)
+            payload = {
+                "tour_name": tour_name,
+                "keyframes_count": len(keyframes),
+                "kml_xml": kml_xml,
+                "sample_keyframe": keyframes[0] if keyframes else {}
+            }
+
+        elif name == "synthesize_artistic_map_specification":
+            style_preset = args.get("style_preset", "cyberpunk_midnight")
+            custom_accent = args.get("custom_accent")
+            from scripts.geospatial_map_artist_engine import GeospatialMapArtistEngine
+            engine = GeospatialMapArtistEngine()
+            payload = engine.synthesize_artistic_map_style(style_preset_key=style_preset, custom_accent=custom_accent)
+
+        elif name == "render_interactive_3d_globe_widget":
+            center_label = args.get("center_label", "Global Operations Terminal")
+            theme = args.get("theme", "cyberpunk_midnight")
+            from scripts.geospatial_map_artist_engine import GeospatialMapArtistEngine
+            engine = GeospatialMapArtistEngine()
+            html_widget = engine.render_artistic_globe_widget(center_label=center_label, theme=theme)
+            payload = {"widget_html": html_widget, "theme": theme}
 
         else:
             raise ValueError(f"Unknown tool name: {name}")

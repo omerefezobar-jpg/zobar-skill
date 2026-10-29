@@ -102,6 +102,12 @@ description: >-
    - **2026 Modern Müfredat & Aktif Oturum Güçlendirme:** Çıkarım anı hesaplama (Test-Time Compute, MCTS, PRM), PagedAttention KV-Cache, DSPy deklaratif imza derleyicisi ve alt-milisaniye sistem kuralları doğrudan aktif mimari kararları desteklemek üzere dinamik olarak oturum bağlamına enjekte edilir (`analyze_curriculum_evolution`, `synthesize_curriculum_grounding`).
 
 
+19. **Sanatsal Haritacılık, Coğrafi Veri & 3D Google Earth Sinematik Sentez İlkesi (Geospatial Artistry & 3D Google Earth Studio Mandate):**
+   - **Google Earth 3D Sinematik Tur & Yörünge Sentezi:** Google Earth Studio ve Google Earth Pro/Web ile tam uyumlu KML 2.2 (`<gx:Tour>`, `<gx:FlyTo>`, `<Camera>`) kamera yörünge rotaları büyük çember (Great Circle / Slerp) interpolasyonu ile milimetrik hesaplanır (`scripts/geospatial_map_artist_engine.py`). Hedef koordinatlar etrafında 360 derecelik akıcı sinematik kamera dönüşleri ve irtifa geçişleri üretilir.
+   - **Ücretsiz, Yüksek Hızlı & Güçlü Harita Katmanları:** CartoDB Dark Matter, CartoDB Positron, CartoDB Voyager, OpenStreetMap ve Stamen Toner gibi sıfır maliyetli genel karo (tile) sağlayıcıları donanım hızlandırmalı CSS filtreleriyle (Cyberpunk Midnight, Minimalist Monochrome, Vintage Topography, Infrared Thermal, Swiss Alpine Clean) dönüştürülür.
+   - **Generative UI 3D Küre Arayüzü & Küresel Telemetri:** `<agent-embed>` standardında HTML5/Canvas 60fps dönen 3D küreler, atmosferik ışımalar ve canlı telemetri düğümleri anında sohbet içine gömülür (`generate_google_earth_cinematic_tour`, `synthesize_artistic_map_specification`, `render_interactive_3d_globe_widget`).
+
+
 ---
 ## 2. Dört Ana İcra Motoru (The 4 Core Engines)
 
