@@ -46,7 +46,7 @@ from scripts.ecs_game_engine import ECSWorld, DeterministicGameLoop
 from scripts.query_asset_vault import AssetVaultQueryEngine
 from scripts.systems_math_engine import SystemsMathEngine
 from scripts.design_system_generator import ModernDesignStylesEngine
-from scripts.reverse_engineering_analyst import analyze_target_system, execute_7phase_re_pipeline
+from scripts.reverse_engineering_analyst import analyze_target_system, execute_7phase_re_pipeline, execute_10phase_re_pipeline
 from scripts.game_modding_engine import synthesize_minecraft_in_game_bridge, calculate_greedy_meshing_metrics, generate_mod_code_template
 from scripts.multi_agent_deliberation_council import conduct_executive_board_deliberation
 from scripts.creative_evolutionary_designer import generate_evolutionary_design
@@ -236,7 +236,8 @@ class ZobarMCPServer:
                     "properties": {
                         "target_name": {"type": "string", "description": "Target binary or protocol name"},
                         "intent": {"type": "string", "description": "Goal of reverse engineering (e.g. Interoperability, Security Audit, Protocol Integration)"},
-                        "full_7_phases": {"type": "boolean", "description": "Execute comprehensive 7-phase reverse engineering pipeline"}
+                        "full_7_phases": {"type": "boolean", "description": "Execute comprehensive 7-phase reverse engineering pipeline"},
+                        "full_10_phases": {"type": "boolean", "description": "Execute complete 10-phase reverse engineering & systems architecture pipeline"}
                     },
                     "required": ["target_name"]
                 }
@@ -540,8 +541,11 @@ class ZobarMCPServer:
         elif name == "analyze_reverse_engineering":
             target_name = args.get("target_name", "UnknownBinary")
             intent = args.get("intent", "Interoperability with third-party software")
+            full_10_phases = args.get("full_10_phases", False)
             full_7_phases = args.get("full_7_phases", False)
-            if full_7_phases:
+            if full_10_phases:
+                payload = execute_10phase_re_pipeline(target_name=target_name, intent=intent)
+            elif full_7_phases:
                 payload = execute_7phase_re_pipeline(target_name=target_name, intent=intent)
             else:
                 payload = analyze_target_system(target_name=target_name, intent=intent)

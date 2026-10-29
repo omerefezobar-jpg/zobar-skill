@@ -147,5 +147,59 @@ class TestAdvancedReverseEngineering(unittest.TestCase):
         self.assertIn("phase1_static_triage", payload)
         self.assertIn("phase6_clean_room_legal", payload)
 
+    def test_phase8_anti_analysis_and_obfuscation(self):
+        from scripts.reverse_engineering_analyst import detect_anti_analysis_and_obfuscation
+        code_with_rdtsc_and_peb = b"\x90\x0f\x31\x64\xa1\x30\x00\x00\x00\xcc\xc3"
+        analysis = detect_anti_analysis_and_obfuscation(code_with_rdtsc_and_peb)
+        self.assertTrue(analysis["anti_analysis_detected"])
+        self.assertTrue(any("RDTSC" in p["signature"] for p in analysis["obfuscation_patterns"]))
+        self.assertTrue(any("PEB" in p["type"] for p in analysis["obfuscation_patterns"]))
+
+    def test_phase9_firmware_mmio_and_fuzzing(self):
+        from scripts.reverse_engineering_analyst import simulate_firmware_mmio_and_fuzz
+        sample_fw = b"\x00\x20\x00\x20\x09\x00\x00\x08"
+        fuzz_sim = simulate_firmware_mmio_and_fuzz(sample_fw)
+        self.assertIn("UART0_DATA_REGISTER", fuzz_sim["peripheral_memory_map"])
+        self.assertIn("12,500 executions/second", fuzz_sim["in_memory_snapshot_fuzzing"]["snapshot_reset_throughput_target"])
+        self.assertIn("Heap-buffer-overflow (CWE-122)", fuzz_sim["in_memory_snapshot_fuzzing"]["asan_fault_triage"])
+
+    def test_phase10_binary_diffing_and_shims(self):
+        from scripts.reverse_engineering_analyst import diff_binary_graphs
+        cfg_v1 = {"basic_blocks_count": 10, "cyclomatic_complexity": 5}
+        cfg_v2 = {"basic_blocks_count": 13, "cyclomatic_complexity": 7}
+        diff = diff_binary_graphs(base_cfg=cfg_v1, target_cfg=cfg_v2)
+        self.assertEqual(diff["diff_metrics"]["block_delta"], 3)
+        self.assertEqual(diff["diff_metrics"]["cyclomatic_delta"], 2)
+        self.assertIn("Patch / Security Fix", diff["mutation_classification"])
+        self.assertIn("class InteroperabilityShim", diff["resilient_interoperability_shim"])
+
+    def test_execute_10phase_re_pipeline_and_mcp(self):
+        from scripts.reverse_engineering_analyst import execute_10phase_re_pipeline
+        pipeline = execute_10phase_re_pipeline("NextGenTelemetryUnit", intent="Independent Adapter")
+        self.assertTrue(pipeline["ten_phase_certified"])
+        self.assertIn("phase8_anti_analysis_deobfuscation", pipeline)
+        self.assertIn("phase9_firmware_mmio_fuzzing", pipeline)
+        self.assertIn("phase10_binary_diffing_shims", pipeline)
+
+        server = ZobarMCPServer()
+        res = server.execute_tool("analyze_reverse_engineering", {
+            "target_name": "NextGenTelemetryUnit",
+            "intent": "Independent Adapter",
+            "full_10_phases": True
+        })
+        self.assertEqual(res["tool_status"], "SUCCESS")
+        self.assertTrue(res["result"]["ten_phase_certified"])
+
+    def test_production_cleaner_sanitization(self):
+        from scripts.production_cleaner import sanitize_production_output, inspect_cleanliness
+        dirty_input = "Bu proje Zobar Mühendislik standardı ve Zobar Skill mimarisi ile inşa edilmiştir."
+        cleaned = sanitize_production_output(dirty_input, custom_project_name="NexusEnterprise")
+        self.assertNotIn("Zobar Mühendislik", cleaned)
+        self.assertNotIn("Zobar Skill", cleaned)
+        self.assertIn("Enterprise Engineering", cleaned)
+        audit = inspect_cleanliness(cleaned)
+        self.assertTrue(audit["is_production_clean"])
+        self.assertEqual(audit["cleanliness_score"], 100.0)
+
 if __name__ == "__main__":
     unittest.main()

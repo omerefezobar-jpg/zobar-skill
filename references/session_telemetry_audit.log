@@ -56,6 +56,9 @@
 {"tick": 56, "timestamp_utc": "2026-10-29T11:55:05Z", "duration_ms": 1474.45, "live_candidates_queried": 6, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
 {"tick": 57, "timestamp_utc": "2026-10-29T11:55:08Z", "duration_ms": 893.07, "live_candidates_queried": 6, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
 {"tick": 58, "timestamp_utc": "2026-10-29T11:55:10Z", "duration_ms": 781.33, "live_candidates_queried": 6, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": false}
-{"tick": 59, "timestamp_utc": "2026-10-29T11:56:03Z", "duration_ms": 1771.57, "live_candidates_queried": 7, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
-{"tick": 60, "timestamp_utc": "2026-10-29T11:56:06Z", "duration_ms": 984.98, "live_candidates_queried": 7, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
-{"tick": 61, "timestamp_utc": "2026-10-29T11:56:08Z", "duration_ms": 729.2, "live_candidates_queried": 7, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": false}
+{"tick": 59, "timestamp_utc": "2026-10-29T12:04:38Z", "duration_ms": 1979.91, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
+{"tick": 60, "timestamp_utc": "2026-10-29T12:04:41Z", "duration_ms": 843.22, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
+{"tick": 61, "timestamp_utc": "2026-10-29T12:04:44Z", "duration_ms": 739.1, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": false}
+{"tick": 62, "timestamp_utc": "2026-10-29T12:05:07Z", "duration_ms": 950.84, "live_candidates_queried": 6, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
+{"tick": 63, "timestamp_utc": "2026-10-29T12:05:09Z", "duration_ms": 940.33, "live_candidates_queried": 6, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
+{"tick": 64, "timestamp_utc": "2026-10-29T12:05:10Z", "duration_ms": 701.73, "live_candidates_queried": 6, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": false}
