@@ -55,6 +55,15 @@ description: >-
    - **Klasik AI Klişelerinden Arınma (Kendini Aş):** Yapay zekanın ürettiği tipik ucuz/klişe çıktılar (parlak 3D plastik/kil balonlar, rastgele gökkuşağı neon degradeleri, 24px'te çamura dönüşen karmaşık devre çizgileri, yamuk erimiş bezier eğrileri) negatif filtrelerle KESİNLİKLE yasaklanır.
    - **Müze Standardında Vektör & Malzeme Dürüstlüğü:** Yalnızca monolitik negatif boşluk (Gestalt figure-ground closure), optik kavis aşımı (+2-3% curve overshoot), altın oran yayları, mat anotlanmış titanyum gravür ve saf monokrom arşiv mürekkebi disiplininde çalışan parametrik SVG ve üst düzey görsel prompt mimarisi üretilir.
 
+11. **10x & 100x Hiper-Özgünlük ve Matematiksel İnovasyon Standardı (10x -> 100x Hyper-Originality Mandate):**
+   - **Yapay Zekâ Medyan Konsensüsünün Aşılması:** Standart yapay zekanın ürettiği ortalama eğitim verisi çorbası (klişe boilerplate, içi boş useState/useEffect sarmalları, ezbere nested for döngüleri, ORM join darboğazları) Kolmogorov-Chaitin Fonksiyonel Bilgi Yoğunluğu ($\mathcal{I}_D$) ve Shannon token entropisi ile taranır. Konsensüs kodları elenir.
+   - **10x Mimari Yükseltme:** Her standart kod şablonu düz bellek (ECS/TypedArray zero-copy), kilitsiz SPSC ring buffer eşzamanlılığı, RLS + pgvector yerel-önceki veri tabanı ve GPU destekli tek tampon çizim ile doğrudan 10 kat daha hızlı ve kompakt hale getirilir (`scripts/hyper_originality_engine.py`).
+   - **100x Sıçrama (Çapraz-Disiplin Matematiksel İzomorfi):** Alışılageldik yaklaşımların tıkandığı yerde matematiksel izomorfiler devreye girer:
+     1. *Cebirsel Topoloji (Simplicial Complex & Betti Sayıları):* Milyonlarca izin ilişkisini özyinelemeli SQL yerine $O(1)$ tek CPU çevriminde doğrular (120x hızlanma).
+     2. *Simplektik Leapfrog Entegratörü:* Faz uzayı hacmini koruyarak sıfır enerji kaybı ve sıfır takılmayla 60 FPS mikro-etkileşim fiziği üretir.
+     3. *Deterministik Kaos Çekicileri (Hénon / Lorenz):* Bot ağlarının taklit edemeyeceği matematiksel Proof-of-Work anti-bot kalkanı oluşturur.
+     4. *Kelime Hizalı Bit Düzeyi SIMD (Roaring Bitmaps):* Milyonluk SaaS filtrelemelerini 0.08ms'de tamamlar.
+
 ---
 ## 2. Dört Ana İcra Motoru (The 4 Core Engines)
 

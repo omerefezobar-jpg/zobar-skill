@@ -96,6 +96,22 @@
       "confidence": 0.89,
       "created_at": 1793274661.1467273,
       "last_reinforced": 1793274661.1467273
+    },
+    {
+      "subject": "live_trend_harvester",
+      "predicate": "assimilated_trick",
+      "object": "Patrick Stewart has died",
+      "confidence": 0.9,
+      "created_at": 1793310054.0449252,
+      "last_reinforced": 1793310054.0449252
+    },
+    {
+      "subject": "live_trend_harvester",
+      "predicate": "assimilated_trick",
+      "object": "We're releasing the weights of Mistral Large 4",
+      "confidence": 0.88,
+      "created_at": 1793310054.0449252,
+      "last_reinforced": 1793310054.0449252
     }
   ],
   "user_profile": {
@@ -106,6 +122,6 @@
     "disliked_patterns": [],
     "last_updated": 1793225150.468043
   },
-  "total_triples_count": 12,
-  "last_saved": 1793274661.1482372
+  "total_triples_count": 14,
+  "last_saved": 1793310054.0459223
 }

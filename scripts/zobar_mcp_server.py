@@ -547,6 +547,23 @@ class ZobarMCPServer:
                     },
                     "required": ["concept"]
                 }
+            },
+            {
+                "name": "synthesize_hyper_originality",
+                "description": "Calculates Kolmogorov-Chaitin information density and elevates software architectures by 10x and 100x using cross-domain mathematical isomorphisms (Algebraic Topology, Symplectic Integrators, Non-Linear Chaos Attractors, and Bit-Parallel SIMD).",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "domain": {"type": "string", "description": "Problem domain or system architecture"},
+                        "baseline_code": {"type": "string", "description": "Optional baseline code snippet to evaluate and elevate"},
+                        "target_multiplier": {
+                            "type": "string",
+                            "enum": ["10x", "100x", "both"],
+                            "description": "Target innovation multiplier"
+                        }
+                    },
+                    "required": ["domain"]
+                }
             }
         ]
 
@@ -933,6 +950,22 @@ class ZobarMCPServer:
                 "paul_rand_evaluation": eval_res,
                 "master_prompts": prompt_res,
                 "parametric_svg": svg_res
+            }
+
+        elif name == "synthesize_hyper_originality":
+            domain = args.get("domain", "systems architecture")
+            baseline_code = args.get("baseline_code", "")
+            target_mult = args.get("target_multiplier", "both")
+            from scripts.hyper_originality_engine import HyperOriginalityEngine
+            ho_engine = HyperOriginalityEngine()
+            score = ho_engine.calculate_code_originality_score(baseline_code) if baseline_code else None
+            ten_x = ho_engine.synthesize_ten_x_architecture(domain, baseline_code) if target_mult in ("10x", "both") else None
+            hundred_x = ho_engine.synthesize_hundred_x_breakthrough(domain) if target_mult in ("100x", "both") else None
+            payload = {
+                "domain": domain,
+                "baseline_originality_analysis": score,
+                "ten_x_elevation": ten_x,
+                "hundred_x_frontier_breakthrough": hundred_x
             }
 
         else:

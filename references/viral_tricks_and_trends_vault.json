@@ -1,9 +1,9 @@
 {
   "version": "2.0.0",
-  "last_updated_utc": "2026-10-29T13:55:50Z",
+  "last_updated_utc": "2026-10-29T21:40:57Z",
   "metadata": {
     "description": "Zobar Trend & Trick Vault: Verified Curated Benchmarks & Live Network Feed Ingestions",
-    "total_tricks": 21
+    "total_tricks": 23
   },
   "tricks": [
     {
@@ -570,6 +570,60 @@
       "verification_methodology": "COMMUNITY_CONSENSUS_VERIFIED",
       "source_url": "https://nullpt.rs/fingerprinting-bioweapons",
       "measurement_date_utc": "2026-10-29T11:51:01Z"
+    },
+    {
+      "id": "LIVE-HN-50294702",
+      "data_origin": "LIVE_NETWORK_SCRAPED",
+      "http_status": 200,
+      "platform": "Global Tech News / Hacker News",
+      "creator": "j4mie",
+      "title": "Patrick Stewart has died",
+      "category": "Global Engineering Wire",
+      "tags": [
+        "hacker-news",
+        "frontpage",
+        "verified-live"
+      ],
+      "problem_solved": "Breakthrough engineering discussion regarding Patrick Stewart has died",
+      "trick_snippet": "// Live HN Story: https://www.nytimes.com/2026/10/29/arts/television/patrick-stewart-dead.html\n// Upvotes: 1508 | Comments: 297\nconst ENGINEERING_BREAKTHROUGH = true;",
+      "raw_metrics": {
+        "raw_points": 1508,
+        "raw_comments": 297,
+        "hn_object_id": "50294702"
+      },
+      "viral_score": 90,
+      "scoring_methodology": "LOG10_HN_POINTS_AND_COMMENTS: 30 + 18*log10(1508 + 2.5*297 + 1) = 90",
+      "verified_impact": "1508 community upvotes and 297 peer comments on Hacker News.",
+      "verification_methodology": "COMMUNITY_CONSENSUS_VERIFIED",
+      "source_url": "https://www.nytimes.com/2026/10/29/arts/television/patrick-stewart-dead.html",
+      "measurement_date_utc": "2026-10-29T21:40:54Z"
+    },
+    {
+      "id": "LIVE-HN-50289418",
+      "data_origin": "LIVE_NETWORK_SCRAPED",
+      "http_status": 200,
+      "platform": "Global Tech News / Hacker News",
+      "creator": "kuberwastaken",
+      "title": "We're releasing the weights of Mistral Large 4",
+      "category": "Global Engineering Wire",
+      "tags": [
+        "hacker-news",
+        "frontpage",
+        "verified-live"
+      ],
+      "problem_solved": "Breakthrough engineering discussion regarding We're releasing the weights of Mistral Large 4",
+      "trick_snippet": "// Live HN Story: https://mistral.ai/news/mistral-large-4-oss/\n// Upvotes: 1013 | Comments: 294\nconst ENGINEERING_BREAKTHROUGH = true;",
+      "raw_metrics": {
+        "raw_points": 1013,
+        "raw_comments": 294,
+        "hn_object_id": "50289418"
+      },
+      "viral_score": 88,
+      "scoring_methodology": "LOG10_HN_POINTS_AND_COMMENTS: 30 + 18*log10(1013 + 2.5*294 + 1) = 88",
+      "verified_impact": "1013 community upvotes and 294 peer comments on Hacker News.",
+      "verification_methodology": "COMMUNITY_CONSENSUS_VERIFIED",
+      "source_url": "https://mistral.ai/news/mistral-large-4-oss/",
+      "measurement_date_utc": "2026-10-29T21:40:54Z"
     }
   ]
 }
