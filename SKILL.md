@@ -96,6 +96,12 @@ description: >-
    - **Firma Düzeyinde Nihai İcra:** Ürünler tek bir geliştiricinin dar bakış açısıyla değil; hukuken korunaklı, alt-milisaniye mimarili, S-Tier yay fiziklerine sahip, viral büyüme döngüleri ve birim ekonomisi kurgulanmış tam teşekküllü bir kurumsal firma standardında teslim edilir (`execute_agency_deliberation`, `synthesize_agency_executive_prompt`).
 
 
+18. **Seçkin Üniversite Müfredat Evrimi & Tarihsel Paradigma Kalkanı İlkesi (Elite University Curriculum Evolution & Historical Grounding Mandate):**
+   - **Tarihsel Müfredat Evrimi (1960'lardan 2026'ya):** MIT, Stanford, UC Berkeley, CMU ve ETH Zürich gibi dünyanın en seçkin üniversitelerinin geçmişten günümüze ders programları, temel ders kitapları (Knuth, Kernighan & Ritchie, Tanenbaum, Saltzer & Kaashoek, Hennessy & Patterson, Kleppmann, Song Han) ve pedagojik paradigma kaymaları izlenir (`scripts/university_curriculum_evolution_engine.py`).
+   - **Tarihte Değişen ve Güncellenen Prensipler:** Moore Yasası ve Dennard ölçeklemesinin çöküşüyle tek çekirdekten kilitsiz SPSC ring buffer'lara geçiş; ağır OOP miras hiyerarşilerinden Rust tipi bellek sahipliği ve veri odaklı tasarıma (ECS) geçiş; klasik B-Tree disk veri tabanlarından CMU Andy Pavlo standardında PostgreSQL RLS + pgvector HNSW hibrit vektör aramasına geçiş; statik WIMP/form arayüzlerinden S-Tier Newtonian yay fizikleri (stiffness 170, damping 26) ve Bento Grid modüler bilgi yoğunluğuna geçiş sistemik olarak koda yansıtılır.
+   - **2026 Modern Müfredat & Aktif Oturum Güçlendirme:** Çıkarım anı hesaplama (Test-Time Compute, MCTS, PRM), PagedAttention KV-Cache, DSPy deklaratif imza derleyicisi ve alt-milisaniye sistem kuralları doğrudan aktif mimari kararları desteklemek üzere dinamik olarak oturum bağlamına enjekte edilir (`analyze_curriculum_evolution`, `synthesize_curriculum_grounding`).
+
+
 ---
 ## 2. Dört Ana İcra Motoru (The 4 Core Engines)
 

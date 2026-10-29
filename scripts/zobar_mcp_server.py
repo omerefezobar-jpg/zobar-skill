@@ -712,6 +712,28 @@ class ZobarMCPServer:
                     },
                     "required": ["product_brief"]
                 }
+            },
+            {
+                "name": "analyze_curriculum_evolution",
+                "description": "Analyzes the historical evolution of computer science curricula from the 1960s to 2026 across MIT, Stanford, UC Berkeley, CMU, and ETH Zürich. Returns historical paradigm shifts, why curricula changed, and latest 2026 syllabi and seminal textbooks.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "topic": {"type": "string", "description": "Academic domain or challenge (e.g., 'concurrency', 'transformers', 'databases', 'compilers', 'ui_ux')"}
+                    },
+                    "required": ["topic"]
+                }
+            },
+            {
+                "name": "synthesize_curriculum_grounding",
+                "description": "Synthesizes an academic grounding markdown context block comparing historical computer science curricula with 2026 MIT/Stanford standards to directly support active engineering work.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "topic": {"type": "string", "description": "Topic or architectural domain to ground academically"}
+                    },
+                    "required": ["topic"]
+                }
             }
         ]
 
@@ -1209,6 +1231,19 @@ class ZobarMCPServer:
             engine = AgencySwarmEnterpriseEngine()
             prompt_str = engine.synthesize_agency_session_prompt(product_brief=product_brief, target_sector=target_sector)
             payload = {"agency_prompt": prompt_str, "product_brief": product_brief}
+
+        elif name == "analyze_curriculum_evolution":
+            topic = args.get("topic", "systems engineering")
+            from scripts.university_curriculum_evolution_engine import UniversityCurriculumEvolutionEngine
+            engine = UniversityCurriculumEvolutionEngine()
+            payload = engine.analyze_curriculum_evolution(topic=topic)
+
+        elif name == "synthesize_curriculum_grounding":
+            topic = args.get("topic", "systems engineering")
+            from scripts.university_curriculum_evolution_engine import UniversityCurriculumEvolutionEngine
+            engine = UniversityCurriculumEvolutionEngine()
+            context_str = engine.synthesize_curriculum_grounding_context(active_topic=topic)
+            payload = {"grounding_markdown": context_str, "topic": topic}
 
         else:
             raise ValueError(f"Unknown tool name: {name}")
