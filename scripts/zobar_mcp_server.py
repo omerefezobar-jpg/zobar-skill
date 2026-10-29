@@ -639,6 +639,18 @@ class ZobarMCPServer:
                     },
                     "required": ["text_input"]
                 }
+            },
+            {
+                "name": "amplify_ai_model_meta_cognition",
+                "description": "Transforms any standard AI model into a frontier super-reasoner (10x-100x amplification) via Feynman first principles, Monte Carlo Tree Search (MCTS), Process Reward Model (PRM) scoring, and DSPy declarative prompt compilation.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "problem": {"type": "string", "description": "Complex engineering, architecture, or algorithmic challenge"},
+                        "domain": {"type": "string", "description": "Domain (e.g. Distributed Systems, FinTech, Cryptography)"}
+                    },
+                    "required": ["problem"]
+                }
             }
         ]
 
@@ -1086,6 +1098,13 @@ class ZobarMCPServer:
             from scripts.security_and_regulatory_engine import SecurityAndRegulatoryEngine
             engine = SecurityAndRegulatoryEngine()
             payload = engine.execute_full_security_audit(text_input, dirty_notes, clean_code)
+
+        elif name == "amplify_ai_model_meta_cognition":
+            problem = args.get("problem", "Distributed zero-copy lock-free consensus")
+            domain = args.get("domain", "Distributed Systems")
+            from scripts.master_ai_model_amplifier import MasterAIModelAmplifier
+            engine = MasterAIModelAmplifier()
+            payload = engine.execute_complete_amplification(problem, domain)
 
         else:
             raise ValueError(f"Unknown tool name: {name}")

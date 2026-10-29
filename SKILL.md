@@ -79,6 +79,12 @@ description: >-
    - **Clean-Room Hukuki Fikri Mülkiyet Kalkanı:** Sony v. Connectix ve NEC v. Intel içtihatları doğrultusunda analiz odası (dirty room) ile temiz üretim odası (clean room) mutlak olarak ayrılır; tescilli değişken veya telifli kod sızıntıları otomatik taranarak ihraç şartnamesi yasal güvenceye alınır.
    - **AB Yapay Zekâ Yasası (EU AI Act) & GDPR:** Madde 5 yasaklı yapay zekâ uygulamaları (sosyal puanlama, manipülasyon) derhal engellenir; Ek III yüksek riskli sistemler için uygunluk değerlendirmesi ve GDPR Madde 17/22 veri gizliliği mekanizmaları zorunlu kılınır.
 
+15. **Meta-Model Bilişsel Hızlandırıcı & Frontier Akıl Yürütme Standardı (Master Model Amplifier & Meta-Cognition Mandate):**
+   - **Feynman İlkeleriyle Sadeleştirme:** Karmaşık problemler tüm pazarlama jargonlarından ve soyut buzzword'lerden arındırılır; fiziksel ve matematiksel değişmezlere (korunum yasaları, Little's Law, sıfır-kopyalama) indirgenir (`scripts/master_ai_model_amplifier.py`).
+   - **Monte Carlo Tree Search (MCTS) & UCT:** Mimari alternatifler rastgele seçilmez; Upper Confidence Bound for Trees formülü ($UCT = Q/N + c\sqrt{\ln N_p / N}$) ile denge kurularak radikal non-konsensüs ve Pareto-üstün düğümler keşfedilir.
+   - **Çıkarım Anı Hesaplama (Test-Time Compute) & PRM:** Model tek bir tahminde bulunmak yerine, N adet hipotez üretir; her adımı Adım Ödül Modeli (Process Reward Model) ile puanlayıp öz-tutarlılık (self-consistency) oylamasıyla 10x-100x daha güçlü mimariyi seçer.
+   - **DSPy Bildirisel Prompt Derleyicisi:** Stanford DSPy tarzında katı girdi kısıtları, çıkarım iskeleleri ve tip güvenceli çıktı tanımları derlenerek token israfı sıfırlanır, Shannon bilgi yoğunluğu maksimize edilir.
+
 ---
 ## 2. Dört Ana İcra Motoru (The 4 Core Engines)
 
