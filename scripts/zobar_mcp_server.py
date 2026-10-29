@@ -480,6 +480,21 @@ class ZobarMCPServer:
                     },
                     "required": ["query"]
                 }
+            },
+            {
+                "name": "quantum_optimize_design",
+                "description": "Quantum Design Optimizer: Evaluates candidate UI designs using quantum state superposition, Hamiltonian energy minimization, and Von Neumann entropy to mathematically select the best-looking, most harmonic, and lowest-friction design.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "candidates": {
+                            "type": "array",
+                            "items": {"type": "object"},
+                            "description": "List of design options with color tokens, aspect ratio, visual density, etc."
+                        }
+                    },
+                    "required": ["candidates"]
+                }
             }
         ]
 
@@ -817,6 +832,12 @@ class ZobarMCPServer:
                 payload = harmonizer.inject_harmonized_components_into_file(inject_target, query, comp_ids)
             else:
                 payload = harmonizer.harmonize_ui_components(query, comp_ids)
+
+        elif name == "quantum_optimize_design":
+            candidates = args.get("candidates", [])
+            from scripts.quantum_design_optimizer import QuantumDesignOptimizer
+            optimizer = QuantumDesignOptimizer()
+            payload = optimizer.select_optimal_design(candidates)
 
         else:
             raise ValueError(f"Unknown tool name: {name}")

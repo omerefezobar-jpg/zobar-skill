@@ -225,12 +225,29 @@ class ProvenComponentHarmonizer:
         else:
             matched_comps = self.match_proven_components(query, limit=3)
 
-        # Harmonize color tokens from top benchmark site
-        primary_site = benchmark_sites[0] if benchmark_sites else {
-            "name": "Linear",
-            "color_tokens": {"background": "#0e1017", "accent": "#6366f1", "text": "#f8fafc"},
-            "key_interactions": "Subtle border hover glow, keyboard-first navigation"
-        }
+        # Quantum aesthetic selection over benchmark sites
+        quantum_report = {}
+        if benchmark_sites:
+            try:
+                from scripts.quantum_design_optimizer import QuantumDesignOptimizer
+                q_opt = QuantumDesignOptimizer()
+                q_selection = q_opt.select_optimal_design(benchmark_sites)
+                primary_site = q_selection["selected_design"]
+                quantum_report = {
+                    "quantum_ground_state_energy": q_selection["ground_state_energy"],
+                    "born_collapse_probability": q_selection["collapse_probability"],
+                    "von_neumann_entropy": q_selection["von_neumann_entropy"],
+                    "coherence_fidelity": q_selection["quantum_coherence_fidelity"],
+                    "optimality_proof": q_selection["mathematical_optimality_proof"]
+                }
+            except Exception:
+                primary_site = benchmark_sites[0]
+        else:
+            primary_site = {
+                "name": "Linear",
+                "color_tokens": {"background": "#0e1017", "accent": "#6366f1", "text": "#f8fafc"},
+                "key_interactions": "Subtle border hover glow, keyboard-first navigation"
+            }
 
         synthesized_snippets = []
         for c in matched_comps:
@@ -249,6 +266,7 @@ class ProvenComponentHarmonizer:
             "benchmark_reference_sites": benchmark_sites,
             "design_tokens": primary_site.get("color_tokens", {}),
             "key_interactions": primary_site.get("key_interactions", "Fluid spring transitions"),
+            "quantum_aesthetic_evaluation": quantum_report,
             "blended_components": synthesized_snippets,
             "combined_html_payload": "\n".join([s["html_snippet"] for s in synthesized_snippets])
         }

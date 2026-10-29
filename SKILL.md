@@ -35,6 +35,12 @@ description: >-
    - **KATI KURAL:** Kesinlikle tekerleği yeniden icat etme veya daha vasat bir şey üretme!
    - Eğer ortaya konulacak kod veya arayüz dünyadaki örneklerinden kesin ve kanıtlanmış bir şekilde ÇOK DAHA İYİ olmayacaksa; `references/s_tier_design_vault.json` ve `references/free_modern_components_vault.json` içerisindeki dünyanın en başarılı sitelerinden (Linear, Stripe, Apple, Vercel, Supabase, Raycast) süzülmüş hazır UI bileşenlerini (Bento grid, Shimmer loader, Cmd+K paleti, Telemetry rozetleri, Spring butonları) ve kanıtlanmış tasarım kodlarını alıp **harmanlayarak** sunmak ZORUNDADIR (`scripts/proven_component_harmonizer.py`).
    - Hiçbir zaman alelade, stilize edilmemiş ham HTML/CSS ya da sıradan form elemanları üretilemez. Arayüzler daima dünya standartlarındaki kanıtlanmış başarı kalıplarından sentezlenir.
+7. **Kuantum Matematiğiyle Estetik Taban-Durum Seçimi (Quantum Aesthetic Ground-State Collapse):**
+   - Tasarım ve bileşen alternatifleri arasında seçim yapılırken sübjektif tahminler veya rastgele tercihler yasaktır.
+   - Tasarım adayları Hilbert uzayında kuantum durum vektörleri ($|\psi\rangle = \sum c_k |k\rangle$) olarak modellenir.
+   - Bilişsel yük, görsel karmaşa (clutter), kromatik uyumsuzluk ve ergonomik sürtünme **Aesthetic Hamiltonian ($\hat{H}$)** potansiyel enerjisi olarak hesaplanır.
+   - Kuantum tünelleme ve adyabatik evrimle taban durum ($E_0$) ve Born olasılık çökmesi ($P(k) = |\langle k | \psi_0 \rangle|^2$) hesaplanarak matematiksel olarak en mantıklı, en az bilişsel sürtünmeye sahip ve altın oran / WCAG kontrast rezonansına en uygun tasarım seçilir (`scripts/quantum_design_optimizer.py`).
+   - Von Neumann Entropisi ($S = -\sum P(k) \ln P(k)$) ile arayüzün ne anlamsız bir gürültü ne de aşırı ilkel bir durağanlık taşımadığı doğrulanır.
 
 ---
 
@@ -152,6 +158,9 @@ python -m unittest discover tests
 # 7. Kanıtlanmış S-Tier Bileşen Harmanlama (Linear/Stripe/Apple/Vercel)
 python scripts/proven_component_harmonizer.py "saas dashboard"
 python scripts/proven_component_harmonizer.py "ecommerce luxury" --inject web/apps/ecommerce_store.html
+
+# 8. Kuantum Matematiğiyle Estetik Tasarım Optimizasyonu & Çökmesi
+python scripts/quantum_design_optimizer.py --demo
 ```
 
 ---
@@ -162,6 +171,7 @@ Skill'i bir LLM / agent içerisinden çağırırken kullanılabilen tescilli ara
 
 | MCP Araç Adı | Parametreler | Ne İşe Yarar? |
 | :--- | :--- | :--- |
+| `quantum_optimize_design` | `candidates` | Kuantum durum süperpozisyonu, Hamiltonian enerji minimizasyonu ve Born olasılık çökmesiyle en estetik ve ergonomik tasarımı seçer. |
 | `blend_proven_ui_components` | `query`, `component_ids`, `inject_target_file` | Dünyanın en başarılı sitelerinden (Linear, Stripe, Apple) süzülmüş hazır modern UI bileşenlerini harmanlar ve doğrudan kodun içine enjekte eder. |
 | `synthesize_complete_application` | `brand_name`, `domain_sector`, `design_theme` | 4 sektörden birinde uçtan uca çalışan, butonları ve LocalStorage'ı tam HTML üretir. |
 | `harvest_ideas_and_co_create` | `domain_context` | Trendleri tarar, iç değerlendirmesini yapar ve kullanıcıya tek satırlık seçenekler sunar. |
