@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![CI & Quality Gate](https://github.com/omerefezobar-jpg/zobar-skill/actions/workflows/ci.yml/badge.svg)](https://github.com/omerefezobar-jpg/zobar-skill/actions)
 [![Regression Suite](https://img.shields.io/badge/Regression%20Suite-30%2F30%20Passing%20(Zero%20Tolerance)-blue.svg)](./benchmarks/BENCHMARK_REPORT.md)
-[![Unit Tests](https://img.shields.io/badge/Unit%20Tests-200%2F200%20Passing-brightgreen.svg)](https://github.com/omerefezobar-jpg/zobar-skill/actions)
+[![Unit Tests](https://img.shields.io/badge/Unit%20Tests-205%2F205%20Passing-brightgreen.svg)](https://github.com/omerefezobar-jpg/zobar-skill/actions)
 [![App Factory](https://img.shields.io/badge/App%20Factory-SaaS%20%7C%20E--Com%20%7C%20MedTech%20%7C%203D-success.svg)](./web/app_factory.html)
 [![Autonomous Co-Creation](https://img.shields.io/badge/Co--Creation-Autonomous%20Pre--Critique%20%7C%20Live%20Inject-blueviolet.svg)](./scripts/autonomous_idea_factory.py)
 [![Clean-Room Reversing](https://img.shields.io/badge/Reverse%20Engineering-10--Phase%20%7C%20Fuzzing%20%7C%20FSD%20Export-red.svg)](./scripts/reverse_engineering_analyst.py)

@@ -495,6 +495,20 @@ class ZobarMCPServer:
                     },
                     "required": ["candidates"]
                 }
+            },
+            {
+                "name": "synthesize_full_stack_triad",
+                "description": "Full-Stack Triad Architecture Engine: Unites Deep Analysis, Quantum-Optimized Frontend Design, and Sub-Millisecond Backend REST/SQL Architecture into a single cohesive production package.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "vision": {"type": "string", "description": "The product or software system vision"},
+                        "sector": {"type": "string", "description": "Target industry sector (e.g. Enterprise SaaS, FinTech, MedTech, Luxury E-Commerce)"},
+                        "brand_name": {"type": "string", "description": "Optional brand or product title"},
+                        "output_dir": {"type": "string", "description": "Optional directory to output full-stack deliverables (HTML, Python server, SQL)"}
+                    },
+                    "required": ["vision"]
+                }
             }
         ]
 
@@ -838,6 +852,25 @@ class ZobarMCPServer:
             from scripts.quantum_design_optimizer import QuantumDesignOptimizer
             optimizer = QuantumDesignOptimizer()
             payload = optimizer.select_optimal_design(candidates)
+
+        elif name == "synthesize_full_stack_triad":
+            vision = args.get("vision", "High-Performance Cloud Core")
+            sector = args.get("sector", "Enterprise SaaS")
+            brand = args.get("brand_name", None)
+            output_dir = args.get("output_dir", None)
+            from scripts.full_stack_triad_engine import FullStackTriadEngine
+            engine = FullStackTriadEngine()
+            result = engine.synthesize_full_stack_triad(vision, sector, brand)
+            if output_dir:
+                os.makedirs(output_dir, exist_ok=True)
+                with open(os.path.join(output_dir, "index.html"), "w", encoding="utf-8") as f:
+                    f.write(result["pillars"]["pillar_2_frontend_design"]["generated_html_code"])
+                with open(os.path.join(output_dir, "server.py"), "w", encoding="utf-8") as f:
+                    f.write(result["pillars"]["pillar_3_backend_systems"]["edge_service_python"])
+                with open(os.path.join(output_dir, "schema.sql"), "w", encoding="utf-8") as f:
+                    f.write(result["pillars"]["pillar_3_backend_systems"]["database_sql_schema"])
+                result["written_output_dir"] = os.path.abspath(output_dir)
+            payload = result
 
         else:
             raise ValueError(f"Unknown tool name: {name}")

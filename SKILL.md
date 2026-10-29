@@ -161,6 +161,9 @@ python scripts/proven_component_harmonizer.py "ecommerce luxury" --inject web/ap
 
 # 8. Kuantum Matematiğiyle Estetik Tasarım Optimizasyonu & Çökmesi
 python scripts/quantum_design_optimizer.py --demo
+
+# 9. Tam Entegre Triad Sentezi (Derin Analiz + Kuantum UI + Alt-Milisaniye Backend)
+python scripts/full_stack_triad_engine.py "Real-Time Embedded IoT Telemetry Dispatcher" --sector "Industrial Automation" --output-dir web/apps/triad_demo
 ```
 
 ---
@@ -171,6 +174,7 @@ Skill'i bir LLM / agent içerisinden çağırırken kullanılabilen tescilli ara
 
 | MCP Araç Adı | Parametreler | Ne İşe Yarar? |
 | :--- | :--- | :--- |
+| `synthesize_full_stack_triad` | `vision`, `sector`, `brand_name`, `output_dir` | Derin Analiz (arXiv, Reddit, Patent, TRIZ), Kuantum Optimize Frontend ve Alt-Milisaniye Backend REST/SQL mimarisini tek pakette üretir. |
 | `quantum_optimize_design` | `candidates` | Kuantum durum süperpozisyonu, Hamiltonian enerji minimizasyonu ve Born olasılık çökmesiyle en estetik ve ergonomik tasarımı seçer. |
 | `blend_proven_ui_components` | `query`, `component_ids`, `inject_target_file` | Dünyanın en başarılı sitelerinden (Linear, Stripe, Apple) süzülmüş hazır modern UI bileşenlerini harmanlar ve doğrudan kodun içine enjekte eder. |
 | `synthesize_complete_application` | `brand_name`, `domain_sector`, `design_theme` | 4 sektörden birinde uçtan uca çalışan, butonları ve LocalStorage'ı tam HTML üretir. |
