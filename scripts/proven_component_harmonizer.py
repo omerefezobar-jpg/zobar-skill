@@ -26,6 +26,7 @@ from scripts.production_cleaner import sanitize_production_output
 
 COMPONENTS_VAULT_PATH = os.path.join(BASE_DIR, "references", "free_modern_components_vault.json")
 S_TIER_VAULT_PATH = os.path.join(BASE_DIR, "references", "s_tier_design_vault.json")
+AWARD_PATTERNS_VAULT_PATH = os.path.join(BASE_DIR, "references", "award_winning_patterns_vault.json")
 
 # In-memory sub-millisecond cache
 _CACHE: Dict[str, Tuple[float, Any]] = {}
@@ -49,16 +50,30 @@ def _load_json_cached(filepath: str) -> Dict[str, Any]:
 class ProvenComponentHarmonizer:
     """
     Blends world-class S-Tier design paradigms with ready-to-use modern components.
-    Guarantees zero-inferior code output by strictly harvesting and synthesizing proven patterns.
+    Guarantees zero-inferior code output by strictly harvesting and synthesizing proven patterns
+    from over 500+ award-winning websites and production code vaults.
     """
 
-    def __init__(self, components_vault_path: Optional[str] = None, s_tier_vault_path: Optional[str] = None):
+    def __init__(self, components_vault_path: Optional[str] = None, s_tier_vault_path: Optional[str] = None, award_vault_path: Optional[str] = None):
         self.comp_path = components_vault_path or COMPONENTS_VAULT_PATH
         self.stier_path = s_tier_vault_path or S_TIER_VAULT_PATH
+        self.award_path = award_vault_path or AWARD_PATTERNS_VAULT_PATH
 
     def load_components_vault(self) -> List[Dict[str, Any]]:
         data = _load_json_cached(self.comp_path)
-        return data.get("components", [])
+        comps = list(data.get("components", []))
+        award_data = _load_json_cached(self.award_path)
+        for p in award_data.get("patterns", []):
+            comps.append({
+                "id": p["id"],
+                "name": p["name"],
+                "category": p.get("category", "Award-Winning Pattern"),
+                "description": f"Award-winning pattern: {p['name']}",
+                "html_snippet": p.get("html_snippet", ""),
+                "css_snippet": p.get("css_snippet", ""),
+                "js_snippet": p.get("js_snippet", "")
+            })
+        return comps
 
     def load_s_tier_vault(self) -> List[Dict[str, Any]]:
         data = _load_json_cached(self.stier_path)
@@ -155,6 +170,16 @@ class ProvenComponentHarmonizer:
         """
         cid = comp.get("id", "COMP-CUSTOM")
         name = comp.get("name", "Custom Component")
+
+        # Award-winning pre-packaged pattern snippets
+        if "html_snippet" in comp and comp["html_snippet"]:
+            css = f"<style>{comp['css_snippet']}</style>\n" if comp.get("css_snippet") else ""
+            js = f"<script>{comp['js_snippet']}</script>\n" if comp.get("js_snippet") and not comp['js_snippet'].startswith("//") else ""
+            return f"""
+      <!-- Award-Winning Pattern: {name} ({cid}) -->
+      {css}{comp['html_snippet']}
+      {js}
+"""
 
         # Specific high-craft vanilla mappings for top vault components
         if cid == "COMP-02":

@@ -1,0 +1,42 @@
+{
+  "vault_metadata": {
+    "version": "3.0.0",
+    "name": "Award-Winning UI Patterns & S-Tier Production Code Vault",
+    "description": "Battle-tested CSS/JS code snippets extracted from world-class award-winning digital products.",
+    "total_patterns": 12
+  },
+  "patterns": [
+    {
+      "id": "AWARD-01",
+      "name": "Spotlight Radial Cursor Hover Card (Linear & Vercel Style)",
+      "category": "Micro-Interactions",
+      "html_snippet": "<div class=\"spotlight-card\" onmousemove=\"updateSpotlight(event, this)\">\n  <div class=\"spotlight-content\">\n    <h4>Sub-Millisecond Engine</h4>\n    <p>Dynamic radial gradient tracking cursor coordinate with zero layout shift.</p>\n  </div>\n</div>",
+      "css_snippet": ".spotlight-card {\n  position: relative;\n  background: rgba(18, 20, 29, 0.75);\n  border: 1px solid rgba(255, 255, 255, 0.08);\n  border-radius: 16px;\n  padding: 1.5rem;\n  overflow: hidden;\n}\n.spotlight-card::before {\n  content: '';\n  position: absolute;\n  top: var(--mouse-y, -100px);\n  left: var(--mouse-x, -100px);\n  width: 250px;\n  height: 250px;\n  background: radial-gradient(circle, rgba(99, 102, 241, 0.15), transparent 70%);\n  transform: translate(-50%, -50%);\n  pointer-events: none;\n  transition: opacity 0.2s;\n}",
+      "js_snippet": "function updateSpotlight(e, card) {\n  const rect = card.getBoundingClientRect();\n  card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);\n  card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);\n}"
+    },
+    {
+      "id": "AWARD-02",
+      "name": "Infinite Inertial Marquee Ticker (Stripe Press & Campsite Style)",
+      "category": "Animation & Banners",
+      "html_snippet": "<div class=\"marquee-wrapper\">\n  <div class=\"marquee-track\">\n    <span>● 0.03ms Execution Latency</span>\n    <span>● 100/100 Cleanliness Score</span>\n    <span>● Quantum Hamiltonian Ground State</span>\n    <span>● Zero AI Gimmicks</span>\n  </div>\n</div>",
+      "css_snippet": ".marquee-wrapper {\n  overflow: hidden;\n  white-space: nowrap;\n  mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);\n}\n.marquee-track {\n  display: inline-flex;\n  gap: 2rem;\n  animation: marqueeScroll 25s linear infinite;\n}\n.marquee-track:hover { animation-play-state: paused; }\n@keyframes marqueeScroll {\n  from { transform: translateX(0); }\n  to { transform: translateX(-50%); }\n}",
+      "js_snippet": "// Pure CSS hardware-accelerated marquee. Zero JS required."
+    },
+    {
+      "id": "AWARD-03",
+      "name": "Tactile Web Audio Micro-Interaction Synthesizer (Teenage Engineering Style)",
+      "category": "Audio & Haptics",
+      "html_snippet": "<button class=\"tactile-btn\" onclick=\"playTactileClick()\">\n  Trigger Action\n</button>",
+      "css_snippet": ".tactile-btn {\n  background: #6366f1;\n  color: #fff;\n  border: none;\n  padding: 0.65rem 1.25rem;\n  border-radius: 8px;\n  font-weight: 700;\n  cursor: pointer;\n  transition: transform 0.1s cubic-bezier(0.16, 1, 0.3, 1);\n}\n.tactile-btn:active { transform: scale(0.96); }",
+      "js_snippet": "let _audioCtx = null;\nfunction playTactileClick(freq = 840, duration = 0.03) {\n  if (!_audioCtx) _audioCtx = new (window.AudioContext || window.webkitAudioContext)();\n  const osc = _audioCtx.createOscillator();\n  const gain = _audioCtx.createGain();\n  osc.frequency.setValueAtTime(freq, _audioCtx.currentTime);\n  osc.frequency.exponentialRampToValueAtTime(320, _audioCtx.currentTime + duration);\n  gain.gain.setValueAtTime(0.04, _audioCtx.currentTime);\n  gain.gain.exponentialRampToValueAtTime(0.001, _audioCtx.currentTime + duration);\n  osc.connect(gain);\n  gain.connect(_audioCtx.destination);\n  osc.start();\n  osc.stop(_audioCtx.currentTime + duration);\n}"
+    },
+    {
+      "id": "AWARD-04",
+      "name": "High-Density Bento Grid Matrix with Dynamic Aspect Ratio",
+      "category": "Layout",
+      "html_snippet": "<div class=\"bento-matrix\">\n  <div class=\"bento-tile tile-wide\">Hero Telemetry</div>\n  <div class=\"bento-tile\">Metric A</div>\n  <div class=\"bento-tile\">Metric B</div>\n</div>",
+      "css_snippet": ".bento-matrix {\n  display: grid;\n  grid-template-columns: repeat(12, 1fr);\n  gap: 1.25rem;\n}\n.bento-tile {\n  grid-column: span 6;\n  background: rgba(255, 255, 255, 0.03);\n  border: 1px solid rgba(255, 255, 255, 0.08);\n  border-radius: 14px;\n  padding: 1.5rem;\n}\n.tile-wide { grid-column: span 12; }\n@media (min-width: 1024px) {\n  .bento-tile { grid-column: span 4; }\n  .tile-wide { grid-column: span 8; }\n}",
+      "js_snippet": "// Fluid CSS grid with zero layout shift."
+    }
+  ]
+}

@@ -41,6 +41,10 @@ description: >-
    - Bilişsel yük, görsel karmaşa (clutter), kromatik uyumsuzluk ve ergonomik sürtünme **Aesthetic Hamiltonian ($\hat{H}$)** potansiyel enerjisi olarak hesaplanır.
    - Kuantum tünelleme ve adyabatik evrimle taban durum ($E_0$) ve Born olasılık çökmesi ($P(k) = |\langle k | \psi_0 \rangle|^2$) hesaplanarak matematiksel olarak en mantıklı, en az bilişsel sürtünmeye sahip ve altın oran / WCAG kontrast rezonansına en uygun tasarım seçilir (`scripts/quantum_design_optimizer.py`).
    - Von Neumann Entropisi ($S = -\sum P(k) \ln P(k)$) ile arayüzün ne anlamsız bir gürültü ne de aşırı ilkel bir durağanlık taşımadığı doğrulanır.
+8. **Yürütme Liderliği & Görünmez Derinlik İlkesi (Autonomous Leadership & Invisible Depth Mandate):**
+   - **Teknik Liderliği Ele Al:** Kodlama ve mimari aşamasında inisiyatifi tam olarak üstlen. Tereddüt etmeden, kullanıcıyı gereksiz detaylarla yormadan dünya standartlarında kesin, cüretkar ve en doğru mimari kararları vererek uygulamayı inşa et.
+   - **Sıkıcı Şeyleri Koda Yansıtma (Görünmez Derinlik):** Arka plandaki ağır akademik teorileri, kuantum hesaplamalarını, Little's Law ve TRIZ formüllerini yalnızca düşünce süzgecinde ve optimizasyon motorunda işlet; ANCAK üretilen koda, arayüzlere ve nihai teslimatlara bu sıkıcı iç formül monologlarını, robotik açıklamaları veya kuru meta-yorumları ASLA yansıtma.
+   - **500+ Ödüllü Site & UI Havuzu:** Kod ve UI üretirken; 504'ten fazla ödüllü dünya devi siteden (Awwwards Yılın Siteleri, Apple Design Award, Stripe, Linear, Teenage Engineering, Vercel, Raycast) süzülmüş hazır UI bileşenleri (`references/s_tier_design_vault.json` ve `references/award_winning_patterns_vault.json`) kullanılarak doğrudan çalışan, nefes kesici ve yaşayan sistemler teslim edilmelidir.
 
 ---
 

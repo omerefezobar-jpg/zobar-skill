@@ -23,10 +23,17 @@ class TestProvenComponentHarmonizer(unittest.TestCase):
 
     def test_load_vaults_successfully(self):
         comps = self.harmonizer.load_components_vault()
-        self.assertGreaterEqual(len(comps), 10, "Components vault should contain at least 10 components")
+        self.assertGreaterEqual(len(comps), 20, "Components vault should contain at least 20 components and award patterns")
 
         sites = self.harmonizer.load_s_tier_vault()
-        self.assertGreaterEqual(len(sites), 50, "S-Tier vault should contain at least 50 sites")
+        self.assertGreaterEqual(len(sites), 500, "S-Tier vault must contain at least 500 award-winning sites")
+
+    def test_load_award_winning_patterns(self):
+        comps = self.harmonizer.load_components_vault()
+        comp_ids = [c["id"] for c in comps]
+        self.assertIn("AWARD-01", comp_ids)
+        self.assertIn("AWARD-02", comp_ids)
+        self.assertIn("AWARD-03", comp_ids)
 
     def test_match_benchmark_sites_linear_and_stripe(self):
         saas_sites = self.harmonizer.match_benchmark_sites("linear issue tracker and stripe", limit=3)
