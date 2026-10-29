@@ -85,6 +85,11 @@ description: >-
    - **Çıkarım Anı Hesaplama (Test-Time Compute) & PRM:** Model tek bir tahminde bulunmak yerine, N adet hipotez üretir; her adımı Adım Ödül Modeli (Process Reward Model) ile puanlayıp öz-tutarlılık (self-consistency) oylamasıyla 10x-100x daha güçlü mimariyi seçer.
    - **DSPy Bildirisel Prompt Derleyicisi:** Stanford DSPy tarzında katı girdi kısıtları, çıkarım iskeleleri ve tip güvenceli çıktı tanımları derlenerek token israfı sıfırlanır, Shannon bilgi yoğunluğu maksimize edilir.
 
+16. **Çok Modlu Video Transkripsiyonu & Oturum Zekası Geliştirme İlkesi (Multimodal Video Transcription & Session Evolution Mandate):**
+   - **Platform Ayrıştırma & Transkripsiyon:** YouTube (Watch, Shorts, Embed) ve Instagram (Reels, Video Gönderileri) üzerindeki üst düzey mühendislik, mimari ve S-Tier UI/UX tasarım videoları standart kütüphane altyapısıyla transkript edilir (`scripts/video_session_intelligence_engine.py`). WebVTT, SRT ve ham altyazı akışları zaman damgalı segmentlere ayrıştırılır.
+   - **Mühendislik İlgililik Filtresi & Yoğunluk Puanı:** Video içeriği 5 temel sütunda (`SYSTEMS_ARCHITECTURE`, `FRONTEND_AND_DESIGN`, `FRONTIER_AI_AND_ML`, `REVERSE_ENGINEERING_AND_SECURITY`, `PRODUCT_GROWTH_AND_FINOPS`) taranır; popüler kültür gürültüsü ve tıklama tuzakları (clickbait) elenir, teknik yoğunluk puanı hesaplanır.
+   - **Oturum Zekası & Hafıza Yükseltme:** Transkriptten somut mimari planlar, CSS yay fizikleri (stiffness/damping), PostgreSQL indeks direktifleri, KV-cache optimizasyonları ve anti-pattern'ler süzülür; `user_knowledge_graph.json` hafızasına bilgi üçlüleri (`[Özne, İlişki, Nesne]`) olarak kaydedilir ve aktif oturum bağlamına dinamik markdown blokları olarak enjekte edilir (`transcribe_and_ingest_video`, `query_video_session_insights`, `synthesize_session_video_context`).
+
 ---
 ## 2. Dört Ana İcra Motoru (The 4 Core Engines)
 

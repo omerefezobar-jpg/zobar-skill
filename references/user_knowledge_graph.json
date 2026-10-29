@@ -100,18 +100,90 @@
     {
       "subject": "live_trend_harvester",
       "predicate": "assimilated_trick",
-      "object": "Patrick Stewart has died",
+      "object": "StackOverflow now gets fewer than 1000 questions a",
       "confidence": 0.9,
-      "created_at": 1793310054.0449252,
-      "last_reinforced": 1793310054.0449252
+      "created_at": 1793295156.660545,
+      "last_reinforced": 1793295156.660545
     },
     {
       "subject": "live_trend_harvester",
       "predicate": "assimilated_trick",
       "object": "We're releasing the weights of Mistral Large 4",
-      "confidence": 0.88,
-      "created_at": 1793310054.0449252,
-      "last_reinforced": 1793310054.0449252
+      "confidence": 0.87,
+      "created_at": 1793304634.4314046,
+      "last_reinforced": 1793304634.4314046
+    },
+    {
+      "subject": "live_trend_harvester",
+      "predicate": "assimilated_trick",
+      "object": "Google Search is now less than half of Alphabet’s ",
+      "confidence": 0.85,
+      "created_at": 1793304634.4314046,
+      "last_reinforced": 1793304634.4314046
+    },
+    {
+      "subject": "live_trend_harvester",
+      "predicate": "assimilated_trick",
+      "object": "Patrick Stewart has died",
+      "confidence": 0.81,
+      "created_at": 1793305000.2739806,
+      "last_reinforced": 1793305000.2739806
+    },
+    {
+      "subject": "Video_youtube_creator",
+      "predicate": "recommends_architecture",
+      "object": "Always enforce postgresql row-level security alongside pgvector hnsw indexing.",
+      "confidence": 1.1,
+      "created_at": 1793311429.393727,
+      "last_reinforced": 1793311429.6408732
+    },
+    {
+      "subject": "Systems Architecture",
+      "predicate": "uses_vector_index",
+      "object": "HNSW (vector_cosine_ops)",
+      "confidence": 1.3000000000000003,
+      "created_at": 1793311429.393727,
+      "last_reinforced": 1793311510.1155868
+    },
+    {
+      "subject": "Video_Andrej Karpathy",
+      "predicate": "recommends_architecture",
+      "object": "We start with self-attention. The core intuition of the transformer attention me",
+      "confidence": 1.2000000000000002,
+      "created_at": 1793311438.4170368,
+      "last_reinforced": 1793311510.1131444
+    },
+    {
+      "subject": "Video_Fireship",
+      "predicate": "recommends_architecture",
+      "object": "Boring static buttons are dead. Modern command palettes and floating bento docks",
+      "confidence": 1.4000000000000004,
+      "created_at": 1793311438.4200366,
+      "last_reinforced": 1793311510.067932
+    },
+    {
+      "subject": "Frontend And Design",
+      "predicate": "uses_spring_physics",
+      "object": "{'stiffness': 170, 'damping': 26}",
+      "confidence": 1.4000000000000004,
+      "created_at": 1793311438.4200366,
+      "last_reinforced": 1793311510.0689435
+    },
+    {
+      "subject": "Video_ArchitectReels",
+      "predicate": "recommends_architecture",
+      "object": "Always combine where tenant_id = current_setting('app.",
+      "confidence": 1.1,
+      "created_at": 1793311494.9136193,
+      "last_reinforced": 1793311510.1155868
+    },
+    {
+      "subject": "Video_SecurityTeam",
+      "predicate": "recommends_architecture",
+      "object": "Always enforce postgresql row-level security for multi-tenant isolation.",
+      "confidence": 1.1,
+      "created_at": 1793311494.914618,
+      "last_reinforced": 1793311510.1174493
     }
   ],
   "user_profile": {
@@ -122,6 +194,6 @@
     "disliked_patterns": [],
     "last_updated": 1793225150.468043
   },
-  "total_triples_count": 14,
-  "last_saved": 1793310054.0459223
+  "total_triples_count": 23,
+  "last_saved": 1793311510.1174493
 }

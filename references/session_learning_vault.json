@@ -1,0 +1,220 @@
+{
+  "version": "1.0",
+  "last_updated": 1793311510.1174493,
+  "total_videos_ingested": 4,
+  "domains": {
+    "SYSTEMS_ARCHITECTURE": [
+      "kCc8FmEb1nY",
+      "dQw4w9WgXcQ",
+      "C9xK4mLP10a",
+      "custom_video_101"
+    ],
+    "FRONTEND_AND_DESIGN": [
+      "dQw4w9WgXcQ"
+    ],
+    "FRONTIER_AI_AND_ML": [
+      "kCc8FmEb1nY"
+    ],
+    "REVERSE_ENGINEERING_AND_SECURITY": [],
+    "PRODUCT_GROWTH_AND_FINOPS": []
+  },
+  "video_records": {
+    "kCc8FmEb1nY": {
+      "video_id": "kCc8FmEb1nY",
+      "platform": "youtube",
+      "canonical_url": "https://www.youtube.com/watch?v=kCc8FmEb1nY",
+      "title": "Let's build GPT: from scratch, in code, spelled out",
+      "creator": "Andrej Karpathy",
+      "ingested_at": 1793311510.1131444,
+      "duration_segments": 3,
+      "relevance": {
+        "primary_domain": "FRONTIER_AI_AND_ML",
+        "relevance_score": 9.39,
+        "is_relevant": true,
+        "technical_density": 0.375,
+        "domain_scores": {
+          "SYSTEMS_ARCHITECTURE": 4.34,
+          "FRONTEND_AND_DESIGN": 3.97,
+          "FRONTIER_AI_AND_ML": 9.39,
+          "REVERSE_ENGINEERING_AND_SECURITY": 0.0,
+          "PRODUCT_GROWTH_AND_FINOPS": 0.0
+        },
+        "matched_keywords": [
+          "transformer",
+          "attention mechanism"
+        ]
+      },
+      "intelligence": {
+        "blueprints": [
+          "We start with self-attention. The core intuition of the transformer attention mechanism is that each token emits queries, keys, and values. The dot product between query and key scaled by square root of head dimension gives the attention matrix.",
+          "Residual connections are critical. We take the input x and add it directly to the output of the multi-head attention block: x = x + self.attn(self.ln1(x)). LayerNorm precedes the transformation in modern pre-norm transformers.",
+          "During inference, calculating keys and values redundantly for past tokens is computationally wasteful. A KV-cache stores past key and value tensors, transforming generation step complexity from quadratic O(N^2) to linear O(N)."
+        ],
+        "code_snippets": [
+          "# Synthesized from video analysis: KV-cache attention acceleration\ndef compute_kv_cache(past_kv, new_keys, new_values):\n    k = torch.cat([past_kv['k'], new_keys], dim=-2) if past_kv else new_keys\n    v = torch.cat([past_kv['v'], new_values], dim=-2) if past_kv else new_values\n    return {'k': k, 'v': v}"
+        ],
+        "design_tokens": {},
+        "anti_patterns": [],
+        "knowledge_triples": [
+          [
+            "Video_Andrej Karpathy",
+            "recommends_architecture",
+            "We start with self-attention. The core intuition of the transformer attention me"
+          ]
+        ]
+      }
+    },
+    "dQw4w9WgXcQ": {
+      "video_id": "dQw4w9WgXcQ",
+      "platform": "youtube",
+      "canonical_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "title": "10 Modern CSS & UI Tricks for S-Tier Web Applications in 100 Seconds",
+      "creator": "Fireship",
+      "ingested_at": 1793311510.067932,
+      "duration_segments": 3,
+      "relevance": {
+        "primary_domain": "FRONTEND_AND_DESIGN",
+        "relevance_score": 16.74,
+        "is_relevant": true,
+        "technical_density": 0.426,
+        "domain_scores": {
+          "SYSTEMS_ARCHITECTURE": 0.0,
+          "FRONTEND_AND_DESIGN": 16.74,
+          "FRONTIER_AI_AND_ML": 0.0,
+          "REVERSE_ENGINEERING_AND_SECURITY": 0.0,
+          "PRODUCT_GROWTH_AND_FINOPS": 0.0
+        },
+        "matched_keywords": [
+          "css",
+          "spring physics",
+          "glassmorphism",
+          "bezier"
+        ]
+      },
+      "intelligence": {
+        "blueprints": [
+          "Boring static buttons are dead. Modern command palettes and floating bento docks use linear spring physics. Instead of cubic-bezier easing, specify mass, stiffness 170, and damping 26.",
+          "For glassmorphism that actually renders at 60fps on mobile GPUs, do not blur giant background surfaces. Use backdrop-filter blur with 12px, coupled with a 1px border gradient with rgba(255, 255, 255, 0.08).",
+          "Use CSS subgrid inside your Bento grids. It inherits track sizing from parent containers, making multi-card alignments completely automatic without tedious flexbox nesting."
+        ],
+        "code_snippets": [
+          "/* Synthesized from video analysis: Tactile spring & glass tokens */\n:root {\n  --ui-blur: 12px;\n  --spring-ease: cubic-bezier(0.16, 1, 0.3, 1);\n  --dock-border: 1px solid rgba(255, 255, 255, 0.08);\n}"
+        ],
+        "design_tokens": {
+          "spring_physics": {
+            "stiffness": 170,
+            "damping": 26
+          }
+        },
+        "anti_patterns": [
+          "Do not blur giant background surfaces."
+        ],
+        "knowledge_triples": [
+          [
+            "Video_Fireship",
+            "recommends_architecture",
+            "Boring static buttons are dead. Modern command palettes and floating bento docks"
+          ],
+          [
+            "Frontend And Design",
+            "uses_spring_physics",
+            "{'stiffness': 170, 'damping': 26}"
+          ]
+        ]
+      }
+    },
+    "C9xK4mLP10a": {
+      "video_id": "C9xK4mLP10a",
+      "platform": "instagram",
+      "canonical_url": "https://www.instagram.com/reel/C9xK4mLP10a/",
+      "title": "Sub-millisecond PostgreSQL with RLS and Vector Search",
+      "creator": "ArchitectReels",
+      "ingested_at": 1793311510.1144443,
+      "duration_segments": 2,
+      "relevance": {
+        "primary_domain": "SYSTEMS_ARCHITECTURE",
+        "relevance_score": 14.94,
+        "is_relevant": true,
+        "technical_density": 0.394,
+        "domain_scores": {
+          "SYSTEMS_ARCHITECTURE": 14.94,
+          "FRONTEND_AND_DESIGN": 0.0,
+          "FRONTIER_AI_AND_ML": 0.0,
+          "REVERSE_ENGINEERING_AND_SECURITY": 0.0,
+          "PRODUCT_GROWTH_AND_FINOPS": 0.0
+        },
+        "matched_keywords": [
+          "hnsw",
+          "postgres",
+          "sub-millisecond"
+        ]
+      },
+      "intelligence": {
+        "blueprints": [
+          "Always combine where tenant_id = current_setting('app."
+        ],
+        "code_snippets": [
+          "-- Synthesized from video analysis: Multi-tenant sub-millisecond index\nCREATE INDEX CONCURRENTLY IF NOT EXISTS idx_tenant_vector_optimized\nON document_embeddings USING hnsw (embedding vector_cosine_ops)\nWITH (m = 16, ef_construction = 64);"
+        ],
+        "design_tokens": {
+          "vector_index": "HNSW (vector_cosine_ops)"
+        },
+        "anti_patterns": [],
+        "knowledge_triples": [
+          [
+            "Video_ArchitectReels",
+            "recommends_architecture",
+            "Always combine where tenant_id = current_setting('app."
+          ],
+          [
+            "Systems Architecture",
+            "uses_vector_index",
+            "HNSW (vector_cosine_ops)"
+          ]
+        ]
+      }
+    },
+    "custom_video_101": {
+      "video_id": "custom_video_101",
+      "platform": "generic_media",
+      "canonical_url": "custom_video_101",
+      "title": "Custom Multi-Tenant Video",
+      "creator": "SecurityTeam",
+      "ingested_at": 1793311510.1174493,
+      "duration_segments": 1,
+      "relevance": {
+        "primary_domain": "SYSTEMS_ARCHITECTURE",
+        "relevance_score": 6.83,
+        "is_relevant": false,
+        "technical_density": 0.267,
+        "domain_scores": {
+          "SYSTEMS_ARCHITECTURE": 6.83,
+          "FRONTEND_AND_DESIGN": 0.0,
+          "FRONTIER_AI_AND_ML": 0.0,
+          "REVERSE_ENGINEERING_AND_SECURITY": 0.0,
+          "PRODUCT_GROWTH_AND_FINOPS": 0.0
+        },
+        "matched_keywords": [
+          "row-level security"
+        ]
+      },
+      "intelligence": {
+        "blueprints": [
+          "Always enforce postgresql row-level security for multi-tenant isolation."
+        ],
+        "code_snippets": [
+          "-- Synthesized from video analysis: Multi-tenant sub-millisecond index\nCREATE INDEX CONCURRENTLY IF NOT EXISTS idx_tenant_vector_optimized\nON document_embeddings USING hnsw (embedding vector_cosine_ops)\nWITH (m = 16, ef_construction = 64);"
+        ],
+        "design_tokens": {},
+        "anti_patterns": [],
+        "knowledge_triples": [
+          [
+            "Video_SecurityTeam",
+            "recommends_architecture",
+            "Always enforce postgresql row-level security for multi-tenant isolation."
+          ]
+        ]
+      }
+    }
+  }
+}

@@ -1,9 +1,9 @@
 {
   "version": "2.0.0",
-  "last_updated_utc": "2026-10-29T21:40:57Z",
+  "last_updated_utc": "2026-10-29T22:05:09Z",
   "metadata": {
     "description": "Zobar Trend & Trick Vault: Verified Curated Benchmarks & Live Network Feed Ingestions",
-    "total_tricks": 23
+    "total_tricks": 25
   },
   "tricks": [
     {
@@ -572,31 +572,31 @@
       "measurement_date_utc": "2026-10-29T11:51:01Z"
     },
     {
-      "id": "LIVE-HN-50294702",
+      "id": "LIVE-HN-50282454",
       "data_origin": "LIVE_NETWORK_SCRAPED",
       "http_status": 200,
       "platform": "Global Tech News / Hacker News",
-      "creator": "j4mie",
-      "title": "Patrick Stewart has died",
+      "creator": "babelfish",
+      "title": "StackOverflow now gets fewer than 1000 questions a month",
       "category": "Global Engineering Wire",
       "tags": [
         "hacker-news",
         "frontpage",
         "verified-live"
       ],
-      "problem_solved": "Breakthrough engineering discussion regarding Patrick Stewart has died",
-      "trick_snippet": "// Live HN Story: https://www.nytimes.com/2026/10/29/arts/television/patrick-stewart-dead.html\n// Upvotes: 1508 | Comments: 297\nconst ENGINEERING_BREAKTHROUGH = true;",
+      "problem_solved": "Breakthrough engineering discussion regarding StackOverflow now gets fewer than 1000 questions a month",
+      "trick_snippet": "// Live HN Story: https://data.stackexchange.com/stackoverflow/query/1926661#graph?t=1\n// Upvotes: 716 | Comments: 620\nconst ENGINEERING_BREAKTHROUGH = true;",
       "raw_metrics": {
-        "raw_points": 1508,
-        "raw_comments": 297,
-        "hn_object_id": "50294702"
+        "raw_points": 716,
+        "raw_comments": 620,
+        "hn_object_id": "50282454"
       },
       "viral_score": 90,
-      "scoring_methodology": "LOG10_HN_POINTS_AND_COMMENTS: 30 + 18*log10(1508 + 2.5*297 + 1) = 90",
-      "verified_impact": "1508 community upvotes and 297 peer comments on Hacker News.",
+      "scoring_methodology": "LOG10_HN_POINTS_AND_COMMENTS: 30 + 18*log10(716 + 2.5*620 + 1) = 90",
+      "verified_impact": "716 community upvotes and 620 peer comments on Hacker News.",
       "verification_methodology": "COMMUNITY_CONSENSUS_VERIFIED",
-      "source_url": "https://www.nytimes.com/2026/10/29/arts/television/patrick-stewart-dead.html",
-      "measurement_date_utc": "2026-10-29T21:40:54Z"
+      "source_url": "https://data.stackexchange.com/stackoverflow/query/1926661#graph?t=1",
+      "measurement_date_utc": "2026-10-29T17:32:36Z"
     },
     {
       "id": "LIVE-HN-50289418",
@@ -612,18 +612,72 @@
         "verified-live"
       ],
       "problem_solved": "Breakthrough engineering discussion regarding We're releasing the weights of Mistral Large 4",
-      "trick_snippet": "// Live HN Story: https://mistral.ai/news/mistral-large-4-oss/\n// Upvotes: 1013 | Comments: 294\nconst ENGINEERING_BREAKTHROUGH = true;",
+      "trick_snippet": "// Live HN Story: https://mistral.ai/news/mistral-large-4-oss/\n// Upvotes: 893 | Comments: 255\nconst ENGINEERING_BREAKTHROUGH = true;",
       "raw_metrics": {
-        "raw_points": 1013,
-        "raw_comments": 294,
+        "raw_points": 893,
+        "raw_comments": 255,
         "hn_object_id": "50289418"
       },
-      "viral_score": 88,
-      "scoring_methodology": "LOG10_HN_POINTS_AND_COMMENTS: 30 + 18*log10(1013 + 2.5*294 + 1) = 88",
-      "verified_impact": "1013 community upvotes and 294 peer comments on Hacker News.",
+      "viral_score": 87,
+      "scoring_methodology": "LOG10_HN_POINTS_AND_COMMENTS: 30 + 18*log10(893 + 2.5*255 + 1) = 87",
+      "verified_impact": "893 community upvotes and 255 peer comments on Hacker News.",
       "verification_methodology": "COMMUNITY_CONSENSUS_VERIFIED",
       "source_url": "https://mistral.ai/news/mistral-large-4-oss/",
-      "measurement_date_utc": "2026-10-29T21:40:54Z"
+      "measurement_date_utc": "2026-10-29T20:10:34Z"
+    },
+    {
+      "id": "LIVE-HN-50291945",
+      "data_origin": "LIVE_NETWORK_SCRAPED",
+      "http_status": 200,
+      "platform": "Global Tech News / Hacker News",
+      "creator": "hubraumhugo",
+      "title": "Google Search is now less than half of Alphabet’s revenue",
+      "category": "Global Engineering Wire",
+      "tags": [
+        "hacker-news",
+        "frontpage",
+        "verified-live"
+      ],
+      "problem_solved": "Breakthrough engineering discussion regarding Google Search is now less than half of Alphabet’s revenue",
+      "trick_snippet": "// Live HN Story: https://www.kadoa.com/companies/insights/google-search-below-half\n// Upvotes: 347 | Comments: 294\nconst ENGINEERING_BREAKTHROUGH = true;",
+      "raw_metrics": {
+        "raw_points": 347,
+        "raw_comments": 294,
+        "hn_object_id": "50291945"
+      },
+      "viral_score": 85,
+      "scoring_methodology": "LOG10_HN_POINTS_AND_COMMENTS: 30 + 18*log10(347 + 2.5*294 + 1) = 85",
+      "verified_impact": "347 community upvotes and 294 peer comments on Hacker News.",
+      "verification_methodology": "COMMUNITY_CONSENSUS_VERIFIED",
+      "source_url": "https://www.kadoa.com/companies/insights/google-search-below-half",
+      "measurement_date_utc": "2026-10-29T20:10:34Z"
+    },
+    {
+      "id": "LIVE-HN-50294702",
+      "data_origin": "LIVE_NETWORK_SCRAPED",
+      "http_status": 200,
+      "platform": "Global Tech News / Hacker News",
+      "creator": "j4mie",
+      "title": "Patrick Stewart has died",
+      "category": "Global Engineering Wire",
+      "tags": [
+        "hacker-news",
+        "frontpage",
+        "verified-live"
+      ],
+      "problem_solved": "Breakthrough engineering discussion regarding Patrick Stewart has died",
+      "trick_snippet": "// Live HN Story: https://www.nytimes.com/2026/10/29/arts/television/patrick-stewart-dead.html\n// Upvotes: 452 | Comments: 83\nconst ENGINEERING_BREAKTHROUGH = true;",
+      "raw_metrics": {
+        "raw_points": 452,
+        "raw_comments": 83,
+        "hn_object_id": "50294702"
+      },
+      "viral_score": 81,
+      "scoring_methodology": "LOG10_HN_POINTS_AND_COMMENTS: 30 + 18*log10(452 + 2.5*83 + 1) = 81",
+      "verified_impact": "452 community upvotes and 83 peer comments on Hacker News.",
+      "verification_methodology": "COMMUNITY_CONSENSUS_VERIFIED",
+      "source_url": "https://www.nytimes.com/2026/10/29/arts/television/patrick-stewart-dead.html",
+      "measurement_date_utc": "2026-10-29T20:16:40Z"
     }
   ]
 }

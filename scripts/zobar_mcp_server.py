@@ -651,6 +651,43 @@ class ZobarMCPServer:
                     },
                     "required": ["problem"]
                 }
+            },
+            {
+                "name": "transcribe_and_ingest_video",
+                "description": "Ingests YouTube or Instagram video URLs or IDs, extracts transcripts, evaluates domain relevance, distills blueprints, code snippets, design tokens, and updates session memory.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "url_or_id": {"type": "string", "description": "YouTube or Instagram video URL or video ID"},
+                        "custom_transcript": {"type": "string", "description": "Optional custom transcript (raw text, WebVTT, SRT)"},
+                        "title_override": {"type": "string", "description": "Optional custom title"},
+                        "creator_override": {"type": "string", "description": "Optional creator handle or channel name"}
+                    },
+                    "required": ["url_or_id"]
+                }
+            },
+            {
+                "name": "query_video_session_insights",
+                "description": "Searches the video intelligence vault for distilled architectural blueprints, code snippets, and UI/UX design tokens for a given topic query.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "query": {"type": "string", "description": "Search topic (e.g., 'spring physics', 'KV-cache', 'PostgreSQL RLS')"},
+                        "limit": {"type": "integer", "description": "Maximum number of results to return (default 3)"}
+                    },
+                    "required": ["query"]
+                }
+            },
+            {
+                "name": "synthesize_session_video_context",
+                "description": "Synthesizes an actionable markdown prompt context block from distilled video knowledge to instantly upgrade active session reasoning for a specific task.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "current_topic": {"type": "string", "description": "Current conversation or task topic to enhance"}
+                    },
+                    "required": ["current_topic"]
+                }
             }
         ]
 
@@ -1105,6 +1142,34 @@ class ZobarMCPServer:
             from scripts.master_ai_model_amplifier import MasterAIModelAmplifier
             engine = MasterAIModelAmplifier()
             payload = engine.execute_complete_amplification(problem, domain)
+
+        elif name == "transcribe_and_ingest_video":
+            url_or_id = args.get("url_or_id", "")
+            custom_transcript = args.get("custom_transcript")
+            title_override = args.get("title_override")
+            creator_override = args.get("creator_override")
+            from scripts.video_session_intelligence_engine import VideoSessionIntelligenceEngine
+            engine = VideoSessionIntelligenceEngine()
+            payload = engine.transcribe_and_ingest(
+                url_or_id=url_or_id,
+                custom_transcript=custom_transcript,
+                title_override=title_override,
+                creator_override=creator_override
+            )
+
+        elif name == "query_video_session_insights":
+            query = args.get("query", "")
+            limit = int(args.get("limit", 3))
+            from scripts.video_session_intelligence_engine import VideoSessionIntelligenceEngine
+            engine = VideoSessionIntelligenceEngine()
+            payload = engine.query_video_insights(query=query, limit=limit)
+
+        elif name == "synthesize_session_video_context":
+            current_topic = args.get("current_topic", "systems engineering")
+            from scripts.video_session_intelligence_engine import VideoSessionIntelligenceEngine
+            engine = VideoSessionIntelligenceEngine()
+            context_str = engine.synthesize_session_enhancement_context(current_topic=current_topic)
+            payload = {"context_markdown": context_str, "current_topic": current_topic}
 
         else:
             raise ValueError(f"Unknown tool name: {name}")

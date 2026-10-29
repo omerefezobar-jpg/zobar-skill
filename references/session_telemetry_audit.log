@@ -86,6 +86,59 @@
 {"tick": 86, "timestamp_utc": "2026-10-29T13:55:45Z", "duration_ms": 1380.12, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
 {"tick": 87, "timestamp_utc": "2026-10-29T13:55:47Z", "duration_ms": 756.38, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
 {"tick": 88, "timestamp_utc": "2026-10-29T13:55:49Z", "duration_ms": 963.35, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": false}
-{"tick": 89, "timestamp_utc": "2026-10-29T21:40:52Z", "duration_ms": 1354.6, "live_candidates_queried": 8, "new_live_items_discovered": 2, "memory_triples_injected": 2, "daemon_active": true}
-{"tick": 90, "timestamp_utc": "2026-10-29T21:40:55Z", "duration_ms": 838.91, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
-{"tick": 91, "timestamp_utc": "2026-10-29T21:40:56Z", "duration_ms": 751.44, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": false}
+{"tick": 89, "timestamp_utc": "2026-10-29T13:59:06Z", "duration_ms": 1476.98, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
+{"tick": 90, "timestamp_utc": "2026-10-29T13:59:09Z", "duration_ms": 863.66, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
+{"tick": 91, "timestamp_utc": "2026-10-29T13:59:11Z", "duration_ms": 808.92, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": false}
+{"tick": 92, "timestamp_utc": "2026-10-29T17:32:35Z", "duration_ms": 1210.13, "live_candidates_queried": 8, "new_live_items_discovered": 1, "memory_triples_injected": 1, "daemon_active": true}
+{"tick": 93, "timestamp_utc": "2026-10-29T17:32:37Z", "duration_ms": 823.7, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
+{"tick": 94, "timestamp_utc": "2026-10-29T17:32:39Z", "duration_ms": 909.91, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": false}
+{"tick": 95, "timestamp_utc": "2026-10-29T20:10:33Z", "duration_ms": 1224.53, "live_candidates_queried": 8, "new_live_items_discovered": 2, "memory_triples_injected": 2, "daemon_active": true}
+{"tick": 96, "timestamp_utc": "2026-10-29T20:10:35Z", "duration_ms": 907.26, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
+{"tick": 97, "timestamp_utc": "2026-10-29T20:10:37Z", "duration_ms": 963.91, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": false}
+{"tick": 98, "timestamp_utc": "2026-10-29T20:16:39Z", "duration_ms": 1108.98, "live_candidates_queried": 6, "new_live_items_discovered": 1, "memory_triples_injected": 1, "daemon_active": true}
+{"tick": 99, "timestamp_utc": "2026-10-29T20:16:41Z", "duration_ms": 768.37, "live_candidates_queried": 6, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
+{"tick": 100, "timestamp_utc": "2026-10-29T20:16:42Z", "duration_ms": 748.07, "live_candidates_queried": 6, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": false}
+{"tick": 101, "timestamp_utc": "2026-10-29T21:25:07Z", "duration_ms": 1304.02, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
+{"tick": 102, "timestamp_utc": "2026-10-29T21:25:09Z", "duration_ms": 866.69, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
+{"tick": 103, "timestamp_utc": "2026-10-29T21:25:11Z", "duration_ms": 762.34, "live_candidates_queried": 6, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": false}
+{"tick": 104, "timestamp_utc": "2026-10-29T21:27:47Z", "duration_ms": 1136.78, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
+{"tick": 105, "timestamp_utc": "2026-10-29T21:27:49Z", "duration_ms": 732.41, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
+{"tick": 106, "timestamp_utc": "2026-10-29T21:27:51Z", "duration_ms": 717.0, "live_candidates_queried": 6, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": false}
+{"tick": 107, "timestamp_utc": "2026-10-29T21:32:48Z", "duration_ms": 1216.74, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
+{"tick": 108, "timestamp_utc": "2026-10-29T21:32:51Z", "duration_ms": 692.74, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
+{"tick": 109, "timestamp_utc": "2026-10-29T21:32:52Z", "duration_ms": 737.05, "live_candidates_queried": 6, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": false}
+{"tick": 110, "timestamp_utc": "2026-10-29T21:39:24Z", "duration_ms": 1096.57, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
+{"tick": 111, "timestamp_utc": "2026-10-29T21:39:26Z", "duration_ms": 692.36, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
+{"tick": 112, "timestamp_utc": "2026-10-29T21:39:28Z", "duration_ms": 724.98, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": false}
+{"tick": 113, "timestamp_utc": "2026-10-29T21:44:29Z", "duration_ms": 1150.55, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
+{"tick": 114, "timestamp_utc": "2026-10-29T21:44:31Z", "duration_ms": 731.93, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
+{"tick": 115, "timestamp_utc": "2026-10-29T21:44:33Z", "duration_ms": 867.09, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": false}
+{"tick": 116, "timestamp_utc": "2026-10-29T21:49:37Z", "duration_ms": 1076.22, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
+{"tick": 117, "timestamp_utc": "2026-10-29T21:49:39Z", "duration_ms": 748.75, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
+{"tick": 118, "timestamp_utc": "2026-10-29T21:49:41Z", "duration_ms": 707.41, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": false}
+{"tick": 119, "timestamp_utc": "2026-10-29T21:53:10Z", "duration_ms": 1075.25, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
+{"tick": 120, "timestamp_utc": "2026-10-29T21:53:12Z", "duration_ms": 739.82, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
+{"tick": 121, "timestamp_utc": "2026-10-29T21:53:13Z", "duration_ms": 676.1, "live_candidates_queried": 6, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": false}
+{"tick": 122, "timestamp_utc": "2026-10-29T21:56:50Z", "duration_ms": 1165.28, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
+{"tick": 123, "timestamp_utc": "2026-10-29T21:56:52Z", "duration_ms": 689.88, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
+{"tick": 124, "timestamp_utc": "2026-10-29T21:56:54Z", "duration_ms": 826.68, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": false}
+{"tick": 125, "timestamp_utc": "2026-10-29T21:59:41Z", "duration_ms": 1145.24, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
+{"tick": 126, "timestamp_utc": "2026-10-29T21:59:43Z", "duration_ms": 712.62, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
+{"tick": 127, "timestamp_utc": "2026-10-29T21:59:44Z", "duration_ms": 757.32, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": false}
+[2026-10-30 01:03:49] INGEST_VIDEO | id=kCc8FmEb1nY | platform=youtube | domain=SYSTEMS_ARCHITECTURE | relevance=29.24%
+[2026-10-30 01:03:49] INGEST_VIDEO | id=dQw4w9WgXcQ | platform=youtube | domain=SYSTEMS_ARCHITECTURE | relevance=29.24%
+[2026-10-30 01:03:58] INGEST_VIDEO | id=kCc8FmEb1nY | platform=youtube | domain=FRONTIER_AI_AND_ML | relevance=9.39%
+[2026-10-30 01:03:58] INGEST_VIDEO | id=dQw4w9WgXcQ | platform=youtube | domain=FRONTEND_AND_DESIGN | relevance=16.74%
+[2026-10-30 01:04:54] INGEST_VIDEO | id=dQw4w9WgXcQ | platform=youtube | domain=FRONTEND_AND_DESIGN | relevance=16.74%
+[2026-10-30 01:04:54] INGEST_VIDEO | id=dQw4w9WgXcQ | platform=youtube | domain=FRONTEND_AND_DESIGN | relevance=16.74%
+[2026-10-30 01:04:54] INGEST_VIDEO | id=kCc8FmEb1nY | platform=youtube | domain=FRONTIER_AI_AND_ML | relevance=9.39%
+[2026-10-30 01:04:54] INGEST_VIDEO | id=C9xK4mLP10a | platform=instagram | domain=SYSTEMS_ARCHITECTURE | relevance=14.94%
+[2026-10-30 01:04:54] INGEST_VIDEO | id=custom_video_101 | platform=generic_media | domain=SYSTEMS_ARCHITECTURE | relevance=6.83%
+{"tick": 128, "timestamp_utc": "2026-10-29T22:05:04Z", "duration_ms": 1347.9, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
+{"tick": 129, "timestamp_utc": "2026-10-29T22:05:07Z", "duration_ms": 767.39, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": true}
+{"tick": 130, "timestamp_utc": "2026-10-29T22:05:09Z", "duration_ms": 735.4, "live_candidates_queried": 8, "new_live_items_discovered": 0, "memory_triples_injected": 0, "daemon_active": false}
+[2026-10-30 01:05:10] INGEST_VIDEO | id=dQw4w9WgXcQ | platform=youtube | domain=FRONTEND_AND_DESIGN | relevance=16.74%
+[2026-10-30 01:05:10] INGEST_VIDEO | id=dQw4w9WgXcQ | platform=youtube | domain=FRONTEND_AND_DESIGN | relevance=16.74%
+[2026-10-30 01:05:10] INGEST_VIDEO | id=kCc8FmEb1nY | platform=youtube | domain=FRONTIER_AI_AND_ML | relevance=9.39%
+[2026-10-30 01:05:10] INGEST_VIDEO | id=C9xK4mLP10a | platform=instagram | domain=SYSTEMS_ARCHITECTURE | relevance=14.94%
+[2026-10-30 01:05:10] INGEST_VIDEO | id=custom_video_101 | platform=generic_media | domain=SYSTEMS_ARCHITECTURE | relevance=6.83%
