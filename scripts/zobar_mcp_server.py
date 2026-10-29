@@ -48,6 +48,7 @@ from scripts.systems_math_engine import SystemsMathEngine
 from scripts.design_system_generator import ModernDesignStylesEngine
 from scripts.reverse_engineering_analyst import analyze_target_system, execute_7phase_re_pipeline, execute_10phase_re_pipeline
 from scripts.end_to_end_app_architect import synthesize_complete_application, evaluate_feature_internally, generate_concise_co_creation_dialogue
+from scripts.autonomous_idea_factory import harvest_and_curate_ideas, inject_feature_into_file
 from scripts.game_modding_engine import synthesize_minecraft_in_game_bridge, calculate_greedy_meshing_metrics, generate_mod_code_template
 from scripts.multi_agent_deliberation_council import conduct_executive_board_deliberation
 from scripts.creative_evolutionary_designer import generate_evolutionary_design
@@ -437,6 +438,48 @@ class ZobarMCPServer:
                     },
                     "required": ["feature_name"]
                 }
+            },
+            {
+                "name": "harvest_ideas_and_co_create",
+                "description": "Autonomous Idea Factory: monitors real-world breakout trends, runs internal pre-evaluation, and formulates crisp 1-line decision options for the user.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "domain": {"type": "string", "description": "Domain sector (e.g. saas, ecommerce, medtech, creative_agency)"}
+                    }
+                }
+            },
+            {
+                "name": "inject_live_app_feature",
+                "description": "Live Application Injector: automatically injects working HTML markup, styling, and JS handlers for a selected feature into a live HTML file.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "target_file": {"type": "string", "description": "Relative or absolute path to the target HTML file"},
+                        "feature_id": {"type": "string", "description": "Selected feature ID (e.g. FEAT-SPLIT-FILTER, FEAT-OFFLINE-QUEUE, FEAT-DARK-ACCENT-TOGGLE)"}
+                    },
+                    "required": ["target_file", "feature_id"]
+                }
+            },
+            {
+                "name": "blend_proven_ui_components",
+                "description": "Proven Pattern Synthesis Mandate: Never write inferior generic UI. Extracts and blends battle-tested UI components and design tokens from world-class benchmark sites (Linear, Stripe, Apple, Vercel) stored in the S-Tier Design Vault.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "query": {"type": "string", "description": "Domain or UI need (e.g. saas, dashboard, luxury ecommerce, medtech telemetry, 3d canvas)"},
+                        "component_ids": {
+                            "type": "array",
+                            "items": {"type": "string"},
+                            "description": "Optional list of specific component IDs from vault (e.g. ['COMP-02', 'COMP-08'])"
+                        },
+                        "inject_target_file": {
+                            "type": "string",
+                            "description": "Optional HTML file path to automatically inject blended components into"
+                        }
+                    },
+                    "required": ["query"]
+                }
             }
         ]
 
@@ -754,6 +797,26 @@ class ZobarMCPServer:
                 "internal_evaluation": critique,
                 "concise_co_creation_dialogue": dialogue
             }
+
+        elif name == "harvest_ideas_and_co_create":
+            domain = args.get("domain", "saas")
+            payload = harvest_and_curate_ideas(domain_context=domain)
+
+        elif name == "inject_live_app_feature":
+            target_file = args.get("target_file", "web/apex_app.html")
+            feature_id = args.get("feature_id", "FEAT-SPLIT-FILTER")
+            payload = inject_feature_into_file(target_file_path=target_file, feature_id=feature_id)
+
+        elif name == "blend_proven_ui_components":
+            query = args.get("query", "saas")
+            comp_ids = args.get("component_ids", None)
+            inject_target = args.get("inject_target_file", None)
+            from scripts.proven_component_harmonizer import ProvenComponentHarmonizer
+            harmonizer = ProvenComponentHarmonizer()
+            if inject_target:
+                payload = harmonizer.inject_harmonized_components_into_file(inject_target, query, comp_ids)
+            else:
+                payload = harmonizer.harmonize_ui_components(query, comp_ids)
 
         else:
             raise ValueError(f"Unknown tool name: {name}")

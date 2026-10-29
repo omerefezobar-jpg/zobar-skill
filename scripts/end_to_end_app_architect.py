@@ -971,12 +971,20 @@ def synthesize_domain_application(domain_key: str, app_name: Optional[str] = Non
     else:
         code = _generate_saas_html(name)
 
+    try:
+        from scripts.proven_component_harmonizer import ProvenComponentHarmonizer
+        harmonizer = ProvenComponentHarmonizer()
+        harmonized_spec = harmonizer.harmonize_ui_components(d_info["title"])
+    except Exception:
+        harmonized_spec = {}
+
     return {
         "domain_key": domain_key,
         "app_name": name,
         "title": d_info["title"],
         "file_name": d_info["file_name"],
-        "generated_html_code": code
+        "generated_html_code": code,
+        "proven_components_summary": harmonized_spec
     }
 
 def synthesize_all_domain_apps(output_dir: str = "web/apps") -> Dict[str, str]:

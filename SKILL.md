@@ -31,6 +31,10 @@ description: >-
 5. **Otonom İç Ön Değerlendirme & Kafa Açmayan İletişim (Autonomous Pre-Critique & Lean Co-Creation):**
    - Sistem bir öneri sunmadan önce kendi içinde çok boyutlu eleştiri süzgecinden geçirir (Bilişsel Yük $\ge 70$, Keyif/Etki $\ge 80$, Anti-Klişe kontrolü). Eşik puanı ($75$) altındaki fikirler sessizce elenir.
    - Kullanıcıyla iletişimde uzun laf kalabalığı yapılmaz; tek cümlelik net etki ve 1-tıkla seçilebilir hızlı seçenekler (`1`, `2`, `3` veya `hepsi`) sunulur.
+6. **Kanıtlanmış Bileşen Harmanlama & Başarılı Siteleri Kullanma İlkesi (Proven Pattern Synthesis Mandate):**
+   - **KATI KURAL:** Kesinlikle tekerleği yeniden icat etme veya daha vasat bir şey üretme!
+   - Eğer ortaya konulacak kod veya arayüz dünyadaki örneklerinden kesin ve kanıtlanmış bir şekilde ÇOK DAHA İYİ olmayacaksa; `references/s_tier_design_vault.json` ve `references/free_modern_components_vault.json` içerisindeki dünyanın en başarılı sitelerinden (Linear, Stripe, Apple, Vercel, Supabase, Raycast) süzülmüş hazır UI bileşenlerini (Bento grid, Shimmer loader, Cmd+K paleti, Telemetry rozetleri, Spring butonları) ve kanıtlanmış tasarım kodlarını alıp **harmanlayarak** sunmak ZORUNDADIR (`scripts/proven_component_harmonizer.py`).
+   - Hiçbir zaman alelade, stilize edilmemiş ham HTML/CSS ya da sıradan form elemanları üretilemez. Arayüzler daima dünya standartlarındaki kanıtlanmış başarı kalıplarından sentezlenir.
 
 ---
 
@@ -144,6 +148,10 @@ python scripts/production_cleaner.py --file web/apex_app.html --check-only
 
 # 6. Test Paketini Koşma (188/188 Test)
 python -m unittest discover tests
+
+# 7. Kanıtlanmış S-Tier Bileşen Harmanlama (Linear/Stripe/Apple/Vercel)
+python scripts/proven_component_harmonizer.py "saas dashboard"
+python scripts/proven_component_harmonizer.py "ecommerce luxury" --inject web/apps/ecommerce_store.html
 ```
 
 ---
@@ -154,6 +162,7 @@ Skill'i bir LLM / agent içerisinden çağırırken kullanılabilen tescilli ara
 
 | MCP Araç Adı | Parametreler | Ne İşe Yarar? |
 | :--- | :--- | :--- |
+| `blend_proven_ui_components` | `query`, `component_ids`, `inject_target_file` | Dünyanın en başarılı sitelerinden (Linear, Stripe, Apple) süzülmüş hazır modern UI bileşenlerini harmanlar ve doğrudan kodun içine enjekte eder. |
 | `synthesize_complete_application` | `brand_name`, `domain_sector`, `design_theme` | 4 sektörden birinde uçtan uca çalışan, butonları ve LocalStorage'ı tam HTML üretir. |
 | `harvest_ideas_and_co_create` | `domain_context` | Trendleri tarar, iç değerlendirmesini yapar ve kullanıcıya tek satırlık seçenekler sunar. |
 | `inject_live_app_feature` | `target_file_path`, `feature_id` | Seçilen özelliği canlı uygulamaya güvenle enjekte eder ve temizlik denetimini yapar. |
