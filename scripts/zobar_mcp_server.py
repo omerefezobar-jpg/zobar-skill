@@ -626,6 +626,19 @@ class ZobarMCPServer:
                     },
                     "required": ["domain_key"]
                 }
+            },
+            {
+                "name": "execute_security_and_legal_audit",
+                "description": "Performs unified enterprise security audit: Prompt injection & jailbreak red teaming, Clean-Room IP provenance shield, and EU AI Act (High-Risk/Prohibited) / GDPR Article 17/22 compliance check.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "text_input": {"type": "string", "description": "User prompt, task description, or system specification to audit"},
+                        "dirty_notes": {"type": "string", "description": "Optional reverse engineering analysis notes"},
+                        "clean_code": {"type": "string", "description": "Optional clean-room reimplementation code"}
+                    },
+                    "required": ["text_input"]
+                }
             }
         ]
 
@@ -1065,6 +1078,14 @@ class ZobarMCPServer:
             from scripts.multimodal_scope_expansion_engine import MultimodalScopeExpansionEngine
             engine = MultimodalScopeExpansionEngine()
             payload = engine.synthesize_domain_scaffold(domain_key, brand)
+
+        elif name == "execute_security_and_legal_audit":
+            text_input = args.get("text_input", "")
+            dirty_notes = args.get("dirty_notes", "")
+            clean_code = args.get("clean_code", "")
+            from scripts.security_and_regulatory_engine import SecurityAndRegulatoryEngine
+            engine = SecurityAndRegulatoryEngine()
+            payload = engine.execute_full_security_audit(text_input, dirty_notes, clean_code)
 
         else:
             raise ValueError(f"Unknown tool name: {name}")

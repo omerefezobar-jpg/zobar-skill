@@ -74,6 +74,11 @@ description: >-
    - **Çok Modlu Veri Hatları:** WebAudio PCM ses sentezi, 60 FPS Canvas biyometrik dalga formları, çok kanallı EEG spektrogramları ve paket entropi matrisleri alt-milisaniye gecikme garantisiyle işlenir.
    - **Sıfır Sermaye Dağıtık Uç (Zero-Capital Edge Topology):** Tüm veri modelleri PostgreSQL RLS (Row-Level Security) izolasyonu, pgvector HNSW indeksleme ve yerel-önceki CRDT senkronizasyonu ile donatılmıştır.
 
+14. **Kurumsal Güvenlik, Red Teaming & Hukuki Kalkan Standardı (Enterprise Security & Legal Shield Mandate):**
+   - **Jailbreak & Prompt Enjeksiyonu Savunması:** Sınır bozma (delimiter spoofing), dolaylı talimat geçersiz kılma (indirect prompt injection), yetki yükseltme ve gizli prompt/anahtar sızdırma girişimleri katı regex ve semantik kırmızı takım (red teaming) filtreleriyle taranır (`scripts/security_and_regulatory_engine.py`).
+   - **Clean-Room Hukuki Fikri Mülkiyet Kalkanı:** Sony v. Connectix ve NEC v. Intel içtihatları doğrultusunda analiz odası (dirty room) ile temiz üretim odası (clean room) mutlak olarak ayrılır; tescilli değişken veya telifli kod sızıntıları otomatik taranarak ihraç şartnamesi yasal güvenceye alınır.
+   - **AB Yapay Zekâ Yasası (EU AI Act) & GDPR:** Madde 5 yasaklı yapay zekâ uygulamaları (sosyal puanlama, manipülasyon) derhal engellenir; Ek III yüksek riskli sistemler için uygunluk değerlendirmesi ve GDPR Madde 17/22 veri gizliliği mekanizmaları zorunlu kılınır.
+
 ---
 ## 2. Dört Ana İcra Motoru (The 4 Core Engines)
 
