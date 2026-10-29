@@ -610,6 +610,22 @@ class ZobarMCPServer:
                         "title": {"type": "string", "description": "Widget header title"}
                     }
                 }
+            },
+            {
+                "name": "synthesize_multimodal_domain_scaffold",
+                "description": "Expands operational scope to 8 enterprise sectors (FinTech, Robotics/IoT, CyberDefense, NeuroTech, SaaS, E-Com, MedTech, 3D Spatial) with multimodal telemetry and sub-millisecond edge architecture.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "domain_key": {
+                            "type": "string",
+                            "enum": ["saas", "ecommerce", "medtech", "creative_agency", "fintech_hft", "robotics_iot", "cyber_defense", "neuro_tech"],
+                            "description": "Target enterprise domain"
+                        },
+                        "brand_name": {"type": "string", "description": "Custom brand or platform name"}
+                    },
+                    "required": ["domain_key"]
+                }
             }
         ]
 
@@ -1042,6 +1058,13 @@ class ZobarMCPServer:
                 payload = engine.synthesize_slider_calculator_widget(title=title)
             else:
                 payload = engine.synthesize_telemetry_widget(title=title)
+
+        elif name == "synthesize_multimodal_domain_scaffold":
+            domain_key = args.get("domain_key", "fintech_hft")
+            brand = args.get("brand_name", None)
+            from scripts.multimodal_scope_expansion_engine import MultimodalScopeExpansionEngine
+            engine = MultimodalScopeExpansionEngine()
+            payload = engine.synthesize_domain_scaffold(domain_key, brand)
 
         else:
             raise ValueError(f"Unknown tool name: {name}")

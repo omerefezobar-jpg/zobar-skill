@@ -69,6 +69,11 @@ description: >-
    - **Cognition Devin / SWE-bench Standartları:** Kod değişiklikleri izole sandbox ortamında otomatik test edilir; hata anında tam çağrı yığını taranarak hedef AST yaması üretilir ve %100 yeşil doğrulanana kadar kendi kendini onaran döngüde ($T \le 3$) yürütülür (`scripts/self_healing_code_engine.py`).
    - **DSPy & MIT Reflexion Standartları:** Tek seferlik (single-pass) üretim yerine, Best-of-N aday dalları Adım Ödül Modeli (Process Reward Model - PRM) ile puanlanır; sözel özeleştiri (Verbal Reflexion) ile mimari açıklar yamalanarak modelin problem çözme gücü $10	imes - 100	imes$ çarpanla katlanır (`scripts/test_time_compute_engine.py`).
 
+13. **Çok Modlu Kapsam Genişletme & 8 Sektör Mimarisi (Multimodal Frontier Scope Mandate):**
+   - **8 Endüstriyel Sektör Kapsamı:** B2B SaaS, Luxury E-Commerce, Clinical MedTech, 3D Spatial Studio sektörlerine ek olarak; *Autonomous FinTech & HFT*, *Industrial Robotics & IoT*, *Zero-Trust CyberDefense* ve *Neural Interfaces (BCI)* sektörleri tam teşekküllü mimari iskelelerle sisteme eklenmiştir (`scripts/multimodal_scope_expansion_engine.py`).
+   - **Çok Modlu Veri Hatları:** WebAudio PCM ses sentezi, 60 FPS Canvas biyometrik dalga formları, çok kanallı EEG spektrogramları ve paket entropi matrisleri alt-milisaniye gecikme garantisiyle işlenir.
+   - **Sıfır Sermaye Dağıtık Uç (Zero-Capital Edge Topology):** Tüm veri modelleri PostgreSQL RLS (Row-Level Security) izolasyonu, pgvector HNSW indeksleme ve yerel-önceki CRDT senkronizasyonu ile donatılmıştır.
+
 ---
 ## 2. Dört Ana İcra Motoru (The 4 Core Engines)
 
